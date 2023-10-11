@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int	ft_strcmp(const char *s1, const char *s2)
+static int	ft_strcmp(const char *s1, const char *s2)
 {
 	while ((*s1 != 0 || *s2 != 0) && *s2 != 0)
 	{
