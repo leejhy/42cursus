@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+// #include "libft.h"
+#include <stdio.h>
 
 size_t ft_strlen(const char *s)
 {
@@ -20,4 +21,11 @@ size_t ft_strlen(const char *s)
     while (*(s + len))
         len++;
     return (len);
+}
+
+int main(void)
+{
+    printf("%d\n",ft_strlen(""));
+    printf("%d\n",ft_strlen(""));
+    
 }

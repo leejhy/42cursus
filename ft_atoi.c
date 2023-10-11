@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+// #include "libft.h"
 
 int	ft_atoi(const char *str)
 {
@@ -34,4 +34,20 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	return (sign * result);
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int	main(void)
+{
+	printf("%d\n",atoi("2147483647"));
+	printf("%d\n",ft_atoi("2147483647"));
+	printf("%d\n",atoi("-2147483648"));
+	printf("%d\n",ft_atoi("-2147483648"));
+	printf("%d\n",atoi("2147483650"));//오버플로우
+	printf("%d\n",ft_atoi("2147483650"));
+	printf("%d\n",atoi("-2147483650"));//언더플로우
+	printf("%d\n",ft_atoi("-2147483650"));
+
 }

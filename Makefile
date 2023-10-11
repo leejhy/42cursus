@@ -29,7 +29,7 @@ $(NAME) : $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
 
 %.o : %.c
-	$(CC) -c $(CFLAGS) $< -o $@
+    $(CC) -c  $(CFLAGS) $< -o $@
 
 clean :
 	rm -f $(OBJS)
