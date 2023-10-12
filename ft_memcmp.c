@@ -24,13 +24,11 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		if (*(temp_s1 + i) > *(temp_s2 + i))
-			return (1);
-		if (*(temp_s1 + i) < *(temp_s2 + i))
-			return (-1);
+		if (*(temp_s1 + i) != *(temp_s2 + i))
+			return (*(temp_s1 + i) - *(temp_s2 + i));
 		i++;
 	}
-	return (0);
+	return (*(temp_s1 + i) - *(temp_s2 + i));
 }
 
 #include <stdio.h>
