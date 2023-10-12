@@ -34,12 +34,12 @@ size_t	ft_strlcat(char *dst, char *src, size_t dstsize)
 	
 	if (dest_len < dstsize)
 	{
-		while (i < dstsize - dest_len - 1 && src[i])
+		while (i < dstsize - dest_len - 1 && *(src + i))
 		{
-			dst[dest_len + i] = src[i];
+			*(dst + dest_len + i) = (src + i);
 			i++;
 		}
-		dst[dest_len + i] = '\0';
+		*(dst + dest_len + i) = '\0';
 		return (src_len + dest_len);
 	}
 	else
