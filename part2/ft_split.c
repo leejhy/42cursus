@@ -6,7 +6,11 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:37:59 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/12 19:37:59 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:41:04 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+char **ft_split(char const *s, char c)
+{
+	
+}
