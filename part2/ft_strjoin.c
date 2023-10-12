@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/12 19:38:02 by junhylee          #+#    #+#             */
+/*   Updated: 2023/10/12 19:38:03 by junhylee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include <stdlib.h>
 
@@ -6,7 +18,7 @@ static size_t ft_strlen(const char *s)
     int len;
 
     len = 0;
-    while (*(s + len))
+    while (s && *(s + len))
         len++;
     return (len);
 }
@@ -35,8 +47,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	s1_len;
 	size_t	s2_len;
 
-	if (!s1 || !s2)
-		return (NULL);
+	// if (!s1 || !s2)
+	// 	return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	str = malloc(sizeof (char) * (s1_len + s2_len + 1));
@@ -55,6 +67,7 @@ int	main(void)
 	printf("%s\n",ft_strjoin("", "aaaa"));
 	printf("%s\n",ft_strjoin("aaaa", ""));
 	printf("%s\n",ft_strjoin("", ""));
+
 	printf("%s\n",ft_strjoin("abc", NULL));
 	printf("%s\n",ft_strjoin(NULL, "abc"));
 	printf("%s\n",ft_strjoin(NULL, NULL));

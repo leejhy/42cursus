@@ -1,5 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+# FLAG = -g -fsanitize=address
 INCLUDE = libft.h
 SRCS = ft_bzero.c \
 		ft_isalnum.c \

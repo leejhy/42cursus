@@ -1,23 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 19:38:05 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/12 19:38:06 by junhylee         ###   ########.fr       */
+/*   Created: 2023/10/12 19:37:59 by junhylee          #+#    #+#             */
+/*   Updated: 2023/10/12 19:37:59 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <stdlib.h>
-
-char *ft_strtrim(char const *s1, char const *set)
-{
-	unsigned char	*temp;
-	temp = (unsigned char *)s1;
-	if (!s1 || !set)
-		return (NULL);
-	
-}
