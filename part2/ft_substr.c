@@ -8,6 +8,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	i = 0;
 	str = malloc(sizeof(char) * len + 1);
+	if (!s)
+		return (NULL);
 	if (!str)
 		return (NULL);
 	while (i < len && *(s + start + i))
@@ -17,4 +19,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	*(str + i) = '\0';
 	return (str);
+}
+
+#include <stdio.h>
+int	main(void)
+{
+	char str[] = "123456789";
+	printf("%s\n",ft_substr(str, 3,3));//456
+	printf("%s\n",ft_substr("", 3,3));//456
+	printf("%s\n",ft_substr(NULL, 3,3));//456
+	printf("%s\n",ft_substr(str, 1,100));//
 }

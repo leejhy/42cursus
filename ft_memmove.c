@@ -23,7 +23,12 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	temp_src = (const unsigned char *)src;
 	if (*temp_dst == NULL && *temp_src == NULL)
 		return (NULL);
-
+	if (temp_dst >= temp_src)
+		return(ft_memcpy(temp_dst, temp_src, len));
+	if (temp_dst < temp_src)
+	{
+		//메모리가 겹치지않게
+	}
 	// while (i < len)
 	// {
 	// 	*(temp_dst + i) = *(temp_src + i);
