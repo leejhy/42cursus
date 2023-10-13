@@ -38,7 +38,7 @@ int	main(void)
 {
 	char str[] = "0123456789";
 	printf("%s\n",ft_substr(str, 3,3));//456
-	printf("%s\n",ft_substr("", 3,3));//456얘네들이 3번 인덱스가 존재하지 않는데 작동을 함 문제있다
+	printf("%s\n",ft_substr("", 3,3));//456얘네들이 3번 인덱스가 존재하지 않는데 작동함
 	printf("%s\n",ft_substr(NULL, 3,3));//456
 	printf("%s\n",ft_substr(str, 20,100));//
 }
