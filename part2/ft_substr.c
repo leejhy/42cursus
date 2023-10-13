@@ -13,6 +13,16 @@
 
 #include <stdlib.h>
 
+static size_t ft_strlen(const char *s)
+{
+    int len;
+
+    len = 0;
+    while (s && *(s + len))//여기서 널처리
+        len++;
+    return (len);
+}
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
@@ -20,7 +30,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	i = 0;
 	str = malloc(sizeof(char) * len + 1);
-	if (!s)
+	if (!s)//s 널처리
 		return (NULL);
 	if (!str)
 		return (NULL);
@@ -37,8 +47,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 int	main(void)
 {
 	char str[] = "0123456789";
-	printf("%s\n",ft_substr(str, 3,3));//456
-	printf("%s\n",ft_substr("", 3,3));//456얘네들이 3번 인덱스가 존재하지 않는데 작동함
+	printf("%s\n",ft_substr(str, 3,3));//345
+	printf("%s\n",ft_substr("", 3,3));
 	printf("%s\n",ft_substr(NULL, 3,3));//456
 	printf("%s\n",ft_substr(str, 20,100));//
 }
