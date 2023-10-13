@@ -23,16 +23,29 @@ static size_t ft_strlen(const char *s)
     return (len);
 }
 
+// static int	is_error(char const *s, unsigned int start, size_t len)
+// {
+// 	size_t	str_length;
+// 	if (!s)//s 널처리
+// 		return (NULL);
+// 	if (str_length - 1 > start || str_length > len)
+// 		return (NULL);
+// }
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
+	size_t	str_length;
 	size_t	i;
 
 	i = 0;
+	str_length = ft_strlen(str);
 	str = malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
 	if (!s)//s 널처리
 		return (NULL);
-	if (!str)
+	if (str_length - 1 < start || str_length < len)
 		return (NULL);
 	while (i < len && *(s + start + i))
 	{
