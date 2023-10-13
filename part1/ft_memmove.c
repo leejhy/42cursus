@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "../libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
@@ -18,29 +20,22 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	unsigned char	*temp_src;
 	unsigned char	*temp_dst;
 
-	i = 0;
+	i = 1;
 	temp_dst = (unsigned char *)dst;
-	temp_src = (const unsigned char *)src;
-	if (*temp_dst == NULL && *temp_src == NULL)
+	temp_src = (unsigned char *)src;
+	if (temp_dst == NULL && temp_src == NULL)
 		return (NULL);
-	if (temp_dst >= temp_src)
+	if (temp_dst <= temp_src)
 		return(ft_memcpy(temp_dst, temp_src, len));
-	if (temp_dst < temp_src)
+	else
 	{
-		//메모리가 겹치지않게
+		while(len - i)
+		{
+			*(temp_dst + (len - i)) = *(temp_src + (len - i));
+			i++;
+		}
 	}
-	// while (i < len)
-	// {
-	// 	*(temp_dst + i) = *(temp_src + i);
-	// 	i++;
-	// }
-	// i = 0;
-	// while (i < len)
-	// {
-	// 	*(dst + i) = *(temp_src + i);
-	// 	i++;
-	// }
-	// return (dst);
+	return (dst);
 }
 
 // int main(void)
