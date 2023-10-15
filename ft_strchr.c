@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 21:00:31 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 14:43:49 by junhylee         ###   ########.fr       */
+/*   Created: 2023/10/08 15:48:09 by junhylee          #+#    #+#             */
+/*   Updated: 2023/10/15 18:32:50 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+char	*ft_strchr(const char *s, int c)
 {
-	void	*arr;
-
-	if (count == 0 || size == 0)
-		return (NULL);
-	arr = malloc(count * size);
-	if (!arr)
-		return (NULL);
-	ft_bzero(arr, count * size);
-	return (arr);
+	while (*s)
+	{
+		if (*s == c)
+			return ((char *)s);
+		s++;
+	}
+	if (*s == '\0' && c == '\0')
+		return ((char *)s);
+	return (NULL);
 }

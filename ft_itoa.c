@@ -6,12 +6,11 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:18:39 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 14:18:34 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:50:29 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
 static int	ft_count(long long n)
 {
@@ -66,7 +65,6 @@ char	*ft_rev(char *str, int len)
 
 	i = 0;
 	rev = malloc(sizeof(char) * (len + 1));
-	printf("len %d, i %d\n ", len, i);
 	while (i < len)
 	{
 		rev[i] = str[len - (i + 1)];
@@ -90,9 +88,4 @@ char	*ft_itoa(int n)
 	str = ft_input(n, str);
 	str = ft_rev(str, len);
 	return (str);
-}
-
-int	main(void)
-{
-	printf("main : %s\n", ft_itoa(-0));
 }

@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 17:16:10 by junhylee@st       #+#    #+#             */
-/*   Updated: 2023/10/10 21:48:04 by junhylee         ###   ########.fr       */
+/*   Created: 2023/10/07 17:17:22 by junhylee          #+#    #+#             */
+/*   Updated: 2023/10/15 18:26:34 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int c)
+int	ft_isalpha(int c)
 {
-	if (ft_isalpha(c) || ft_isdigit(c))
+	if (65 <= c && c <= 90)
+		return (1);
+	if (97 <= c && c <= 122)
 		return (1);
 	return (0);
 }

@@ -1,20 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 17:46:03 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/07 17:51:05 by junhylee         ###   ########.fr       */
+/*   Created: 2023/10/08 19:25:47 by junhylee          #+#    #+#             */
+/*   Updated: 2023/10/15 18:34:41 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isascii(int c)
+static int	ft_strcmp(const char *s1, const char *s2)
 {
-	if (0 <= c && c <= 126)
-		return (1);
+	while ((*s1 != 0 || *s2 != 0) && *s2 != 0)
+	{
+		if (*s1 != *s2)
+			return (1);
+		s1++;
+		s2++;
+	}
 	return (0);
+}
+
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	if (!needle)
+		return (NULL);
+	while (i < len && *(haystack + i))
+	{
+		if (!ft_strcmp(haystack + i, needle))
+			return ((char *)haystack + i);
+		i++;
+	}
+	return (NULL);
 }

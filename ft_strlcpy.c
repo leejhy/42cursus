@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/08 17:00:41 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/10 21:48:19 by junhylee         ###   ########.fr       */
+/*   Created: 2023/10/08 14:36:38 by junhylee          #+#    #+#             */
+/*   Updated: 2023/10/15 19:53:42 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t			i;
-	unsigned char	*temp_s;
+	size_t	i;
+	size_t	length_src;
 
-	temp_s = (unsigned char *)s;
 	i = 0;
-	while (i < n)
+	length_src = ft_strlen(src);
+	if (dstsize == 0)
+		return (length_src);
+	while ((i + 1 < dstsize) && *(src + i))
 	{
-		if (*(temp_s + i) == (unsigned char)c)
-			return (temp_s + i);
+		*(dst + i) = *(src + i);
 		i++;
 	}
-	return (NULL);
+	*(dst + i) = '\0';
+	return (length_src);
 }
-
-// #include <stdio.h>
-// #include <string.h>
-// int	main(void)
-// {
-// 	char str[] = "Helloword";
-// 	printf("%s\n", memchr(str, 'a', 20000000));
-// 	printf("%s\n", ft_memchr(str, 'a', 20000000));
-// }

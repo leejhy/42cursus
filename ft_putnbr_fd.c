@@ -6,11 +6,11 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:42:06 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 16:58:31 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/15 17:21:02 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 void	ft_putchar(char put, int fd)
 {

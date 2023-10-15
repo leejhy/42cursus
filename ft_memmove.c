@@ -6,13 +6,28 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 19:17:38 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 16:00:52 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:37:42 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "../libft.h"
+#include "libft.h"
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	size_t			i;
+	unsigned char	*temp_dst;
+	unsigned char	*temp_src;
+
+	temp_dst = (unsigned char *)dst;
+	temp_src = (unsigned char *)src;
+	i = 0;
+	while (i < n)
+	{
+		*(temp_dst + i) = *(temp_src + i);
+		i++;
+	}
+	return (dst);
+}
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
@@ -20,7 +35,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	unsigned char	*temp_src;
 	unsigned char	*temp_dst;
 
-	i = 1;
+	i = 0;
 	temp_dst = (unsigned char *)dst;
 	temp_src = (unsigned char *)src;
 	if (temp_dst == NULL && temp_src == NULL)
@@ -29,22 +44,11 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		return (ft_memcpy(temp_dst, temp_src, len));
 	else
 	{
-		while (len - i)
+		while (i < len)
 		{
-			*(temp_dst + (len - i)) = *(temp_src + (len - i));
+			*(temp_dst + (len - 1 - i)) = *(temp_src + (len - 1 - i));
 			i++;
 		}
 	}
 	return (dst);
 }
-
-// int main(void)
-// {
-//     char str[] = "12345678";
-
-//     memmove(str + 2, str, sizeof(char) * 4);
-//     printf("src  : %s\n", str);
-
-// 	return (0);
-
-// }

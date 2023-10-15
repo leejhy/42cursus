@@ -6,11 +6,11 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:37:59 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 15:40:47 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:40:52 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 static int	is_sep(char s, char c)
 {
@@ -36,7 +36,7 @@ static size_t	ft_wordcnt(char const *s, char c)
 	return (cnt);
 }
 
-static char	*ft_strdup(const char *s, char c)
+static char	*ft_splitdup(const char *s, char c)
 {
 	char		*word;
 	size_t		len;
@@ -87,12 +87,12 @@ char	**ft_split(char const *s, char c)
 	{
 		while (*s && is_sep(*s, c))
 			s++;
-		if (*s && !ft_strdup(s, c))
+		if (*s && !ft_splitdup(s, c))
 		{
 			ft_frees(strings, i - 1);
 			return (NULL);
 		}
-		*(strings + i) = ft_strdup(s, c);
+		*(strings + i) = ft_splitdup(s, c);
 		while (*s && !is_sep(*s, c))
 			s++;
 		i++;

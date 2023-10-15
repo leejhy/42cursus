@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/08 16:58:21 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/08 19:25:32 by junhylee         ###   ########.fr       */
+/*   Created: 2023/10/08 18:02:37 by junhylee          #+#    #+#             */
+/*   Updated: 2023/10/15 20:13:34 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t	i;
+	size_t			i;
+	unsigned char	*temp_s1;
+	unsigned char	*temp_s2;
 
 	i = 0;
-	while (i < n && (s1[i] != 0 && s2[i] != 0))
-	{	
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	temp_s1 = (unsigned char *)s1;
+	temp_s2 = (unsigned char *)s2;
+	while (i < n)
+	{
+		if (*(temp_s1 + i) != *(temp_s2 + i))
+			return (*(temp_s1 + i) - *(temp_s2 + i));
 		i++;
 	}
-	if (n == i)
+	if (i == n)
 		return (0);
-	else if (s1[i] == '\0' || s2[i] == '\0')
-		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	else
-		return (0);
+	return (*(temp_s1 + i) - *(temp_s2 + i));
 }
-
-// #include <stdio.h>
-// #include <string.h>
 
 // int	main(void)
 // {
-// 	printf("%d\n", strncmp("abcd", "abzd", 4));
-// 	printf("%d\n", ft_strncmp("abcd", "abzd", 4));
+// 	char s2[] = {0, 0, 127, 0};
+// 	char s3[] = {0, 0, 42, 0};
+// 	ft_memcmp(s2, s3, 4);
+
+
+// 	// ft_memcmp("abc", "abc", 7)
 // }

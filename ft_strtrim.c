@@ -6,13 +6,11 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:38:05 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 15:43:51 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:42:39 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdlib.h>
-// #include <stdio.h>
-#include "../libft.h"
+#include "libft.h"
 
 int	is_in(char s, const char *set)
 {
@@ -23,16 +21,6 @@ int	is_in(char s, const char *set)
 		set++;
 	}
 	return (0);
-}
-
-static size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s && *(s + len))
-		len++;
-	return (len);
 }
 
 static size_t	ft_back(char *s1, char const *set)
@@ -90,10 +78,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	*(str + i) = '\0';
 	return (str);
 }
-
-// int	main(void)
-// {
-// 	// char set[] = "3";
-// 	// char s1[] = "123123123";
-// 	printf("%s\n", ft_strtrim("", NULL));
-// }

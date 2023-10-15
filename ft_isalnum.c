@@ -1,42 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/08 14:36:38 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/10 21:54:19 by junhylee         ###   ########.fr       */
+/*   Created: 2023/10/07 17:16:10 by junhylee@st       #+#    #+#             */
+/*   Updated: 2023/10/15 18:30:45 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_strlen(const char *str)
+int	ft_isalnum(int c)
 {
-	int	i;
-
-	i = 0;
-	while (*str != 0)
-	{
-		str++;
-		i++;
-	}
-	return (i);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
-	size_t	length_src;
-
-	i = 0;
-	length_src = ft_strlen(src);
-	while ((i + 1 < dstsize) && (src[i] != '\0'))
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (length_src);
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (1);
+	return (0);
 }

@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/08 15:34:28 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 15:58:42 by junhylee         ###   ########.fr       */
+/*   Created: 2023/10/15 15:21:26 by junhylee          #+#    #+#             */
+/*   Updated: 2023/10/15 18:19:30 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	if (97 <= c && c <= 122)
-		return (c - 32);
-	return (c);
+	unsigned int	i;
+
+	i = 0;
+	while (*(s + i))
+	{
+		(*f)(i, (s + i));
+		i++;
+	}
+	return ;
 }
