@@ -1,25 +1,9 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-# FLAG = -g -fsanitize=address
-INCLUDE = libft.h
-SRCS = ft_bzero.c \
-		ft_isalnum.c \
-		ft_isalpha.c \
-		ft_isascii.c \
-		ft_isdigit.c \
-		ft_isprint.c \
-		ft_memchr.c \
-		ft_memcmp.c \
-		ft_memcpy.c \
-		ft_memset.c \
-		ft_strchr.c \
-		ft_strlcat.c \
-		ft_strlcpy.c \
-		ft_strlen.c \
-		ft_strncmp.c \
-		ft_strrchr.c \
-		ft_tolower.c \
-		ft_toupper.c
+DIR_PART2 = ./part2/
+SRCS = $(DIR_PART2)ft_split.c \
+		$(DIR_PART2)ft_substr.c \
+		$(DIR_PART2)ft_strtrim.c \
 
 OBJS = ${SRCS:.c=.o}
 NAME = libft.a
@@ -30,7 +14,7 @@ $(NAME) : $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
 
 %.o : %.c
-    $(CC) -c  $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
 clean :
 	rm -f $(OBJS)

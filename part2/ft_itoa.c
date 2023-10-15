@@ -1,0 +1,98 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/14 16:18:39 by junhylee          #+#    #+#             */
+/*   Updated: 2023/10/15 14:18:34 by junhylee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+#include <stdio.h>
+
+static int	ft_count(long long n)
+{
+	int	len;
+
+	len = 0;
+	if (n < 0)
+	{
+		n = n * -1;
+		len++;
+	}
+	while (n > 0)
+	{
+		n = n / 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_input(long long n, char *str)
+{
+	int	i;
+	int	sign;
+
+	sign = 0;
+	i = 0;
+	if (n < 0)
+	{
+		n = n * -1;
+		sign = 1;
+	}
+	while (n > 0)
+	{
+		*(str + i) = (n % 10) + '0';
+		i++;
+		n /= 10;
+	}
+	if (sign == 1)
+	{
+		*(str + i) = '-';
+		*(str + i + 1) = '\0';
+	}
+	else
+		*(str + i) = '\0';
+	return (str);
+}
+
+char	*ft_rev(char *str, int len)
+{
+	char	*rev;
+	int		i;
+
+	i = 0;
+	rev = malloc(sizeof(char) * (len + 1));
+	printf("len %d, i %d\n ", len, i);
+	while (i < len)
+	{
+		rev[i] = str[len - (i + 1)];
+		i++;
+	}
+	rev[i] = '\0';
+	return (rev);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*str;
+	int		len;
+
+	if (n == 0)
+		return ("0");
+	len = ft_count(n);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	str = ft_input(n, str);
+	str = ft_rev(str, len);
+	return (str);
+}
+
+int	main(void)
+{
+	printf("main : %s\n", ft_itoa(-0));
+}

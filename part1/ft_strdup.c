@@ -6,27 +6,27 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:32:15 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/10 21:53:15 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/15 15:57:05 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t ft_strlen(const char *s)
+static size_t	ft_strlen(const char *s)
 {
-    int len;
+	int	len;
 
-    len = 0;
-    while (*(s + len))
-        len++;
-    return (len);
+	len = 0;
+	while (*(s + len))
+		len++;
+	return (len);
 }
 
 char	*ft_strdup(const char *s1)
 {
 	unsigned char	*arr;
-	size_t	i;
-	size_t	s1_len;
+	size_t			i;
+	size_t			s1_len;
 
 	i = 0;
 	s1_len = ft_strlen(s1);

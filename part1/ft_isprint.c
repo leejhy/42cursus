@@ -6,13 +6,13 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:36:59 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/07 17:45:21 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/15 15:53:42 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isprint(int c)
+int	ft_isprint(int c)
 {
-    if (32 <= c && c <= 126)
-        return (1);
-    return (0);
+	if (32 <= c && c <= 126)
+		return (1);
+	return (0);
 }

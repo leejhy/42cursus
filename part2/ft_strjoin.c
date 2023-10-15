@@ -6,21 +6,21 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:38:02 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/12 19:38:03 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/15 15:59:12 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <stdlib.h>
 
-static size_t ft_strlen(const char *s)
+static size_t	ft_strlen(const char *s)
 {
-    int len;
+	int	len;
 
-    len = 0;
-    while (s && *(s + len))//여기서 널처리
-        len++;
-    return (len);
+	len = 0;
+	while (s && *(s + len))
+		len++;
+	return (len);
 }
 
 static char	*ft_strcat(char *dest, char *src)

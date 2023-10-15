@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 19:17:38 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/10 18:55:09 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:00:52 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	if (temp_dst == NULL && temp_src == NULL)
 		return (NULL);
 	if (temp_dst <= temp_src)
-		return(ft_memcpy(temp_dst, temp_src, len));
+		return (ft_memcpy(temp_dst, temp_src, len));
 	else
 	{
-		while(len - i)
+		while (len - i)
 		{
 			*(temp_dst + (len - i)) = *(temp_src + (len - i));
 			i++;
@@ -41,9 +41,10 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 // int main(void)
 // {
 //     char str[] = "12345678";
- 
+
 //     memmove(str + 2, str, sizeof(char) * 4);
 //     printf("src  : %s\n", str);
-	
+
 // 	return (0);
+
 // }

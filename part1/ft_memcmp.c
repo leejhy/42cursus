@@ -6,11 +6,11 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 18:02:37 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/08 19:24:05 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:53:01 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
@@ -18,11 +18,11 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	unsigned char	*temp_s1;
 	unsigned char	*temp_s2;
 
+	i = 0;
 	temp_s1 = (unsigned char *)s1;
 	temp_s2 = (unsigned char *)s2;
 
-	i = 0;
-	while (i < n)
+	while (*(temp_s1 + i) && *(temp_s2 + i) && i < n)
 	{
 		if (*(temp_s1 + i) != *(temp_s2 + i))
 			return (*(temp_s1 + i) - *(temp_s2 + i));
@@ -31,13 +31,12 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	return (*(temp_s1 + i) - *(temp_s2 + i));
 }
 
-#include <stdio.h>
 #include <string.h>
 
 int	main(void)
 {
-	printf("%d\n", memcmp("abced", "abcee", 6));//같을때
-	printf("%d\n", ft_memcmp("abced", "abcee", 6));
+	printf("%d\n", memcmp("abced", "abcee", 0));//같을때
+	printf("%d\n", ft_memcmp("abced", "abcee", 0));
 	printf("%d\n", memcmp("abc", "abz", 4));// 다를때
 	printf("%d\n", ft_memcmp("abc", "abz", 4));
 	printf("%d\n", memcmp("abced", "abced", 10));//같은데 바이트 더클때

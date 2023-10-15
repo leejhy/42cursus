@@ -2,11 +2,8 @@
 
 int	main(void)
 {
-	size_t	a;
-	size_t	b;
-	a = -9223372036854775808;
-	b = 9223372036854775807;
-	size_t	c;
-	c = a*b;
-	printf("%d\n",c);
+	int a = -2147483648;
+	printf("%d\n",a);
+	a = a * -1;
+	printf("%d\n",a);
 }

@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 19:56:02 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/10 20:45:56 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/15 15:58:30 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_atoi(const char *str)
 {
-	int	sign;
+	int			sign;
 	long long	result;
 
 	sign = 1;
