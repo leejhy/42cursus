@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:48:09 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 18:32:50 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:46:58 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (c > 255)
-		c -= 255;
+	char	temp_c;
+
+	temp_c = (char)c;
 	while (*s)
 	{
-		if (*s == c)
+		if (*s == temp_c)
 			return ((char *)s);
 		s++;
 	}
-	if (*s == '\0' && c == '\0')
+	if (*s == '\0' && temp_c == '\0')
 		return ((char *)s);
 	return (NULL);
 }

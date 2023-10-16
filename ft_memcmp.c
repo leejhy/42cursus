@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 18:02:37 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 20:13:34 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:37:50 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,5 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 // 	char s2[] = {0, 0, 127, 0};
 // 	char s3[] = {0, 0, 42, 0};
 // 	ft_memcmp(s2, s3, 4);
-
-
 // 	// ft_memcmp("abc", "abc", 7)
 // }

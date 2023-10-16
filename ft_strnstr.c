@@ -6,36 +6,36 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:25:47 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 18:34:41 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/16 20:38:38 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_strcmp(const char *s1, const char *s2)
-{
-	while ((*s1 != 0 || *s2 != 0) && *s2 != 0)
-	{
-		if (*s1 != *s2)
-			return (1);
-		s1++;
-		s2++;
-	}
-	return (0);
-}
-
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
+	size_t	cnt;
+	size_t	needle_len;
 
 	i = 0;
+	needle_len = ft_strlen(needle);
 	if (!needle)
+		return ((char *)haystack);
+	if (!haystack)
 		return (NULL);
-	while (i < len && *(haystack + i))
+	while (i < len)
 	{
-		if (!ft_strcmp(haystack + i, needle))
-			return ((char *)haystack + i);
+		cnt = 0;
+		while (i + cnt < len && *(haystack + i + cnt) == *(needle + cnt))
+			cnt++;
+		if (cnt == needle_len)
+			return ((char *)(haystack + i));
 		i++;
 	}
 	return (NULL);
 }
+
+// ft_strnstr(0x107d2fda0: "", "", 0): expected: 0x107d2fda0, yours: 0x0
+// Error in test 4: ft_strnstr(0x107d2fda0: "", "", 1): expected: 0x107d2fda0, yours: 0x0
+// Error in test 5: ft_strnstr(0x107d2fda0: "", "", 2)

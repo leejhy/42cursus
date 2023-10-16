@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:38:05 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 18:42:39 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/16 20:39:34 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	temp = (char *)s1;
 	back = ft_back(temp, set);
 	front = ft_front(temp, set);
-	if ((front == 0 && back == 0) && is_in(*temp, set))
+	if (front == 0 && back == 0 && is_in(*temp, set))
 		return (NULL);
 	str = malloc(sizeof(char) * (ft_strlen(s1) + 1));
 	if (!str)
@@ -79,12 +79,18 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (str);
 }
 
-// #include <stdio.h>
+// Error in test 1: ft_strtrim("", ""): expected: "", got: <NULL>
+// Error in test 1: ft_strtrim("", ""): not enough memory allocated, needed: 1, reserved:
+// 0
+// Could not find the corresponding allocation or the pointer 0x0
+// Error in test 3: ft_strtrim("", "cdef"): expected: "", got: <NULL>
+// Error in test 3: ft_strtrim("", "cdef"): not enough memory allocated, needed: 1,
+// reserved: 0
 
-// int	main(void)
-// {
-// 	const char set[] = "123";
-// 	const char s1[] = "123123312HE23LLO1233121";
-
-// 	printf("%s\n",ft_strtrim(s1,set));
-// }
+// char s1[] = "          ";
+//     if (!(strtrim = ft_strtrim(s1, " ")))
+//         ft_print_result("NULL");
+//     else
+//         ft_print_result(strtrim);
+//     if (strtrim == s1)
+//         ft_print_result("\nA new str

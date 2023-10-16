@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:37:59 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 18:40:52 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:28:56 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	ft_frees(char **strings, size_t	idx)
 		free(strings + i);
 		i++;
 	}
-	free(strings);
+	free(strings + i);
 	return ;
 }
 
@@ -87,9 +87,9 @@ char	**ft_split(char const *s, char c)
 	{
 		while (*s && is_sep(*s, c))
 			s++;
-		if (*s && !ft_splitdup(s, c))
+		if (!ft_splitdup(s, c))
 		{
-			ft_frees(strings, i - 1);
+			ft_frees(strings, i);
 			return (NULL);
 		}
 		*(strings + i) = ft_splitdup(s, c);

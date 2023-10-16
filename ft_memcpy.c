@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:05:20 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 19:41:54 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:03:03 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	temp_dst = (unsigned char *)dst;
 	temp_src = (unsigned char *)src;
 	i = 0;
-	while (i < n)
+	while ((dst || src) && i < n)
 	{
 		*(temp_dst + i) = *(temp_src + i);
 		i++;

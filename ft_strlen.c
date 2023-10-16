@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:09:08 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 18:34:31 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/16 20:38:01 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
-	while (s && *(s + len))
+	while (*(s + len))
 		len++;
 	return (len);
 }
