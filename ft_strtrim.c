@@ -12,7 +12,17 @@
 
 #include "libft.h"
 
-int	is_in(char s, const char *set)
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (s && *(s + len))
+		len++;
+	return (len);
+}
+
+static int	is_in(char s, const char *set)
 {
 	while (*set)
 	{
@@ -65,7 +75,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	temp = (char *)s1;
 	back = ft_back(temp, set);
 	front = ft_front(temp, set);
-	if (front == 0 && back == 0 && is_in(*temp, set))
+	if ((front == 0 && back == 0) && is_in(*temp, set))
 		return (NULL);
 	str = malloc(sizeof(char) * (ft_strlen(s1) + 1));
 	if (!str)
@@ -77,4 +87,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	*(str + i) = '\0';
 	return (str);
+}
+
+#include <stdio.h>
+
+int	main(void)
+{
+	const char set[] = "123";
+	const char s1[] = "123123312HE23LLO1233121";
+
+	printf("%s\n",ft_strtrim(s1,set));
 }
