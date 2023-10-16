@@ -18,6 +18,8 @@ char	*ft_strrchr(const char *s, int c)
 	int		cnt;
 
 	cnt = 0;
+	while (c > 255)
+		c -= 255;
 	while (*s)
 	{
 		if (*s == c)

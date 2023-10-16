@@ -14,6 +14,8 @@
 
 char	*ft_strchr(const char *s, int c)
 {
+	while (c > 255)
+		c -= 255;
 	while (*s)
 	{
 		if (*s == c)

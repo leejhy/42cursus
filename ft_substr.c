@@ -31,7 +31,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		i++;
 	}
 	*(str + i) = '\0';
-	if (!*str)
-		return (NULL);
+	// if (!*str)
+	// 	return (NULL);
 	return (str);
 }

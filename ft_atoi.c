@@ -35,3 +35,11 @@ int	ft_atoi(const char *str)
 	}
 	return (sign * result);
 }
+#include <stdio.h>
+int	main(void)
+{
+	printf("atoi %d\n",atoi("3000000000"));
+	printf("ft_a %d\n",ft_atoi("3000000000"));
+	printf("atoi %d\n",atoi("-4294967297"));
+	printf("ft_a %d\n",ft_atoi("-4294967297"));
+}
