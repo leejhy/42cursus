@@ -12,16 +12,6 @@
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s && *(s + len))
-		len++;
-	return (len);
-}
-
 static int	is_in(char s, const char *set)
 {
 	while (*set)
@@ -89,12 +79,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (str);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	const char set[] = "123";
-	const char s1[] = "123123312HE23LLO1233121";
+// int	main(void)
+// {
+// 	const char set[] = "123";
+// 	const char s1[] = "123123312HE23LLO1233121";
 
-	printf("%s\n",ft_strtrim(s1,set));
-}
+// 	printf("%s\n",ft_strtrim(s1,set));
+// }

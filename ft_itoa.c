@@ -30,7 +30,7 @@ static int	ft_count(long long n)
 	return (len);
 }
 
-char	*ft_input(long long n, char *str)
+static char	*ft_input(long long n, char *str)
 {
 	int	i;
 	int	sign;
@@ -58,7 +58,7 @@ char	*ft_input(long long n, char *str)
 	return (str);
 }
 
-char	*ft_rev(char *str, int len)
+static char	*ft_rev(char *str, int len)
 {
 	char	*rev;
 	int		i;

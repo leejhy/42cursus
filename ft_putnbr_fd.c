@@ -12,12 +12,12 @@
 
 #include "libft.h"
 
-void	ft_putchar(char put, int fd)
+static void	ft_putchar(char put, int fd)
 {
 	write(fd, &put, 1);
 }
 
-void	ft_recursion(long long nb, int fd)
+static void	ft_recursion(long long nb, int fd)
 {
 	// if (nb == -2147483648)
 	// 	write (1, "-2147483648", 11);
