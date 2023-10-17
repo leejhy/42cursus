@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "libft.h"
-#include <stdio.h>
+#include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -31,8 +30,4 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	if (i == n)
 		return (0);
 	return (*(temp_s1 + i) - *(temp_s2 + i));
-}
-int	main(void)
-{
-	printf("%d\n",ft_strncmp("456123","456",2));
 }

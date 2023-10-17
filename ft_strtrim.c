@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:38:05 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/16 20:39:34 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/17 22:12:18 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,13 @@ char	*ft_strtrim(char const *s1, char const *set)
 }
 
 // Error in test 1: ft_strtrim("", ""): expected: "", got: <NULL>
-// Error in test 1: ft_strtrim("", ""): not enough memory allocated, needed: 1, reserved:
+// Error in test 1: ft_strtrim("", ""): not enough memory allocated,
+//  needed: 1, reserved:
 // 0
 // Could not find the corresponding allocation or the pointer 0x0
 // Error in test 3: ft_strtrim("", "cdef"): expected: "", got: <NULL>
-// Error in test 3: ft_strtrim("", "cdef"): not enough memory allocated, needed: 1,
+// Error in test 3: ft_strtrim("", "cdef"): not enough memory 
+// allocated, needed: 1,
 // reserved: 0
 
 // char s1[] = "          ";
@@ -94,3 +96,50 @@ char	*ft_strtrim(char const *s1, char const *set)
 //         ft_print_result(strtrim);
 //     if (strtrim == s1)
 //         ft_print_result("\nA new str
+
+// ft_strtrim("xxxz  test with x and z and x .  zx  xx z", "z x")
+// ㄴ26바이트 할당 해야하는데, 42바이트 할당함
+// ft_strtrim("ab cd  f    ", " ") 9바이트 할당해야 하는데 13바이트 할당함
+// char s1[] = "          ";
+//     if (!(strtrim = ft_strtrim(s1, " ")))
+//         ft_print_result("NULL");
+//     else
+//         ft_print_result(strtrim);
+//     if (strtrim == s1)
+//         ft_print_result("\nA new string was not returned");
+// Expected (cat -e test05.output):
+
+// Your result (cat -e user_output_test05):
+// NULL
+// strcpy(str, "LoReM iPsUm");
+//     strmapi = ft_strmapi(str, &mapi);
+//     ft_print_result(strmapi);
+//     if (strmapi == str)
+//         ft_print_result("\nA new string was not returned");
+//     if (strmapi[11] != '\0')
+//         ft_print_result("\nString is not null terminated");
+// Expected (cat -e test01.output):
+// lOrEm IpSuM
+// Your result (cat -e user_output_test01):
+// char *str = "01234";
+//  	size_t size = 10;
+//  	char *ret = ft_substr(str, 10, size);
+
+//  	if (!strncmp(ret, "", 1))
+//  	{
+//  		free(ret);
+//  		exit(TEST_SUCCESS);
+//  	}
+//  	free(ret);
+//  	exit(TEST_FAILED);
+
+
+//  [crash]: your strtrim does not work with full blank input
+//  Test code:
+//  	char *s1 = "  \t \t \n   \n\n\n\t";
+//  	char *s2 = "";
+//  	char *ret = ft_strtrim(s1, " \n\t");
+
+//  	if (!strcmp(ret, s2))
+//  		exit(TEST_SUCCESS);
+//  	exit(TEST_FAILED);

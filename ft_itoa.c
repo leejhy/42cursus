@@ -6,11 +6,12 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:18:39 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/16 16:41:23 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/17 22:04:03 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static int	ft_count(long long n)
 {
@@ -51,10 +52,9 @@ static char	*ft_input(long long n, char *str)
 	if (sign == 1)
 	{
 		*(str + i) = '-';
-		*(str + i + 1) = '\0';
+		i++;
 	}
-	else
-		*(str + i) = '\0';
+	*(str + i) = '\0';
 	return (str);
 }
 
@@ -65,11 +65,17 @@ static char	*ft_rev(char *str, int len)
 
 	i = 0;
 	rev = malloc(sizeof(char) * (len + 1));
+	if (!rev)
+	{
+		free(str);
+		return (NULL);
+	}
 	while (i < len)
 	{
 		rev[i] = str[len - (i + 1)];
 		i++;
 	}
+	free(str);
 	rev[i] = '\0';
 	return (rev);
 }
@@ -80,7 +86,14 @@ char	*ft_itoa(int n)
 	int		len;
 
 	if (n == 0)
-		return ("0");
+	{
+		str = malloc(sizeof(char) * 2);
+		if (!str)
+			return (NULL);
+		*str = '0';
+		*(str + 1) = '\0';
+		return (str);
+	}
 	len = ft_count(n);
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)

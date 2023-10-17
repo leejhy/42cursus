@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:38:09 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/16 20:38:55 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/17 22:12:46 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 }
 
 // ft_substr("", 1, 1): Bus error
+// /* 2 */ mcheck(s, strlen("tripouille") + 1); free(s); showLeaks();
+// MKO 28: 	/* 6 */ mcheck(s, 1); free(s); showLeaks();
