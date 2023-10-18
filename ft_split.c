@@ -65,11 +65,10 @@ static void	ft_frees(char **strings, size_t	idx)
 	i = 0;
 	while (i < idx)
 	{
-		free(strings + i);
+		free(*(strings + i));
 		i++;
 	}
-	free(strings + i);
-	return ;
+	free(strings);
 }
 
 char	**ft_split(char const *s, char c)
@@ -83,16 +82,16 @@ char	**ft_split(char const *s, char c)
 	strings = malloc(sizeof(char *) * (word + 1));
 	if (!strings)
 		return (NULL);
-	while (i < word)
+	while (s && i < word)
 	{
 		while (*s && is_sep(*s, c))
 			s++;
-		if (!ft_splitdup(s, c))
+		*(strings + i) = ft_splitdup(s, c);
+		if (!*(strings + i))
 		{
 			ft_frees(strings, i);
 			return (NULL);
 		}
-		*(strings + i) = ft_splitdup(s, c);
 		while (*s && !is_sep(*s, c))
 			s++;
 		i++;
