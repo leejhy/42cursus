@@ -18,7 +18,7 @@ void	ft_putendl_fd(char *s, int fd)
 
 	s_len = ft_strlen(s);
 	write(fd, s, s_len);
-	write(1, "\n", 1);
+	write(fd, "\n", 1);
 }
 //  ft_putendl_fd("lorem ipsum dolor sit amet", 2);
 // Expected (cat -e test01.output):
