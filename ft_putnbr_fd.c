@@ -17,7 +17,7 @@ void	ft_putchar(char put, int fd)
 	write(fd, &put, 1);
 }
 
-void	ft_recursion(long long nb, int fd)
+static void	ft_recursion(long long nb, int fd)
 {
 	if (nb < 0)
 	{	
@@ -26,7 +26,7 @@ void	ft_recursion(long long nb, int fd)
 	}
 	if (nb < 10)
 		ft_putchar(nb + '0', fd);
-	if (nb > 9)
+	if (nb >= 10)
 	{
 		ft_recursion(nb / 10, fd);
 		ft_recursion(nb % 10, fd);
@@ -37,3 +37,28 @@ void	ft_putnbr_fd(int n, int fd)
 {
 	ft_recursion(n, fd);
 }
+
+// static void ft_recursion(long long nb, int fd)
+// {
+// 	long long put;
+// 	if (nb < 0)
+// 	{
+// 		nb = nb * -1;
+// 		write(fd,"-",1);
+// 	}
+// 	if (nb < 10)
+// 	{
+// 		put = nb + '0';
+// 		write(fd, &put, 1);
+// 	}
+// 	if (nb >= 10)
+// 	{
+// 		ft_recursion(nb / 10, fd);
+// 		ft_recursion(nb % 10, fd);
+// 	}
+// }
+
+// void    ft_putnbr_fd(int n, int fd)
+// {
+// 	ft_recursion(n, fd);
+// }
