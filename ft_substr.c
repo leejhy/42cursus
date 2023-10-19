@@ -6,41 +6,40 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:38:09 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/17 22:12:46 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/19 20:52:29 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "libft.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
-size_t	ft_strlen(const char *s)
+static char	*ft_error(void)
 {
-	size_t	len;
+	char	*str;
 
-	len = 0;
-	while (*(s + len))
-		len++;
-	return (len);
+	str = malloc(sizeof(char));
+	if (!str)
+		return (NULL);
+	*str = '\0';
+	return (str);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
-	size_t	s_len;
 	size_t	i;
 
 	if (!s)
 		return (NULL);
 	i = 0;
-	s_len = ft_strlen(s);
-	if (s_len <= start)
+	if (ft_strlen(s) <= start)
 	{
-		str = malloc(sizeof(char) * 1);
-		*str = '\0';
+		str = ft_error();
 		return (str);
-    }
-	str = malloc(sizeof(char) * (len + 1));
+	}
+	if (len <= ft_strlen(s) - start)
+		str = malloc(sizeof(char) * (len + 1));
+	else
+		str = malloc(sizeof(char) * (ft_strlen(s) - start) + 1);
 	if (!str)
 		return (NULL);
 	while (*(s + start + i) && i < len)
@@ -52,10 +51,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-int	main(void)
-{
-	printf("%s\n",ft_substr("",1,1));
-}
-// ft_substr("", 1, 1): Bus error
+// #include <stdio.h>
+
+// int	main(void)
+// {
+// 	printf("%s\n", ft_substr("012345678901234567890123456789", 28, 30));
+// }
 // /* 2 */ mcheck(s, strlen("tripouille") + 1); free(s); showLeaks();
-// MKO 28: 	/* 6 */ mcheck(s, 1); free(s); showLeaks();
