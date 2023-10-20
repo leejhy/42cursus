@@ -10,113 +10,100 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+// #include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-static int	is_in(char s, const char *set)
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (*(s + len))
+		len++;
+	return (len);
+}
+
+static int	is_set(char c, char const *set)
 {
 	while (*set)
 	{
-		if (*set == s)
+		if (*set == c)
 			return (1);
 		set++;
 	}
 	return (0);
 }
 
-static size_t	ft_back(char *s1, char const *set)
+static size_t	ft_front_set(char const *s1, char const *set)
 {
-	size_t	back;
+	size_t	cnt;
 
-	back = ft_strlen(s1) - 1;
-	while (is_in(*(s1 + back), (char *)set))
-	{
-		if (back == 0 && back - 1 != 0)
-			return (0);
-		back--;
-	}
-	return (back);
+	cnt = 0;
+	while (*(s1 + cnt) && is_set(*(s1 + cnt), set))
+		cnt++;
+	return (cnt);// cnt - 1 이 인덱스
 }
 
-static size_t	ft_front(char *s1, char const *set)
+static size_t	ft_rear_set(char const *s1, char const *set)
 {
-	char	*temp;
-	size_t	i;
+	size_t	cnt;
+	size_t	s1_len;
 
-	i = 0;
-	temp = (char *)s1;
-	while (is_in(*(temp + i), (char *)set))
-		i++;
-	if (i == ft_strlen(s1))
-		return (0);
-	return (i);
+	s1_len = ft_strlen(s1);
+	s1_len--;// s1_len은 널문자 가리키기 때문에 1줄임
+	cnt = 0;
+	while (s1_len - cnt >= 0 && is_set(*(s1 + (s1_len - cnt)), set))
+		cnt++;
+	return (cnt);
+}
+
+static char	*ft_error(void)
+{
+	char	*str;
+
+	str = malloc(sizeof(char));
+	if (!str)
+		return (NULL);
+	*str = '\0';
+	return (str);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t		i;
-	size_t		back;
-	size_t		front;
-	char		*temp;
-	char		*str;
+	char *substr;
+	size_t	s1_len;
+	size_t	front;
+	size_t	rear;
+	size_t	i;
 
-	if (!s1 || !*s1)
-		return (NULL);
 	i = 0;
-	temp = (char *)s1;
-	back = ft_back(temp, set);
-	front = ft_front(temp, set);
-	if (front == 0 && back == 0 && is_in(*temp, set))
-		return (NULL);
-	str = malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (!str)
-		return (NULL);
-	while (i <= back - front)
+	s1_len = ft_strlen(s1);//20
+	front = ft_front_set(s1, set);//4
+	rear = ft_rear_set(s1, set);// 8 여기 까지 문제 x
+	if (s1_len == front && s1_len == rear)
 	{
-		*(str + i) = *(temp + front + i);
+		substr = ft_error();
+		return (substr);
+	}
+	substr = malloc(sizeof(char) * s1_len - front - rear + 1);
+	if (!substr)
+		return (NULL);
+	while (i < s1_len - rear - front)
+	{
+		*(substr + i) = *(s1 + front + i);
 		i++;
 	}
-	*(str + i) = '\0';
-	return (str);
+	*(substr + i) = '\0';
+	return (substr);
 }
 
-// Error in test 1: ft_strtrim("", ""): expected: "", got: <NULL>
-// Error in test 1: ft_strtrim("", ""): not enough memory allocated, needed: 1, reserved: 0
-// Could not find the corresponding allocation or the pointer 0x0
-// Error in test 3: ft_strtrim("", "cdef"): expected: "", got: <NULL>
-// Error in test 3: ft_strtrim("", "cdef"): not enough memory allocated, needed: 1, reserved: 0
-// Could not find the corresponding allocation or the pointer 0x0
-
-//  [crash]: your strtrim does not work with empty input
-//  Test code:
-//  	char *s1 = "";
-//  	char *s2 = "";
-//  	char *ret = ft_strtrim(s1, " \n\t");
-
-//  	if (!strcmp(ret, s2))
-//  		exit(TEST_SUCCESS);
-//  	exit(TEST_FAILED);
-
-
-//  [KO]: your strtrim did not allocate the good size so the \0 test may be false
-//  Test code:
-//  	char *s1 = "\t   \n\n\n  \n\n\t    Hello \t  Please\n Trim me !\t\t\t\n  \t\t\t\t  ";
-//  	char *s2 = "Hello \t  Please\n Trim me !";
-//  	int r_size = strlen(s2);
-//  	int size;
-
-//  	ft_strtrim(s1, " \n\t");
-//  	size = get_last_malloc_size();
-//  	if (size == r_size + 1)
-//  		exit(TEST_SUCCESS);
-//  	exit(TEST_KO);
-//     char s1[] = "          ";
-//     if (!(strtrim = ft_strtrim(s1, " ")))
-//         ft_print_result("NULL");
-//     else
-//         ft_print_result(strtrim);
-//     if (strtrim == s1)
-//         ft_print_result("\nA new string was not returned");
-// Expected (cat -e test05.output):
-
-// Your result (cat -e user_output_test05):
-// NULL
+int	main(void)
+{
+	printf("%s\n",ft_strtrim("2132He213llo21112312","213"));
+	printf("%s\n",ft_strtrim("",""));
+	printf("%s\n",ft_strtrim("", "cdef"));
+	printf("%s\n",ft_strtrim("          "," "));
+	printf("%s\n",ft_strtrim("ab cd  f    ", " "));
+	printf("%s\n",ft_strtrim("xxxz  test with x and z and x .  zx  xx z", "z x"));//26바이트 할당해야함
+}
