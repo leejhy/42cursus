@@ -51,9 +51,8 @@ static size_t	ft_rear_set(char const *s1, char const *set)
 	size_t	s1_len;
 
 	s1_len = ft_strlen(s1);
-	s1_len--;// s1_len은 널문자 가리키기 때문에 1줄임
 	cnt = 0;
-	while (s1_len - cnt >= 0 && is_set(*(s1 + (s1_len - cnt)), set))
+	while (cnt < s1_len && is_set(*(s1 + (s1_len - 1 - cnt)), set))
 		cnt++;
 	return (cnt);
 }
@@ -71,39 +70,34 @@ static char	*ft_error(void)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char *substr;
+	char *str;
 	size_t	s1_len;
 	size_t	front;
 	size_t	rear;
 	size_t	i;
 
 	i = 0;
-	s1_len = ft_strlen(s1);//20
-	front = ft_front_set(s1, set);//4
+	s1_len = ft_strlen(s1);//8
+	front = ft_front_set(s1, set);//8
 	rear = ft_rear_set(s1, set);// 8 여기 까지 문제 x
-	if (s1_len == front && s1_len == rear)
+	if (s1_len == front || s1_len == rear)
 	{
-		substr = ft_error();
-		return (substr);
+		str = ft_error();
+		return (str);
 	}
-	substr = malloc(sizeof(char) * s1_len - front - rear + 1);
-	if (!substr)
+	str = malloc(sizeof(char) * (s1_len - front - rear) + 1);
+	if (!str)
 		return (NULL);
-	while (i < s1_len - rear - front)
+	while (*(s1 + front + i) && i < s1_len - rear - front)
 	{
-		*(substr + i) = *(s1 + front + i);
+		*(str + i) = *(s1 + front + i);
 		i++;
 	}
-	*(substr + i) = '\0';
-	return (substr);
+	*(str + i) = '\0';
+	return (str);
 }
 
 int	main(void)
 {
-	printf("%s\n",ft_strtrim("2132He213llo21112312","213"));
-	printf("%s\n",ft_strtrim("",""));
-	printf("%s\n",ft_strtrim("", "cdef"));
-	printf("%s\n",ft_strtrim("          "," "));
-	printf("%s\n",ft_strtrim("ab cd  f    ", " "));
-	printf("%s\n",ft_strtrim("xxxz  test with x and z and x .  zx  xx z", "z x"));//26바이트 할당해야함
+	printf("%s\n",ft_strtrim("21312213","213"));
 }
