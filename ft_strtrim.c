@@ -6,23 +6,11 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:38:05 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/19 20:56:35 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/20 19:29:59 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (*(s + len))
-		len++;
-	return (len);
-}
+#include "libft.h"
 
 static int	is_set(char c, char const *set)
 {
@@ -42,7 +30,7 @@ static size_t	ft_front_set(char const *s1, char const *set)
 	cnt = 0;
 	while (*(s1 + cnt) && is_set(*(s1 + cnt), set))
 		cnt++;
-	return (cnt);// cnt - 1 이 인덱스
+	return (cnt);
 }
 
 static size_t	ft_rear_set(char const *s1, char const *set)
@@ -70,16 +58,16 @@ static char	*ft_error(void)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char *str;
+	char	*str;
 	size_t	s1_len;
 	size_t	front;
 	size_t	rear;
 	size_t	i;
 
 	i = 0;
-	s1_len = ft_strlen(s1);//8
-	front = ft_front_set(s1, set);//8
-	rear = ft_rear_set(s1, set);// 8 여기 까지 문제 x
+	s1_len = ft_strlen(s1);
+	front = ft_front_set(s1, set);
+	rear = ft_rear_set(s1, set);
 	if (s1_len == front || s1_len == rear)
 	{
 		str = ft_error();
@@ -95,9 +83,4 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	*(str + i) = '\0';
 	return (str);
-}
-
-int	main(void)
-{
-	printf("%s\n",ft_strtrim("21312213","213"));
 }

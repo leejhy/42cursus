@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:08:51 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 16:32:55 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/20 19:37:04 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,4 @@
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
-	return ;
 }

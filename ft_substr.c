@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:38:09 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/19 20:52:29 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/20 19:35:17 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	*(str + i) = '\0';
 	return (str);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	printf("%s\n", ft_substr("012345678901234567890123456789", 28, 30));
-// }
-// /* 2 */ mcheck(s, strlen("tripouille") + 1); free(s); showLeaks();
