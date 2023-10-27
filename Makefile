@@ -14,6 +14,7 @@ SRCS =	ft_atoi.c ft_bzero.c ft_calloc.c \
 		ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c
 OBJS = ${SRCS:.c=.o}
 BONUS_SRCS =	ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
+				ft_lstadd_back_bonus.c
 				
 BONUS_OBJS =
 NAME = libft.a
