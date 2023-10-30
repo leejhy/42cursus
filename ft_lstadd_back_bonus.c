@@ -6,19 +6,11 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 13:02:23 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/30 16:34:08 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:55:48 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-typedef struct	s_list
-{
-	void			*content;
-	struct s_list	*next;
-}				t_list;
-
-#include <stdio.h>
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
@@ -29,7 +21,5 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		temp = temp -> next;
 	new = (t_list *)malloc(sizeof(t_list));
 	if (!new)
-		return (NULL);
-	// new->next = NULL;
-	// temp->next = new;
+		return ;
 }

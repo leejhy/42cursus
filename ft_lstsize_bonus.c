@@ -6,17 +6,11 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 11:22:57 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/28 15:11:44 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:24:47 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-typedef struct	s_list
-{
-	void			*content;
-	struct s_list	*next;
-}				t_list;
 
 int	ft_lstsize(t_list *lst)
 {
@@ -29,8 +23,4 @@ int	ft_lstsize(t_list *lst)
 		len++;
 	}
 	return (len);
-}
-int	main(void)
-{
-	
 }
