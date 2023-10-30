@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 13:02:23 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/30 16:34:08 by junhylee         ###   ########.fr       */
+/*   Created: 2023/10/28 17:10:39 by junhylee          #+#    #+#             */
+/*   Updated: 2023/10/28 17:20:45 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-typedef struct	s_list
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	void			*content;
-	struct s_list	*next;
-}				t_list;
-
-#include <stdio.h>
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*temp;
-
-	temp = *lst;
-	while (temp -> next != NULL)
-		temp = temp -> next;
-	new = (t_list *)malloc(sizeof(t_list));
-	if (!new)
-		return (NULL);
-	// new->next = NULL;
-	// temp->next = new;
+	(*del)((*lst)->content);
+	free(*lst);
+	*lst = NULL;//인자로 받아오기전 원래 포인터 free 및 NULL할당?
 }

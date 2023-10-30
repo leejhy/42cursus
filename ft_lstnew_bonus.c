@@ -6,12 +6,11 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:45:07 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/23 20:53:18 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/28 17:05:37 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 typedef struct	s_list
 {

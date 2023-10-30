@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 13:02:23 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/30 16:34:08 by junhylee         ###   ########.fr       */
+/*   Created: 2023/10/28 17:21:38 by junhylee          #+#    #+#             */
+/*   Updated: 2023/10/28 17:24:35 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-typedef struct	s_list
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	void			*content;
-	struct s_list	*next;
-}				t_list;
-
-#include <stdio.h>
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*temp;
-
-	temp = *lst;
-	while (temp -> next != NULL)
-		temp = temp -> next;
-	new = (t_list *)malloc(sizeof(t_list));
-	if (!new)
-		return (NULL);
-	// new->next = NULL;
-	// temp->next = new;
+	while (lst != NULL)
+	{
+		(*f)(lst->content);
+		lst = lst->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 11:26:13 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/24 11:29:37 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:21:57 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ typedef struct	s_list
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	int		cnt;
-	t_list	*lst_node;
+	t_list	*last_node;
 
-	lst_node = lst;
-	while (lst_node->next != NULL)//lst->n
-		lst_node = lst_node->next;
-	return (lst_node);
+	last_node = lst;
+	while (last_node->next != NULL)//lst->n
+		last_node = last_node->next;
+	return (last_node);
 }
