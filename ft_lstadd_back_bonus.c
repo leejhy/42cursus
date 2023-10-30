@@ -13,12 +13,12 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*temp;
 	
-	temp = lst;
+	temp = *lst;
+	while (temp -> next != NULL)
+		temp = temp -> next;
 	new = (t_list *)malloc(sizeof(t_list));
 	if (!new)
 		return (NULL);
-	new->next = NULL;
-	while (temp -> next != NULL)
-		temp = temp -> next;
-	temp->next = new;
+	// new->next = NULL;
+	// temp->next = new;
 }
