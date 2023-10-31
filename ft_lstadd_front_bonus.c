@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 20:21:42 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/31 17:44:38 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/31 19:14:59 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (*lst == NULL)
+	if ((*lst) == NULL)
 		*lst = new;
 	else
 	{

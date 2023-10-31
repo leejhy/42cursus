@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 11:26:13 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/30 18:24:29 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/31 19:25:43 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	t_list	*last_node;
-
 	if (!lst)
 		return (NULL);
-	last_node = lst;
-	while (last_node->next != NULL)//lst->n
-		last_node = last_node->next;
-	return (last_node);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
 }

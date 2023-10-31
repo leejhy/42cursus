@@ -26,7 +26,7 @@ endif
 all : $(NAME)
 	sleep 1
 bonus :
-	ADD_BONUS=1 make
+	@ADD_BONUS=1 make
 
 $(NAME) : $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
@@ -42,4 +42,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : clean fclean re all
+.PHONY : clean fclean re all bonus
