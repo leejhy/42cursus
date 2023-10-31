@@ -14,7 +14,17 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	(*del)((*lst)->content);
-	free(*lst);
-	*lst = NULL;//인자로 받아오기전 원래 포인터 free 및 NULL할당?
+	t_list	*head;
+
+	head = *lst;
+	if (*lst == NULL)
+		return ;
+	// else//move last node
+	while((*lst) != NULL)
+	{
+		(*del)(*lst->content);
+		(*lst) = (*lst)->next;
+		free(head);
+		head = *lst;
+	}
 }
