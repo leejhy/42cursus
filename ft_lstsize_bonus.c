@@ -17,7 +17,7 @@ int	ft_lstsize(t_list *lst)
 	int	len;
 
 	len = 0;
-	while (lst != NULL)//노드가 한 개 밖에 없으면 1나와야 되니까
+	while (lst != NULL)
 	{
 		lst = lst->next;
 		len++;

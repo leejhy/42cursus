@@ -14,12 +14,11 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*temp;
+	t_list *last_node;
 
-	temp = *lst;
-	while (temp -> next != NULL)
-		temp = temp -> next;
-	new = (t_list *)malloc(sizeof(t_list));
-	if (!new)
-		return ;
+	last_node = ft_lstlast(*lst);// next가 NULL
+	if (*lst == NULL)
+		*lst = new;
+	else
+		last_node->next = new;
 }
