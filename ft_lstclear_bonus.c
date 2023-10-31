@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 17:10:39 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/28 17:20:45 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:44:53 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	// else//move last node
 	while((*lst) != NULL)
 	{
-		(*del)(*lst->content);
+		(*del)((*lst)->content);
 		(*lst) = (*lst)->next;
 		free(head);
 		head = *lst;
