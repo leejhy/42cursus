@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:34:28 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 18:35:57 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:42:30 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_toupper(int c)
 {
-	if (97 <= c && c <= 122)
+	if ('a' <= c && c <= 'z')
 		return (c - 32);
 	return (c);
 }

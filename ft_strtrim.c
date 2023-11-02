@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:38:05 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/20 19:29:59 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:47:23 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		str = ft_error();
 		return (str);
 	}
-	str = malloc(sizeof(char) * (s1_len - front - rear) + 1);
+	str = malloc(sizeof(char) * (s1_len - front - rear + 1));
 	if (!str)
 		return (NULL);
 	while (*(s1 + front + i) && i < s1_len - rear - front)

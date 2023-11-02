@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 16:35:15 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/31 21:57:24 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:36:27 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,23 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*newlst;
 	t_list	*newnode;
-	t_list	*head;
+	void	*new_content;
 
-	head = lst;
 	newlst = NULL;
 	if (!f || !del)
 		return (NULL);
 	while (lst != NULL)
 	{
-		newnode = ft_lstnew((*f)(lst->content));
+		new_content = (*f)(lst->content);
+		newnode = ft_lstnew(new_content);
+		if (newnode == NULL)
+		{
+			(*del)(new_content);
+			ft_lstclear(&newlst, del);
+			return (NULL);
+		}
 		ft_lstadd_back(&newlst, newnode);
 		lst = lst->next;
 	}
-	ft_lstclear(head, &del);
 	return (newlst);
 }

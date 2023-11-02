@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:17:22 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/20 19:36:35 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:38:04 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_isalpha(int c)
 {
-	if (65 <= c && c <= 90)
+	if ('A' <= c && c <= 'Z')
 		return (1);
-	if (97 <= c && c <= 122)
+	if ('a' <= c && c <= 'z')
 		return (1);
 	return (0);
 }

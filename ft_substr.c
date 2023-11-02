@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:38:09 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/20 19:35:17 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:45:31 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (len <= ft_strlen(s) - start)
 		str = malloc(sizeof(char) * (len + 1));
 	else
-		str = malloc(sizeof(char) * (ft_strlen(s) - start) + 1);
+		str = malloc(sizeof(char) * (ft_strlen(s) - start + 1));
 	if (!str)
 		return (NULL);
 	while (*(s + start + i) && i < len)

@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:44:50 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 18:35:39 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:42:36 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_tolower(int c)
 {
-	if (65 <= c && c <= 90)
+	if ('A' <= c && c <= 'Z')
 		return (c + 32);
 	return (c);
 }

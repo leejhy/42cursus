@@ -24,7 +24,7 @@ ifdef ADD_BONUS
 endif
 
 all : $(NAME)
-	sleep 1
+
 bonus :
 	@ADD_BONUS=1 make
 
