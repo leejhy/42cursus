@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:03:46 by junhylee          #+#    #+#             */
-/*   Updated: 2023/10/15 18:42:07 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/05 16:39:27 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ size_t	ft_strlcat(char *dst, char *src, size_t dstsize)
 
 	i = 0;
 	src_len = ft_strlen(src);
+	if (dst == NULL && dstsize == 0)
+		return (src_len);
 	dest_len = ft_strlen(dst);
 	if (dest_len < dstsize)
 	{

@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 13:02:23 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/02 19:54:55 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/05 15:24:31 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last_node;
 
+	if (lst == NULL)
+		return ;
 	if (*lst == NULL)
 		*lst = new;
 	else
