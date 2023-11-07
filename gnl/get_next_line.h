@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:55:03 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/06 21:52:03 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/07 19:48:09 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,6 @@
 char	*get_next_line(int fd);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+
 #endif

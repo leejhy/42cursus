@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 17:40:09 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/06 21:51:50 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/07 20:28:08 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,23 @@ char	*ft_strdup(const char *s1)
 	}
 	*(arr + i) = '\0';
 	return ((char *)arr);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+	size_t	s1_len;
+	size_t	s2_len;
+
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	str = malloc(sizeof (char) * (s1_len + s2_len + 1));
+	if (!str)
+		return (NULL);
+	while (*s1)
+		*str++ = *s1++;
+	while (*s2)
+		*str++ = *s2++;
+	*str = '\0';
+	return (str - (s1_len + s2_len));
 }
