@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-#define BUFFER_SIZE 1//지울예정
+#define BUFFER_SIZE 2//지울예정
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -24,7 +24,7 @@
 #include <fcntl.h> // O_RDONLY
 
 char	*get_next_line(int fd);
-char	*ft_strdup(const char *s1);
+char	*ft_strdup(const char *s1, size_t read_size);
 size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 
