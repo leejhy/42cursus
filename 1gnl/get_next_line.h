@@ -18,7 +18,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 42
 # endif
 
 #include <stdio.h>
@@ -30,7 +30,7 @@
 char	*get_next_line(int fd);
 char	*ft_strdup(const char *s1, size_t read_size);
 char	*ft_strjoin(char const *s1, char const *s2);
-int		is_lf(char *buf);
+int		is_lf(char *buf, int *flag);
 char	*get_str(char *str, char *buf, int read_size);
 
 #endif

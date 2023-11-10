@@ -6,9 +6,9 @@ int	main(void)
 	char	*str;
 
 	fd = open("43_with_nl", O_RDWR);
-	str = get_next_line(fd);
+	str = get_next_line(fd);//leak
 	printf("%s", str);
-	// free(str);
+	free(str);
 	// str = get_next_line(fd);
 	// printf("%s", str);
 

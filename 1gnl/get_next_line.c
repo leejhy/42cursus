@@ -17,19 +17,21 @@ char	*get_next_line(int fd)
 	char		*buf;
 	char		*str;
 	size_t		read_size;
+	int			flag;
 
+	flag = 0;
 	if (fd < 0)
 		return (NULL);
 	str = NULL;
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	while (1)
+	while (!flag)
 	{
 		read_size = read(fd, buf, BUFFER_SIZE);
 		if (read_size == 0)
 			break ;
 		while (read_size <= BUFFER_SIZE)
 			buf[read_size++] = '\0';
-		read_size = is_lf(buf);
+		read_size = is_lf(buf, &flag);
 		str = get_str(str, buf, read_size);
 		if (!str)
 			break ;

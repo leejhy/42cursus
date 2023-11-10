@@ -47,7 +47,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2 && s2[i])
 		i++;
 	s2_len = i;
-	str = malloc(sizeof (char) * (s1_len + s2_len + 1));
+	str = malloc(sizeof(char) * (s1_len + s2_len + 1));//leak
 	if (!str)
 		return (NULL);
 	while (s1 && *s1)
@@ -59,7 +59,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str - (s1_len + s2_len));
 }
 
-int	is_lf(char *buf)
+int	is_lf(char *buf, int *flag)
 {
 	int	i;
 
@@ -68,6 +68,7 @@ int	is_lf(char *buf)
 	{
 		if (buf[i] == '\n')
 		{
+			*flag = 1;
 			i++;
 			break ;
 		}
@@ -85,17 +86,15 @@ char	*get_str(char *str, char *buf, int read_size)
 	temp = ft_strdup(buf, read_size);
 	if (!temp)
 		return (NULL);
-	str = ft_strjoin(str, temp);
+	str = ft_strjoin(str, temp);//leak
 	if (!str)
 	{
 		free(str);
 		return (NULL);
 	}
 	if (tmp_str)
-	{
 		free(tmp_str);
-		tmp_str = NULL;
-	}
 	free(temp);
+	printf("utils %s\n",str);
 	return (str);
 }
