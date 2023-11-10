@@ -95,6 +95,6 @@ char	*get_str(char *str, char *buf, int read_size)
 	if (tmp_str)
 		free(tmp_str);
 	free(temp);
-	printf("utils %s\n",str);
+//	printf("utils %s\n",str);
 	return (str);
 }
