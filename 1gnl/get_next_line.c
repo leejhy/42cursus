@@ -24,14 +24,14 @@ char	*get_next_line(int fd)
 		return (NULL);
 	str = NULL;
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	while (!flag)
+	while (flag == 0)
 	{
 		read_size = read(fd, buf, BUFFER_SIZE);
 		if (read_size == 0)
 			break ;
 		while (read_size <= BUFFER_SIZE)
 			buf[read_size++] = '\0';
-		read_size = is_lf(buf, &flag);
+		read_size = ft_withlf(buf, &flag);
 		str = get_str(str, buf, read_size);
 		if (!str)
 			break ;

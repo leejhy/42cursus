@@ -59,7 +59,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str - (s1_len + s2_len));
 }
 
-int	is_lf(char *buf, int *flag)
+int	ft_withlf(char *buf, int *flag)
 {
 	int	i;
 
@@ -68,9 +68,9 @@ int	is_lf(char *buf, int *flag)
 	{
 		if (buf[i] == '\n')
 		{
-			*flag = 1;
 			i++;
-			break ;
+			*flag = 1;
+			return (i);
 		}
 		i++;
 	}
