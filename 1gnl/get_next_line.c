@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:58:56 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/13 20:25:19 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:09:47 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 char	*get_next_line(int fd)
 {
-	char		*buf;
-	char		*temp;
-	static char	*str;
-	static int	read_idx;
-	size_t		read_size;
-	int			flag;
+	char			*buf;
+	char			*temp;
+	static char		*str;
+	static int		read_idx;
+	size_t			read_size;
+	int				flag;
+	static t_list 	*head;
+
 
 	flag = 0;
 	str = NULL;
@@ -39,6 +41,7 @@ char	*get_next_line(int fd)
 			break ;
 	}
 	free(buf);
+	read_size = read_idx;
 	temp = ft_substr(str, buf, read_size);
 	return (str);
 }

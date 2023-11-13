@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:55:03 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/13 20:00:02 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:07:48 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 
 typedef struct s_list
 {
-	int		fd;
+	int				fd;
+	int				*str;
 	struct s_list	*next;
 }	t_list;
 
