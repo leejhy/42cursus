@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:55:03 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/09 22:00:05 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:00:02 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,17 @@
 #include <sys/stat.h>
 #include <fcntl.h> // 
 
+typedef struct s_list
+{
+	int		fd;
+	struct s_list	*next;
+}	t_list;
+
 char	*get_next_line(int fd);
 char	*ft_strdup(const char *s1, size_t read_size);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_withlf(char *buf, int *flag);
 char	*get_str(char *str, char *buf, int read_size);
-
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+size_t	ft_strlen(const char *s);
 #endif

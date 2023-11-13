@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:58:56 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/09 21:42:39 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:25:19 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 char	*get_next_line(int fd)
 {
 	char		*buf;
-	char		*str;
+	char		*temp;
+	static char	*str;
+	static int	read_idx;
 	size_t		read_size;
 	int			flag;
 
 	flag = 0;
-	if (fd < 0)
-		return (NULL);
 	str = NULL;
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	while (flag == 0)
+	while (fd >= 0 && flag == 0)
 	{
 		read_size = read(fd, buf, BUFFER_SIZE);
 		if (read_size == 0)
@@ -39,5 +39,6 @@ char	*get_next_line(int fd)
 			break ;
 	}
 	free(buf);
+	temp = ft_substr(str, buf, read_size);
 	return (str);
 }
