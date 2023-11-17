@@ -18,7 +18,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 42
 # endif
 
 #include <stdio.h>
@@ -41,5 +41,8 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_withlf(char *buf, int *flag);
 char	*get_str(char *str, char *buf, int read_size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-size_t	ft_strlen(const char *s);
+void	ft_fd_lst(t_list **head, int fd);
+char	*ft_read_line(int fd);
+char	*ft_getoneline(char *str, int *idx);
+
 #endif

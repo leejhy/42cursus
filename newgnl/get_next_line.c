@@ -18,15 +18,20 @@ void	ft_fd_lst(t_list **head, int fd)
 	t_list	*last_node;
 
 	last_node = *head;
+	printf("last %p *head %p head %p\n", last_node, *head, head);
 	newnode = (t_list *)malloc(sizeof(t_list));
 	if (!newnode)
 		return ;
 	newnode->fd = fd;
 	newnode->idx = 0;
-	newnode->str = NULL;
+	newnode->buf = NULL;
 	newnode->next = NULL;
+	printf("%d %d %s\n",newnode->fd, newnode->idx, newnode->buf);
 	if (*head == NULL)
-		newnode = head;
+	{
+		*head = newnode;
+		printf("%d %d %s\n",(*head)->fd, (*head)->idx, (*head)->buf);
+	}
 	else//노드가 1개이상 존재하는 상황
 	{
 		while (last_node->next != NULL)
@@ -36,9 +41,10 @@ void	ft_fd_lst(t_list **head, int fd)
 		else //이전fd와 현재 fd가 같으면 그냥 free
 			free(newnode);
 	}
+	printf("work\n");
 }
 
-char	*get_next_line(int fd)
+char	*ft_read_line(int fd)
 {
 	char			*buf;
 	static char		*str;
@@ -66,24 +72,44 @@ char	*get_next_line(int fd)
 
 char	*ft_getoneline(char *str, int *idx)
 {
-	int	i;
+	int		i;
+	int		len;
+	char	*oneline;
 
-	*idx = i;
+	i = 0;
+	len = *idx;
+	while (str[len])//널처ㅣㄹ
+		len++;
+	oneline = malloc(sizeof(char) * len + 1);
+	if (!oneline)
+		return (NULL);
+	while (str[*idx])//널처리
+	{
+		oneline[i] = str[*idx];
+		i++;
+		if (str[*idx] == '\n')
+			break;
+		(*idx)++;
+	}
+	oneline[i] = '\0';
+	return (oneline);
 }
 
 char	*get_next_line(int fd)
 {
-	size_t			read_size;
 	char			*str;
 	static t_list	*head;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1)
 		return (NULL);
-	head = NULL;
-	ft_fd_lst(fd, &head);
+	head = NULL;//이게맞나
+	ft_fd_lst(&head, fd);
 	while (head->fd != fd)
 		head = head->next;
-	head->buf = ft_read_line(fd);
-	str = ft_getoneline(head->buf, &(head->idx));
+	if (head->buf)//head->buf안에 아무것도 없으면 readline
+		head->buf = ft_read_line(fd);
+	str = ft_getoneline(head->buf, &(head->idx));//readline을 하건 안하건 호출했으면 한줄 리턴해야함 없으면 NULL
+	if (!str)
+		return (NULL);
 	return (str);
 }
