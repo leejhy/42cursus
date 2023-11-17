@@ -18,7 +18,7 @@ void	ft_fd_lst(t_list **head, int fd)
 	t_list	*last_node;
 
 	last_node = *head;
-	printf("last %p *head %p head %p\n", last_node, *head, head);
+//	printf("last %p *head %p head %p\n", last_node, *head, head);
 	newnode = (t_list *)malloc(sizeof(t_list));
 	if (!newnode)
 		return ;
@@ -26,11 +26,11 @@ void	ft_fd_lst(t_list **head, int fd)
 	newnode->idx = 0;
 	newnode->buf = NULL;
 	newnode->next = NULL;
-	printf("%d %d %s\n",newnode->fd, newnode->idx, newnode->buf);
+//	printf("%d %d %s\n",newnode->fd, newnode->idx, newnode->buf);
 	if (*head == NULL)
 	{
 		*head = newnode;
-		printf("%d %d %s\n",(*head)->fd, (*head)->idx, (*head)->buf);
+//		printf("%d %d %s\n",(*head)->fd, (*head)->idx, (*head)->buf);
 	}
 	else//노드가 1개이상 존재하는 상황
 	{
@@ -41,7 +41,7 @@ void	ft_fd_lst(t_list **head, int fd)
 		else //이전fd와 현재 fd가 같으면 그냥 free
 			free(newnode);
 	}
-	printf("work\n");
+	//printf("work\n");
 }
 
 char	*ft_read_line(int fd)
@@ -67,6 +67,7 @@ char	*ft_read_line(int fd)
 			break ;
 	}
 	free(buf);
+//	printf("return value %s",str);
 	return (str);
 }
 
@@ -77,20 +78,23 @@ char	*ft_getoneline(char *str, int *idx)
 	char	*oneline;
 
 	i = 0;
-	len = *idx;
-	while (str[len])//널처ㅣㄹ
+	len = 0;
+	while (str && str[*idx + len])//널처리
 		len++;
 	oneline = malloc(sizeof(char) * len + 1);
 	if (!oneline)
 		return (NULL);
-	while (str[*idx])//널처리
+	while (str && str[*idx + i])//널처리
 	{
-		oneline[i] = str[*idx];
-		i++;
-		if (str[*idx] == '\n')
+		oneline[i] = str[*idx + i];
+		if (str[*idx + i] == '\n')
+		{
+			i++;
 			break;
-		(*idx)++;
+		}
+		i++;
 	}
+	*idx = i;//*idx는 개행을 가리킴
 	oneline[i] = '\0';
 	return (oneline);
 }
@@ -102,13 +106,13 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1)
 		return (NULL);
-	head = NULL;//이게맞나
 	ft_fd_lst(&head, fd);
 	while (head->fd != fd)
 		head = head->next;
-	if (head->buf)//head->buf안에 아무것도 없으면 readline
-		head->buf = ft_read_line(fd);
-	str = ft_getoneline(head->buf, &(head->idx));//readline을 하건 안하건 호출했으면 한줄 리턴해야함 없으면 NULL
+	if (head->buf == NULL)//head->buf안에 아무것도 없으면 readline
+		head->buf = ft_read_line(fd);//read는 42바이트 잘 읽음
+	str = ft_getoneline(head->buf, &(head->idx));//readline을 하건 안하건 호출했으면 한줄 리턴해야함 없으면 NULL	
+	printf("head : %p\n",head);
 	if (!str)
 		return (NULL);
 	return (str);

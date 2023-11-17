@@ -3,16 +3,17 @@
 int	main(void)
 {
 	int		fd;
+	int		fd2;
 	char	*str;
 	fd = open("41_with_nl", O_RDWR);
 	str = get_next_line(fd);//leak
 	printf("%s", str);
 	free(str);
-	// while (i < 5)
-	// {
-	// 	str = get_next_line(fd);
-	// 	// printf("%s", str);
-	// 	free(str);
-	// 	i++;
-	// }
+	fd2 = open("43_with_nl", O_RDWR);
+	str = get_next_line(fd2);
+	printf("%s", str);
+	free(str);
+	str = get_next_line(fd);
+	//printf("%s", str);
+	free(str);
 }
