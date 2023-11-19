@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 15:32:16 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/19 17:49:03 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:19:12 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_delnode(t_list **head, int fd)
 	}
 }
 
-char	*ft_readline(int fd, char *buf, char **backup)
+char	*ft_read_line(int fd, char *buf, char **backup)
 {
 	char	*str;
 	size_t	read_size;
@@ -104,16 +104,21 @@ char	*ft_get_oneline(char *read_line)
 	len = 0;
 	if (!read_line)//여기서 막힘
 		return (NULL);
-	while (read_line[len] != '\n')
+	while (read_line[len] != '\0' && read_line[len] != '\n')
+		len++;
+	if (read_line[len] == '\n')
 		len++;
 	rt_str = malloc(sizeof(char) * (len + 1));
-	while (read_line[i] != '\n')
+	if (!rt_str)
+		return (NULL);
+	while (read_line[i] != '\0' && i < len)
 	{
 		rt_str[i] = read_line[i];
 		i++;
 	}
+	rt_str[i] = '\0';
 	free(read_line);
-	retrun (rt_str);
+	return (rt_str);
 }
 
 char	*get_next_line(int fd)
@@ -125,7 +130,7 @@ char	*get_next_line(int fd)
 
 	ft_makenode(&head, fd);
 	read_line = ft_read_line(fd, buf, &(head->backup));
-	if (!is_lf(read_line))//개행이 존재하지 않으면 바로리턴
+	if (!is_nl(read_line))//개행이 존재하지 않으면 바로리턴
 		return (read_line);
 	rt_str = ft_get_oneline(read_line);
 	return (rt_str);

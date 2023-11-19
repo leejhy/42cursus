@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 15:32:27 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/19 17:47:36 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:01:52 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ int	is_nl(char *str)
 		i++;
 	}
 	return (0);
+}
+
+char	*ft_strchr(char *str)
+{
+	while (str && *str)//NULL 처리
+	{
+		if (*str == '\n')
+		{
+			str++;
+			return (str);
+		}
+		str++;
+	}
+	return (NULL);
 }
 
 char	*ft_strdup(const char *s1)
@@ -84,18 +98,4 @@ char	*ft_freejoin(char *s1, char *s2)
 	if (s1)
 		free(s1);
 	return (str);
-}
-
-char	*ft_strchr(char *str)
-{
-	while (str && *str)//NULL 처리
-	{
-		if (*str == '\n')
-		{
-			str++;
-			return (str);
-		}
-		str++;
-	}
-	return (NULL);
 }
