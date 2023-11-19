@@ -5,25 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/05 17:40:09 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/14 21:14:39 by junhylee         ###   ########.fr       */
+/*   Created: 2023/11/19 15:32:27 by junhylee          #+#    #+#             */
+/*   Updated: 2023/11/19 17:07:25 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strdup(const char *s1, size_t read_size)
+int	is_nl(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_strdup(const char *s1)
 {
 	char	*str;
+	size_t	s1_len;
 	size_t	i;
 
 	i = 0;
-	if (!s1 || read_size == 0)
+	s1_len = 0;
+	if (!s1)
 		return (NULL);
-	str = (char *)malloc(sizeof(char) * (read_size + 1));
+	while (s1[s1_len])
+		s1_len++;
+	str = malloc(sizeof(char) * (s1_len + 1));
 	if (!str)
 		return (NULL);
-	while (i < read_size)
+	while (s1[i])
 	{
 		str[i] = s1[i];
 		i++;
@@ -58,34 +76,16 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str - (s1_len + s2_len));
 }
 
-int	ft_withlf(char *buf, int *flag)
+char	*ft_strchr(char *buf)
 {
-	int	i;
-
-	i = 0;
-	while (buf[i])
+	while (buf && *buf)//NULL 처리
 	{
-		if (buf[i] == '\n')
-			*flag = 1;
-		i++;
+		if (*buf == '\n')
+		{
+			buf++;
+			return (buf);
+		}
+		buf++;
 	}
-	return (i);
-}
-
-char	*get_str(char *str, char *buf, int read_size)
-{
-	char	*temp;
-	char	*tmp_str;
-
-	tmp_str = str;
-	temp = ft_strdup(buf, read_size);
-	if (!temp)
-		return (NULL);
-	str = ft_strjoin(str, temp);
-	if (!str)
-		return (NULL);
-	if (tmp_str)
-		free(tmp_str);
-	free(temp);
-	return (str);
+	return (NULL);
 }

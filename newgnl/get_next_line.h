@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/05 13:55:03 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/14 21:14:32 by junhylee         ###   ########.fr       */
+/*   Created: 2023/11/19 15:32:41 by junhylee          #+#    #+#             */
+/*   Updated: 2023/11/19 16:38:17 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,17 @@
 typedef struct s_list
 {
 	int				fd;
-	int				idx;
-	char			*buf;
+	char			*backup;
 	struct s_list	*next;
 }	t_list;
 
 char	*get_next_line(int fd);
-char	*ft_strdup(const char *s1, size_t read_size);
-char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_withlf(char *buf, int *flag);
-char	*get_str(char *str, char *buf, int read_size);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *s1);
+char	*ft_strchr(char *buf);
+char	*get_str(char *str, char *headbuf, char *buf, int read_size);
 void	ft_fd_lst(t_list **head, int fd);
-char	*ft_read_line(int fd);
+char	*ft_readline(int fd, char *buf, char **backup)
 char	*ft_getoneline(char *str, int *idx);
+int		is_lf(char *str);
 
 #endif
