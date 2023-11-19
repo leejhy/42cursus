@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 15:32:27 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/19 17:07:25 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/19 17:47:36 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	s1_len = 0;
-	if (!s1)
+	if (!s1 || !*s1)//첫 인덱스가 NULL 이거나, 널문자이면
 		return (NULL);
 	while (s1[s1_len])
 		s1_len++;
@@ -76,16 +76,26 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str - (s1_len + s2_len));
 }
 
-char	*ft_strchr(char *buf)
+char	*ft_freejoin(char *s1, char *s2)
 {
-	while (buf && *buf)//NULL 처리
+	char	*str;
+
+	str = ft_strjoin(s1, s2);
+	if (s1)
+		free(s1);
+	return (str);
+}
+
+char	*ft_strchr(char *str)
+{
+	while (str && *str)//NULL 처리
 	{
-		if (*buf == '\n')
+		if (*str == '\n')
 		{
-			buf++;
-			return (buf);
+			str++;
+			return (str);
 		}
-		buf++;
+		str++;
 	}
 	return (NULL);
 }

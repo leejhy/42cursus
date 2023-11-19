@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 15:32:16 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/19 17:07:28 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/19 17:49:03 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_makenode(t_list **head, int fd)
 			free(newnode);
 	}
 }
+
 void	ft_delnode(t_list **head, int fd)
 {
 	t_list	*del_lst;
@@ -63,12 +64,14 @@ void	ft_delnode(t_list **head, int fd)
 		*head = NULL;
 	}
 }
+
 char	*ft_readline(int fd, char *buf, char **backup)
 {
 	char	*str;
 	size_t	read_size;
 
 	// read_size = BUFFER_SIZE + 1;
+	str = NULL;
 	if (*backup)
 	{
 		str = ft_strdup(*backup);
@@ -80,23 +83,50 @@ char	*ft_readline(int fd, char *buf, char **backup)
 		buf[read_size] = '\0';
 		if (read_size == 0)
 			break ;
-		str = ft_strjoin(str, buf);
+		str = ft_freejoin(str, buf);
 		if (is_nl(str))
 			break ;
 	}
 	if (is_nl(str))
 		*backup = ft_strdup(ft_strchr(str));
+	if (!str || !*str)//처음 읽었는데 read_size==0이면 str은 NULL
+		return (NULL);
 	return (str);
+}
+
+char	*ft_get_oneline(char *read_line)
+{
+	char	*rt_str;
+	int		len;
+	int		i;
+
+	i = 0; 
+	len = 0;
+	if (!read_line)//여기서 막힘
+		return (NULL);
+	while (read_line[len] != '\n')
+		len++;
+	rt_str = malloc(sizeof(char) * (len + 1));
+	while (read_line[i] != '\n')
+	{
+		rt_str[i] = read_line[i];
+		i++;
+	}
+	free(read_line);
+	retrun (rt_str);
 }
 
 char	*get_next_line(int fd)
 {
 	char			*rt_str;
+	char			*read_line;
 	char			buf[BUFFER_SIZE + 1];
 	static t_list	*head;
 
 	ft_makenode(&head, fd);
-	rt_str = ft_read_line(fd, buf, &(head->backup));
-	
+	read_line = ft_read_line(fd, buf, &(head->backup));
+	if (!is_lf(read_line))//개행이 존재하지 않으면 바로리턴
+		return (read_line);
+	rt_str = ft_get_oneline(read_line);
 	return (rt_str);
 }
