@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 15:32:16 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/19 18:19:12 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:28:38 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,11 @@ char	*get_next_line(int fd)
 	char			buf[BUFFER_SIZE + 1];
 	static t_list	*head;
 
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1)
+		return (NULL);
 	ft_makenode(&head, fd);
+	while (head->fd != fd)
+		head = head->next;
 	read_line = ft_read_line(fd, buf, &(head->backup));
 	if (!is_nl(read_line))//개행이 존재하지 않으면 바로리턴
 		return (read_line);
