@@ -38,7 +38,7 @@ void	ft_makenode(t_list **head, int fd);
 void	ft_delnode(t_list **head, int fd);
 char	*get_next_line(int fd);
 char	*ft_get_oneline(char *read_line, int idx);
-char	*ft_readline(int fd, char *buf, char **backup);
+char	*ft_read_line(int fd, char *buf, char **backup);
 int		is_nl(char *str);
 char	*ft_strchr(char *str);
 char	*ft_strdup(const char *s1);
