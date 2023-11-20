@@ -75,6 +75,7 @@ char	*ft_read_line(int fd, char *buf, char **backup)
 	{
 		str = ft_strdup(*backup);
 		free(*backup);
+		*backup = NULL;
 	}
 	while (1)
 	{
@@ -91,24 +92,20 @@ char	*ft_read_line(int fd, char *buf, char **backup)
 	return (str);
 }
 
-char	*ft_get_oneline(char *read_line)
+char	*ft_get_oneline(char *read_line, int idx)
 {
 	char	*rt_str;
-	int		len;
 	int		i;
 
 	i = 0; 
-	len = 0;
 	if (!read_line)//여기서 막힘
 		return (NULL);
-	while (read_line[len] != '\0' && read_line[len] != '\n')
-		len++;
-	if (read_line[len] == '\n')
-		len++;
-	rt_str = malloc(sizeof(char) * (len + 1));
+	if (read_line[idx] == '\n')
+		idx++;
+	rt_str = malloc(sizeof(char) * (idx + 1));
 	if (!rt_str)
 		return (NULL);
-	while (read_line[i] != '\0' && i < len)
+	while (i < idx)
 	{
 		rt_str[i] = read_line[i];
 		i++;
@@ -124,17 +121,26 @@ char	*get_next_line(int fd)
 	char			*read_line;
 	char			buf[BUFFER_SIZE + 1];
 	static t_list	*head;
-	//t_list			*temp_head;
+	int				idx;
+	t_list			*temp_head;
 
-	//temp_head = head;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1)
+	idx = 0;
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1)//close된 fd들어오면 노드지우기
+	{
+		if (read(fd, NULL, 0) == -1)
+			ft_delnode(&head, fd);
 		return (NULL);
+	}
 	ft_makenode(&head, fd);
+	temp_head = head;
 	while (head->fd != fd)
 		head = head->next;
-	read_line = ft_read_line(fd, buf, &(head->backup));
+	read_line = ft_read_line(head->fd, buf, &(head->backup));
 	if (!is_nl(read_line))//개행이 존재하지 않으면 바로리턴
 		return (read_line);
-	rt_str = ft_get_oneline(read_line);
+	while (read_line[idx] != '\n')//이거 지우고 get_oneline에서 알아서 길이재
+		idx++;
+	rt_str = ft_get_oneline(read_line, idx);
+	head = temp_head;
 	return (rt_str);
 }

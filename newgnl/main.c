@@ -5,15 +5,16 @@ int	main(void)
 	int		fd;
 	char	*str;
 
-	fd = open("41_with_nl", O_RDWR);
+	fd = open("43_with_nl", O_RDWR);
 	str = get_next_line(fd);
-	printf("%s", str);
+	printf("m %s", str);
 	free(str);
 	str = get_next_line(fd);
-	printf("%s", str);
+	printf("m %s", str);
 	free(str);
+	close(fd);
 	str = get_next_line(fd);
-	printf("%s", str);
+	printf("m %s", str);
 	free(str);
 
 }
