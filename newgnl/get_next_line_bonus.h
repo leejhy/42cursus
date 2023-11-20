@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/19 15:32:41 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/19 17:55:31 by junhylee         ###   ########.fr       */
+/*   Created: 2023/11/20 16:49:27 by junhylee          #+#    #+#             */
+/*   Updated: 2023/11/20 20:26:53 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 
 # include <stdlib.h>
@@ -19,13 +19,14 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
+
 # endif
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h> // 
+#include <fcntl.h> //
 
 typedef struct s_list
 {
@@ -37,7 +38,7 @@ typedef struct s_list
 void	ft_makenode(t_list **head, int fd);
 void	ft_delnode(t_list **head, int fd);
 char	*get_next_line(int fd);
-char	*ft_get_oneline(char *read_line, int idx);
+char	*ft_get_oneline(char *read_line);
 char	*ft_read_line(int fd, char *buf, char **backup);
 int		is_nl(char *str);
 char	*ft_strchr(char *str);
