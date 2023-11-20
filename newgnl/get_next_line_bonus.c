@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:49:33 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/20 22:21:21 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/11/20 22:31:19 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,20 @@ void	ft_delnode(t_list **head, int fd)
 	t_list	*del_lst;
 	t_list	*temp;
 
-	// temp = NULL;
+	temp = *head;
 	del_lst = *head;
 	if (head == NULL || *head == NULL)
 		return ;
 	if (del_lst->fd == fd)
 	{
 		*head = del_lst->next;
-		if (del_lst->backup)
-			free(del_lst->backup);
-		del_lst->backup = NULL;
+		free(del_lst->backup);
+		// del_lst->backup = NULL;
 		free(del_lst);
 		return ;
 	}
-	while (del_lst->next != NULL)
+	while (del_lst->next != NULL && del_lst->fd != fd)
 	{
-		if (del_lst->fd == fd)
-			break ;
 		temp = del_lst;
 		del_lst = del_lst->next;
 	}
@@ -70,7 +67,7 @@ void	ft_delnode(t_list **head, int fd)
 		return ;
 	temp->next = del_lst->next;
 	free(del_lst->backup);
-	del_lst->backup = NULL;
+	// del_lst->backup = NULL;
 	free(del_lst);
 }
 
