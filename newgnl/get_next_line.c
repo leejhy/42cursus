@@ -70,7 +70,6 @@ char	*ft_read_line(int fd, char *buf, char **backup)
 	char	*str;
 	size_t	read_size;
 
-	// read_size = BUFFER_SIZE + 1;
 	str = NULL;
 	if (*backup)
 	{
@@ -84,13 +83,11 @@ char	*ft_read_line(int fd, char *buf, char **backup)
 		if (read_size == 0)
 			break ;
 		str = ft_freejoin(str, buf);
-		if (is_nl(str))
+		if (is_nl(str) || read_size < BUFFER_SIZE)
 			break ;
 	}
 	if (is_nl(str))
 		*backup = ft_strdup(ft_strchr(str));
-	if (!str || !*str)//처음 읽었는데 read_size==0이면 str은 NULL
-		return (NULL);
 	return (str);
 }
 
@@ -127,7 +124,9 @@ char	*get_next_line(int fd)
 	char			*read_line;
 	char			buf[BUFFER_SIZE + 1];
 	static t_list	*head;
+	//t_list			*temp_head;
 
+	//temp_head = head;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1)
 		return (NULL);
 	ft_makenode(&head, fd);

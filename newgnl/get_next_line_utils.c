@@ -61,6 +61,8 @@ char	*ft_strdup(const char *s1)
 		i++;
 	}
 	str[i] = '\0';
+//	if (s1)
+//		free(s1);
 	return (str);
 }
 
