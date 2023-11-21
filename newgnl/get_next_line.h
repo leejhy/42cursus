@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 16:49:27 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/20 20:26:53 by junhylee         ###   ########.fr       */
+/*   Created: 2023/11/19 15:32:41 by junhylee          #+#    #+#             */
+/*   Updated: 2023/11/21 22:30:57 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
-
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -35,7 +34,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-void	ft_makenode(t_list **head, int fd);
+int		ft_makenode(t_list **head, int fd);
 void	ft_delnode(t_list **head, int fd);
 char	*get_next_line(int fd);
 char	*ft_get_oneline(char *read_line);

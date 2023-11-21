@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 16:49:24 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/20 16:49:52 by junhylee         ###   ########.fr       */
+/*   Created: 2023/11/19 15:32:27 by junhylee          #+#    #+#             */
+/*   Updated: 2023/11/21 22:30:46 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 int	is_nl(char *str)
 {
@@ -61,8 +61,6 @@ char	*ft_strdup(const char *s1)
 		i++;
 	}
 	str[i] = '\0';
-//	if (s1)
-//		free(s1);
 	return (str);
 }
 
@@ -97,6 +95,12 @@ char	*ft_freejoin(char *s1, char *s2)
 	char	*str;
 
 	str = ft_strjoin(s1, s2);
+	if (!str)
+	{
+		if (s1)
+			free(s1);
+		return (NULL);
+	}
 	if (s1)
 		free(s1);
 	return (str);
