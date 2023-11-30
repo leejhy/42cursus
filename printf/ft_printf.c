@@ -44,7 +44,7 @@ int	ft_printf(char const *format, ...)
 int	ft_checkform(char form_c, int *len, va_list ap)
 {
 	if (form_c == 'c')
-		return (ft_putchar(va_arg(ap, int), len));
+		return (ft_putchar(va_arg(ap, int ), len));
 	if (form_c == 's')
 		return (ft_putstr(va_arg(ap, char *), len));
 	if (form_c == 'p')

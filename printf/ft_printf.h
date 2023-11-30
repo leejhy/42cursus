@@ -13,11 +13,11 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdio.h>//
-# include <stdlib.h>
+# include <stdio.h>//del
+# include <stdlib.h>//del
 # include <unistd.h>
 # include <stdarg.h>//va_args
-# include <stdint.h>
+# include <stdint.h>//del
 
 int		ft_printf(char const *format, ...);
 int		ft_checkform(char form_c, int *len, va_list ap);
