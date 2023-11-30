@@ -23,12 +23,17 @@ int	ft_printf(char const *format, ...)
 	{
 		if (*format == '%')
 		{
-			format++;
-			if (ft_formchar(*format, &total_len, ap) == -1)
+			format++;//format의 마지막 문자가 %이면 여기서 '\0'을 찍고
+			if (*format == '\0')//아래 format++에서 segfault 방지
+				break ;
+			if (ft_checkform(*format, &total_len, ap) == -1)
+			{
+				va_end(ap);
 				return (-1);
+			}
 		}
 		else
-			write(1, format, 1);//ft_putchar
+			ft_putchar(*format, &total_len);
 		format++;
 		total_len++;
 	}
@@ -36,31 +41,38 @@ int	ft_printf(char const *format, ...)
 	return (total_len);
 }
 
-int	ft_formchar(char form_c, int *len, va_list ap)
+int	ft_checkform(char form_c, int *len, va_list ap)
 {
 	if (form_c == 'c')
 		return (ft_putchar(va_arg(ap, char), len));
 	if (form_c == 's')
-		return (ft_putstr(va_arg(ap, char *)));
+		return (ft_putstr(va_arg(ap, char *), len));
 	if (form_c == 'p')
 		return (ft_putaddr(va_arg(ap, void *), len));
 	if (form_c == 'd' || form_c == 'i')
-		return (ft_putdec(va_arg(ap, int)));
+		return (ft_putdec(va_arg(ap, int), len));
 	if (form_c == 'u')
-		return (ft_putudec(va_arg(ap, unsigned int)));
+		return (ft_putdec(va_arg(ap, unsigned int), len));
 	if (form_c == 'x' || form_c == 'X')
 		return (ft_puthex(form_c, va_arg(ap, unsigned int), len));
 	if (form_c == '%')
-		*len = *len + printf("%c", form_c);//ft_putchar
+		return (ft_putchar(form_c));//ft_putchar
+	else
+		return (-1);
 	return 0;
 }
 
 int	ft_putaddr(uintptr_t addr, int *len)
 {
 	write(1, "0x", 2);
-	len += 2;
+	*len += 2;
 	if (ft_puthex('p', addr, len) == -1)
 		return (-1);
+}
+
+int	ft_putdec(int nb, int *len)
+{
+	ft_putnbr_base(nb, "0123456789", 10, len);
 }
 
 int	ft_puthex(char form_c, unsigned int nb, int *len)
@@ -72,17 +84,3 @@ int	ft_puthex(char form_c, unsigned int nb, int *len)
 	return (0);
 }
 
-int	ft_putnbr_base(long long nb, char *base, int base_len, int *len)
-{
-	if (nb < 0)
-	{
-		(*len)++;
-		nb = nb * -1;
-	}
-	if (nb >= base_len)
-		ft_putnbr_base(nb / base_len, base, base_len, len);
-	if (write(1, &base[nb % base_len], 1) == -1)
-		return (-1);
-	(*len)++;
-	return (0);
-}

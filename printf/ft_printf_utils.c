@@ -17,50 +17,48 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
-	if (!s)
-		return (NULL);
 	while (*(s + len))
 		len++;
 	return (len);
 }
 
-void	ft_recursion(long long nb, int fd)
-{
-	long long	put;
-
-	if (nb < 0)
-	{
-		nb = nb * -1;
-		write(fd, "-", 1);
-	}
-	if (nb < 10)
-	{
-		put = nb + '0';
-		write(fd, &put, 1);
-	}
-	if (nb >= 10)
-	{
-		ft_recursion(nb / 10, fd);
-		ft_recursion(nb % 10, fd);
-	}
-}
-
-void	ft_putnbr_fd(long long n, int fd)
-{
-	ft_recursion(n, fd);
-}
-
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr(char *str, int *len)
 {
 	size_t	s_len;
-
-	s_len = ft_strlen(s);
-	write(fd, s, s_len);
+	if (!str)
+	{
+		*len += 6;
+		write(1, "(null)", 6);
+		return (0);
+	}
+	s_len = ft_strlen(str);
+	if (write(1, str, s_len) == -1)
+		return (-1);
+	*len += s_len;
 }
+
 int	ft_putchar(char c, int *len)
 {
 	if (write(1, &c, 1) == -1)
 		return (-1);
 	*len += 1;
+	return (0);
+}
+
+int	ft_putnbr_base(long long nb, char *base, int base_len, int *len)
+{
+	if (nb < 0)
+	{
+		(*len)++;
+		nb = nb * -1;
+	}
+	if (nb >= base_len)
+		ft_putnbr_base(nb / base_len, base, base_len, len);
+	else
+	{
+		if (write(1, &base[nb % base_len], 1) == -1)
+			return (-1);
+		(*len)++;
+	}
 	return (0);
 }
