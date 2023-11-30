@@ -44,7 +44,7 @@ int	ft_printf(char const *format, ...)
 int	ft_checkform(char form_c, int *len, va_list ap)
 {
 	if (form_c == 'c')
-		return (ft_putchar(va_arg(ap, char), len));
+		return (ft_putchar(va_arg(ap, int), len));
 	if (form_c == 's')
 		return (ft_putstr(va_arg(ap, char *), len));
 	if (form_c == 'p')
@@ -56,30 +56,35 @@ int	ft_checkform(char form_c, int *len, va_list ap)
 	if (form_c == 'x' || form_c == 'X')
 		return (ft_puthex(form_c, va_arg(ap, unsigned int), len));
 	if (form_c == '%')
-		return (ft_putchar(form_c));//ft_putchar
+		return (ft_putchar(form_c, len));//ft_putchar
 	else
 		return (-1);
 	return 0;
 }
 
-int	ft_putaddr(uintptr_t addr, int *len)
+int	ft_putaddr(void *addr, int *len)
 {
+	uintptr_t addr_nb;
+
+	addr_nb = (uintptr_t)addr;
 	write(1, "0x", 2);
 	*len += 2;
-	if (ft_puthex('p', addr, len) == -1)
+	if (ft_puthex('p', addr_nb, len) == -1)
 		return (-1);
+	return (0);
 }
 
 int	ft_putdec(int nb, int *len)
 {
 	ft_putnbr_base(nb, "0123456789", 10, len);
+	return (0);
 }
 
-int	ft_puthex(char form_c, unsigned int nb, int *len)
+int	ft_puthex(char form_c, unsigned long nb, int *len)
 {
-	if (form_c == 'x')
+	if (form_c == 'x' || form_c == 'p')
 		ft_putnbr_base(nb, "0123456789abcdef", 16, len);
-	if (form_c == 'X' || form_c == 'p')//else 
+	if (form_c == 'X')//else 
 		ft_putnbr_base(nb, "0123456789ABCDEF", 16, len);
 	return (0);
 }

@@ -15,16 +15,17 @@
 
 # include <stdio.h>//
 # include <stdlib.h>
-// # include <unistd.h>
+# include <unistd.h>
 # include <stdarg.h>//va_args
+# include <stdint.h>
 
 int		ft_printf(char const *format, ...);
 int		ft_checkform(char form_c, int *len, va_list ap);
-int		ft_putaddr(uintptr_t addr, int *len);
+int		ft_putaddr(void *addr, int *len);
 int		ft_putdec(int nb, int *len);
-int		ft_puthex(char form_c, unsigned int nb, int *len);
+int		ft_puthex(char form_c, unsigned long nb, int *len);
 size_t	ft_strlen(const char *s);
-void	ft_putstr(char *str, int *len);
+int		ft_putstr(char *str, int *len);
 int		ft_putchar(char c, int *len);
 int		ft_putnbr_base(long long nb, char *base, int base_len, int *len);
 

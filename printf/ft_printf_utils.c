@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-void	ft_putstr(char *str, int *len)
+int	ft_putstr(char *str, int *len)
 {
 	size_t	s_len;
 	if (!str)
@@ -35,6 +35,7 @@ void	ft_putstr(char *str, int *len)
 	if (write(1, str, s_len) == -1)
 		return (-1);
 	*len += s_len;
+	return (0);
 }
 
 int	ft_putchar(char c, int *len)
@@ -49,16 +50,17 @@ int	ft_putnbr_base(long long nb, char *base, int base_len, int *len)
 {
 	if (nb < 0)
 	{
+		write(1, "-", 1);
 		(*len)++;
 		nb = nb * -1;
 	}
 	if (nb >= base_len)
 		ft_putnbr_base(nb / base_len, base, base_len, len);
-	else
-	{
-		if (write(1, &base[nb % base_len], 1) == -1)
-			return (-1);
-		(*len)++;
-	}
+	//else
+	//{
+	if (write(1, &base[nb % base_len], 1) == -1)
+		return (-1);
+	(*len)++;
+	//}
 	return (0);
 }
