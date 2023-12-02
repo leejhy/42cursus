@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 21:20:39 by junhylee          #+#    #+#             */
-/*   Updated: 2023/11/29 16:39:40 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/02 15:23:40 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-int	ft_putstr(char *str, int *len)
+int	ft_putstr(char *str, size_t *len)
 {
 	size_t	s_len;
-	if (!str)
+
+	if (str == NULL)
 	{
 		*len += 6;
-		write(1, "(null)", 6);
+		if (write(1, "(null)", 6) == -1)
+			return (-1);
 		return (0);
 	}
 	s_len = ft_strlen(str);
@@ -38,7 +40,7 @@ int	ft_putstr(char *str, int *len)
 	return (0);
 }
 
-int	ft_putchar(char c, int *len)
+int	ft_putchar(char c, size_t *len)
 {
 	if (write(1, &c, 1) == -1)
 		return (-1);
@@ -46,21 +48,25 @@ int	ft_putchar(char c, int *len)
 	return (0);
 }
 
-int	ft_putnbr_base(long long nb, char *base, int base_len, int *len)
+int	ft_putnbr_base(long nb, const char *base, int base_len, size_t *len)
 {
 	if (nb < 0)
 	{
-		write(1, "-", 1);
-		(*len)++;
+		if (base_len == 10)
+		{
+			if (write(1, "-", 1) == -1)
+				return (-1);
+			(*len)++;
+		}
 		nb = nb * -1;
 	}
 	if (nb >= base_len)
-		ft_putnbr_base(nb / base_len, base, base_len, len);
-	//else
-	//{
+	{
+		if (ft_putnbr_base(nb / base_len, base, base_len, len) == -1)
+			return (-1);
+	}
 	if (write(1, &base[nb % base_len], 1) == -1)
 		return (-1);
 	(*len)++;
-	//}
 	return (0);
 }
