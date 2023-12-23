@@ -1,13 +1,18 @@
 
 #include "push_swap.h"
 
-void	pa(t_stack *A_stack, int nb)
+void	makeNode(t_stack *a)
 {
-	if (A_stack == NULL)
-		A_stack->nb = nb;
+
+}
+
+void	init(t_stack *stack_A, int nb)
+{
+	if (stack_A == NULL)
+		stack_A->nb = nb;
 	else
 	{
 		//마지막노드 이동
-		A_stack->nb = nb;
+		stack_A->nb = nb;
 	}
 }

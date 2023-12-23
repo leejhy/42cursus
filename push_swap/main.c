@@ -42,21 +42,28 @@ int	is_errors(int argc, char **argv)
 	return (0);
 }
 
+int	*AtoIntArr(char **argv)
+{
+	int	*arr;
+	
+	arr = malloc(sizeof(int) * word);
+}
 
 int	main(int argc, char **argv)
 {
 	size_t		i;
 	long long	nb;
+	int			*arr;
 	t_stack		*stack_A;
 
 	i = argc - 1;
-	stack_A = malloc(sizeof(t_stack));
-	stack_A = NULL;
 	if (is_errors)
 	{
 		printf("Error\n");
 		return (0);
 	}
+	arr = AtoIntArr(argv);
+	init(stack_A, argv);
 	while (i)
 	{
 		nb = ft_atoi(argv[i]);
