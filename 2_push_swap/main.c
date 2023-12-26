@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:34:17 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/26 21:43:41 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/26 21:48:21 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_errors(int argc, char **argv)
 	return (0);
 }
 
-void intToidx(t_pos *pos, t_stack head_A, int *arr)
+void intToidx(t_pos *pos, t_stack *head_A, int *arr)
 {
 	
 }
