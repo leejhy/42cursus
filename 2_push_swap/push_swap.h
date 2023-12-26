@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:30:10 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/23 14:56:53 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/26 19:20:19 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,19 @@ typedef struct	s_stack
 	struct	s_stack *next;
 }	t_stack;
 
+typedef struct	s_pos
+{
+	int	size;
+	t_stack	*front;
+	t_stack	*rear;
+}	t_pos;
+
+void	init_pos(t_pos **pos, t_stack **head);
 int	*ft_parsing(int argc, char **argv);
 long long	ft_atoi(const char *str);
 void	ft_lstclear(t_stack **lst);
 void	ft_lstadd_back(t_stack **lst, t_stack *new);
 t_stack	*ft_makeNewNode(int nb);
 void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt);
+int	isDuplicate(int *arr, int arr_cnt);
 #endif

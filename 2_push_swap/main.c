@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:34:17 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/23 15:03:18 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/26 19:43:26 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,17 @@ int	is_errors(int argc, char **argv)
 	return (0);
 }
 
-// int	*AtoIntArr(char **argv)
-// {
-// 	int	*arr;
-	
-// 	// arr = malloc(sizeof(int) * word);
-// }
-
 int	main(int argc, char **argv)
 {
 	size_t		i;
 	long long	nb;
 	int			*nb_arr;
 	t_stack		*head_A;
+	t_pos		*pos;
 
 	i = 0;
 	head_A = NULL;
+	pos = NULL;
 	if (is_errors(argc, argv))
 	{
 		printf("Error\n");
@@ -57,7 +52,8 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	ft_makestack(&head_A, nb_arr, argc - 1);
-	if (head_A == NULL)
+	init_pos(&pos, &head_A);
+	if (!head_A || !pos)
 	{
 		printf("Error\n");
 		return (0);
@@ -65,6 +61,8 @@ int	main(int argc, char **argv)
 	while (head_A != NULL)
 	{
 		printf("%d\n", head_A->nb);
+		if (head_A->prev != NULL)
+			printf("prev %d\n", head_A->prev->nb);
 		head_A = head_A->next;
 	}
 	return (0);
