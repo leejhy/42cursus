@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 19:46:15 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/26 19:49:40 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/26 21:31:59 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,20 @@ void	sort(int *arr, int arr_cnt)
 	int	j;
 	int	temp;
 
-	i = 1;
+	i = 0;
 	while (i < arr_cnt)
 	{
-		temp = arr[i];
-		j = i - 1;
-		while (temp < arr[j] && j >= 0)
+		j = i;
+		while (j < arr_cnt)
 		{
-			if (temp < arr[j])
-				arr[j + 1] = arr[j];
-			j--;
+			if (i != j && arr[i] > arr[j])
+			{
+				temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+			j++;
 		}
-		arr[j + 1] = temp;
 		i++;
 	}
 }
