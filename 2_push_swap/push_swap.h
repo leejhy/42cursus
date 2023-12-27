@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:30:10 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/26 21:13:38 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:16:24 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,9 @@ void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt);
 int	isDuplicate(int *arr, int arr_cnt);
 void	sort(int *arr, int arr_cnt);
 void	intToidx(t_pos *pos, t_stack **head_A, int *arr, int arr_cnt);
+void	ft_makeNodeB(t_stack **head_B, t_pos **pos_B, int nb);
+void	ft_delFirstNode(t_stack **head, t_pos **pos);
+void	ft_lstadd_front(t_stack	**head, t_stack *new);
+void	pb(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B);
+
 #endif

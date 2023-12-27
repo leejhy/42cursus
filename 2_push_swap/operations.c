@@ -1,10 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/27 18:21:30 by junhylee          #+#    #+#             */
+/*   Updated: 2023/12/27 20:16:47 by junhylee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	pb(t_stack *head_A, t_pos *pos_A, t_stack *head_B, t_pos *pos_B)
+void	pb(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 {
+	if ((*pos_A)->size == 0)
+		return ;
+	(*pos_A)->size -= 1;
+	ft_makeNodeB(head_B, pos_B, (*pos_A)->front->nb);
 	if (head_B == NULL)
-		ft_makestackB(head_B, *pos_B, pos_A->front->nb);
-	pos_A->size -= 1;
+		exit(0);//?
+	ft_delFirstNode(head_A, pos_A);
 }
 
 void	sa(t_stack *head_A, t_pos *pos)

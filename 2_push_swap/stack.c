@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:49:30 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/26 21:15:25 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/27 18:37:08 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	set_pos(t_pos **pos, t_stack **head)
 	t_stack *temp_node;
 
 	*pos = malloc(sizeof(t_pos));
-	if (!pos)
+	if (!*pos)
 		return ;
 	temp_node = *head;
 	(*pos)->front = *head;
