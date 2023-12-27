@@ -29,9 +29,26 @@ int	is_errors(int argc, char **argv)
 	return (0);
 }
 
-void intToidx(t_pos *pos, t_stack *head_A, int *arr)
+void	intToidx(t_pos *pos, t_stack **head_A, int *arr, int arr_cnt)
 {
-	
+	t_stack	*temp;
+	int		i;
+
+	temp = *head_A;
+	while (temp != NULL)
+	{
+		i = 0;
+		while (i < arr_cnt)
+		{
+			if (arr[i] == temp->nb)
+			{
+				temp->nb = i;
+				break ;
+			}
+			i++;
+		}
+		temp = temp->next;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -58,7 +75,8 @@ int	main(int argc, char **argv)
 	}
 	ft_makestack(&head_A, nb_arr, argc - 1);
 	init_pos(&pos, &head_A);
-	intToidx(pos, head_A, nb_arr);
+	intToidx(pos, &head_A, nb_arr, argc - 1);
+	// free(nb_arr);
 	if (!head_A || !pos)
 	{
 		printf("Error\n");
@@ -68,10 +86,10 @@ int	main(int argc, char **argv)
 	// 	printf("%d ", nb_arr[k]);
 	while (head_A != NULL)
 	{
-		// printf("%d\n", head_A->nb);
-		// if (head_A->prev != NULL)
-			// printf("prev %d\n", head_A->prev->nb);
+		printf("%d\n", head_A->nb);
+		if (head_A->prev != NULL)
+			printf("prev %d\n", head_A->prev->nb);
 		head_A = head_A->next;
 	}
-	return (0);
+	exit (0); // int arr등 아직 안쓴 애들도 있음
 }
