@@ -1,5 +1,10 @@
 #include "push_swap.h"
 
+void	pb(t_stack *head_B, t_pos *pos_A)
+{
+	pos_A->size -= 1;
+}
+
 void	sa(t_stack *head_A, t_pos *pos)
 {
 	int	temp_nb;

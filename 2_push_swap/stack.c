@@ -25,14 +25,14 @@ t_stack	*ft_makeNewNode(int nb)
 	return (newnode);
 }
 
-void	ft_lstadd_back(t_stack **lst, t_stack *new)
+void	ft_lstadd_back(t_stack **head, t_stack *new)
 {
 	t_stack	*last_node;
 	t_stack	*prev_temp;
 	
-	last_node = *lst;
-	if (*lst == NULL)
-		*lst = new;
+	last_node = *head;
+	if (*head == NULL)
+		*head = new;
 	else
 	{
 		while (last_node->next != NULL)
@@ -60,7 +60,7 @@ void	ft_lstclear(t_stack **lst)
 }
 
 void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt)
-{
+{//only for a
 	t_stack	*new_node;
 	int		i;
 
@@ -80,10 +80,9 @@ void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt)
 	sort(nb_arr, arr_cnt);
 }
 
-void	init_pos(t_pos **pos, t_stack **head, int size)
+void	set_pos(t_pos **pos, t_stack **head)
 {
 	t_stack *temp_node;
-	
 	*pos = malloc(sizeof(t_pos));
 	if (!pos)
 		return ;
@@ -92,5 +91,6 @@ void	init_pos(t_pos **pos, t_stack **head, int size)
 	while (temp_node->next != NULL)
 		temp_node = temp_node->next;
 	(*pos)->rear = temp_node;
-	(*pos)->size = size;
+
+	//(*pos)->size = size;
 }

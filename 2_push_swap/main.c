@@ -58,11 +58,11 @@ int	main(int argc, char **argv)
 	long long	nb;
 	int			*nb_arr;
 	t_stack		*head_A;
-	t_pos		*pos;
+	t_pos		*pos_A;
 
 	i = 0;
 	head_A = NULL;
-	pos = NULL;
+	pos_A = NULL;
 	if (is_errors(argc, argv))
 	{
 		printf("Error\n");
@@ -75,10 +75,10 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	ft_makestack(&head_A, nb_arr, argc - 1);
-	init_pos(&pos, &head_A, argc - 1);
-	intToidx(pos, &head_A, nb_arr, argc - 1);
+	set_pos(&pos_A, &head_A, argc - 1);
+	intToidx(pos_A, &head_A, nb_arr, argc - 1);
 	// free(nb_arr);
-	if (!head_A || !pos)
+	if (!head_A || !pos_A)
 	{
 		printf("Error\n");
 		return (0);
