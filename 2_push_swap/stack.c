@@ -91,7 +91,5 @@ void	set_pos(t_pos **pos, t_stack **head)
 	while (temp_node->next != NULL)
 		temp_node = temp_node->next;
 	(*pos)->rear = temp_node;
-
 	(*pos)->size = ft_lstsize(*head);
-	//(*pos)->size = size;
 }
