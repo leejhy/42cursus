@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:21:22 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/27 20:28:32 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/27 21:08:51 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,18 @@ void	ft_delFirstNode(t_stack **head, t_pos **pos)
 	t_stack	*temp;
 	
 	temp = *head;
-	*head = (*head)->next;//temp에 첫째 값 저장하고 head 밀기
-	(*pos)->front = *head;
-	(*head)->prev = NULL;
-	temp->next = NULL;
+	if (temp->next == NULL)
+	{
+		(*pos)->front = NULL;
+		(*pos)->rear = NULL;
+	}
+	else
+	{
+		*head = (*head)->next;//temp에 첫째 값 저장하고 head 밀기
+		(*pos)->front = *head;
+		(*head)->prev = NULL;
+		temp->next = NULL;
+	}
 	free(temp);
 }
 
