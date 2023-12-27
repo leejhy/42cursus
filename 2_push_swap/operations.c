@@ -1,7 +1,9 @@
 #include "push_swap.h"
 
-void	pb(t_stack *head_B, t_pos *pos_A)
+void	pb(t_stack *head_A, t_pos *pos_A, t_stack *head_B, t_pos *pos_B)
 {
+	if (head_B == NULL)
+		ft_makestackB(head_B, *pos_B, pos_A->front->nb);
 	pos_A->size -= 1;
 }
 

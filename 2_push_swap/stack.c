@@ -83,6 +83,7 @@ void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt)
 void	set_pos(t_pos **pos, t_stack **head)
 {
 	t_stack *temp_node;
+
 	*pos = malloc(sizeof(t_pos));
 	if (!pos)
 		return ;

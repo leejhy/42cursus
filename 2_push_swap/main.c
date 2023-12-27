@@ -12,20 +12,13 @@
 
 #include "push_swap.h"
 
-// size_t	ft_strlen(const char *s)
-// {
-// 	size_t	len;
-
-// 	len = 0;
-// 	while (*(s + len))
-// 		len++;
-// 	return (len);
-// }
-
 int	is_errors(int argc, char **argv)
 {
 	if (argc <= 1)
+	{
+		printf("Error\n");
 		return (1);
+	}
 	return (0);
 }
 
@@ -53,21 +46,17 @@ void	intToidx(t_pos *pos, t_stack **head_A, int *arr, int arr_cnt)
 
 int	main(int argc, char **argv)
 {
-	size_t		i;
 	int			tt = 0;
-	long long	nb;
 	int			*nb_arr;
 	t_stack		*head_A;
+	t_stack		*head_B;
 	t_pos		*pos_A;
 
-	i = 0;
 	head_A = NULL;
+	head_B = NULL;
 	pos_A = NULL;
 	if (is_errors(argc, argv))
-	{
-		printf("Error\n");
 		return (0);
-	}
 	nb_arr = ft_parsing(argc, argv);
 	if (!nb_arr)
 	{
