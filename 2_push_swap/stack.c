@@ -80,7 +80,7 @@ void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt)
 	sort(nb_arr, arr_cnt);
 }
 
-void	init_pos(t_pos **pos, t_stack **head)
+void	init_pos(t_pos **pos, t_stack **head, int size)
 {
 	t_stack *temp_node;
 	
@@ -92,4 +92,5 @@ void	init_pos(t_pos **pos, t_stack **head)
 	while (temp_node->next != NULL)
 		temp_node = temp_node->next;
 	(*pos)->rear = temp_node;
+	(*pos)->size = size;
 }

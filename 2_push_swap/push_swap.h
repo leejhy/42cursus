@@ -32,8 +32,10 @@ typedef struct	s_pos
 	t_stack	*front;
 	t_stack	*rear;
 }	t_pos;
-
-void	init_pos(t_pos **pos, t_stack **head);
+void	sa(t_stack *head_A, t_pos *pos);
+void	ra(t_stack *head_A, t_pos *pos);
+void	rra(t_stack *head_A, t_pos *pos);
+void	init_pos(t_pos **pos, t_stack **head, int size);
 int	*ft_parsing(int argc, char **argv);
 long long	ft_atoi(const char *str);
 void	ft_lstclear(t_stack **lst);
@@ -42,4 +44,5 @@ t_stack	*ft_makeNewNode(int nb);
 void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt);
 int	isDuplicate(int *arr, int arr_cnt);
 void	sort(int *arr, int arr_cnt);
+void	intToidx(t_pos *pos, t_stack **head_A, int *arr, int arr_cnt);
 #endif

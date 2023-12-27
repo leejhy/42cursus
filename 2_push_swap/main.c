@@ -54,6 +54,7 @@ void	intToidx(t_pos *pos, t_stack **head_A, int *arr, int arr_cnt)
 int	main(int argc, char **argv)
 {
 	size_t		i;
+	int			tt = 0;
 	long long	nb;
 	int			*nb_arr;
 	t_stack		*head_A;
@@ -74,7 +75,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	ft_makestack(&head_A, nb_arr, argc - 1);
-	init_pos(&pos, &head_A);
+	init_pos(&pos, &head_A, argc - 1);
 	intToidx(pos, &head_A, nb_arr, argc - 1);
 	// free(nb_arr);
 	if (!head_A || !pos)
@@ -88,7 +89,7 @@ int	main(int argc, char **argv)
 	{
 		printf("%d\n", head_A->nb);
 		if (head_A->prev != NULL)
-			printf("prev %d\n", head_A->prev->nb);
+			tt = head_A->prev->nb;
 		head_A = head_A->next;
 	}
 	exit (0); // int arr등 아직 안쓴 애들도 있음
