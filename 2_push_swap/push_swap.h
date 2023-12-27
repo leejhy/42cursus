@@ -35,7 +35,8 @@ typedef struct	s_pos
 void	sa(t_stack *head_A, t_pos *pos);
 void	ra(t_stack *head_A, t_pos *pos);
 void	rra(t_stack *head_A, t_pos *pos);
-void	set_pos(t_pos **pos, t_stack **head, int size);
+void	set_pos(t_pos **pos, t_stack **head);
+int		ft_lstsize(t_stack *head);
 int	*ft_parsing(int argc, char **argv);
 long long	ft_atoi(const char *str);
 void	ft_lstclear(t_stack **lst);
