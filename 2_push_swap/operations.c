@@ -23,6 +23,11 @@ void	pb(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 	ft_delFirstNode(head_A, pos_A);
 }
 
+void	pa(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
+{
+	
+}
+
 void	sa(t_stack *head_A, t_pos *pos)
 {
 	int	temp_nb;
