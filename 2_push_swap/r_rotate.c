@@ -25,7 +25,7 @@ void	rra(t_stack **head_A, t_pos **pos_A)
 	printf("rra\n");
 }
 
-void	rb(t_stack **head_B, t_pos **pos_B)
+void	rrb(t_stack **head_B, t_pos **pos_B)
 {
 	r_rotate(*head_B, *pos_B);
 	printf("rrb\n");
