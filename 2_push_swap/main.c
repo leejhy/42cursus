@@ -89,10 +89,10 @@ int	main(int argc, char **argv)
 	pushswap(head_A, pos_A, head_B, pos_B);
 	// for (int k = 0; k < argc - 1; k++)
 	// 	printf("%d ", nb_arr[k]);
-	// pb(&head_A, &pos_A, &head_B, &pos_B);
-	// pb(&head_A, &pos_A, &head_B, &pos_B);
-	// pb(&head_A, &pos_A, &head_B, &pos_B);
-	// pb(&head_A, &pos_A, &head_B, &pos_B);
+	pb(&head_A, &pos_A, &head_B, &pos_B);
+	pb(&head_A, &pos_A, &head_B, &pos_B);
+	pa(&head_A, &pos_A, &head_B, &pos_B);
+	ra(head_A, pos_A);
 	while (head_A != NULL)
 	{
 		printf("%d\n", head_A->nb);
@@ -100,11 +100,9 @@ int	main(int argc, char **argv)
 		// 	printf("prev :%d\n",head_A->prev->nb);
 		head_A = head_A->next;
 	}
-	// printf("pos b front : %d\n", pos_B->front->nb);
-	// printf("pos b rear : %d\n", pos_B->rear->nb);
-	// printf("stack B : %d\n", head_B->nb);
+	printf(" size %d\n", pos_A->size);
+	printf(" size %d\n", pos_B->size);
+	printf("stack B : %d\n", head_B->nb);
 	// printf("stack B : %d\n", head_B->next->nb);
-	// printf("stack B : %d\n", head_B->next->next->nb);
-	// printf("stack B : %d\n", head_B->next->next->next->nb);
 	exit (0); // int arr등 아직 안쓴 애들도 있음
 }

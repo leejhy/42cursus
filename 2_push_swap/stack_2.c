@@ -60,30 +60,10 @@ void	ft_delFirstNode(t_stack **head, t_pos **pos)
 		(*head)->prev = NULL;
 		temp->next = NULL;
 	}
-	free(temp);
-}
-
-void	ft_makeNodeB(t_stack **head_B, t_pos **pos_B, int nb)
-{
-	t_stack	*newnode;
-	t_stack	*last_node;
-	int		cnt;
-
-	cnt = 1;
-	newnode = ft_makeNewNode(nb);
-	if (!newnode)
-		return ;
-	ft_lstadd_front(head_B, newnode);
-	last_node = *head_B;
-	*pos_B = malloc(sizeof(t_pos));
-	if (!(*pos_B))
-		return ;
-	while (last_node->next != NULL)
+	if ((*pos)->size == 0)
 	{
-		cnt += 1;
-		last_node = last_node->next;
+		free(*pos);
+		*pos = NULL;
 	}
-	(*pos_B)->rear = last_node;
-	(*pos_B)->front = *head_B;
-	(*pos_B)->size = cnt;
+	free(temp);
 }
