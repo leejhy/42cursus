@@ -1,4 +1,4 @@
-CC = cc
+CC = clang
 CFLAGS = -Wall -Werror -Wextra
 INC = push_swap.h
 SRCS =	main.c operations.c parsing.c \

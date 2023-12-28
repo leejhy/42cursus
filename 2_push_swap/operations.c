@@ -23,10 +23,10 @@ void	pb(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 	ft_delFirstNode(head_A, pos_A);
 }
 
-void	pa(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
-{
-	
-}
+// void	pa(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
+// {
+
+// }
 
 void	sa(t_stack *head_A, t_pos *pos)
 {
@@ -41,7 +41,9 @@ void	ra(t_stack *head_A, t_pos *pos)
 {//first becomes the last one
 	t_stack *node;
 	int	temp_nb;
-
+	
+	if (pos->size == 0)
+		return ;
 	temp_nb = head_A->nb;
 	node = head_A->next;
 	while (node->next != NULL)
@@ -57,7 +59,9 @@ void	rra(t_stack *head_A, t_pos *pos)
 {//The last elements becomes the first one
 	t_stack	*node;
 	int	temp_nb;
-
+	
+	if (head_A == NULL)
+		return ;
 	temp_nb = pos->rear->nb;
 	node = pos->rear->prev;
 	while (node->prev != NULL)

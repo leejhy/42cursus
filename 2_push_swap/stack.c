@@ -28,7 +28,6 @@ t_stack	*ft_makeNewNode(int nb)
 void	ft_lstadd_back(t_stack **head, t_stack *new)
 {
 	t_stack	*last_node;
-	t_stack	*prev_temp;
 	
 	last_node = *head;
 	if (*head == NULL)

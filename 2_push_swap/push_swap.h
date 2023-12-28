@@ -45,7 +45,7 @@ t_stack	*ft_makeNewNode(int nb);
 void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt);
 int	isDuplicate(int *arr, int arr_cnt);
 void	sort(int *arr, int arr_cnt);
-void	intToidx(t_pos *pos, t_stack **head_A, int *arr, int arr_cnt);
+void	intToidx(t_stack **head_A, int *arr, int arr_cnt);
 void	ft_makeNodeB(t_stack **head_B, t_pos **pos_B, int nb);
 void	ft_delFirstNode(t_stack **head, t_pos **pos);
 void	ft_lstadd_front(t_stack	**head, t_stack *new);

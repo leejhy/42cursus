@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	is_errors(int argc, char **argv)
+int	is_errors(int argc)
 {
 	if (argc <= 1)
 	{
@@ -22,7 +22,7 @@ int	is_errors(int argc, char **argv)
 	return (0);
 }
 
-void	intToidx(t_pos *pos, t_stack **head_A, int *arr, int arr_cnt)
+void	intToidx(t_stack **head_A, int *arr, int arr_cnt)
 {
 	t_stack	*temp;
 	int		i;
@@ -44,9 +44,21 @@ void	intToidx(t_pos *pos, t_stack **head_A, int *arr, int arr_cnt)
 	}
 }
 
+void	pushswap(t_stack *head_A, t_pos *pos_A, t_stack *head_B, t_pos *pos_B)
+{
+	//if (pos_A->size < 4)
+		// hard_sort;
+	if (head_A == NULL || pos_A->size == 0)
+		return ;
+	if (pos_B != NULL)
+	{
+		if (head_B == NULL || pos_B->size == 0)
+			return ;
+	}
+}
+
 int	main(int argc, char **argv)
 {
-	int			tt = 0;
 	int			*nb_arr;
 	t_stack		*head_A;
 	t_stack		*head_B;
@@ -57,7 +69,7 @@ int	main(int argc, char **argv)
 	head_B = NULL;
 	pos_A = NULL;
 	pos_B = NULL;
-	if (is_errors(argc, argv))
+	if (is_errors(argc))
 		return (0);
 	nb_arr = ft_parsing(argc, argv);
 	if (!nb_arr)
@@ -67,13 +79,14 @@ int	main(int argc, char **argv)
 	}
 	ft_makestack(&head_A, nb_arr, argc - 1);
 	set_pos(&pos_A, &head_A);
-	intToidx(pos_A, &head_A, nb_arr, argc - 1);
+	intToidx(&head_A, nb_arr, argc - 1);
 	// free(nb_arr);
 	if (!head_A || !pos_A)
 	{
 		printf("Error\n");
 		return (0);
 	}
+	pushswap(head_A, pos_A, head_B, pos_B);
 	// for (int k = 0; k < argc - 1; k++)
 	// 	printf("%d ", nb_arr[k]);
 	// pb(&head_A, &pos_A, &head_B, &pos_B);
@@ -83,12 +96,12 @@ int	main(int argc, char **argv)
 	while (head_A != NULL)
 	{
 		printf("%d\n", head_A->nb);
-		if (head_A->prev != NULL)
-			printf("prev :%d\n",head_A->prev->nb);
+		// if (head_A->prev != NULL)
+		// 	printf("prev :%d\n",head_A->prev->nb);
 		head_A = head_A->next;
 	}
-	// printf("pos b : %d\n", pos_B->front->nb);
-	// printf("pos b : %d\n", pos_B->rear->nb);
+	// printf("pos b front : %d\n", pos_B->front->nb);
+	// printf("pos b rear : %d\n", pos_B->rear->nb);
 	// printf("stack B : %d\n", head_B->nb);
 	// printf("stack B : %d\n", head_B->next->nb);
 	// printf("stack B : %d\n", head_B->next->next->nb);
