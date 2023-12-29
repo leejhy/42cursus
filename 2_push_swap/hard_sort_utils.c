@@ -26,10 +26,11 @@ int find_zero(t_stack *head_A)
 	loc = 0;
 	while (temp_A != NULL && temp_A->nb != 0)
 	{
+		// printf("find_zero\n");
 		loc += 1;
 		temp_A = temp_A->next;
 	}
-	if (temp_A->nb == 0)
+	if (temp_A != NULL)
 		return (loc);
 	return (-1);
 }
@@ -43,10 +44,11 @@ int find_one(t_stack *head_A)
 	loc = 0;
 	while (temp_A != NULL && temp_A->nb != 1)
 	{
+		// printf("find_one\n");
 		loc += 1;
 		temp_A = temp_A->next;
 	}
-	if (temp_A->nb == 1)
+	if (temp_A != NULL)
 		return (loc);
 	return (-1);
 }
@@ -58,25 +60,34 @@ void	ft_select_pb(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos
 
 	while (find_zero(*head_A) >= 0 || find_one(*head_A) >= 0)
 	{
+		// printf("select_pb\n");
 		loc_zero = find_zero(*head_A);
 		loc_one = find_one(*head_A);
-		printf("select_pb\n");
 		if (loc_one == 0 || loc_zero == 0)
 			pb(head_A, pos_A, head_B, pos_B);
 		else if (loc_one == 1 || loc_zero == 1)
+		{
+			// printf("@@@1\n");
 			ra(head_A, pos_A);
+		}
 		else if (loc_one == (*pos_A)->rear->nb || loc_zero == (*pos_A)->rear->nb)
+		{
+			// printf("@@@2\n");
 			rra(head_A, pos_A);
+		}
 		else if (loc_one == 2 || loc_zero == 2)
 		{
+			// printf("@@@3\n");
 			ra(head_A, pos_A);
 			ra(head_A, pos_A);
 		}
 		else if (loc_one == 3 || loc_zero == 3)
 		{
+			// printf("@@@4\n");
 			rra(head_A, pos_A);
 			rra(head_A, pos_A);
 		}
+		// printf("@@@5\n");
 	}
 }
 

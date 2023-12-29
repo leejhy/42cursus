@@ -84,7 +84,7 @@ void	sort_four_args(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **p
 
 void	sort_five_args(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 {
-	ft_select_pb(head_A, pos_A, head_B, pos_B);
+	ft_select_pb(head_A, pos_A, head_B, pos_B); // segmentation fault
 	sort_three_args(head_A, pos_A);
 	if ((*head_B)->nb < (*head_B)->next->nb)
 		sb(head_B, pos_B);
