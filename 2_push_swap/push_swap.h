@@ -79,6 +79,7 @@ void	sort_five_args(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **p
 int		ft_nbcnt(t_stack *head_A, t_stack *head_B);
 int 	find_zero(t_stack *head_A);
 int 	find_one(t_stack *head_A);
+int		is_sorted(t_stack **head_A);
 void	ft_select_pb(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B);
 //main.c
 int		is_errors(int argc);

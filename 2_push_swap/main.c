@@ -48,6 +48,8 @@ void	push_swap(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 {
 	if (*head_A == NULL || (*pos_A)->size == 0)
 		return ;
+	if (is_sorted(head_A))
+		return ;
 	if ((*pos_A)->size <= 5)
 		ft_hard_sort(head_A, pos_A, head_B, pos_B);
 	if (*pos_B != NULL)
@@ -86,7 +88,7 @@ int	main(int argc, char **argv)
 		printf("Error\n");
 		return (0);
 	}
-	pushswap(head_A, pos_A, head_B, pos_B);
+	push_swap(&head_A, &pos_A, &head_B, &pos_B);
 	while (head_A != NULL)
 	{
 		printf("%d\n", head_A->nb);
@@ -94,9 +96,9 @@ int	main(int argc, char **argv)
 		// 	printf("prev :%d\n",head_A->prev->nb);
 		head_A = head_A->next;
 	}
-	printf(" size %d\n", pos_A->size);
-	printf(" size %d\n", pos_B->size);
-	printf("stack B : %d\n", head_B->nb);
-	printf("stack B : %d\n", head_B->next->nb);
+	// printf(" size %d\n", pos_A->size);
+	// printf(" size %d\n", pos_B->size);
+	// printf("stack B : %d\n", head_B->nb);
+	// printf("stack B : %d\n", head_B->next->nb);
 	exit (0); // int arr등 아직 안쓴 애들도 있음
 }

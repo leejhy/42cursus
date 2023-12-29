@@ -8,9 +8,10 @@ int	ft_nbcnt(t_stack *head_A, t_stack *head_B)
 
 	cnt = 0;
 	temp_A = head_A;
-	while (temp_A != NULL && head_B->nb < temp_A->nb)
+	while (temp_A != NULL)
 	{
-		cnt += 1;
+		if (head_B->nb < temp_A->nb)
+			cnt += 1;
 		temp_A = temp_A->next;
 	}
 	return (cnt);
@@ -59,6 +60,7 @@ void	ft_select_pb(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos
 	{
 		loc_zero = find_zero(*head_A);
 		loc_one = find_one(*head_A);
+		printf("select_pb\n");
 		if (loc_one == 0 || loc_zero == 0)
 			pb(head_A, pos_A, head_B, pos_B);
 		else if (loc_one == 1 || loc_zero == 1)
@@ -76,4 +78,25 @@ void	ft_select_pb(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos
 			rra(head_A, pos_A);
 		}
 	}
+}
+
+int	is_sorted(t_stack **head_A)
+{
+	t_stack *temp;
+	int		cnt;
+	int		size;
+	
+	cnt = 0;
+	size = 0;
+	temp = *head_A;
+	while (temp->next != NULL)
+	{
+		if (temp->nb < temp->next->nb)
+			cnt += 1;
+		size += 1;
+		temp = temp->next;
+	}
+	if (cnt == size)
+		return (1);
+	return (0);
 }

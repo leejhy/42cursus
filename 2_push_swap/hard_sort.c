@@ -21,7 +21,7 @@ void	ft_hard_sort(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos
 	if ((*pos_A)->size == 4)
 		sort_four_args(head_A, pos_A, head_B, pos_B);
 	if ((*pos_A)->size == 5)
-		sort_two_args(head_A, pos_A, head_B, pos_B);
+		sort_five_args(head_A, pos_A, head_B, pos_B);
 }
 
 void	sort_two_args(t_stack **head_A, t_pos **pos_A)
@@ -57,13 +57,13 @@ void	sort_four_args(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **p
 {
 	int	cnt;
 
-	cnt = ft_nbcnt(*head_A, *head_B);
 	pb(head_A, pos_A, head_B, pos_B);
+	cnt = ft_nbcnt(*head_A, *head_B);
 	sort_three_args(head_A, pos_A);
-	if (cnt == 0)
+	if(cnt == 0)//가장 큼
 	{
-		pa(head_A, pos_A, head_B, pos_B);
-		rra(head_A, pos_A);
+		pa(head_A, pos_A, head_B,  pos_B);
+		ra(head_A, pos_A);
 	}
 	if (cnt == 1)
 	{
@@ -78,16 +78,13 @@ void	sort_four_args(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **p
 		pa(head_A, pos_A, head_B, pos_B);
 		rra(head_A, pos_A);
 	}
-	else
+	if (cnt == 3)
 		pa(head_A, pos_A, head_B, pos_B);
 }
 
 void	sort_five_args(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 {
-	int	loc_one;
-	int	loc_zero;
-
-	ft_find(head_A, pos_A, head_B, pos_B);
+	ft_select_pb(head_A, pos_A, head_B, pos_B);
 	sort_three_args(head_A, pos_A);
 	if ((*head_B)->nb < (*head_B)->next->nb)
 		sb(head_B, pos_B);
