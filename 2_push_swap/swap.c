@@ -5,6 +5,8 @@ void	swap(t_stack *head, t_pos *pos)
 {
 	int	temp_nb;
 
+	if (pos->size <= 1)
+		return ;
 	temp_nb = head->nb;
 	head->nb = head->next->nb;
 	head->next->nb = temp_nb;

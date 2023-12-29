@@ -2,7 +2,7 @@ CC = clang
 CFLAGS = -Wall -Werror -Wextra
 INC = push_swap.h
 SRCS =	main.c parsing.c push.c r_rotate.c rotate.c \
-		sort.c stack.c stack_2.c swap.c
+		sort.c stack.c stack2.c swap.c
 OBJS = ${SRCS:.c=.o}
 NAME = push_swap
 

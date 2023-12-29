@@ -33,7 +33,7 @@ void	rb(t_stack **head_B, t_pos **pos_B)
 
 void	rr(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 {
-	ra(*head_A, *pos_A);
-	rb(*head_B, *pos_B);
+	rotate(*head_A, *pos_A);
+	rotate(*head_B, *pos_B);
 	printf("rr\n");
 }

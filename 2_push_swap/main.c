@@ -44,15 +44,19 @@ void	intToidx(t_stack **head_A, int *arr, int arr_cnt)
 	}
 }
 
-void	pushswap(t_stack *head_A, t_pos *pos_A, t_stack *head_B, t_pos *pos_B)
+void	pushswap(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 {
 	//if (pos_A->size < 4)
 		// hard_sort;
-	if (head_A == NULL || pos_A->size == 0)
+	if (*head_A == NULL || (*pos_A)->size == 0)
 		return ;
-	if (pos_B != NULL)
+	if ((*pos_A)->size <= 5)
 	{
-		if (head_B == NULL || pos_B->size == 0)
+		ft_hard_sort(head_A, pos_A, head_B, pos_B);
+	}
+	if (*pos_B != NULL)
+	{
+		if (*head_B == NULL || (*pos_B)->size == 0)
 			return ;
 	}
 }
@@ -87,12 +91,6 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	pushswap(head_A, pos_A, head_B, pos_B);
-	// for (int k = 0; k < argc - 1; k++)
-	// 	printf("%d ", nb_arr[k]);
-	pb(&head_A, &pos_A, &head_B, &pos_B);
-	pb(&head_A, &pos_A, &head_B, &pos_B);
-	pa(&head_A, &pos_A, &head_B, &pos_B);
-	ra(head_A, pos_A);
 	while (head_A != NULL)
 	{
 		printf("%d\n", head_A->nb);
@@ -103,6 +101,6 @@ int	main(int argc, char **argv)
 	printf(" size %d\n", pos_A->size);
 	printf(" size %d\n", pos_B->size);
 	printf("stack B : %d\n", head_B->nb);
-	// printf("stack B : %d\n", head_B->next->nb);
+	printf("stack B : %d\n", head_B->next->nb);
 	exit (0); // int arr등 아직 안쓴 애들도 있음
 }
