@@ -78,5 +78,13 @@ void	sort_four_args(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **p
 
 void	sort_five_args(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 {
-	
+	int	loc_one;
+	int	loc_zero;
+
+	ft_find(head_A, pos_A, head_B, pos_B);
+	sort_three_args(head_A, pos_A);
+	if ((*head_B)->nb < (*head_B)->next->nb)
+		sb(head_B, pos_B);
+	pa(head_A, pos_A, head_B, pos_B);
+	pa(head_A, pos_A, head_B, pos_B);
 }
