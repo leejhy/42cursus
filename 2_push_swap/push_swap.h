@@ -69,10 +69,21 @@ void	ft_pushB(t_stack **head_B, t_pos **pos_B, int nb);
 long long	ft_atoi(const char *str);
 int			isDuplicate(int *arr, int arr_cnt);
 int			*ft_parsing(int argc, char **argv);
+//hard_sort.c
+void	ft_hard_sort(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B);
+void	sort_two_args(t_stack **head_A, t_pos **pos_A);
+void	sort_three_args(t_stack **head_A, t_pos **pos_A);
+void	sort_four_args(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B);
+void	sort_five_args(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B);
+//hard_sort_utils.c
+int		ft_nbcnt(t_stack *head_A, t_stack *head_B);
+int 	find_zero(t_stack *head_A);
+int 	find_one(t_stack *head_A);
+void	ft_select_pb(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B);
 //main.c
 int		is_errors(int argc);
 void	intToidx(t_stack **head_A, int *arr, int arr_cnt);
-void	pushswap(t_stack *head_A, t_pos *pos_A, t_stack *head_B, t_pos *pos_B);
+void	push_swap(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B);
 int		main(int argc, char **argv);
 
 #endif

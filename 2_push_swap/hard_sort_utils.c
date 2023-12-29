@@ -50,11 +50,11 @@ int find_one(t_stack *head_A)
 	return (-1);
 }
 
-void	ft_find(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
+void	ft_select_pb(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 {
 	int loc_one;
 	int	loc_zero;
-	
+
 	while (find_zero(*head_A) >= 0 || find_one(*head_A) >= 0)
 	{
 		loc_zero = find_zero(*head_A);

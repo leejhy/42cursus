@@ -44,16 +44,12 @@ void	intToidx(t_stack **head_A, int *arr, int arr_cnt)
 	}
 }
 
-void	pushswap(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
+void	push_swap(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 {
-	//if (pos_A->size < 4)
-		// hard_sort;
 	if (*head_A == NULL || (*pos_A)->size == 0)
 		return ;
 	if ((*pos_A)->size <= 5)
-	{
 		ft_hard_sort(head_A, pos_A, head_B, pos_B);
-	}
 	if (*pos_B != NULL)
 	{
 		if (*head_B == NULL || (*pos_B)->size == 0)

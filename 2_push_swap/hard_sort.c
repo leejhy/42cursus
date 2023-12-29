@@ -15,7 +15,13 @@
 void	ft_hard_sort(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 {
 	if ((*pos_A)->size == 2)
-		sort_two_args(*head_A, *pos_A);
+		sort_two_args(head_A, pos_A);
+	if ((*pos_A)->size == 3)
+		sort_three_args(head_A, pos_A);
+	if ((*pos_A)->size == 4)
+		sort_four_args(head_A, pos_A, head_B, pos_B);
+	if ((*pos_A)->size == 5)
+		sort_two_args(head_A, pos_A, head_B, pos_B);
 }
 
 void	sort_two_args(t_stack **head_A, t_pos **pos_A)
