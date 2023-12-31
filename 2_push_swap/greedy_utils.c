@@ -1,22 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   greedy.c                                           :+:      :+:    :+:   */
+/*   greedy_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 15:59:31 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/31 18:04:03 by junhylee         ###   ########.fr       */
+/*   Created: 2023/12/31 16:16:12 by junhylee          #+#    #+#             */
+/*   Updated: 2023/12/31 16:16:25 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	greedy(t_pos **pos_A, t_pos **pos_B)
-{
-	t_stack *head_A;
-
-	head_A = (*pos_A)->front;
-}
-//rra pa ra
-//ra pa rra

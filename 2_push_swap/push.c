@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:21:30 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/27 21:07:03 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/31 19:00:02 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_pushA(t_stack **head_A, t_pos **pos_A, int nb)
 	int		cnt;
 
 	cnt = 1;
-	newnode = ft_makeNewNode(nb);
+	newnode = ft_make_newnode(nb);
 	if (!newnode)
 		return ;
 	ft_lstadd_front(head_A, newnode);
@@ -68,7 +68,7 @@ void	ft_pushB(t_stack **head_B, t_pos **pos_B, int nb)
 	int		cnt;
 
 	cnt = 1;
-	newnode = ft_makeNewNode(nb);
+	newnode = ft_make_newnode(nb);
 	if (!newnode)
 		return ;
 	ft_lstadd_front(head_B, newnode);

@@ -6,13 +6,13 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:49:30 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/31 15:39:21 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/31 18:59:39 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*ft_makeNewNode(int nb)
+t_stack	*ft_make_newnode(int nb)
 {
 	t_stack	*newnode;
 
@@ -69,7 +69,7 @@ void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt)
 	i = 0;
 	while (i < arr_cnt)
 	{
-		new_node = ft_makeNewNode(nb_arr[i]);
+		new_node = ft_make_newnode(nb_arr[i]);
 		if (!new_node)
 		{
 			ft_lstclear(head_A);

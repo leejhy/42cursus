@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:30:10 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/31 16:01:25 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/31 18:59:46 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct	s_pos
 }	t_pos;
 
 //stack.c
-t_stack	*ft_makeNewNode(int nb);
+t_stack	*ft_make_newnode(int nb);
 void	ft_lstadd_back(t_stack **head, t_stack *new);
 void	ft_lstclear(t_stack **lst);
 void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt);
