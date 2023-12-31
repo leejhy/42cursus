@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:49:30 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/27 18:37:08 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/31 15:39:21 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt)
 	t_stack	*new_node;
 	int		i;
 
+	// *head_A = NULL;
+	if (nb_arr == NULL)
+		return ;
 	i = 0;
 	while (i < arr_cnt)
 	{
@@ -83,6 +86,8 @@ void	set_pos(t_pos **pos, t_stack **head)
 {
 	t_stack *temp_node;
 
+	if (head == NULL || *head == NULL)
+		return ;
 	*pos = malloc(sizeof(t_pos));
 	if (!*pos)
 		return ;

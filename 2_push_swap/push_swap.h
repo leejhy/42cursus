@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:30:10 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/27 20:16:24 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/31 16:01:25 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,10 @@ void	ft_lstadd_back(t_stack **head, t_stack *new);
 void	ft_lstclear(t_stack **lst);
 void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt);
 void	set_pos(t_pos **pos, t_stack **head);
-//stack2.c
+//stack_utils.c
 int		ft_lstsize(t_stack *head);
 void	ft_lstadd_front(t_stack	**head, t_stack *new);
 void	ft_delFirstNode(t_stack **head, t_pos **pos);
-//sort.c
 void	sort(int *arr, int arr_cnt);
 //swap.c
 void	swap(t_stack *head, t_pos *pos);

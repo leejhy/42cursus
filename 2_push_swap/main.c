@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:34:17 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/27 21:09:46 by junhylee         ###   ########.fr       */
+/*   Updated: 2023/12/31 16:01:57 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	intToidx(t_stack **head_A, int *arr, int arr_cnt)
 	t_stack	*temp;
 	int		i;
 
+	if (head_A == NULL || *head_A == NULL)
+		return ;
 	temp = *head_A;
 	while (temp != NULL)
 	{
@@ -52,11 +54,8 @@ void	push_swap(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 		return ;
 	if ((*pos_A)->size <= 5)
 		ft_hard_sort(head_A, pos_A, head_B, pos_B);
-	if (*pos_B != NULL)
-	{
-		if (*head_B == NULL || (*pos_B)->size == 0)
-			return ;
-	}
+	// else
+	// 	greedy(pos_A, pos_B);
 }
 
 int	main(int argc, char **argv)
@@ -74,16 +73,16 @@ int	main(int argc, char **argv)
 	if (is_errors(argc))
 		return (0);
 	nb_arr = ft_parsing(argc, argv);
-	if (!nb_arr)
-	{
-		printf("Error\n");
-		return (0);
-	}
+	// if (!nb_arr)
+	// {
+	// 	printf("Error\n");
+	// 	return (0);
+	// }
 	ft_makestack(&head_A, nb_arr, argc - 1);
 	set_pos(&pos_A, &head_A);
 	intToidx(&head_A, nb_arr, argc - 1);
 	// free(nb_arr);
-	if (!head_A || !pos_A)
+	if (!head_A || !pos_A || !nb_arr)
 	{
 		printf("Error\n");
 		return (0);
