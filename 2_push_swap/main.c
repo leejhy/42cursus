@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:34:17 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/31 18:58:19 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/01 09:25:24 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	push_swap(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 	if ((*pos_A)->size <= 5)
 		ft_hard_sort(head_A, pos_A, head_B, pos_B);
 	else
-		greedy(pos_A, pos_B);
+		greedy(head_A ,pos_A, head_B, pos_B);
 }
 
 int	main(int argc, char **argv)

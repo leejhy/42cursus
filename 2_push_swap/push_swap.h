@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:30:10 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/31 18:59:46 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/01 18:30:05 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ int		is_errors(int argc);
 void	intToidx(t_stack **head_A, int *arr, int arr_cnt);
 void	push_swap(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B);
 int		main(int argc, char **argv);
+//greedy.c
+void	greedy(t_stack **head_A, t_pos **pos_A, t_stack **head_B,t_pos **pos_B);
 
 #endif
