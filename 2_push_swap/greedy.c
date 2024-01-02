@@ -59,12 +59,11 @@ void	ft_find_optimal(t_pos **pos_A, t_pos **pos_B)
 
 void	greedy(t_stack **head_A, t_pos **pos_A, t_stack **head_B,t_pos **pos_B)
 {
-	int	optimal;
-
 	set_pivot(head_A, pos_A, head_B, pos_B);
 	sort_three_args(head_A, pos_A);
 	while ((*pos_B)->size != 0)
 	{
-		optimal = ft_find_optimal(head_B, pos_B);
+		ft_find_optimal(head_B, pos_B);
+		is_sorted(head_A);
 	}
 }
