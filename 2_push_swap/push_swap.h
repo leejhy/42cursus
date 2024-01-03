@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:30:10 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/01 18:30:05 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:17:20 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,11 @@ void	push_swap(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
 int		main(int argc, char **argv);
 //greedy.c
 void	greedy(t_stack **head_A, t_pos **pos_A, t_stack **head_B,t_pos **pos_B);
+void	ft_find_optimal(t_pos **pos_A, t_pos **pos_B);
+void	set_pivot(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B);
+//greedy_utils.c
+int	*ft_case_arr(t_pos **pos_A, t_pos **pos_B, int *arr);
+int	ft_optimal_idx(int *arr, int arr_size);
+
 
 #endif
