@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:21:22 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/31 16:00:51 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/03 22:02:10 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	ft_lstadd_front(t_stack	**head, t_stack *new)
 	}
 }
 
-void	ft_delFirstNode(t_stack **head, t_pos **pos)
+void	ft_del_first_node(t_stack **head, t_pos **pos)
 {
 	t_stack	*temp;
-	
+
 	temp = *head;
 	if (temp->next == NULL)
 	{

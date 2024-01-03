@@ -6,36 +6,37 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:21:30 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/31 19:00:02 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/03 22:03:53 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pa(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
+void	pa(t_stack **a, t_pos **pos_a, t_stack **b, t_pos **pos_b)
 {
-	if ((*pos_B)->size == 0)
+	if ((*pos_b)->size == 0)
 		return ;
-	(*pos_B)->size -= 1;
-	ft_pushA(head_A, pos_A, (*pos_B)->front->nb);
-	if (head_A == NULL)
+	(*pos_b)->size -= 1;
+	ft_push_a(a, pos_a, (*pos_b)->front->nb);
+	if (a == NULL)
 		exit(0);
-	ft_delFirstNode(head_B, pos_B);
+	ft_del_first_node(b, pos_b);
 	printf("pa\n");
 }
 
-void	pb(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
+void	pb(t_stack **a, t_pos **pos_a, t_stack **b, t_pos **pos_b)
 {
-	if ((*pos_A)->size == 0)
+	if ((*pos_a)->size == 0)
 		return ;
-	(*pos_A)->size -= 1;
-	ft_pushB(head_B, pos_B, (*pos_A)->front->nb);
-	if (head_B == NULL)
+	(*pos_a)->size -= 1;
+	ft_push_b(b, pos_b, (*pos_a)->front->nb);
+	if (b == NULL)
 		exit(0);//?
-	ft_delFirstNode(head_A, pos_A);
+	ft_del_first_node(a, pos_a);
 	printf("pb\n");
 }
-void	ft_pushA(t_stack **head_A, t_pos **pos_A, int nb)
+
+void	ft_push_a(t_stack **a, t_pos **pos_a, int nb)
 {
 	t_stack	*newnode;
 	t_stack	*last_node;
@@ -45,23 +46,23 @@ void	ft_pushA(t_stack **head_A, t_pos **pos_A, int nb)
 	newnode = ft_make_newnode(nb);
 	if (!newnode)
 		return ;
-	ft_lstadd_front(head_A, newnode);
-	last_node = *head_A;
-	if (*pos_A == NULL)
-		*pos_A = malloc(sizeof(t_pos));
-	if (!(*pos_A))
+	ft_lstadd_front(a, newnode);
+	last_node = *a;
+	if (*pos_a == NULL)
+		*pos_a = malloc(sizeof(t_pos));
+	if (!(*pos_a))
 		return ;
 	while (last_node->next != NULL)
 	{
 		cnt += 1;
 		last_node = last_node->next;
 	}
-	(*pos_A)->rear = last_node;
-	(*pos_A)->front = *head_A;
-	(*pos_A)->size = cnt;
+	(*pos_a)->rear = last_node;
+	(*pos_a)->front = *a;
+	(*pos_a)->size = cnt;
 }
 
-void	ft_pushB(t_stack **head_B, t_pos **pos_B, int nb)
+void	ft_push_b(t_stack **b, t_pos **pos_b, int nb)
 {
 	t_stack	*newnode;
 	t_stack	*last_node;
@@ -71,18 +72,18 @@ void	ft_pushB(t_stack **head_B, t_pos **pos_B, int nb)
 	newnode = ft_make_newnode(nb);
 	if (!newnode)
 		return ;
-	ft_lstadd_front(head_B, newnode);
-	last_node = *head_B;
-	if (*pos_B == NULL)
-		*pos_B = malloc(sizeof(t_pos));
-	if (!(*pos_B))
+	ft_lstadd_front(b, newnode);
+	last_node = *b;
+	if (*pos_b == NULL)
+		*pos_b = malloc(sizeof(t_pos));
+	if (!(*pos_b))
 		return ;
 	while (last_node->next != NULL)
 	{
 		cnt += 1;
 		last_node = last_node->next;
 	}
-	(*pos_B)->rear = last_node;
-	(*pos_B)->front = *head_B;
-	(*pos_B)->size = cnt;
+	(*pos_b)->rear = last_node;
+	(*pos_b)->front = *b;
+	(*pos_b)->size = cnt;
 }

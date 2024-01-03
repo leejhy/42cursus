@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:34:17 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/01 09:25:24 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/03 21:43:36 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,30 @@ void	intToidx(t_stack **head_A, int *arr, int arr_cnt)
 	}
 }
 
-void	push_swap(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
+void	push_swap(t_stack **a, t_pos **pos_a, t_stack **b, t_pos **pos_b)
 {
-	if (*head_A == NULL || (*pos_A)->size == 0)
+	if (*a == NULL || (*pos_a)->size == 0)
 		return ;
-	if (is_sorted(head_A))
+	if (is_sorted(a))
 		return ;
-	if ((*pos_A)->size <= 5)
-		ft_hard_sort(head_A, pos_A, head_B, pos_B);
+	if ((*pos_a)->size <= 5)
+		ft_hard_sort(a, pos_a, b, pos_b);
 	else
-		greedy(head_A ,pos_A, head_B, pos_B);
+		greedy(a, pos_a, b, pos_b);
 }
 
 int	main(int argc, char **argv)
 {
 	int			*nb_arr;
-	t_stack		*head_A;
-	t_stack		*head_B;
-	t_pos		*pos_A;
-	t_pos		*pos_B;
+	t_stack		*a;
+	t_stack		*b;
+	t_pos		*pos_a;
+	t_pos		*pos_b;
 
-	head_A = NULL;
-	head_B = NULL;
-	pos_A = NULL;
-	pos_B = NULL;
+	a = NULL;
+	b = NULL;
+	pos_a = NULL;
+	pos_b = NULL;
 	if (is_errors(argc))
 		return (0);
 	nb_arr = ft_parsing(argc, argv);
@@ -78,22 +78,22 @@ int	main(int argc, char **argv)
 	// 	printf("Error\n");
 	// 	return (0);
 	// }
-	ft_makestack(&head_A, nb_arr, argc - 1);
-	set_pos(&pos_A, &head_A);
-	intToidx(&head_A, nb_arr, argc - 1);
+	ft_makestack(&a, nb_arr, argc - 1);
+	set_pos(&pos_a, &a);
+	intToidx(&a, nb_arr, argc - 1);
 	// free(nb_arr);
-	if (!head_A || !pos_A || !nb_arr)
+	if (!a || !pos_a || !nb_arr)
 	{
 		printf("Error\n");
 		return (0);
 	}
-	push_swap(&head_A, &pos_A, &head_B, &pos_B);
-	while (head_A != NULL)
+	push_swap(&a, &pos_a, &b, &pos_b);
+	while (a != NULL)
 	{
-		printf("%d\n", head_A->nb);
+		printf("%d\n", a->nb);
 		// if (head_A->prev != NULL)
 		// 	printf("prev :%d\n",head_A->prev->nb);
-		head_A = head_A->next;
+		a = a->next;
 	}
 	// printf(" size %d\n", pos_A->size);
 	// printf(" size %d\n", pos_B->size);

@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 13:20:02 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/31 15:20:03 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/03 21:56:49 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ long long	ft_atoi(const char *str)
 	return (sign * result);
 }
 
-int	isDuplicate(int *arr, int arr_cnt)
+int	is_duplicate(int *arr, int arr_cnt)
 {
 	int	i;
 	int	j;
@@ -76,7 +76,7 @@ int	*ft_parsing(int argc, char **argv)
 		nb_arr[i] = nb;
 		i++;
 	}
-	if (isDuplicate(nb_arr, argc - 1))
+	if (is_duplicate(nb_arr, argc - 1))
 		return (NULL);
 	return (nb_arr);
 }

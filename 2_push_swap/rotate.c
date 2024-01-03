@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:50 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/01 10:47:40 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/03 21:54:19 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	rotate(t_stack *head, t_pos *pos)
 {//first becomes the last one
-	t_stack *node;
-	int	temp_nb;
-	
+	t_stack	*node;
+	int		temp_nb;
+
 	if (pos->size == 0)
 		return ;
 	temp_nb = head->nb;
@@ -30,21 +30,21 @@ void	rotate(t_stack *head, t_pos *pos)
 	node->nb = temp_nb;
 }
 
-void	ra(t_stack **head_A, t_pos **pos_A)
+void	ra(t_pos **pos_a)
 {
-	rotate(*head_A, *pos_A);
+	rotate((*pos_a)->front, *pos_a);
 	printf("ra\n");
 }
 
-void	rb(t_stack **head_B, t_pos **pos_B)
+void	rb(t_pos **pos_b)
 {
-	rotate(*head_B, *pos_B);
+	rotate((*pos_b)->front, *pos_b);
 	printf("rb\n");
 }
 
-void	rr(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
+void	rr(t_pos **pos_a, t_pos **pos_b)
 {
-	rotate(*head_A, *pos_A);
-	rotate(*head_B, *pos_B);
+	rotate((*pos_a)->front, *pos_a);
+	rotate((*pos_b)->front, *pos_b);
 	printf("rr\n");
 }

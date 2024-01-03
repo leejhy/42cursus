@@ -6,112 +6,102 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:34 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/03 13:42:35 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/03 22:02:45 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "push_swap.h"
 
-int	ft_nbcnt(t_stack *head_A, t_stack *head_B)
+int	ft_nbcnt(t_stack *a, t_stack *b)
 {
-	t_stack	*temp_A;
-	int	cnt;
+	t_stack	*temp_a;
+	int		cnt;
 
 	cnt = 0;
-	temp_A = head_A;
-	while (temp_A != NULL)
+	temp_a = a;
+	while (temp_a != NULL)
 	{
-		if (head_B->nb < temp_A->nb)
+		if (b->nb < temp_a->nb)
 			cnt += 1;
-		temp_A = temp_A->next;
+		temp_a = temp_a->next;
 	}
 	return (cnt);
 }
 
-int find_zero(t_stack *head_A)
+int	find_zero(t_stack *a)
 {
 	int		loc;
-	t_stack *temp_A;
+	t_stack	*temp_a;
 
-	temp_A = head_A;
+	temp_a = a;
 	loc = 0;
-	while (temp_A != NULL && temp_A->nb != 0)
+	while (temp_a != NULL && temp_a->nb != 0)
 	{
 		// printf("find_zero\n");
 		loc += 1;
-		temp_A = temp_A->next;
+		temp_a = temp_a->next;
 	}
-	if (temp_A != NULL)
+	if (temp_a != NULL)
 		return (loc);
 	return (-1);
 }
 
-int find_one(t_stack *head_A)
+int	find_one(t_stack *a)
 {
 	int		loc;
-	t_stack *temp_A;
+	t_stack	*temp_a;
 
-	temp_A = head_A;
+	temp_a = a;
 	loc = 0;
-	while (temp_A != NULL && temp_A->nb != 1)
+	while (temp_a != NULL && temp_a->nb != 1)
 	{
 		// printf("find_one\n");
 		loc += 1;
-		temp_A = temp_A->next;
+		temp_a = temp_a->next;
 	}
-	if (temp_A != NULL)
+	if (temp_a != NULL)
 		return (loc);
 	return (-1);
 }
 
-void	ft_select_pb(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
+void	ft_select_pb(t_stack **a, t_pos **pos_a, t_stack **b, t_pos **pos_b)
 {
-	int loc_one;
+	int	loc_one;
 	int	loc_zero;
 
-	while (find_zero(*head_A) >= 0 || find_one(*head_A) >= 0)
+	while (find_zero(*a) >= 0 || find_one(*a) >= 0)
 	{
-		// printf("select_pb\n");
-		loc_zero = find_zero(*head_A);
-		loc_one = find_one(*head_A);
+		loc_zero = find_zero(*a);
+		loc_one = find_one(*a);
 		if (loc_one == 0 || loc_zero == 0)
-			pb(head_A, pos_A, head_B, pos_B);
+			pb(a, pos_a, b, pos_b);
 		else if (loc_one == 1 || loc_zero == 1)
-		{
-			// printf("@@@1\n");
-			ra(head_A, pos_A);
-		}
-		else if (loc_one == (*pos_A)->rear->nb || loc_zero == (*pos_A)->rear->nb)
-		{
-			// printf("@@@2\n");
-			rra(head_A, pos_A);
-		}
+			ra(pos_a);
+		else if (loc_one == (*pos_a)->rear->nb
+			|| loc_zero == (*pos_a)->rear->nb)
+			rra(pos_a);
 		else if (loc_one == 2 || loc_zero == 2)
 		{
-			// printf("@@@3\n");
-			ra(head_A, pos_A);
-			ra(head_A, pos_A);
+			ra(pos_a);
+			ra(pos_a);
 		}
 		else if (loc_one == 3 || loc_zero == 3)
 		{
-			// printf("@@@4\n");
-			rra(head_A, pos_A);
-			rra(head_A, pos_A);
+			rra(pos_a);
+			rra(pos_a);
 		}
-		// printf("@@@5\n");
 	}
 }
 
-int	is_sorted(t_stack **head_A)
+int	is_sorted(t_stack **a)
 {
-	t_stack *temp;
+	t_stack	*temp;
 	int		cnt;
 	int		size;
-	
+
 	cnt = 0;
 	size = 0;
-	temp = *head_A;
+	temp = *a;
 	while (temp->next != NULL)
 	{
 		if (temp->nb < temp->next->nb)

@@ -6,10 +6,9 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:59 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/31 16:01:00 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/03 21:53:33 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "push_swap.h"
 
@@ -24,27 +23,27 @@ void	swap(t_stack *head, t_pos *pos)
 	head->next->nb = temp_nb;
 }
 
-void	sa(t_stack **head_A, t_pos **pos_A)
+void	sa(t_pos **pos_a)
 {
-	if ((*pos_A)->size <= 1)
+	if ((*pos_a)->size <= 1)
 		return ;
-	swap(*head_A, *pos_A);
+	swap((*pos_a)->front, *pos_a);
 	printf("sa\n");
 }
 
-void	sb(t_stack **head_B, t_pos **pos_B)
+void	sb(t_pos **pos_b)
 {
-	if ((*pos_B)->size <= 1)
+	if ((*pos_b)->size <= 1)
 		return ;
-	swap(*head_B, *pos_B);
+	swap((*pos_b)->front, *pos_b);
 	printf("sa\n");
 }
 
-void	ss(t_stack **head_A, t_pos **pos_A, t_stack **head_B, t_pos **pos_B)
+void	ss(t_pos **pos_a, t_pos **pos_b)
 {
-	if ((*pos_A)->size <= 1 || (*pos_B)->size <= 1)
+	if ((*pos_a)->size <= 1 || (*pos_b)->size <= 1)
 		return ;
-	swap(*head_A, *pos_A);
-	swap(*head_B, *pos_B);
+	swap((*pos_a)->front, *pos_a);
+	swap((*pos_b)->front, *pos_b);
 	printf("ss\n");
 }
