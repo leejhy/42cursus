@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:31 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/03 20:22:20 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/03 21:12:53 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,35 @@ void	ft_find_optimal(t_pos **pos_A, t_pos **pos_B)
 		//얘는 그러면 arr[min_b] * 2 + 1번 실행됨
 	}
 	//b operation 먼저 실행 후 a operation실행
+	if (arr[min_b] == 1)
+	{
+		if ((B의 i 인덱스 원소의 nb가) > (*pos_A)->rear->nb) //예외, 최대값
+		{
+			pa;
+			ra;
+			return ;
+		}
+	}
+	else if (arr[min_b] == 0) // 예외, 최소값
+	{
+		pa;
+		return ;
+	}
 	if (flag_rrb == 0 && flag_rra == 0)//rb, ra
 	{//min_b만큼 rb하고, pa, arr[min_b]만큼 ra한다.
+		ft_rb_ra;
 	}
 	if (flag_rrb == 1 && flag_rra == 0)//rb, ra
 	{//min_b만큼 rrb하고, pa, arr[min_b]만큼 ra한다.
-
+		ft_rrb_ra;
 	}
 	if (flag_rrb == 0 && flag_rra == 1)//rb, ra
 	{//min_b만큼 rb하고, pa, arr[min_b]만큼 rra한다.
-		
+		ft_rb_rra;
 	}
 	if (flag_rrb == 1 && flag_rra == 1)//rb, ra
 	{//min_b만큼 rrb하고, pa, arr[min_b]만큼 rra한다.
+		ft_rrb_rra;
 	}
 	
 	//optimal 찾고 그 최적해의 값을 알아내야함
