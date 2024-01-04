@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:31 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/03 22:15:02 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/04 21:28:52 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,22 @@ void	set_pivot(t_pos *pos_a, t_pos *pos_b)
 	size = (pos_a->size) - pivot2;
 	while (pos_a->size > 3 && (pos_a->size != size))// 6개일때 오류나서 수정
 	{
-		printf("a top %d\n", pos_a->front->nb);
 		if (pos_a->front->nb < pivot2)
 		{
 			pb(pos_a, pos_b);
-			if (pos_b->front != NULL && pos_b->front->nb < pivot1)
-			{
-				if (pos_b->size > 1)
-					rb(pos_b);//원소 1개일때 rb 오류
-			}
-			continue ;
+			rb(pos_b);
 		}
-		ra(pos_a);
+		// if (pos_a->front->nb < pivot2)
+		// {
+		// 	pb(pos_a, pos_b);
+		// 	if (pos_b->front != NULL && pos_b->front->nb < pivot1)
+		// 	{
+		// 		if (pos_b->size > 1)
+		// 			rb(pos_b);//원소 1개일때 rb 오류
+		// 	}
+		// 	continue ;
+		// }
+		// ra(pos_a);
 	}
 	while (pos_a->size != 3)
 		pb(pos_a, pos_b);
@@ -49,14 +53,15 @@ void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 	int	rrb_cnt;
 	int	rra_cnt;
 	int	min_b;
-	int	min_a;//
+	// int	min_a;//
 	int	middle_b;//
 	int	middle_a;//
 
+	flag_rra = 0;
 	flag_rrb = 0;
 	middle_b = pos_b->size / 2;
 	middle_a = pos_a->size;
-	arr = malloc(sizeof(int) * pos_b->size);
+	arr = malloc(sizeof(int) * (pos_b->size));
 	if (!arr)
 		exit(0);
 	arr = ft_case_arr(pos_a, pos_b, arr);//여기까지 매우퍼펙트
@@ -78,47 +83,46 @@ void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 		// if ((B의 i 인덱스 원소의 nb가) > pos_a->rear->nb) //예외, 최대값
 		if (b_idx_nb > pos_a->rear->nb) //예외, 최대값
 		{
-			pa;
-			ra;
+			pa(pos_a, pos_b);
+			ra(pos_a);
 			return ;
 		}
 	}
 	else if (arr[min_b] == 0) // 예외, 최소값 min_b만큼 rb or rrb 만하고 pa
 	{
-		pa;
+		if (flag_rrb == 1)
+			ft_ra_pa(pos_a, pos_b, rrb_cnt, flag_rrb);
+		else
+			ft_ra_pa(pos_a, pos_b, min_b, flag_rrb);
 		return ;
 	}
 	if (flag_rrb == 0 && flag_rra == 0)//rb, ra
-	{//min_b만큼 rb하고, pa, arr[min_b]만큼 ra한다.
-		ft_rb_ra;
+	{
+		ft_rb_ra(pos_a, pos_b, min_b, arr[min_b]);
+		return ;
 	}
 	if (flag_rrb == 1 && flag_rra == 0)//rb, ra
-	{//min_b만큼 rrb하고, pa, arr[min_b]만큼 ra한다.
-		ft_rrb_ra;
+	{
+		ft_rrb_ra(pos_b, pos_a, rrb_cnt, arr[min_b]);
+		return ;
 	}
 	if (flag_rrb == 0 && flag_rra == 1)//rb, ra
-	{//min_b만큼 rb하고, pa, arr[min_b]만큼 rra한다.
-		ft_rb_rra;
+	{
+		ft_rb_rra(pos_b, pos_a, min_b, rra_cnt);
+		return ;
 	}
 	if (flag_rrb == 1 && flag_rra == 1)//rb, ra
-	{//min_b만큼 rrb하고, pa, arr[min_b]만큼 rra한다.
-		ft_rrb_rra;
+	{
+		ft_rrb_rra(pos_b, pos_a, rrb_cnt, rra_cnt);
+		return ;
 	}
 	//optimal 찾고 그 최적해의 값을 알아내야함
-	printf("b top %d\n", pos_b->front->nb);
-	printf("b bottom %d\n", pos_b->rear->nb);
-	// for (int i = 0; i < 13; i++)
-	// 	printf("arr[%d] = %d\n", i, arr[i]);
-	// if (min_idx > (*pos_B)->size / 2)//이때
-	// 	operation_cnt = min_idx / 2;
 }
 
 void	greedy(t_pos *pos_a, t_pos *pos_b)
 {
 	set_pivot(pos_a, pos_b);//OK
 	sort_three_args(pos_a);//ok
-	// while ((*pos_B)->size != 0)
-	// {
-	ft_find_optimal(pos_a, pos_b);//얘만 완성하면됨
-	// }
+	while (pos_b->size != 0)
+		ft_find_optimal(pos_a , pos_b);//얘만 완성하면됨
 }

@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:16:12 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/03 21:58:03 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/04 20:32:29 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@ int	*ft_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr)
 	t_stack	*a;
 	int		cnt_a;
 	int		i;
-	
+
 	i = 0;
 	b = pos_b->front;
-	while (b != NULL)
+	while (b != NULL)//얘 무한루프
 	{//인덱스가 b에서 연산하는 값, 배열 안의 값이 a에서 연산할 값	
 		cnt_a = 0;
-		printf("Bnumber %d\n", b->nb);
 		a = pos_a->front->next;
 		if (b->nb < pos_a->front->nb)
 			arr[i] = 0;//top보다 작으면 최소값이니까 인덱스 수만큼 rb만하고 pa가능
@@ -46,6 +45,7 @@ int	*ft_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr)
 	}// 이거 rra rrb / ra rb 구분 해야함..
 	return (arr);
 }
+
 int	ft_min_b(int *arr, int arr_size)
 {
 	int	i;

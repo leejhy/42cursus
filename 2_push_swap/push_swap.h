@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:30:10 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/03 22:03:41 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/04 20:15:29 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,21 @@ void	ft_select_pb(t_pos *pos_a, t_pos *pos_b);
 int		is_errors(int argc);
 void	int_to_idx(t_stack **head_a, int *arr, int arr_cnt);
 void	push_swap(t_pos *pos_a, t_pos *pos_b);
+void	ft_pos_set(t_pos **pos_a, t_pos **pos_b);
 int		main(int argc, char **argv);
 //greedy.c
 void	greedy(t_pos *pos_a, t_pos *pos_b);
 void	ft_find_optimal(t_pos *pos_A, t_pos *pos_B);
 void	set_pivot(t_pos *pos_a, t_pos *pos_b);
+//greedy_op.c
+void	ft_rb_ra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
+void	ft_rrb_ra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
+void	ft_rb_rra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
+void	ft_rrb_rra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
+void	ft_ra_pa(t_pos *pos_a, t_pos *pos_b, int ro_b, int flag);
 //greedy_utils.c
 int		*ft_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr);
+int	ft_get_idx_b(t_stack *head, int idx);
+int	ft_min_b(int *arr, int arr_size);
 
 #endif
