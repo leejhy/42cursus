@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:34:17 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/04 20:44:31 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/04 22:23:41 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_pos_set(t_pos **pos_a, t_pos **pos_b)
 int	main(int argc, char **argv)
 {
 	int			*nb_arr;
-	// t_stack		*a;
+	t_stack		*a;
 	// t_stack		*b;
 	t_pos		*pos_a;
 	t_pos		*pos_b;
@@ -110,13 +110,20 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	push_swap(pos_a, pos_b); //단일 포인터로도 바꿔보기 ok
-	// a = pos_a->front;
-	// while (a != NULL)
+	a = pos_a->front;
+	while (a != NULL)
+	{
+		printf("%d\n", a->nb);
+		// if (head_A->prev != NULL)
+		// 	printf("prev :%d\n",head_A->prev->nb);
+		a = a->next;
+	}
+	// printf("=========b=======\n");
+	// b = pos_b->front;
+	// while (b != NULL)
 	// {
-	// 	printf("%d\n", a->nb);
-	// 	// if (head_A->prev != NULL)
-	// 	// 	printf("prev :%d\n",head_A->prev->nb);
-	// 	a = a->next;
+	// 	printf("%d\n", b->nb);
+	// 	b = b->next;
 	// }
 	// printf(" size %d\n", pos_A->size);
 	// printf(" size %d\n", pos_B->size);

@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:31 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/04 21:28:52 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/04 22:21:10 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,14 @@ void	set_pivot(t_pos *pos_a, t_pos *pos_b)
 		if (pos_a->front->nb < pivot2)
 		{
 			pb(pos_a, pos_b);
-			rb(pos_b);
+			if (pos_b->front != NULL && pos_b->front->nb < pivot1)
+			{
+				if (pos_b->size > 1)
+					rb(pos_b);//원소 1개일때 rb 오류
+			}
+			continue ;
 		}
-		// if (pos_a->front->nb < pivot2)
-		// {
-		// 	pb(pos_a, pos_b);
-		// 	if (pos_b->front != NULL && pos_b->front->nb < pivot1)
-		// 	{
-		// 		if (pos_b->size > 1)
-		// 			rb(pos_b);//원소 1개일때 rb 오류
-		// 	}
-		// 	continue ;
-		// }
-		// ra(pos_a);
+		ra(pos_a);
 	}
 	while (pos_a->size != 3)
 		pb(pos_a, pos_b);
