@@ -42,20 +42,22 @@ void	set_pivot(t_pos *pos_a, t_pos *pos_b)
 
 void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 {
+	t_stack	*idx;
 	int	*arr;
 	int	flag_rrb;
 	int	flag_rra;
 	int	min_b;
-	int	min_a;
-	int	middle_b;
-	int	middle_a;
+	int	min_a;//
+	int	middle_b;//
+	int	middle_a;//
 
+	idx = pos_b->front;
 	flag_rrb = 0;
 	middle_b = pos_b->size / 2;
 	middle_a = pos_a->size;
 	arr = malloc(sizeof(int) * pos_b->size);
 	if (!arr)
-		return ;
+		exit(0);
 	arr = ft_case_arr(pos_a, pos_b, arr);//여기까지 매우퍼펙트
 	min_b = ft_min_b(arr, pos_b->size);//여기 진짜 최적해를 찾아야함 rb rrb포함
 	if (min_b > middle_b) // rrb
@@ -71,7 +73,8 @@ void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 	}
 	if (arr[min_b] == 1)
 	{
-		if ((B의 i 인덱스 원소의 nb가) > (*pos_A)->rear->nb) //예외, 최대값
+		idx = ft_get_idx_b(idx);
+		if ((B의 i 인덱스 원소의 nb가) > pos_a->rear->nb) //예외, 최대값
 		{
 			pa;
 			ra;
@@ -100,8 +103,8 @@ void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 		ft_rrb_rra;
 	}
 	//optimal 찾고 그 최적해의 값을 알아내야함
-	printf("b top %d\n", (*pos_b)->front->nb);
-	printf("b bottom %d\n", (*pos_b)->rear->nb);
+	printf("b top %d\n", pos_b->front->nb);
+	printf("b bottom %d\n", pos_b->rear->nb);
 	// for (int i = 0; i < 13; i++)
 	// 	printf("arr[%d] = %d\n", i, arr[i]);
 	// if (min_idx > (*pos_B)->size / 2)//이때
