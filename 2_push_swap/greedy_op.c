@@ -24,15 +24,17 @@ void	ft_rb_ra(t_pos **pos_A, t_pos **pos_B, int ro_b, int ro_a)
 		rb;
 		i++;
 	}
-	while (j < ro_a)
+	while (j < ro_a)//ro_b랑 ro_a겹치는 만큼 rr;
 	{
 		ra;
+		j++;
 	}
 	pa;
 	j = 0;
 	while (j < ro_a)
 	{
 		rra;// ra한만큼 rra;
+		j++;
 	}
 }
 void	ft_rrb_ra(t_pos **pos_A, t_pos **pos_B, int ro_b, int ro_a);

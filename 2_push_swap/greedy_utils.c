@@ -74,7 +74,22 @@ int	ft_min_b(int *arr, int arr_size)
 	// min_dix(b의 연산 수) + min_value(a의 연산 수)
 }
 
-int	ft_min_a(int *arr, int arr_size)
+int	ft_get_idx_b(t_stack *head, int idx)
+{
+	int	i;
+	t_stack	*node;
+
+	node = head;
+	i = 0;
+	while (i < idx)
+	{
+		node = node->next;
+		i++;
+	}
+	return (node->nb);
+}
+
+/*int	ft_min_a(int *arr, int arr_size)
 {
 	int	i;
 	int	rb_idx;
@@ -99,4 +114,4 @@ int	ft_min_a(int *arr, int arr_size)
 		return (rb_idx);
 	else
 		return (rrb_idx);
-}
+}*/

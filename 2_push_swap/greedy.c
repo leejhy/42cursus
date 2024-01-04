@@ -42,16 +42,17 @@ void	set_pivot(t_pos *pos_a, t_pos *pos_b)
 
 void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 {
-	t_stack	*idx;
+	int	b_idx_nb;
 	int	*arr;
 	int	flag_rrb;
 	int	flag_rra;
+	int	rrb_cnt;
+	int	rra_cnt;
 	int	min_b;
 	int	min_a;//
 	int	middle_b;//
 	int	middle_a;//
 
-	idx = pos_b->front;
 	flag_rrb = 0;
 	middle_b = pos_b->size / 2;
 	middle_a = pos_a->size;
@@ -63,25 +64,26 @@ void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 	if (min_b > middle_b) // rrb
 	{
 		flag_rrb = 1;//이거 함수로 할까 ft_flag_on
-		min_b = min_b % middle_b;//rrb 실행횟수
+		rrb_cnt = min_b % middle_b;//rrb 실행횟수
 	}
 	if (arr[min_b] > middle_a)
 	{
 		flag_rra = 1;
-		arr[min_b] = (pos_a->size) - arr[min_b]; //rra실행 횟수
+		rra_cnt = (pos_a->size) - arr[min_b]; //rra실행 횟수
 		//얘는 그러면 arr[min_b] * 2 + 1번 실행됨
 	}
 	if (arr[min_b] == 1)
 	{
-		idx = ft_get_idx_b(idx);
-		if ((B의 i 인덱스 원소의 nb가) > pos_a->rear->nb) //예외, 최대값
+		b_idx_nb = ft_get_idx_b(pos_b->front, min_b);
+		// if ((B의 i 인덱스 원소의 nb가) > pos_a->rear->nb) //예외, 최대값
+		if (b_idx_nb > pos_a->rear->nb) //예외, 최대값
 		{
 			pa;
 			ra;
 			return ;
 		}
 	}
-	else if (arr[min_b] == 0) // 예외, 최소값
+	else if (arr[min_b] == 0) // 예외, 최소값 min_b만큼 rb or rrb 만하고 pa
 	{
 		pa;
 		return ;
