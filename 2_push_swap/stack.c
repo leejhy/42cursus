@@ -58,12 +58,11 @@ void	ft_lstclear(t_stack **lst)
 	}
 }
 
-void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt)
+void	ft_makestack(t_stack **head_a, int *nb_arr, int arr_cnt)
 {//only for a
 	t_stack	*new_node;
 	int		i;
 
-	// *head_A = NULL;
 	if (nb_arr == NULL)
 		return ;
 	i = 0;
@@ -72,29 +71,30 @@ void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt)
 		new_node = ft_make_newnode(nb_arr[i]);
 		if (!new_node)
 		{
-			ft_lstclear(head_A);
-			*head_A = NULL;
+			ft_lstclear(head_a);
+			*head_a = NULL;
 			return ;
 		}
-		ft_lstadd_back(head_A, new_node);
+		ft_lstadd_back(head_a, new_node);
 		i++;
 	}
 	sort(nb_arr, arr_cnt);
 }
 
-void	set_pos(t_pos **pos, t_stack **head)
+void	ft_connect_pos(t_pos **pos)
 {
 	t_stack *temp_node;
 
-	if (head == NULL || *head == NULL)
+	temp_node = (*pos)->front;
+	if (temp_node == NULL)
 		return ;
-	*pos = malloc(sizeof(t_pos));
-	if (!*pos)
-		return ;
-	temp_node = *head;
-	(*pos)->front = *head;
+	// *pos = malloc(sizeof(t_pos));
+	// if (!*pos)
+	// 	return ;
+	// temp_node = (*pos)->front;
+	// (*pos)->front = *head;
 	while (temp_node->next != NULL)
 		temp_node = temp_node->next;
 	(*pos)->rear = temp_node;
-	(*pos)->size = ft_lstsize(*head);
+	(*pos)->size = ft_lstsize((*pos)->front);
 }

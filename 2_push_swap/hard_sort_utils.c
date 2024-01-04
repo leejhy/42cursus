@@ -64,21 +64,21 @@ int	find_one(t_stack *a)
 	return (-1);
 }
 
-void	ft_select_pb(t_stack **a, t_pos **pos_a, t_stack **b, t_pos **pos_b)
+void	ft_select_pb(t_pos *pos_a, t_pos *pos_b)
 {
 	int	loc_one;
 	int	loc_zero;
 
-	while (find_zero(*a) >= 0 || find_one(*a) >= 0)
+	while (find_zero(pos_a->front) >= 0 || find_one(pos_a->front) >= 0)
 	{
-		loc_zero = find_zero(*a);
-		loc_one = find_one(*a);
+		loc_zero = find_zero(pos_a->front);
+		loc_one = find_one(pos_a->front);
 		if (loc_one == 0 || loc_zero == 0)
-			pb(a, pos_a, b, pos_b);
+			pb(pos_a, pos_b);
 		else if (loc_one == 1 || loc_zero == 1)
 			ra(pos_a);
-		else if (loc_one == (*pos_a)->rear->nb
-			|| loc_zero == (*pos_a)->rear->nb)
+		else if (loc_one == pos_a->rear->nb
+			|| loc_zero == pos_a->rear->nb)
 			rra(pos_a);
 		else if (loc_one == 2 || loc_zero == 2)
 		{
@@ -93,7 +93,7 @@ void	ft_select_pb(t_stack **a, t_pos **pos_a, t_stack **b, t_pos **pos_b)
 	}
 }
 
-int	is_sorted(t_stack **a)
+int	is_sorted(t_stack *head_a)
 {
 	t_stack	*temp;
 	int		cnt;
@@ -101,7 +101,7 @@ int	is_sorted(t_stack **a)
 
 	cnt = 0;
 	size = 0;
-	temp = *a;
+	temp = head_a;
 	while (temp->next != NULL)
 	{
 		if (temp->nb < temp->next->nb)

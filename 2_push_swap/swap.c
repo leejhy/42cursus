@@ -23,27 +23,27 @@ void	swap(t_stack *head, t_pos *pos)
 	head->next->nb = temp_nb;
 }
 
-void	sa(t_pos **pos_a)
+void	sa(t_pos *pos_a)
 {
-	if ((*pos_a)->size <= 1)
+	if (pos_a->size <= 1)
 		return ;
-	swap((*pos_a)->front, *pos_a);
+	swap(pos_a->front, pos_a);
 	printf("sa\n");
 }
 
-void	sb(t_pos **pos_b)
+void	sb(t_pos *pos_b)
 {
-	if ((*pos_b)->size <= 1)
+	if (pos_b->size <= 1)
 		return ;
-	swap((*pos_b)->front, *pos_b);
+	swap(pos_b->front, pos_b);
 	printf("sa\n");
 }
 
-void	ss(t_pos **pos_a, t_pos **pos_b)
+void	ss(t_pos *pos_a, t_pos *pos_b)
 {
-	if ((*pos_a)->size <= 1 || (*pos_b)->size <= 1)
+	if (pos_a->size <= 1 || pos_b->size <= 1)
 		return ;
-	swap((*pos_a)->front, *pos_a);
-	swap((*pos_b)->front, *pos_b);
+	swap(pos_a->front, pos_a);
+	swap(pos_b->front, pos_b);
 	printf("ss\n");
 }

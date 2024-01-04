@@ -31,21 +31,21 @@ void	r_rotate(t_stack *head, t_pos *pos)
 	node->nb = temp_nb;
 }
 
-void	rra(t_pos **pos_a)
+void	rra(t_pos *pos_a)
 {
-	r_rotate((*pos_a)->front, *pos_a);
+	r_rotate(pos_a->front, pos_a);
 	printf("rra\n");
 }
 
-void	rrb(t_pos **pos_b)
+void	rrb(t_pos *pos_b)
 {
-	r_rotate((*pos_b)->front, *pos_b);
+	r_rotate(pos_b->front, pos_b);
 	printf("rrb\n");
 }
 
-void	rrr(t_pos **pos_a, t_pos **pos_b)
+void	rrr(t_pos *pos_a, t_pos *pos_b)
 {
-	r_rotate((*pos_a)->front, *pos_a);
-	r_rotate((*pos_b)->front, *pos_b);
+	r_rotate(pos_a->front, pos_a);
+	r_rotate(pos_b->front, pos_b);
 	printf("rrr\n");
 }

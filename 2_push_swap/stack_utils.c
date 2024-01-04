@@ -60,11 +60,6 @@ void	ft_del_first_node(t_stack **head, t_pos **pos)
 		(*head)->prev = NULL;
 		temp->next = NULL;
 	}
-	if ((*pos)->size == 0)
-	{
-		free(*pos);
-		*pos = NULL;
-	}
 	free(temp);
 }
 
