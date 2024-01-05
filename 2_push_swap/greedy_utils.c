@@ -6,40 +6,30 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:16:12 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/04 22:12:39 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:10:04 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*ft_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr)
+int	*ft_make_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr)
 {
-	t_stack	*b;
-	t_stack	*a;
-	int		cnt_a;
+	t_stack	*temp_b;
 	int		i;
+	int		a_min;
+	int		a_max;
 
 	i = 0;
-	b = pos_b->front;
-	while (b != NULL)
-	{//인덱스가 b에서 연산하는 값, 배열 안의 값이 a에서 연산할 값	
-		cnt_a = 0;
-		a = pos_a->front->next;
-		if (b->nb < pos_a->front->nb)//pos_a->front->nb가 아니라 a의 최소값의 인덱스를 구하고, 그만큼 ra/ rra 해야함 즉, a의 최소원소보다 b의 nb가 작으면
-			arr[i] = 0;
-		else if (b->nb > pos_a->rear->nb)//pos_a->rear->nb가 아니라 a의 최대값의 인덱스를 구하고 그만큼 ra /rra해야함 즉, a의 최대 원소보다 b의 nb가 크면
-			arr[i] = 1;
-		else
-		{
-			while (a != NULL && a->prev->nb < b->nb)//얘도 함수화
-			{
-				arr[i] = ++cnt_a;//a의 인덱스
-				a = a->next;
-			}
-		}
+	temp_b = pos_b->front;
+	while (temp_b != NULL)
+	{
+		a_min = find_a_min(arr, i, temp_b->nb, pos_a);
+		a_max = find_a_max(arr, i, temp_b->nb, pos_a);
+		if (a_min < temp_b->nb && temp_b->nb < a_max)
+			ft_cnt_mid(arr, i, temp_b->nb, pos_a);
 		i += 1; // rb하는 수
-		b = b->next;
-	}// 이거 rra rrb / ra rb 구분 해야함..
+		temp_b = temp_b->next;
+	}
 	return (arr);
 }
 
@@ -126,47 +116,32 @@ int	ft_min_b(int *arr, int arr_size, int middle_a)
 		return (rb_cnt);
 	else
 		return (rrb_cnt);
-	// min_dix(b의 연산 수) + min_value(a의 연산 수)
 }
-
-int	ft_get_idx_b(t_stack *head, int idx)
+void	ft_last_sort(t_pos *pos_a)
 {
-	int	i;
-	t_stack	*node;
-
-	node = head;
+	t_stack	*head;
+	int		a_cnt;
+	int		i;
+	
 	i = 0;
-	while (i < idx)
+	head = pos_a->front;
+	a_cnt = find_zero(head);
+	if (head->nb == 0)
+		return ;
+	if (a_cnt > pos_a->size / 2)//0의 위치가 절반이 넘으면 rra
 	{
-		node = node->next;
-		i++;
+		while (i < pos_a->size - a_cnt)
+		{
+			rra(pos_a);
+			i += 1;
+		}
 	}
-	return (node->nb);
+	else// 절반 안넘으면 ra
+	{
+		while (i < a_cnt)
+		{
+			ra(pos_a);
+			i += 1;
+		}
+	}
 }
-
-/*int	ft_min_a(int *arr, int arr_size)
-{
-	int	i;
-	int	rb_idx;
-	int	rrb_idx;
-
-	i = 0;
-	rb_idx = 0;
-	rrb_idx = 0;
-	while (i <= arr_size / 2) // rb판단
-	{
-		if (rb_idx + arr[rb_idx] > i + arr[i])
-			rb_idx = i;
-		i++;
-	}
-	while (i < arr_size) //rrb연산
-	{
-		if (rrb_idx + arr[rrb_idx] > i + arr[i])
-			rrb_idx = i;
-		i++;
-	}
-	if (rb_idx + arr[rb_idx] < rrb_idx / 2 + arr[rrb_idx])
-		return (rb_idx);
-	else
-		return (rrb_idx);
-}*/

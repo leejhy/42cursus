@@ -3,7 +3,8 @@ CFLAGS = -Wall -Werror -Wextra
 INC = push_swap.h
 SRCS =	main.c parsing.c push.c r_rotate.c rotate.c \
 		stack.c stack_utils.c swap.c hard_sort.c \
-		hard_sort_utils.c greedy.c greedy_utils.c greedy_op.c
+		hard_sort_utils.c greedy.c greedy_utils.c greedy_op.c \
+		find_optimal.c
 OBJS = ${SRCS:.c=.o}
 NAME = push_swap
 

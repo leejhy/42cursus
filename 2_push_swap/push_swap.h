@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:30:10 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/04 20:15:29 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/05 21:51:36 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,14 @@ void	ft_rb_ra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
 void	ft_rrb_ra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
 void	ft_rb_rra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
 void	ft_rrb_rra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
-void	ft_ra_pa(t_pos *pos_a, t_pos *pos_b, int ro_b, int flag);
 //greedy_utils.c
-int	*ft_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr);
-int	ft_get_idx_b(t_stack *head, int idx);
+int	*ft_make_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr);
 int	ft_min_b(int *arr, int arr_size, int middle_a);
 int	ft_rb_cnt(int i, int *arr, int arr_size);
 int	ft_rrb_cnt(int i, int *arr, int arr_size);
-
+void	ft_last_sort(t_pos *pos_a);
+//find_optimal.c
+int		find_a_min(int *arr, int b_idx, int b_nb, t_pos *pos_a);
+int		find_a_max(int *arr, int b_idx, int b_nb, t_pos *pos_a);
+void	ft_cnt_mid(int *arr, int idx, int b_nb, t_pos *pos_a);	
 #endif
