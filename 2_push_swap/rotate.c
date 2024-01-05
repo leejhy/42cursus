@@ -16,8 +16,8 @@ void	rotate(t_stack *head, t_pos *pos)
 {//first becomes the last one
 	t_stack	*node;
 	int		temp_nb;
-
-	if (pos->size == 0)
+	// printf("%d\n",pos->size);
+	if (pos->size == 0)//수정해야돼
 		return ;
 	temp_nb = head->nb;
 	node = head->next;

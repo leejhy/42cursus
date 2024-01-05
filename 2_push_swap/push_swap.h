@@ -97,8 +97,10 @@ void	ft_rb_rra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
 void	ft_rrb_rra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
 void	ft_ra_pa(t_pos *pos_a, t_pos *pos_b, int ro_b, int flag);
 //greedy_utils.c
-int		*ft_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr);
+int	*ft_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr);
 int	ft_get_idx_b(t_stack *head, int idx);
-int	ft_min_b(int *arr, int arr_size);
+int	ft_min_b(int *arr, int arr_size, int middle_a);
+int	ft_rb_cnt(int i, int *arr, int arr_size);
+int	ft_rrb_cnt(int i, int *arr, int arr_size);
 
 #endif

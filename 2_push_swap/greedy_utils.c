@@ -74,29 +74,30 @@ int	ft_rb_cnt(int i, int *arr, int arr_size)
 	return (rb_cnt);
 }
 
-int	ft_rrb_cnt(int *i, int *arr, int arr_size)
+int	ft_rrb_cnt(int i, int *arr, int arr_size)
 {
 	int	rrb_cnt;
 
+	// printf("%d\n")
 	rrb_cnt = 0;
-	while (i <= arr_size) // rb판단
+	while (i < arr_size) // rb판단
 	{
-		if (arr[rrb_cnt] < 0 && arr[*i] < 0)
+		if (arr[rrb_cnt] < 0 && arr[i] < 0)
 		{	
-			if (rrb_cnt != i && (rrb_cnt + (arr[rrb_cnt] * -1) > i + (arr[*i] * -1)))//비교할땐 ra, rra구분해서 비교하고 return 할때는 인덱스 그대로 넘겨줘야함
-				rrb_cnt = *i;
+			if (rrb_cnt != i && (rrb_cnt + (arr[rrb_cnt] * -1) > i + (arr[i] * -1)))//비교할땐 ra, rra구분해서 비교하고 return 할때는 인덱스 그대로 넘겨줘야함
+				rrb_cnt = i;
 		}
 		else if (arr[rrb_cnt] < 0)
 		{
-			if (rrb_cnt != *i && (rrb_cnt + (arr[rrb_cnt] * -1) > *i + arr[*i]))//비교할땐 ra, rra구분해서 비교하고 return 할때는 인덱스 그대로 넘겨줘야함
-				rrb_cnt = *i;
+			if (rrb_cnt != i && (rrb_cnt + (arr[rrb_cnt] * -1) > i + arr[i]))//얘가 문제가 좀있네
+				rrb_cnt = i;
 		}
-		else if (arr[*i] < 0)
+		else if (arr[i] < 0)
 		{
-			if (rrb_cnt + arr[rrb_cnt] > *i + (arr[*i] * -1))
-				rrb_cnt = *i;
+			if (rrb_cnt + arr[rrb_cnt] > i + (arr[i] * -1))
+				rrb_cnt = i;
 		}
-		*i += 1;
+		i += 1;
 	}
 	return (rrb_cnt);
 }
@@ -115,9 +116,11 @@ int	ft_min_b(int *arr, int arr_size, int middle_a)
 		if (arr[i] > middle_a)
 			arr[i] = arr[i] * -1;
 		i++;
-	}
+	}//ok
 	rb_cnt = ft_rb_cnt(0, arr, arr_size);
-	rrb_cnt = ft_rrb_cnt(arr_size / 2 + 1, arr, arr_size);
+	rrb_cnt = ft_rrb_cnt((arr_size / 2) + 1, arr, arr_size);
+	rb_a = arr[rb_cnt];
+	rrb_a = arr[rrb_cnt];
 	if (arr[rb_cnt] < 0)
 		rb_a = arr[rb_cnt] * -1;
 	if (arr[rrb_cnt] < 0)

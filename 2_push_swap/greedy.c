@@ -49,35 +49,36 @@ void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 	int	rra_cnt;
 	int	min_b;
 	// int	min_a;//
-	int	middle_b;//
-	int	middle_a;//
+	// int	middle_b;//
+	// int	middle_a;//
 
 	flag_rra = 0;
 	flag_rrb = 0;
-	middle_b = pos_b->size / 2;
-	middle_a = pos_a->size;
+	// middle_b = pos_b->size / 2;
+	// middle_a = pos_a->size;
 	arr = malloc(sizeof(int) * (pos_b->size));
 	if (!arr)
 		exit(0);
-	arr = ft_case_arr(pos_a, pos_b, arr);//여기까지 매우퍼펙트
-	min_b = ft_min_b(arr, pos_b->size);//여기 진짜 최적해를 찾아야함 rb rrb포함
-	if (min_b > middle_b) // rrb
+	arr = ft_case_arr(pos_a, pos_b, arr);//perfect
+	min_b = ft_min_b(arr, pos_b->size, pos_a->size / 2);//여기 진짜 최적해를 찾아야함 rb rrb포함
+	if (min_b > pos_b->size / 2) // rrb, 여기서 Floating point exception나옴
 	{
 		flag_rrb = 1;//이거 함수로 할까 ft_flag_on
-		rrb_cnt = min_b % middle_b;//rrb 실행횟수
+		rrb_cnt = pos_b->size - min_b;//rrb 실행횟수
 	}
-	if (arr[min_b] > middle_a)//이거 음수로 나오는거 확인
-	{
-		flag_rra = 1;
-		rra_cnt = (pos_a->size) - arr[min_b]; //rra실행 횟수
-		//얘는 그러면 arr[min_b] * 2 + 1번 실행됨
-	}
-	// if (arr[min_b] < 0)//이거 음수로 나오는거 확인
+	// if (arr[min_b] < middle_a)// 같을때도
 	// {
 	// 	flag_rra = 1;
-	// 	rra_cnt = (pos_a->size) + arr[min_b]; //rra실행 횟수
+	// 	rra_cnt = (pos_a->size) - arr[min_b]; //rra실행 횟수
 	// 	//얘는 그러면 arr[min_b] * 2 + 1번 실행됨
 	// }
+	// printf("arr[min_b]%d")
+	if (arr[min_b] < 0)//이거 음수로 나오는거 확인
+	{
+		flag_rra = 1;
+		rra_cnt = (pos_a->size) + arr[min_b]; //rra실행 횟수
+		//얘는 그러면 arr[min_b] * 2 + 1번 실행됨
+	}
 	if (arr[min_b] == 1)
 	{
 		b_idx_nb = ft_get_idx_b(pos_b->front, min_b);
@@ -104,17 +105,18 @@ void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 	}
 	if (flag_rrb == 1 && flag_rra == 0)//rb, ra
 	{
-		ft_rrb_ra(pos_b, pos_a, rrb_cnt, arr[min_b]);
+		ft_rrb_ra(pos_a, pos_b, rrb_cnt, arr[min_b]);//segmentaion
+		printf("============================\n");
 		return ;
 	}
 	if (flag_rrb == 0 && flag_rra == 1)//rb, ra
 	{
-		ft_rb_rra(pos_b, pos_a, min_b, rra_cnt);
+		ft_rb_rra(pos_a, pos_b, min_b, rra_cnt);
 		return ;
 	}
 	if (flag_rrb == 1 && flag_rra == 1)//rb, ra
 	{
-		ft_rrb_rra(pos_b, pos_a, rrb_cnt, rra_cnt);
+		ft_rrb_rra(pos_a, pos_b, rrb_cnt, rra_cnt);
 		return ;
 	}
 	//optimal 찾고 그 최적해의 값을 알아내야함
@@ -124,6 +126,13 @@ void	greedy(t_pos *pos_a, t_pos *pos_b)
 {
 	set_pivot(pos_a, pos_b);//OK
 	sort_three_args(pos_a);//ok
+	printf("a %d\n", pos_a->front->nb);
+	printf("a %d\n", pos_a->front->next->nb);
+	printf("a %d\n", pos_a->front->next->next->nb);;
 	while (pos_b->size != 0)
-		ft_find_optimal(pos_a , pos_b);//얘만 완성하면됨
+	{
+		if (pos_b->size == 1)
+			printf("last pb %d\n",pos_b->front->nb);
+		ft_find_optimal(pos_a ,pos_b);//얘만 완성하면됨
+	}
 }
