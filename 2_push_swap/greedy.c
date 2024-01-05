@@ -48,38 +48,27 @@ void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 	int	rrb_cnt;
 	int	rra_cnt;
 	int	min_b;
-	// int	min_a;//
-	// int	middle_b;//
-	// int	middle_a;//
 
 	flag_rra = 0;
 	flag_rrb = 0;
-	// middle_b = pos_b->size / 2;
-	// middle_a = pos_a->size;
 	arr = malloc(sizeof(int) * (pos_b->size));
 	if (!arr)
 		exit(0);
-	arr = ft_case_arr(pos_a, pos_b, arr);//perfect
+	arr = ft_case_arr(pos_a, pos_b, arr);//수정해야함
+	//---------------------------------------------------------------------------------------//
 	min_b = ft_min_b(arr, pos_b->size, pos_a->size / 2);//여기 진짜 최적해를 찾아야함 rb rrb포함
 	if (min_b > pos_b->size / 2) // rrb, 여기서 Floating point exception나옴
 	{
 		flag_rrb = 1;//이거 함수로 할까 ft_flag_on
 		rrb_cnt = pos_b->size - min_b;//rrb 실행횟수
 	}
-	// if (arr[min_b] < middle_a)// 같을때도
-	// {
-	// 	flag_rra = 1;
-	// 	rra_cnt = (pos_a->size) - arr[min_b]; //rra실행 횟수
-	// 	//얘는 그러면 arr[min_b] * 2 + 1번 실행됨
-	// }
-	// printf("arr[min_b]%d")
 	if (arr[min_b] < 0)//이거 음수로 나오는거 확인
 	{
 		flag_rra = 1;
 		rra_cnt = (pos_a->size) + arr[min_b]; //rra실행 횟수
 		//얘는 그러면 arr[min_b] * 2 + 1번 실행됨
 	}
-	if (arr[min_b] == 1)
+	if (arr[min_b] == 1)//얘부터 함수화
 	{
 		b_idx_nb = ft_get_idx_b(pos_b->front, min_b);
 		// if ((B의 i 인덱스 원소의 nb가) > pos_a->rear->nb) //예외, 최대값
@@ -126,9 +115,9 @@ void	greedy(t_pos *pos_a, t_pos *pos_b)
 {
 	set_pivot(pos_a, pos_b);//OK
 	sort_three_args(pos_a);//ok
-	printf("a %d\n", pos_a->front->nb);
-	printf("a %d\n", pos_a->front->next->nb);
-	printf("a %d\n", pos_a->front->next->next->nb);;
+	// printf("a %d\n", pos_a->front->nb);
+	// printf("a %d\n", pos_a->front->next->nb);
+	// printf("a %d\n", pos_a->front->next->next->nb);;
 	while (pos_b->size != 0)
 	{
 		if (pos_b->size == 1)

@@ -26,16 +26,13 @@ int	*ft_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr)
 		cnt_a = 0;
 		a = pos_a->front->next;
 		if (b->nb < pos_a->front->nb)//pos_a->front->nb가 아니라 a의 최소값의 인덱스를 구하고, 그만큼 ra/ rra 해야함 즉, a의 최소원소보다 b의 nb가 작으면
-			arr[i] = 0;//top보다 작으면 최소값이니까 인덱스 수만큼 rb만하고 pa가능
+			arr[i] = 0;
 		else if (b->nb > pos_a->rear->nb)//pos_a->rear->nb가 아니라 a의 최대값의 인덱스를 구하고 그만큼 ra /rra해야함 즉, a의 최대 원소보다 b의 nb가 크면
-			arr[i] = 1;//b의 top이 A의 바텀보다 크면 최대값이니가 pa ra(a의 연산 1번 따라서 1)
+			arr[i] = 1;
 		else
 		{
-			// while (A != NULL && !(A->prev->nb < B->nb && B->nb < A->nb))
-			while (a != NULL && a->prev->nb < b->nb)
+			while (a != NULL && a->prev->nb < b->nb)//얘도 함수화
 			{
-				// cnt_A += 1;
-				// arr[i] = i + cnt_A;//ra하는 수(a의 인덱스) 이거 i+cnt_A가아니라 cnt_A아닌가
 				arr[i] = ++cnt_a;//a의 인덱스
 				a = a->next;
 			}
