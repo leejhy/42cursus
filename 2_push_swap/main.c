@@ -29,6 +29,8 @@ void	int_to_idx(t_stack **head_a, int *arr, int arr_cnt)
 
 	if (head_a == NULL || *head_a == NULL)
 		return ;
+	if (arr == NULL)
+		return ;
 	temp = *head_a;
 	while (temp != NULL)
 	{

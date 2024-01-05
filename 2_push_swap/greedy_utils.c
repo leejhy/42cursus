@@ -21,13 +21,13 @@ int	*ft_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr)
 
 	i = 0;
 	b = pos_b->front;
-	while (b != NULL)//얘 무한루프
+	while (b != NULL)
 	{//인덱스가 b에서 연산하는 값, 배열 안의 값이 a에서 연산할 값	
 		cnt_a = 0;
 		a = pos_a->front->next;
-		if (b->nb < pos_a->front->nb)
+		if (b->nb < pos_a->front->nb)//pos_a->front->nb가 아니라 a의 최소값의 인덱스를 구하고, 그만큼 ra/ rra 해야함 즉, a의 최소원소보다 b의 nb가 작으면
 			arr[i] = 0;//top보다 작으면 최소값이니까 인덱스 수만큼 rb만하고 pa가능
-		else if (b->nb > pos_a->rear->nb)
+		else if (b->nb > pos_a->rear->nb)//pos_a->rear->nb가 아니라 a의 최대값의 인덱스를 구하고 그만큼 ra /rra해야함 즉, a의 최대 원소보다 b의 nb가 크면
 			arr[i] = 1;//b의 top이 A의 바텀보다 크면 최대값이니가 pa ra(a의 연산 1번 따라서 1)
 		else
 		{
@@ -46,7 +46,7 @@ int	*ft_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr)
 	return (arr);
 }
 
-int	ft_min_b(int *arr, int arr_size)
+int	ft_min_b(int *arr, int arr_size, int middle_a)
 {
 	int	i;
 	int	rb_idx;
@@ -55,10 +55,31 @@ int	ft_min_b(int *arr, int arr_size)
 	i = 0;
 	rb_idx = 0;
 	rrb_idx = 0;
+	while (i < arr_size)
+	{
+		if (arr[i] > middle_a)
+			arr[i] = arr[i] * -1;
+		i++;
+	}
+	i = 0;
+	rb_idx = ft_first_while(&i, arr, arr_size)
 	while (i <= arr_size / 2) // rb판단
 	{
-		if (rb_idx + arr[rb_idx] > i + arr[i])
-			rb_idx = i;
+		if (arr[rb_idx] < 0 && arr[i] < 0)
+		{
+			if (rb_idx != i && (rb_idx + (arr[rb_idx] * -1) > i + (arr[i] * -1)))//비교할땐 ra, rra구분해서 비교하고 return 할때는 인덱스 그대로 넘겨줘야함
+				rb_idx = i;
+		}
+		else if (arr[rb_idx] < 0)
+		{
+			if (rb_idx != i && (rb_idx + (arr[rb_idx] * -1) > i + arr[i]))//비교할땐 ra, rra구분해서 비교하고 return 할때는 인덱스 그대로 넘겨줘야함
+				rb_idx = i;
+		}
+		else if (arr[i] < 0)
+		{
+			if (rb_idx + arr[rb_idx] > i + (arr[i] * -1))
+				rb_idx = i;
+		}
 		i++;
 	}
 	while (i < arr_size) //rrb연산
