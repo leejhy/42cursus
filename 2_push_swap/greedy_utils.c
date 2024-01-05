@@ -46,52 +46,86 @@ int	*ft_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr)
 	return (arr);
 }
 
+int	ft_rb_cnt(int i, int *arr, int arr_size)
+{
+	int	rb_cnt;
+
+	rb_cnt = 0;
+	// arr_size / 2 + 1
+	while (i <= arr_size / 2) // rb판단
+	{
+		if (arr[rb_cnt] < 0 && arr[i] < 0)
+		{	
+			if (rb_cnt != i && (rb_cnt + (arr[rb_cnt] * -1) > i + (arr[i] * -1)))//비교할땐 ra, rra구분해서 비교하고 return 할때는 인덱스 그대로 넘겨줘야함
+				rb_cnt = i;
+		}
+		else if (arr[rb_cnt] < 0)
+		{
+			if (rb_cnt != i && (rb_cnt + (arr[rb_cnt] * -1) > i + arr[i]))//비교할땐 ra, rra구분해서 비교하고 return 할때는 인덱스 그대로 넘겨줘야함
+				rb_cnt = i;
+		}
+		else if (arr[i] < 0)
+		{
+			if (rb_cnt + arr[rb_cnt] > i + (arr[i] * -1))
+				rb_cnt = i;
+		}
+		i += 1;
+	}
+	return (rb_cnt);
+}
+
+int	ft_rrb_cnt(int *i, int *arr, int arr_size)
+{
+	int	rrb_cnt;
+
+	rrb_cnt = 0;
+	while (i <= arr_size) // rb판단
+	{
+		if (arr[rrb_cnt] < 0 && arr[*i] < 0)
+		{	
+			if (rrb_cnt != i && (rrb_cnt + (arr[rrb_cnt] * -1) > i + (arr[*i] * -1)))//비교할땐 ra, rra구분해서 비교하고 return 할때는 인덱스 그대로 넘겨줘야함
+				rrb_cnt = *i;
+		}
+		else if (arr[rrb_cnt] < 0)
+		{
+			if (rrb_cnt != *i && (rrb_cnt + (arr[rrb_cnt] * -1) > *i + arr[*i]))//비교할땐 ra, rra구분해서 비교하고 return 할때는 인덱스 그대로 넘겨줘야함
+				rrb_cnt = *i;
+		}
+		else if (arr[*i] < 0)
+		{
+			if (rrb_cnt + arr[rrb_cnt] > *i + (arr[*i] * -1))
+				rrb_cnt = *i;
+		}
+		*i += 1;
+	}
+	return (rrb_cnt);
+}
+
 int	ft_min_b(int *arr, int arr_size, int middle_a)
 {
 	int	i;
-	int	rb_idx;
-	int	rrb_idx;
+	int	rb_a;
+	int	rrb_a;
+	int	rb_cnt;
+	int	rrb_cnt;
 
 	i = 0;
-	rb_idx = 0;
-	rrb_idx = 0;
 	while (i < arr_size)
 	{
 		if (arr[i] > middle_a)
 			arr[i] = arr[i] * -1;
 		i++;
 	}
-	i = 0;
-	rb_idx = ft_first_while(&i, arr, arr_size)
-	while (i <= arr_size / 2) // rb판단
-	{
-		if (arr[rb_idx] < 0 && arr[i] < 0)
-		{
-			if (rb_idx != i && (rb_idx + (arr[rb_idx] * -1) > i + (arr[i] * -1)))//비교할땐 ra, rra구분해서 비교하고 return 할때는 인덱스 그대로 넘겨줘야함
-				rb_idx = i;
-		}
-		else if (arr[rb_idx] < 0)
-		{
-			if (rb_idx != i && (rb_idx + (arr[rb_idx] * -1) > i + arr[i]))//비교할땐 ra, rra구분해서 비교하고 return 할때는 인덱스 그대로 넘겨줘야함
-				rb_idx = i;
-		}
-		else if (arr[i] < 0)
-		{
-			if (rb_idx + arr[rb_idx] > i + (arr[i] * -1))
-				rb_idx = i;
-		}
-		i++;
-	}
-	while (i < arr_size) //rrb연산
-	{
-		if (rrb_idx + arr[rrb_idx] > i + arr[i])
-			rrb_idx = i;
-		i++;
-	}
-	if (rb_idx + arr[rb_idx] < rrb_idx / 2 + arr[rrb_idx])
-		return (rb_idx);
+	rb_cnt = ft_rb_cnt(0, arr, arr_size);
+	rrb_cnt = ft_rrb_cnt(arr_size / 2 + 1, arr, arr_size);
+	if (arr[rb_cnt] < 0)
+		rb_a = arr[rb_cnt] * -1;
+	if (arr[rrb_cnt] < 0)
+		rrb_a = arr[rrb_cnt] * -1;
+	if (rb_cnt + rb_a < rrb_cnt / 2 + rrb_a)
+		return (rb_cnt);
 	else
-		return (rrb_idx);
+		return (rrb_cnt);
 	// min_dix(b의 연산 수) + min_value(a의 연산 수)
 }
 

@@ -66,12 +66,18 @@ void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 		flag_rrb = 1;//이거 함수로 할까 ft_flag_on
 		rrb_cnt = min_b % middle_b;//rrb 실행횟수
 	}
-	if (arr[min_b] > middle_a)
+	if (arr[min_b] > middle_a)//이거 음수로 나오는거 확인
 	{
 		flag_rra = 1;
 		rra_cnt = (pos_a->size) - arr[min_b]; //rra실행 횟수
 		//얘는 그러면 arr[min_b] * 2 + 1번 실행됨
 	}
+	// if (arr[min_b] < 0)//이거 음수로 나오는거 확인
+	// {
+	// 	flag_rra = 1;
+	// 	rra_cnt = (pos_a->size) + arr[min_b]; //rra실행 횟수
+	// 	//얘는 그러면 arr[min_b] * 2 + 1번 실행됨
+	// }
 	if (arr[min_b] == 1)
 	{
 		b_idx_nb = ft_get_idx_b(pos_b->front, min_b);
