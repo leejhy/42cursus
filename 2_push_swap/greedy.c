@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:31 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/05 22:10:22 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:30:31 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ void	set_pivot(t_pos *pos_a, t_pos *pos_b)
 	}
 	while (pos_a->size != 3)
 		pb(pos_a, pos_b);
-	// t_stack *temp;
-	// temp = pos_b->front;
+	t_stack *temp;
+	temp = pos_b->front;
 	// printf("stack a %d\n", pos_a->front->nb);
 	// printf("stack a %d\n", pos_a->front->next->nb);
 	// printf("stack a %d\n", pos_a->front->next->next->nb);
-	// while (temp != NULL)
-	// {
-	// 	printf("stack b : %d\n", temp->nb);
-	// 	temp = temp->next;
-	// }
+	while (temp != NULL)
+	{
+		// printf("stack b : %d\n", temp->nb);
+		temp = temp->next;
+	}
 	// printf("push done\n");
 }
 
@@ -64,15 +64,9 @@ void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 	arr = malloc(sizeof(int) * (pos_b->size));
 	if (!arr)
 		exit(0);
-	arr = ft_make_case_arr(pos_a, pos_b, arr);//수정해야함
-	min_b = ft_min_b(arr, pos_b->size, pos_a->size / 2);
-	//그냥 이 이후로, min_b 만큼 rb or rrb
-	//arr[min_b] 만큼 ra, rra 하면됨
-	// if (pos_b->size == 1)
-	// {
-	// 	printf("main arr %d\n", arr[0]);
-	// 	printf("main min_b %d\n", min_b);
-	// }
+	arr = ft_make_case_arr(pos_a, pos_b, arr);//ok
+	//arr에서 할 수 있는 최적화는 정말 다함 24.01.06
+	min_b = ft_min_b(arr, pos_b->size, pos_a->size);//얘가 할 수 있는 최적화 다함
 	if (min_b > pos_b->size / 2)
 	{
 		flag_rrb = 1;//이거 함수로 할까 ft_flag_on
@@ -86,12 +80,13 @@ void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 	}
 	if (flag_rrb == 0 && flag_rra == 0)//rb, ra
 		ft_rb_ra(pos_a, pos_b, min_b, arr[min_b]);
-	if (flag_rrb == 1 && flag_rra == 0)//rb, ra
+	if (flag_rrb == 1 && flag_rra == 0)//rrb, ra
 		ft_rrb_ra(pos_a, pos_b, rrb_cnt, arr[min_b]);
-	if (flag_rrb == 0 && flag_rra == 1)//rb, ra
+	if (flag_rrb == 0 && flag_rra == 1)//rb, rra
 		ft_rb_rra(pos_a, pos_b, min_b, rra_cnt);
-	if (flag_rrb == 1 && flag_rra == 1)//rb, ra
+	if (flag_rrb == 1 && flag_rra == 1)//rrb, rra
 		ft_rrb_rra(pos_a, pos_b, rrb_cnt, rra_cnt);
+	free(arr);
 	//optimal 찾고 그 최적해의 값을 알아내야함
 }
 
@@ -99,11 +94,13 @@ void	greedy(t_pos *pos_a, t_pos *pos_b)
 {
 	set_pivot(pos_a, pos_b);//OK
 	sort_three_args(pos_a);//ok
+	// printf("sorted\n");
 	// printf("stack a %d\n", pos_a->front->nb);
 	// printf("stack a %d\n", pos_a->front->next->nb);
 	// printf("stack a %d\n", pos_a->front->next->next->nb);
 	while (pos_b->size != 0)
 		ft_find_optimal(pos_a ,pos_b);//얘만 완성하면됨
+	// ft_find_optimal(pos_a ,pos_b);//얘만 완성하면됨
 	// printf ("last_sort\n");
 	ft_last_sort(pos_a);//ok
 }

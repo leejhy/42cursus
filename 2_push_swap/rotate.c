@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:50 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/03 21:54:19 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:39:01 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	rotate(t_stack *head, t_pos *pos)
 {//first becomes the last one
 	t_stack	*node;
 	int		temp_nb;
-	// printf("%d\n",pos->size);
-	if (pos->size == 0)//수정해야돼
+
+	if (pos->size == 0 || pos->size == 1)
 		return ;
 	temp_nb = head->nb;
 	node = head->next;

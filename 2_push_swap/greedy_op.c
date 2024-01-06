@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:50:34 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/05 22:00:26 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:46:09 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,22 @@ void	ft_rb_ra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a)
 {
 	int	i;
 	int	j;
+	int k;
 
-	i = 0;
-	j = 0;
-	while (i < ro_b)//ro_b = min_b_idx
+	k = 0;
+	while (k < ro_a && k < ro_b)
+	{
+		rr(pos_a, pos_b);
+		k++;
+	}
+	i = k;
+	j = k;
+	while (ro_b > 0 && i < ro_b)
 	{
 		rb(pos_b);
 		i++;
 	}
-	while (j < ro_a)//ro_b랑 ro_a겹치는 만큼 rr;
+	while (ro_a > 0 && j < ro_a)
 	{
 		ra(pos_a);
 		j++;
@@ -39,7 +46,7 @@ void	ft_rrb_ra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a)
 	
 	i = 0;
 	j = 0;
-	while (i < ro_b)//ro_b = min_b_idx
+	while (i < ro_b)
 	{
 		rrb(pos_b);
 		i++;
@@ -59,7 +66,7 @@ void	ft_rb_rra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a)
 
 	i = 0;
 	j = 0;
-	while (i < ro_b)//ro_b = min_b_idx
+	while (i < ro_b)
 	{
 		rb(pos_b);
 		i++;
@@ -75,10 +82,17 @@ void	ft_rrb_rra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a)
 {
 	int	i;
 	int	j;
+	int	k;
 
-	i = 0;
-	j = 0;
-	while (i < ro_b)//ro_b = min_b_idx
+	k = 0;
+	while (k < ro_a && k < ro_b)
+	{
+		rrr(pos_a, pos_b);
+		k++;
+	}
+	i = k;
+	j = k;
+	while (i < ro_b)
 	{
 		rrb(pos_b);
 		i++;

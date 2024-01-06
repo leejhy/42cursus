@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:11:41 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/05 22:20:53 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:32:49 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	find_a_min(int *arr, int b_idx, int b_nb, t_pos *pos_a)//찾아서 arr[i]에
 	int	min;
 	int	min_idx;
 	int	i;
+
 	i = 0;
 	min_idx = 0;
 	temp_a = pos_a->front;
@@ -33,10 +34,7 @@ int	find_a_min(int *arr, int b_idx, int b_nb, t_pos *pos_a)//찾아서 arr[i]에
 		temp_a = temp_a->next;
 	}
 	if (b_nb < min)
-	{
-
-		arr[b_idx] = min_idx;//min_idx가 연산할 횟수 아니면 그냥 넘어가기
-	}
+		arr[b_idx] = min_idx;
 	return (min);
 }
 
@@ -62,15 +60,11 @@ int	find_a_max(int *arr, int b_idx, int b_nb, t_pos *pos_a)
 		temp_a = temp_a->next;
 	}
 	if (b_nb > max)// b_nb가 가장 큰값
-	{
-		// printf("max %d\n", b_nb);
-		// printf("%d %d\n", arr[b_idx], max_idx);
-		arr[b_idx] = max_idx + 1;//min_idx가 연산할 횟수 아니면 그냥 넘어가기
-	}
+		arr[b_idx] = max_idx + 1;
 	return (max);
 }
 
-void	ft_cnt_mid(int *arr, int idx, int b_nb, t_pos *pos_a)
+void	ft_cnt_mid(int *arr, int b_idx, int b_nb, t_pos *pos_a)
 {
 	t_stack *temp_a;
 	int	cnt;
@@ -80,7 +74,7 @@ void	ft_cnt_mid(int *arr, int idx, int b_nb, t_pos *pos_a)
 	while (temp_a->next != NULL)
 	{
 		cnt += 1;
-		arr[idx] = cnt;
+		arr[b_idx] = cnt;
 		if (temp_a->nb < b_nb && b_nb < temp_a->next->nb)
 			break ;
 		temp_a = temp_a->next;
@@ -89,6 +83,6 @@ void	ft_cnt_mid(int *arr, int idx, int b_nb, t_pos *pos_a)
 	{//NULL로 튕겨 나왔는데, a의 마지막원소와 첫번째원소 사이 이면
 	// 즉, 그대로 pa만 하면 되는경우에
 		if (temp_a->nb < b_nb && b_nb < pos_a->front->nb)
-			arr[idx] = 0;
+			arr[b_idx] = cnt + 1;
 	}
 }

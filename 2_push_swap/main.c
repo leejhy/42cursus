@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:34:17 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/05 22:22:35 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:20:05 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,10 @@ void	ft_pos_set(t_pos **pos_a, t_pos **pos_b)
 int	main(int argc, char **argv)
 {
 	int			*nb_arr;
-	// t_stack		*a;
-	// t_stack		*b;
 	t_pos		*pos_a;
 	t_pos		*pos_b;
 
 	ft_pos_set(&pos_a, &pos_b);//ok
-	// printf("%p %p\n", pos_a, pos_b);
-	// printf("%d %d\n", pos_a->size, pos_b->size);
-	// a = pos_a->front;
-	// b = pos_b->rear;
 	if (is_errors(argc))
 		return (0);
 	nb_arr = ft_parsing(argc, argv);
@@ -111,7 +105,8 @@ int	main(int argc, char **argv)
 		printf("Error\n");
 		return (0);
 	}
-	push_swap(pos_a, pos_b); //단일 포인터로도 바꿔보기 ok
+	push_swap(pos_a, pos_b);
+	// t_stack		*a;
 	// a = pos_a->front;
 	// while (a != NULL)
 	// {

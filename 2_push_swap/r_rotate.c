@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:48 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/03 21:55:02 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:44:38 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	r_rotate(t_stack *head, t_pos *pos)
 	t_stack	*node;
 	int		temp_nb;
 
+	if (pos->size == 0 || pos->size == 1)
+		return ;
 	if (head == NULL)
 		return ;
 	temp_nb = pos->rear->nb;
