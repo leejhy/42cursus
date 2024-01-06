@@ -23,5 +23,3 @@ NUM=`./push_swap $ARG | wc -l`
 INDEX=`expr $INDEX + 1`
 done
 echo "$NUM_OVER overred operations for $ITER times (Average: `expr $SUM / $ITER`)"
-
-fi

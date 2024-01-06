@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:21:30 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/03 22:03:53 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:14:35 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	pa(t_pos *pos_a, t_pos *pos_b)
 	if (pos_a == NULL)
 		exit(0);
 	ft_del_first_node(&(pos_b->front), &pos_b);
-	printf("pa\n");
+	write(1, "pa\n", 3);
 }
 
 void	pb(t_pos *pos_a, t_pos *pos_b)
@@ -31,9 +31,9 @@ void	pb(t_pos *pos_a, t_pos *pos_b)
 	pos_a->size -= 1;
 	ft_push_b(pos_b->front, pos_b, pos_a->front->nb);
 	if (pos_b->front == NULL)
-		exit(0);//?
+		exit(0);
 	ft_del_first_node(&(pos_a->front), &pos_a);
-	printf("pb\n");
+	write(1, "pb\n", 3);
 }
 
 void	ft_push_a(t_stack *a, t_pos *pos_a, int nb)
@@ -48,10 +48,6 @@ void	ft_push_a(t_stack *a, t_pos *pos_a, int nb)
 		return ;
 	ft_lstadd_front(&a, newnode);
 	last_node = a;
-	// if (*pos_a == NULL)
-	// 	*pos_a = malloc(sizeof(t_pos));
-	// if (!(*pos_a))
-	// 	return ;
 	while (last_node->next != NULL)
 	{
 		cnt += 1;
@@ -74,10 +70,6 @@ void	ft_push_b(t_stack *b, t_pos *pos_b, int nb)
 		return ;
 	ft_lstadd_front(&b, newnode);
 	last_node = b;
-	// if (*pos_b == NULL)
-	// 	*pos_b = malloc(sizeof(t_pos));
-	// if (!(*pos_b))
-	// 	return ;
 	while (last_node->next != NULL)
 	{
 		cnt += 1;

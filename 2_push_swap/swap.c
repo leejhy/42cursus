@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:59 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/03 21:53:33 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:30:49 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sa(t_pos *pos_a)
 	if (pos_a->size <= 1)
 		return ;
 	swap(pos_a->front, pos_a);
-	printf("sa\n");
+	write(1, "sa\n", 3);
 }
 
 void	sb(t_pos *pos_b)
@@ -36,7 +36,7 @@ void	sb(t_pos *pos_b)
 	if (pos_b->size <= 1)
 		return ;
 	swap(pos_b->front, pos_b);
-	printf("sa\n");
+	write(1, "sa\n", 3);
 }
 
 void	ss(t_pos *pos_a, t_pos *pos_b)
@@ -45,5 +45,5 @@ void	ss(t_pos *pos_a, t_pos *pos_b)
 		return ;
 	swap(pos_a->front, pos_a);
 	swap(pos_b->front, pos_b);
-	printf("ss\n");
+	write(1, "ss\n", 3);
 }

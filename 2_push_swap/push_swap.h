@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:30:10 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/06 18:00:02 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:50:44 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <unistd.h>
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
@@ -69,17 +70,11 @@ long long	ft_atoi(const char *str);
 int			is_duplicate(int *arr, int arr_cnt);
 int			*ft_parsing(int argc, char **argv);
 //hard_sort.c
-void	ft_hard_sort(t_pos *pos_a, t_pos *pos_b);
+void	ft_hard_sort(t_pos *pos_a);
 void	sort_two_args(t_pos *pos_a);
 void	sort_three_args(t_pos *pos_a);
-void	sort_four_args(t_pos *pos_a, t_pos *pos_b);
-void	sort_five_args(t_pos *pos_a, t_pos *pos_b);
-//hard_sort_utils.c
-int		ft_nbcnt(t_stack *a, t_stack *b);
 int		find_zero(t_stack *a);
-int		find_one(t_stack *a);
 int		is_sorted(t_stack *head_a);
-void	ft_select_pb(t_pos *pos_a, t_pos *pos_b);
 //main.c
 int		is_errors(int argc);
 void	int_to_idx(t_stack **head_a, int *arr, int arr_cnt);
@@ -91,15 +86,19 @@ void	greedy(t_pos *pos_a, t_pos *pos_b);
 void	ft_find_optimal(t_pos *pos_A, t_pos *pos_B);
 void	set_pivot(t_pos *pos_a, t_pos *pos_b);
 //greedy_op.c
+void	do_greedy_op(int *arr, int min_b, t_pos *pos_a, t_pos *pos_b);
 void	ft_rb_ra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
 void	ft_rrb_ra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
 void	ft_rb_rra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
 void	ft_rrb_rra(t_pos *pos_a, t_pos *pos_b, int ro_b, int ro_a);
+//greedy_op_utils.c
+int		ft_op_rra_count(int *arr, int idx, int a_size, int *flag_rra);
+int		ft_op_rrb_count(int min_b, int b_size, int *flag_rrb);
 //greedy_utils.c
-int	*ft_make_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr);
-int	ft_min_b(int *arr, int arr_size, int middle_a);
-int	ft_rrb_cnt(int i, int *arr, int arr_size, int a_size);
-int	ft_rrb_cnt(int i, int *arr, int arr_size, int a_size);
+int		*ft_make_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr);
+int		ft_min_b(int *arr, int arr_size, int middle_a);
+int		ft_rrb_cnt(int i, int *arr, int arr_size, int a_size);
+int		ft_rrb_cnt(int i, int *arr, int arr_size, int a_size);
 void	ft_last_sort(t_pos *pos_a);
 //find_optimal.c
 int		find_a_min(int *arr, int b_idx, int b_nb, t_pos *pos_a);

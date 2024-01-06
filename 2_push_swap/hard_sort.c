@@ -6,22 +6,18 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 13:07:40 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/03 21:56:17 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:21:44 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_hard_sort(t_pos *pos_a, t_pos *pos_b)
+void	ft_hard_sort(t_pos *pos_a)
 {
 	if (pos_a->size == 2)
 		sort_two_args(pos_a);
 	if (pos_a->size == 3)
 		sort_three_args(pos_a);
-	if (pos_a->size == 4)
-		sort_four_args(pos_a, pos_b);
-	if (pos_a->size == 5)
-		sort_five_args(pos_a, pos_b);
 }
 
 void	sort_two_args(t_pos *pos_a)
@@ -42,7 +38,7 @@ void	sort_three_args(t_pos *pos_a)
 	head = pos_a->front;
 	node = head;
 	max = head->nb;
-	while (node != NULL)//max 구하기
+	while (node != NULL)
 	{
 		if (max < node->nb)
 			max = node->nb;
@@ -55,41 +51,40 @@ void	sort_three_args(t_pos *pos_a)
 	sort_two_args(pos_a);
 }
 
-void	sort_four_args(t_pos *pos_a, t_pos *pos_b)
+int	find_zero(t_stack *a)
 {
-	int	cnt;
+	int		loc;
+	t_stack	*temp_a;
 
-	pb(pos_a, pos_b);
-	cnt = ft_nbcnt(pos_a->front, pos_b->front);
-	sort_three_args(pos_a);
-	if(cnt == 0)//가장 큼
+	temp_a = a;
+	loc = 0;
+	while (temp_a != NULL && temp_a->nb != 0)
 	{
-		pa(pos_a, pos_b);
-		ra(pos_a);
+		loc += 1;
+		temp_a = temp_a->next;
 	}
-	if (cnt == 1)
-	{
-		rra(pos_a);
-		pa(pos_a, pos_b);
-		ra(pos_a);
-		ra(pos_a);
-	}
-	if (cnt == 2)
-	{
-		ra(pos_a);
-		pa(pos_a, pos_b);
-		rra(pos_a);
-	}
-	if (cnt == 3)
-		pa(pos_a, pos_b);
+	if (temp_a != NULL)
+		return (loc);
+	return (-1);
 }
 
-void	sort_five_args(t_pos *pos_a, t_pos *pos_b)
+int	is_sorted(t_stack *head_a)
 {
-	ft_select_pb(pos_a, pos_b);
-	sort_three_args(pos_a);
-	if (pos_b->front->nb < pos_b->front->next->nb)
-		sb(pos_b);
-	pa(pos_a, pos_b);
-	pa(pos_a, pos_b);
+	t_stack	*temp;
+	int		cnt;
+	int		size;
+
+	cnt = 0;
+	size = 0;
+	temp = head_a;
+	while (temp->next != NULL)
+	{
+		if (temp->nb < temp->next->nb)
+			cnt += 1;
+		size += 1;
+		temp = temp->next;
+	}
+	if (cnt == size)
+		return (1);
+	return (0);
 }

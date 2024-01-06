@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:34:17 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/06 17:20:05 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:19:06 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_errors(int argc)
 {
 	if (argc <= 1)
 	{
-		printf("Error\n");
+		write(1, "Error\n", 6);
 		return (1);
 	}
 	return (0);
@@ -54,8 +54,8 @@ void	push_swap(t_pos *pos_a, t_pos *pos_b)
 		return ;
 	if (is_sorted(pos_a->front))
 		return ;
-	if (pos_a->size <= 5)
-		ft_hard_sort(pos_a, pos_b);
+	if (pos_a->size <= 3)
+		ft_hard_sort(pos_a);
 	else
 		greedy(pos_a, pos_b);
 }
@@ -85,7 +85,7 @@ int	main(int argc, char **argv)
 	t_pos		*pos_a;
 	t_pos		*pos_b;
 
-	ft_pos_set(&pos_a, &pos_b);//ok
+	ft_pos_set(&pos_a, &pos_b);
 	if (is_errors(argc))
 		return (0);
 	nb_arr = ft_parsing(argc, argv);
@@ -95,36 +95,13 @@ int	main(int argc, char **argv)
 	// 	return (0);
 	// }
 	ft_makestack(&(pos_a->front), nb_arr, argc - 1);
-	ft_connect_pos(&pos_a);//ok
-	int_to_idx(&(pos_a->front), nb_arr, argc - 1);//ok
-	// free(nb_arr);
-	// a = pos_a->front;
-	// if (!a || !pos_a || !nb_arr)
+	ft_connect_pos(&pos_a);
+	int_to_idx(&(pos_a->front), nb_arr, argc - 1);
 	if (!pos_a || !nb_arr)
 	{
-		printf("Error\n");
+		write(1, "Error\n", 6);
 		return (0);
 	}
 	push_swap(pos_a, pos_b);
-	// t_stack		*a;
-	// a = pos_a->front;
-	// while (a != NULL)
-	// {
-	// 	printf("%d\n", a->nb);
-	// 	// if (head_A->prev != NULL)
-	// 	// 	printf("prev :%d\n",head_A->prev->nb);
-	// 	a = a->next;
-	// }
-	// printf("=========b=======\n");
-	// b = pos_b->front;
-	// while (b != NULL)
-	// {
-	// 	printf("%d\n", b->nb);
-	// 	b = b->next;
-	// }
-	// printf(" size %d\n", pos_A->size);
-	// printf(" size %d\n", pos_B->size);
-	// printf("stack B : %d\n", head_B->nb);
-	// printf("stack B : %d\n", head_B->next->nb);
-	exit (0); // int arr등 아직 안쓴 애들도 있음
+	exit (0);
 }

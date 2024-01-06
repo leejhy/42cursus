@@ -6,15 +6,14 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:48 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/06 15:44:38 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:30:17 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "push_swap.h"
 
 void	r_rotate(t_stack *head, t_pos *pos)
-{//The last elements becomes the first one
+{
 	t_stack	*node;
 	int		temp_nb;
 
@@ -36,18 +35,18 @@ void	r_rotate(t_stack *head, t_pos *pos)
 void	rra(t_pos *pos_a)
 {
 	r_rotate(pos_a->front, pos_a);
-	printf("rra\n");
+	write(1, "rra\n", 4);
 }
 
 void	rrb(t_pos *pos_b)
 {
 	r_rotate(pos_b->front, pos_b);
-	printf("rrb\n");
+	write(1, "rrb\n", 4);
 }
 
 void	rrr(t_pos *pos_a, t_pos *pos_b)
 {
 	r_rotate(pos_a->front, pos_a);
 	r_rotate(pos_b->front, pos_b);
-	printf("rrr\n");
+	write(1, "rrr\n", 4);
 }

@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 16:16:12 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/06 18:16:27 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:26:05 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ int	*ft_make_case_arr(t_pos *pos_a, t_pos *pos_b, int *arr)
 	{
 		a_min = find_a_min(arr, i, temp_b->nb, pos_a);
 		a_max = find_a_max(arr, i, temp_b->nb, pos_a);
-		//min, max perfect
 		if (a_min < temp_b->nb && temp_b->nb < a_max)
 			ft_cnt_mid(arr, i, temp_b->nb, pos_a);
-		i += 1; // rb하는 수
+		i += 1;
 		temp_b = temp_b->next;
 	}
 	return (arr);
@@ -41,7 +40,7 @@ int	ft_rb_cnt(int i, int *arr, int arr_size, int a_size)
 	int	arr_i;
 
 	rb_cnt = 0;
-	while (i <= arr_size / 2) // rb판단
+	while (i <= arr_size / 2)
 	{
 		arr_rb_cnt = arr[rb_cnt];
 		arr_i = arr[i];
@@ -63,7 +62,7 @@ int	ft_rrb_cnt(int i, int *arr, int arr_size, int a_size)
 	int	arr_i;
 
 	rrb_cnt = i;
-	while (i < arr_size) // rb판단
+	while (i < arr_size)
 	{
 		arr_rrb_cnt = arr[rrb_cnt];
 		arr_i = arr[i];
@@ -92,7 +91,7 @@ int	ft_min_b(int *arr, int arr_size, int a_size)
 		if (arr[i] > a_size / 2)
 			arr[i] = arr[i] * -1;
 		i++;
-	}//ok
+	}
 	rb_cnt = ft_rb_cnt(0, arr, arr_size, a_size);
 	rrb_cnt = ft_rrb_cnt(arr_size / 2, arr, arr_size, a_size);
 	a_cnt_rb = arr[rb_cnt];
@@ -105,18 +104,19 @@ int	ft_min_b(int *arr, int arr_size, int a_size)
 		return (rb_cnt);
 	return (rrb_cnt);
 }
+
 void	ft_last_sort(t_pos *pos_a)
 {
 	t_stack	*head;
 	int		a_cnt;
 	int		i;
-	
+
 	i = 0;
 	head = pos_a->front;
 	a_cnt = find_zero(head);
 	if (head->nb == 0)
 		return ;
-	if (a_cnt > pos_a->size / 2)//0의 위치가 절반이 넘으면 rra
+	if (a_cnt > pos_a->size / 2)
 	{
 		while (i < pos_a->size - a_cnt)
 		{
@@ -124,7 +124,7 @@ void	ft_last_sort(t_pos *pos_a)
 			i += 1;
 		}
 	}
-	else// 절반 안넘으면 ra
+	else
 	{
 		while (i < a_cnt)
 		{

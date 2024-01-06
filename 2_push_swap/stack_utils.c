@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:21:22 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/03 22:02:10 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:28:09 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_lstsize(t_stack *head)
 
 void	ft_lstadd_front(t_stack	**head, t_stack *new)
 {
-	t_stack *temp;
+	t_stack	*temp;
 
 	temp = *head;
 	if (*head == NULL)
@@ -55,7 +55,7 @@ void	ft_del_first_node(t_stack **head, t_pos **pos)
 	}
 	else
 	{
-		*head = (*head)->next;//temp에 첫째 값 저장하고 head 밀기
+		*head = (*head)->next;
 		(*pos)->front = *head;
 		(*head)->prev = NULL;
 		temp->next = NULL;

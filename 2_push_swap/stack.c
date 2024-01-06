@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:49:30 by junhylee          #+#    #+#             */
-/*   Updated: 2023/12/31 18:59:39 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:30:31 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_stack	*ft_make_newnode(int nb)
 void	ft_lstadd_back(t_stack **head, t_stack *new)
 {
 	t_stack	*last_node;
-	
+
 	last_node = *head;
 	if (*head == NULL)
 		*head = new;
@@ -48,8 +48,6 @@ void	ft_lstclear(t_stack **lst)
 {
 	t_stack	*del_lst;
 
-	// if (lst == NULL)
-	// 	return ;
 	while ((*lst) != NULL)
 	{
 		del_lst = *lst;
@@ -59,7 +57,7 @@ void	ft_lstclear(t_stack **lst)
 }
 
 void	ft_makestack(t_stack **head_a, int *nb_arr, int arr_cnt)
-{//only for a
+{
 	t_stack	*new_node;
 	int		i;
 
@@ -83,16 +81,11 @@ void	ft_makestack(t_stack **head_a, int *nb_arr, int arr_cnt)
 
 void	ft_connect_pos(t_pos **pos)
 {
-	t_stack *temp_node;
+	t_stack	*temp_node;
 
 	temp_node = (*pos)->front;
 	if (temp_node == NULL)
 		return ;
-	// *pos = malloc(sizeof(t_pos));
-	// if (!*pos)
-	// 	return ;
-	// temp_node = (*pos)->front;
-	// (*pos)->front = *head;
 	while (temp_node->next != NULL)
 		temp_node = temp_node->next;
 	(*pos)->rear = temp_node;
