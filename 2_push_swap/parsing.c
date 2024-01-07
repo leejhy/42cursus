@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 13:20:02 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/07 16:00:55 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:47:30 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ long long	ft_atoll(const char *str)
 		result = result * 10 + (*str - '0');
 		str++;
 	}
+	if (*str == '-' || *str == '+')
+		ft_error();
 	return (sign * result);
 }
 

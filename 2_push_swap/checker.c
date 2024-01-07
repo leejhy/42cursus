@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:11:29 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/07 21:14:47 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:51:37 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int argc, char **argv)
 		if (ft_read_op(pos_a, pos_b) == 0)
 			break ;
 	}
-	check_sorted(pos_a->front);
+	check_sorted(pos_a->front, pos_b);
 	ft_frees(nb_arr, str, pos_a, pos_b);
 	return (0);
 }

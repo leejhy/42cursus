@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 12:40:59 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/07 19:46:00 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:28:11 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ size_t	ft_nb_cnt(char *str, char sep)
 			i += 1;
 		}
 		if (len > 11)
-			exit(1);
+			ft_error();
 	}
 	return (nb_cnt);
 }

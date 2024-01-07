@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:59 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/06 19:30:49 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:54:19 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	sb(t_pos *pos_b)
 	if (pos_b->size <= 1)
 		return ;
 	swap(pos_b->front, pos_b);
-	write(1, "sa\n", 3);
+	write(1, "sb\n", 3);
 }
 
 void	ss(t_pos *pos_a, t_pos *pos_b)

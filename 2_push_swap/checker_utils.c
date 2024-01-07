@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:40:31 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/07 20:41:03 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:52:12 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	ft_check_push(t_pos *pos_a, t_pos *pos_b, char *str)
 		pb(pos_a, pos_b);
 }
 
-void	check_sorted(t_stack *head_a)
+void	check_sorted(t_stack *head_a, t_pos *pos_b)
 {
-	if (is_sorted(head_a))
+	if (is_sorted(head_a) && pos_b->size == 0)
 	{
 		write(1, "OK\n", 3);
 		return ;

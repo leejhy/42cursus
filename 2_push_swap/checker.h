@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:11:48 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/07 21:11:45 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:52:00 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_check_swap(t_pos *pos_a, t_pos *pos_b, char *str);
 void	ft_check_push(t_pos *pos_a, t_pos *pos_b, char *str);
 void	ft_check_error(char *str);
 void	ft_error(void);
-void	check_sorted(t_stack *head_a);
+void	check_sorted(t_stack *head_a, t_pos *pos_b);
 int		is_sorted(t_stack *head_a);
 void	swap(t_stack *head, t_pos *pos);
 void	sa(t_pos *pos_a);
