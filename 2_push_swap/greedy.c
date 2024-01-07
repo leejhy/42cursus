@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:59:31 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/06 19:52:34 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:19:56 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_find_optimal(t_pos *pos_a, t_pos *pos_b)
 
 	arr = malloc(sizeof(int) * (pos_b->size));
 	if (!arr)
-		exit(0);
+		failed_malloc();
 	arr = ft_make_case_arr(pos_a, pos_b, arr);
 	min_b = ft_min_b(arr, pos_b->size, pos_a->size);
 	do_greedy_op(arr, min_b, pos_a, pos_b);

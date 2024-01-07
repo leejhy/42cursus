@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:30:10 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/06 19:50:44 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:43:27 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
-# include <stdio.h>
 # include <unistd.h>
 
 # define INT_MAX 2147483647
@@ -39,7 +38,7 @@ t_stack	*ft_make_newnode(int nb);
 void	ft_lstadd_back(t_stack **head, t_stack *new);
 void	ft_lstclear(t_stack **lst);
 void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt);
-void	ft_connect_pos(t_pos **pos);
+void	set_pos_a(t_pos **pos);
 //stack_utils.c
 int		ft_lstsize(t_stack *head);
 void	ft_lstadd_front(t_stack	**head, t_stack *new);
@@ -66,9 +65,15 @@ void	pb(t_pos *pos_a, t_pos *pos_b);
 void	ft_push_a(t_stack *a, t_pos *pos_a, int nb);
 void	ft_push_b(t_stack *b, t_pos *pos_b, int nb);
 //parsing.c
-long long	ft_atoi(const char *str);
-int			is_duplicate(int *arr, int arr_cnt);
-int			*ft_parsing(int argc, char **argv);
+long long	ft_atoll(const char *str);
+void		is_duplicate(int *arr, int arr_max);
+char		*parsing(int argc, char **argv);
+char		*ft_strjoin(char **argv, int sep, int arg_cnt, int arg_len);
+int			*str_to_nbarr(char *str, int nb_cnt);
+//parsing_utils.c
+int		ft_nb_cnt(char *str, char sep);
+int		ft_arg_len(char **argv, int arg_cnt);
+void	ft_strcat(char *dest, char *str_arg, int *idx);
 //hard_sort.c
 void	ft_hard_sort(t_pos *pos_a);
 void	sort_two_args(t_pos *pos_a);
@@ -76,10 +81,9 @@ void	sort_three_args(t_pos *pos_a);
 int		find_zero(t_stack *a);
 int		is_sorted(t_stack *head_a);
 //main.c
-int		is_errors(int argc);
 void	int_to_idx(t_stack **head_a, int *arr, int arr_cnt);
 void	push_swap(t_pos *pos_a, t_pos *pos_b);
-void	ft_pos_set(t_pos **pos_a, t_pos **pos_b);
+void	init_pos(t_pos **pos_a, t_pos **pos_b);
 int		main(int argc, char **argv);
 //greedy.c
 void	greedy(t_pos *pos_a, t_pos *pos_b);
@@ -103,5 +107,9 @@ void	ft_last_sort(t_pos *pos_a);
 //find_optimal.c
 int		find_a_min(int *arr, int b_idx, int b_nb, t_pos *pos_a);
 int		find_a_max(int *arr, int b_idx, int b_nb, t_pos *pos_a);
-void	ft_cnt_mid(int *arr, int idx, int b_nb, t_pos *pos_a);	
+void	ft_cnt_mid(int *arr, int idx, int b_nb, t_pos *pos_a);
+//error.c
+void	ft_error(void);
+void	failed_malloc(void);
+void	ft_frees(int *nb_arr, char *str, t_pos *pos_a, t_pos *pos_b);
 #endif

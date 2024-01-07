@@ -1,10 +1,10 @@
 CC = clang
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 INC = push_swap.h
-SRCS =	main.c parsing.c push.c r_rotate.c rotate.c \
-		stack.c stack_utils.c swap.c hard_sort.c \
-		greedy.c greedy_utils.c greedy_op.c \
-		find_optimal.c greedy_op_utils.c
+SRCS =	main.c parsing.c parsing_utils.c \
+		push.c r_rotate.c rotate.c stack.c swap.c stack_utils.c\
+		greedy.c greedy_utils.c greedy_op.c greedy_op_utils.c\
+		hard_sort.c find_optimal.c error.c
 OBJS = ${SRCS:.c=.o}
 NAME = push_swap
 

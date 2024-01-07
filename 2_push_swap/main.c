@@ -6,21 +6,12 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:34:17 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/06 19:19:06 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:28:31 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	is_errors(int argc)
-{
-	if (argc <= 1)
-	{
-		write(1, "Error\n", 6);
-		return (1);
-	}
-	return (0);
-}
+#include <stdio.h>
 
 void	int_to_idx(t_stack **head_a, int *arr, int arr_cnt)
 {
@@ -60,17 +51,19 @@ void	push_swap(t_pos *pos_a, t_pos *pos_b)
 		greedy(pos_a, pos_b);
 }
 
-void	ft_pos_set(t_pos **pos_a, t_pos **pos_b)
+void	init_pos(t_pos **pos_a, t_pos **pos_b)
 {
 	t_pos	*temp_a;
 	t_pos	*temp_b;
 
 	*pos_a = malloc(sizeof(t_pos));
+	if (!(*pos_a))
+		failed_malloc();
 	*pos_b = malloc(sizeof(t_pos));
+	if (!(*pos_b))
+		failed_malloc();
 	temp_a = *pos_a;
 	temp_b = *pos_b;
-	if (!(*pos_a) || !(*pos_b))
-		exit(0);
 	temp_a->front = NULL;
 	temp_b->front = NULL;
 	temp_a->rear = NULL;
@@ -82,26 +75,23 @@ void	ft_pos_set(t_pos **pos_a, t_pos **pos_b)
 int	main(int argc, char **argv)
 {
 	int			*nb_arr;
+	char		*str;
+	int			nb_cnt;
 	t_pos		*pos_a;
 	t_pos		*pos_b;
 
-	ft_pos_set(&pos_a, &pos_b);
-	if (is_errors(argc))
-		return (0);
-	nb_arr = ft_parsing(argc, argv);
-	// if (!nb_arr)
-	// {
-	// 	printf("Error\n");
-	// 	return (0);
-	// }
-	ft_makestack(&(pos_a->front), nb_arr, argc - 1);
-	ft_connect_pos(&pos_a);
-	int_to_idx(&(pos_a->front), nb_arr, argc - 1);
+	init_pos(&pos_a, &pos_b);
+	if (argc <= 1)
+		ft_error();
+	str = parsing(argc, argv);
+	nb_cnt = ft_nb_cnt(str, ' ');
+	nb_arr = str_to_nbarr(str, nb_cnt);
+	ft_makestack(&(pos_a->front), nb_arr, nb_cnt);
+	set_pos_a(&pos_a);
+	int_to_idx(&(pos_a->front), nb_arr, nb_cnt);
 	if (!pos_a || !nb_arr)
-	{
-		write(1, "Error\n", 6);
-		return (0);
-	}
+		ft_error();
 	push_swap(pos_a, pos_b);
-	exit (0);
+	ft_frees(nb_arr, str, pos_a, pos_b);
+	return (0);
 }
