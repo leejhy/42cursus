@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:49:30 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/07 15:21:31 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 20:16:21 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ void	ft_lstadd_back(t_stack **head, t_stack *new)
 void	ft_lstclear(t_stack **lst)
 {
 	t_stack	*del_lst;
+	t_stack	*head;
 
-	while ((*lst) != NULL)
+	head = *lst;
+	while (head != NULL)
 	{
-		del_lst = *lst;
-		del_lst = del_lst->next;
+		del_lst = head;
+		head = head->next;
 		free(del_lst);
 	}
 }

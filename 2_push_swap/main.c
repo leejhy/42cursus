@@ -6,38 +6,11 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:34:17 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/07 15:28:31 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:01:12 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-
-void	int_to_idx(t_stack **head_a, int *arr, int arr_cnt)
-{
-	t_stack	*temp;
-	int		i;
-
-	if (head_a == NULL || *head_a == NULL)
-		return ;
-	if (arr == NULL)
-		return ;
-	temp = *head_a;
-	while (temp != NULL)
-	{
-		i = 0;
-		while (i < arr_cnt)
-		{
-			if (arr[i] == temp->nb)
-			{
-				temp->nb = i;
-				break ;
-			}
-			i++;
-		}
-		temp = temp->next;
-	}
-}
 
 void	push_swap(t_pos *pos_a, t_pos *pos_b)
 {
@@ -51,32 +24,11 @@ void	push_swap(t_pos *pos_a, t_pos *pos_b)
 		greedy(pos_a, pos_b);
 }
 
-void	init_pos(t_pos **pos_a, t_pos **pos_b)
-{
-	t_pos	*temp_a;
-	t_pos	*temp_b;
-
-	*pos_a = malloc(sizeof(t_pos));
-	if (!(*pos_a))
-		failed_malloc();
-	*pos_b = malloc(sizeof(t_pos));
-	if (!(*pos_b))
-		failed_malloc();
-	temp_a = *pos_a;
-	temp_b = *pos_b;
-	temp_a->front = NULL;
-	temp_b->front = NULL;
-	temp_a->rear = NULL;
-	temp_b->rear = NULL;
-	temp_a->size = 0;
-	temp_b->size = 0;
-}
-
 int	main(int argc, char **argv)
 {
 	int			*nb_arr;
 	char		*str;
-	int			nb_cnt;
+	size_t		nb_cnt;
 	t_pos		*pos_a;
 	t_pos		*pos_b;
 
@@ -89,8 +41,6 @@ int	main(int argc, char **argv)
 	ft_makestack(&(pos_a->front), nb_arr, nb_cnt);
 	set_pos_a(&pos_a);
 	int_to_idx(&(pos_a->front), nb_arr, nb_cnt);
-	if (!pos_a || !nb_arr)
-		ft_error();
 	push_swap(pos_a, pos_b);
 	ft_frees(nb_arr, str, pos_a, pos_b);
 	return (0);

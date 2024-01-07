@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:16:00 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/07 15:28:31 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 20:17:33 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	ft_frees(int *nb_arr, char *str, t_pos *pos_a, t_pos *pos_b)
 	free(nb_arr);
 	free(str);
 	free(pos_a);
+	ft_lstclear(&(pos_a->front));
 	free(pos_b);
 }

@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 13:20:02 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/07 15:31:15 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/07 16:00:55 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ long long	ft_atoll(const char *str)
 	return (sign * result);
 }
 
-void	is_duplicate(int *arr, int arr_max)
+void	is_duplicate(int *arr, size_t arr_max)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (i < arr_max)
@@ -55,15 +55,15 @@ void	is_duplicate(int *arr, int arr_max)
 	return ;
 }
 
-char	*ft_strjoin(char **argv, int sep, int arg_cnt, int arg_len)
+char	*ft_strjoin(char **argv, size_t sep, size_t arg_cnt, size_t len)
 {
 	char	*rt_str;
-	int		i;
-	int		idx;
+	size_t	i;
+	size_t	idx;
 
 	i = 1;
 	idx = 0;
-	rt_str = malloc(sizeof (char) * (sep + arg_len + 1));
+	rt_str = malloc(sizeof (char) * (sep + len + 1));
 	if (!rt_str)
 		failed_malloc();
 	while (i <= arg_cnt)
@@ -75,10 +75,10 @@ char	*ft_strjoin(char **argv, int sep, int arg_cnt, int arg_len)
 	return (rt_str);
 }
 
-int	*str_to_nbarr(char *str, int nb_cnt)
+int	*str_to_nbarr(char *str, size_t nb_cnt)
 {
 	int			*nb_arr;
-	int			i;
+	size_t		i;
 	long long	nb;
 
 	i = 0;
@@ -106,8 +106,8 @@ int	*str_to_nbarr(char *str, int nb_cnt)
 
 char	*parsing(int argc, char **argv)
 {
-	int		arg_cnt;
-	int		arg_len;
+	size_t	arg_cnt;
+	size_t	arg_len;
 	char	*str;
 
 	arg_cnt = argc - 1;
