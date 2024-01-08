@@ -1,11 +1,13 @@
 #include "pipex.h"
 
-#include <stdio.h>
-
-int main( int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-   while(*envp)
-      printf( "%s\n", *envp++);
+   pid_t a;
 
-   return 0;
+   if (argc != 5)
+      return (0);
+   a = fork();
+
+   pipe();
+
 }
