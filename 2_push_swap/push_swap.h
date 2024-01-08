@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
+# include <stdio.h>//s
 # include <unistd.h>
 
 # define INT_MAX 2147483647

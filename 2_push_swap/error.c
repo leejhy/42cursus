@@ -27,7 +27,7 @@ void	ft_frees(int *nb_arr, char *str, t_pos *pos_a, t_pos *pos_b)
 {
 	free(nb_arr);
 	free(str);
-	free(pos_a);
 	ft_lstclear(&(pos_a->front));
+	free(pos_a);
 	free(pos_b);
 }

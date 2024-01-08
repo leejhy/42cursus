@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address
 INC = push_swap.h
 SRCS =	main.c parsing.c parsing_utils.c \
 		push.c r_rotate.c rotate.c stack.c swap.c stack_utils.c \

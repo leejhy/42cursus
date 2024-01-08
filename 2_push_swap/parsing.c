@@ -32,8 +32,12 @@ long long	ft_atoll(const char *str)
 		result = result * 10 + (*str - '0');
 		str++;
 	}
-	if (*str == '-' || *str == '+')
+	if (*str != ' ')//널, 공백이면 실행되면 안됨
+	{
+		if (*str == '\0')
+			return (sign * result);
 		ft_error();
+	}
 	return (sign * result);
 }
 
