@@ -2,18 +2,14 @@
 #include <stdio.h>
 
 int main(int argc, char **argv, char **envp)
-{//argv[2]가 cmd1임
-	
-	//argv[2]를 쪼갬 "ls -l"면, {"ls", "-l"}이렇게
-	char **command = {"ls", "-l"};
-
-	execve(command[0], command, NULL);
-	// if (execve(command[0], command, NULL) == -1) {
-    //     perror("execve");
-    //     return 1;
-    // }
-
-    // execve 함수가 성공하면 이 부분은 실행되지 않음
-
+{
+    char *cmd[4];
+    
+    cmd[0] = "/bin/sh";
+    cmd[1] = "-c";
+    cmd[2] = argv[1];
+    cmd[3] = NULL;
+    // cmd[4] = NULL;
+	execve("/bin/sh", cmd, 0);
     return 0;
 }

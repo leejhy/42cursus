@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:48:31 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/08 17:48:33 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:59:32 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,18 @@
 void	ft_error(int err)
 {
 	char *str;
-
+	size_t	len;
+	
+	len = 0;
 	str = strerror(err);
-	write(1, str, ft_strlen(str));
+	while (str[len])
+		len++;
+	write(1, str, len);
+	exit(1);
+}
+
+void	malloc_failed(void)
+{
+	write(1, "malloc failed\n", 14);
 	exit(1);
 }
