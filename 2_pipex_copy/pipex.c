@@ -12,61 +12,67 @@
 
 #include "pipex.h"
 
-void	ft_child_one(int fd_file1, char **cmd1, int *pipe_fd, char **envp)
+void	ft_child_one(int *pipe_fd, int fd_file1, char **cmd1, char **envp)
 {//open file 1
+//얘의 stdin fd_file1로,
 	close(pipe_fd[0]);
-	dup2(pipe_fd[1], fd_file1);
-	execve("/bin/sh", cmd1, envp);
-	printf("11 ");
-	printf("write!! child_one \n");//stdout이 아니라 fds[1]으로 출력됨
+	dup2(0, fd_file1);
+	dup2(1, pipe_fd[1]);//stdout을 pipe_fd1로 바꾸고 실행
+	execve("/bin/sh", cmd1, envp);//실행결과를 pipe_fd[1]에 출력(넘기기)
 }
 
-void	ft_child_two(int fd_file2, char **cmd2, int *pipe_fd, char **envp)
+void	ft_child_two(int *pipe_fd, int fd_file2, char **cmd2, char **envp)
 {//open file2
+
+	//stdin을 pipe로
 	close(pipe_fd[1]);
-	dup2(pipe_fd[0], fd_file2);//stdin이 fds[0] 을 가리킴
-	char *buf;
-	buf = malloc(100);
-	read(0, buf, 32);
-	printf("now, two get -> %s\n", buf);
+	dup2(0, pipe_fd[0]);
+	dup2(1, fd_file2);//stdout을 file2로
+	execve("/bin/sh", cmd2, envp);
 }
 
-void	ft_parent(int file1, int file2, char **argv, char **envp)
+void	ft_parent(pid_t child_one, int *pipe_fd, char **argv, char **envp)
 {
-	int		pipe_fd[2];
-	ptd_t	child_one;
 	ptd_t	child_two;
-	char	**cmd1;
 	char	**cmd2;
+	int		fd_file2;
+	int		status_one;
+	int		status_two;
 
-	cmd1 = ft_split(argv[2]);
+	fd_file2 = open(argv[4], O_RDWR);
 	cmd2 = ft_split(argv[3]);
-	pipe(pipe_fd);
-	// close(pipe_fd[0]);
-	// close(pipe_fd[1]);
-	child_one = fork();
-	if (child_one == 0)
-		ft_child_one(file1, cmd1, pipe_fd, envp);
+	child_two = fork();
+	if (child_two == 0)
+		ft_child_two(file2, cmd2, pipe_fd, envp);
 	if (child_one > 0)
 	{
-		child_two = fork();
-		if (child_two == 0)
-			ft_child_two(file2, cmd2, pipe_fd, envp);
-		waitpid(child_one, &status, 0);
-		waitpid(child_two, &status, 0);
-		if (child_two > 0)
-			printf("parent done\n");
+		close(pipe_fd[0]);
+		close(pipe_fd[1]);
+		waitpid(child_one, &status_one, 0);
+		waitpid(child_two, &status_two, 0);
+		close(fd_file2);
+		printf("parent done\n");
 	}
+	free(cmd2);
 }
 
 int	main(int argc, char **argv, char **envp)
 {//argv[1] = file1, argv[2] = cmd1, argv[3] = cmd2, argv[4] = file2 
-	int		file1;
-	int		file2;
 //pipe, child one, parent 여기서 선언, 호출
+	int		fd_file1;
+	pid_t	child_one;
+	int		pipe_fd[2];
+	char	**cmd1;
+
 	if (argc != 5)
 		return (0);
-	file1 = open(argv[1], O_RDONLY);//얘한테 들어있는 텍스트 읽어서 실행 시키고 fd[0]에다가 쓸거임
-	file2 = open(argv[4], O_WRONLY);//fd[1]를 read해서 얘한테 쓸거임
-	ft_parent(file1, file2, argv, envp);
+	cmd1 = ft_split(argv[2]);
+	fd_file1 = open(argv[1], O_RDWR);
+	child_one = fork();
+	if (child_one == 0)
+		ft_child_one(fd_file1, cmd1, pipe_fd, envp)
+	if (child_one > 0)
+		ft_parent(childe_one, pipe_fd, argv, envp);
+	free(cmd1);
+	close(fd_file1);
 }
