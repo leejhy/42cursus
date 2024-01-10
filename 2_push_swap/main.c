@@ -12,7 +12,6 @@
 
 #include "push_swap.h"
 
-
 void	push_swap(t_pos *pos_a, t_pos *pos_b)
 {
 	if (pos_a->size == 0)

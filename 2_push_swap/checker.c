@@ -9,8 +9,13 @@
 /*   Updated: 2024/01/07 21:51:37 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <stdio.h>
 #include "checker.h"
+
+// void	f(void)
+// {
+// 	system("leaks checker");
+// }
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -40,13 +45,13 @@ int	is_nl(char *str)
 
 int	ft_read_op(t_pos *pos_a, t_pos *pos_b)
 {
-	char	str[9];
+	char	str[5];
 	char	buf;
 	size_t	i;
 	ssize_t	read_size;
 
 	i = 0;
-	while (i < 8)
+	while (i < 4)
 	{
 		read_size = read(0, &buf, 1);
 		str[i] = buf;
@@ -99,5 +104,6 @@ int	main(int argc, char **argv)
 	}
 	check_sorted(pos_a->front, pos_b);
 	ft_frees(nb_arr, str, pos_a, pos_b);
+	system("leaks checker");
 	return (0);
 }
