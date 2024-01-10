@@ -68,7 +68,9 @@ int	main(int argc, char **argv, char **envp)
 	pid_t	child_one;
 	int		pipe_fd[2];
 	char	**cmd1;
+	char	*path;
 
+	path = ft_get_path(envp);
 	if (argc != 5)
 		return (0);
 	cmd1 = ft_split(argv[2]);
