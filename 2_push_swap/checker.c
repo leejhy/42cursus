@@ -45,14 +45,14 @@ int	is_nl(char *str)
 
 int	ft_read_op(t_pos *pos_a, t_pos *pos_b)
 {
-	char	str[5];
+	char	str[10];
 	char	buf;
 	size_t	i;
 	ssize_t	read_size;
 
 	i = 0;
-	while (i < 4)
-	{
+	while (i < 9)
+	{//최대 4자리 ,rrr\n 근데 이 뒤에 다른게 달려서 들어올수도 있다고 판단해서 더 크게 받음
 		read_size = read(0, &buf, 1);
 		str[i] = buf;
 		i += 1;
