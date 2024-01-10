@@ -34,18 +34,24 @@ void	r_rotate(t_stack *head, t_pos *pos)
 
 void	rra(t_pos *pos_a)
 {
+	if (pos_a->size < 1)
+		return ;
 	r_rotate(pos_a->front, pos_a);
 	write(1, "rra\n", 4);
 }
 
 void	rrb(t_pos *pos_b)
 {
+	if (pos_b->size < 1)
+		return ;
 	r_rotate(pos_b->front, pos_b);
 	write(1, "rrb\n", 4);
 }
 
 void	rrr(t_pos *pos_a, t_pos *pos_b)
 {
+	if (pos_a->size < 1 || pos_b->size < 1)
+		return ;
 	r_rotate(pos_a->front, pos_a);
 	r_rotate(pos_b->front, pos_b);
 	write(1, "rrr\n", 4);

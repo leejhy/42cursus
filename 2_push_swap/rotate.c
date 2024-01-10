@@ -32,18 +32,24 @@ void	rotate(t_stack *head, t_pos *pos)
 
 void	ra(t_pos *pos_a)
 {
+	if (pos_a->size < 1)
+		return ;
 	rotate(pos_a->front, pos_a);
 	write(1, "ra\n", 3);
 }
 
 void	rb(t_pos *pos_b)
 {
+	if (pos_b->size < 1)
+		return ;
 	rotate(pos_b->front, pos_b);
 	write(1, "rb\n", 3);
 }
 
 void	rr(t_pos *pos_a, t_pos *pos_b)
 {
+	if (pos_a->size < 1 || pos_b->size < 1)
+		return ;
 	rotate(pos_a->front, pos_a);
 	rotate(pos_b->front, pos_b);
 	write(1, "rr\n", 3);
