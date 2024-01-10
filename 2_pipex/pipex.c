@@ -23,7 +23,6 @@ void	ft_child_one(int *pipe_fd, int fd_file1, char **cmd1, char **envp)
 
 void	ft_child_two(int *pipe_fd, int fd_file2, char **cmd2, char **envp)
 {//open file2
-55
 	//stdin을 pipe로
 	close(pipe_fd[1]);
 	dup2(pipe_fd[0], 0);
@@ -78,7 +77,10 @@ int	main(int argc, char **argv, char **envp)
 	if (child_one == 0)
 		ft_child_one(pipe_fd, fd_file1, cmd1, envp);
 	if (child_one > 0)
+	{
+		waitpid(child_one, &status_one, WNOHANG);
 		ft_parent(child_one, pipe_fd, argv, envp);
+	}
 	free(cmd1);
 	close(fd_file1);
 }
