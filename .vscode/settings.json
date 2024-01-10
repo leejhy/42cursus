@@ -7,6 +7,7 @@
 		"stdarg.h": "c",
 		"push_swap.h": "c",
 		"pipex.h": "c",
-		"errno.h": "c"
+		"errno.h": "c",
+		"checker.h": "c"
 	}
 }

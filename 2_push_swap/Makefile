@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 INC = push_swap.h
 SRCS =	main.c parsing.c parsing_utils.c \
 		push.c r_rotate.c rotate.c stack.c swap.c stack_utils.c \
@@ -9,7 +9,7 @@ OBJS = ${SRCS:.c=.o}
 BONUS_SRCS =	checker.c checker_utils.c \
 				parsing.c parsing_utils.c stack.c error.c \
 				push.c r_rotate.c rotate.c swap.c hard_sort.c \
-				stack_utils.c
+				stack_utils.c checker_error.c
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 BONUS_INC = checker.h
 NAME = push_swap

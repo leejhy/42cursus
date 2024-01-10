@@ -28,6 +28,7 @@ void	ft_frees(int *nb_arr, char *str, t_pos *pos_a, t_pos *pos_b)
 	free(nb_arr);
 	free(str);
 	ft_lstclear(&(pos_a->front));
+	ft_lstclear(&(pos_b->front));
 	free(pos_a);
 	free(pos_b);
 }

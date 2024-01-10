@@ -77,6 +77,8 @@ int	is_sorted(t_stack *head_a)
 	cnt = 0;
 	size = 0;
 	temp = head_a;
+	if (head_a == 0)
+		return (0);
 	while (temp->next != NULL)
 	{
 		if (temp->nb < temp->next->nb)

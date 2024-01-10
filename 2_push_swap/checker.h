@@ -13,6 +13,7 @@
 #ifndef CHECKER_H
 # define CHECKER_H
 
+# include <stdio.h>////////////////
 # include <unistd.h>
 # include <stdlib.h>
 
@@ -42,13 +43,14 @@ void	int_to_idx(t_stack **head_a, int *arr, int arr_cnt);
 void	ft_makestack(t_stack **head_A, int *nb_arr, int arr_cnt);
 void	ft_lstclear(t_stack **lst);
 void	ft_frees(int *nb_arr, char *str, t_pos *pos_a, t_pos *pos_b);
-void	ft_check_op(t_pos *pos_a, t_pos *pos_b, char *str);
+int		ft_check_op(t_pos *pos_a, t_pos *pos_b, char *str);
 int		ft_read_op(t_pos *pos_a, t_pos *pos_b);
 int		is_nl(char *str);
 int		ft_strcmp(char *s1, char *s2);
-void	ft_check_rotate(t_pos *pos_a, t_pos *pos_b, char *str);
-void	ft_check_swap(t_pos *pos_a, t_pos *pos_b, char *str);
-void	ft_check_push(t_pos *pos_a, t_pos *pos_b, char *str);
+int		ft_check_rotate(t_pos *pos_a, t_pos *pos_b, char *str);
+int		ft_check_r_rotate(t_pos *pos_a, t_pos *pos_b, char *str);
+int		ft_check_swap(t_pos *pos_a, t_pos *pos_b, char *str);
+int		ft_check_push(t_pos *pos_a, t_pos *pos_b, char *str);
 void	ft_check_error(char *str);
 void	ft_error(void);
 void	check_sorted(t_stack *head_a, t_pos *pos_b);

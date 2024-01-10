@@ -40,16 +40,16 @@ int	is_nl(char *str)
 
 int	ft_read_op(t_pos *pos_a, t_pos *pos_b)
 {
-	char	*str;
+	char	str[6];
 	char	buf;
 	size_t	i;
 	ssize_t	read_size;
 
-	str = malloc(sizeof(char) * 10);
-	if (!str)
-		exit(1);
+	// str = malloc(sizeof(char) * 5);
+	// if (!str)
+	// 	exit(1);
 	i = 0;
-	while (1)
+	while (i < 5)
 	{
 		read_size = read(0, &buf, 1);
 		str[i] = buf;
@@ -60,17 +60,24 @@ int	ft_read_op(t_pos *pos_a, t_pos *pos_b)
 		if (is_nl(str))
 			break ;
 	}
-	ft_check_op(pos_a, pos_b, str);
-	free(str);
+	if (ft_check_op(pos_a, pos_b, str) == 0)
+		ft_error();
+	// free(str);
 	return (1);
 }
 
-void	ft_check_op(t_pos *pos_a, t_pos *pos_b, char *str)
+int	ft_check_op(t_pos *pos_a, t_pos *pos_b, char *str)
 {
 	ft_check_error(str);
-	ft_check_rotate(pos_a, pos_b, str);
-	ft_check_swap(pos_a, pos_b, str);
-	ft_check_push(pos_a, pos_b, str);
+	if (ft_check_rotate(pos_a, pos_b, str))
+		return (1);
+	if (ft_check_r_rotate(pos_a, pos_b, str))
+		return (1);
+	if (ft_check_swap(pos_a, pos_b, str))
+		return (1);
+	if (ft_check_push(pos_a, pos_b, str))
+		return (1);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -82,7 +89,7 @@ int	main(int argc, char **argv)
 	size_t	nb_cnt;
 
 	if (argc <= 1)
-		ft_error();
+		exit(1);
 	init_pos(&pos_a, &pos_b);
 	str = parsing(argc, argv);
 	nb_cnt = ft_nb_cnt(str, ' ');

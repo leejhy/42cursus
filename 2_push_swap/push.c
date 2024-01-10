@@ -30,6 +30,7 @@ void	pb(t_pos *pos_a, t_pos *pos_b)
 		return ;
 	pos_a->size -= 1;
 	ft_push_b(pos_b->front, pos_b, pos_a->front->nb);
+	printf("===============\n");
 	if (pos_b->front == NULL)
 		exit(0);
 	ft_del_first_node(&(pos_a->front), &pos_a);
