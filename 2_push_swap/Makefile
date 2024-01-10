@@ -17,9 +17,7 @@ BONUS_NAME = checker
 
 all : $(NAME)
 
-bonus : 
-	ADD_BONUS=1
-	$(BONUS_NAME)
+bonus : $(BONUS_NAME)
 
 $(BONUS_NAME) : $(BONUS_OBJS) $(BONUS_INC)
 	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJS)
