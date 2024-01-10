@@ -40,16 +40,13 @@ int	is_nl(char *str)
 
 int	ft_read_op(t_pos *pos_a, t_pos *pos_b)
 {
-	char	str[6];
+	char	str[9];
 	char	buf;
 	size_t	i;
 	ssize_t	read_size;
 
-	// str = malloc(sizeof(char) * 5);
-	// if (!str)
-	// 	exit(1);
 	i = 0;
-	while (i < 5)
+	while (i < 8)
 	{
 		read_size = read(0, &buf, 1);
 		str[i] = buf;
@@ -62,13 +59,11 @@ int	ft_read_op(t_pos *pos_a, t_pos *pos_b)
 	}
 	if (ft_check_op(pos_a, pos_b, str) == 0)
 		ft_error();
-	// free(str);
 	return (1);
 }
 
 int	ft_check_op(t_pos *pos_a, t_pos *pos_b, char *str)
 {
-	ft_check_error(str);
 	if (ft_check_rotate(pos_a, pos_b, str))
 		return (1);
 	if (ft_check_r_rotate(pos_a, pos_b, str))

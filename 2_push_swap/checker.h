@@ -52,7 +52,6 @@ int		ft_check_rotate(t_pos *pos_a, t_pos *pos_b, char *str);
 int		ft_check_r_rotate(t_pos *pos_a, t_pos *pos_b, char *str);
 int		ft_check_swap(t_pos *pos_a, t_pos *pos_b, char *str);
 int		ft_check_push(t_pos *pos_a, t_pos *pos_b, char *str);
-void	ft_check_error(char *str);
 void	ft_error(void);
 void	check_sorted(t_stack *head_a, t_pos *pos_b);
 int		is_sorted(t_stack *head_a);

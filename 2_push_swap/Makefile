@@ -9,7 +9,7 @@ OBJS = ${SRCS:.c=.o}
 BONUS_SRCS =	checker.c checker_utils.c \
 				parsing.c parsing_utils.c stack.c error.c \
 				push.c r_rotate.c rotate.c swap.c hard_sort.c \
-				stack_utils.c checker_error.c
+				stack_utils.c
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 BONUS_INC = checker.h
 NAME = push_swap
@@ -17,7 +17,9 @@ BONUS_NAME = checker
 
 all : $(NAME)
 
-bonus : $(BONUS_NAME)
+bonus : 
+	ADD_BONUS=1
+	$(BONUS_NAME)
 
 $(BONUS_NAME) : $(BONUS_OBJS) $(BONUS_INC)
 	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJS)
@@ -34,6 +36,6 @@ clean :
 fclean : clean
 	rm -f $(NAME) $(BONUS_NAME)
 
-re : fclean all bonus
+re : fclean all
 
 .PHONY : clean fclean re all bonus
