@@ -34,6 +34,7 @@ typedef struct s_pos
 	t_stack	*rear;
 }	t_pos;
 
+void	ft_only_space(char *str);
 void	init_pos(t_pos **pos_a, t_pos **pos_b);
 char	*parsing(int argc, char **argv);
 size_t	ft_nb_cnt(char *str, char sep);

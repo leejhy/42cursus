@@ -51,6 +51,8 @@ size_t	ft_arg_len(char **argv, size_t arg_cnt)
 	{
 		len = 0;
 		tmp_str = argv[i];
+		if (*tmp_str == ' ')
+			ft_only_space(tmp_str);
 		if (*tmp_str == '\0')
 			ft_error();
 		while (tmp_str[len])
@@ -102,23 +104,11 @@ void	int_to_idx(t_stack **head_a, int *arr, int arr_cnt)
 	}
 }
 
-void	init_pos(t_pos **pos_a, t_pos **pos_b)
+void	ft_only_space(char *str)
 {
-	t_pos	*temp_a;
-	t_pos	*temp_b;
-
-	*pos_a = malloc(sizeof(t_pos));
-	if (!(*pos_a))
-		failed_malloc();
-	*pos_b = malloc(sizeof(t_pos));
-	if (!(*pos_b))
-		failed_malloc();
-	temp_a = *pos_a;
-	temp_b = *pos_b;
-	temp_a->front = NULL;
-	temp_b->front = NULL;
-	temp_a->rear = NULL;
-	temp_b->rear = NULL;
-	temp_a->size = 0;
-	temp_b->size = 0;
+	while (*str == ' ')
+		str++;
+	if (*str == '\0')
+		ft_error();
 }
+

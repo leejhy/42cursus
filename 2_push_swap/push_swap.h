@@ -34,6 +34,7 @@ typedef struct s_pos
 	t_stack	*rear;
 }	t_pos;
 
+void		ft_only_space(char *str);
 long long	ft_atoll(const char *str);
 t_stack		*ft_make_newnode(int nb);
 void		ft_lstadd_back(t_stack **head, t_stack *new);

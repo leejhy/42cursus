@@ -86,3 +86,24 @@ void	sort(int *arr, int arr_cnt)
 		i++;
 	}
 }
+
+void	init_pos(t_pos **pos_a, t_pos **pos_b)
+{
+	t_pos	*temp_a;
+	t_pos	*temp_b;
+
+	*pos_a = malloc(sizeof(t_pos));
+	if (!(*pos_a))
+		failed_malloc();
+	*pos_b = malloc(sizeof(t_pos));
+	if (!(*pos_b))
+		failed_malloc();
+	temp_a = *pos_a;
+	temp_b = *pos_b;
+	temp_a->front = NULL;
+	temp_b->front = NULL;
+	temp_a->rear = NULL;
+	temp_b->rear = NULL;
+	temp_a->size = 0;
+	temp_b->size = 0;
+}
