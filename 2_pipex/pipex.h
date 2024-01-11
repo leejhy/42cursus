@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:48:39 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/09 17:58:11 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:02:21 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,27 @@
 
 //pipex.c
 void	ft_parent(int *pipe_fd, char **argv, char **envp);
-void	ft_child_one(int *pipe_fd, int fd_file1, char **cmd1, char *cmd1_path);
-void	ft_child_one(int *pipe_fd, int fd_file1, char **cmd1, char *cmd1_path);
+void	ft_child_one(char *file, int *pipe_fd, char **cmd1, char *path);
+void	ft_child_two(char *file, int *pipe_fd, char **cmd2, char *path);
 //pipex_utils.c
+int		ft_open(char *filename, int option);
+void	wait_process(int process_cnt);
+size_t	ft_strlen(char *str);
+
+//ft_split.c
 size_t	ft_word_cnt(char *str, char sep);
 char	*ft_strdup(char *str, char sep);
+void	split_frees(char **ptr);
 char	**ft_split(char *str);
-//parsing.c
+//get_path.c
 char	*ft_path_cmd(char *cmd, char **envp);
-char	*ft_match_path(char *str_path, char *cmd);
+char	*ft_match_path(char *str_path, char *cmd, size_t cmd_len);
 char	*ft_get_path(char **envp);
-size_t	ft_strlen(char *str);
-int		ft_strncmp(char *s1, char *s2, int n);
+int		ft_strncmp(char *s1, char *s2, size_t n);
 //process.c
 void	wait_process(int process_cnt);
 //error.c
 void	ft_error(int err);
 void	malloc_failed(void);
+
 #endif

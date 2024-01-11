@@ -1,7 +1,7 @@
 CC = clang#cc로 수정
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 INC = pipex.h
-SRCS = pipex.c pipex_utils.c parsing.c error.c process.c
+SRCS = pipex.c pipex_utils.c ft_split.c get_path.c error.c
 OBJS = ${SRCS:.c=.o}
 NAME = pipex
 

@@ -1,47 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 18:28:09 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/11 20:32:11 by junhylee         ###   ########.fr       */
+/*   Created: 2024/01/11 18:27:25 by junhylee          #+#    #+#             */
+/*   Updated: 2024/01/11 18:27:26 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	wait_process(int process_cnt)
+void	ft_fo()
 {
-	int	i;
-	int	status;
-
-	i = 0;
-	while (i < process_cnt)
+	pid = fork();
+	if (pid == 0)
 	{
-		if (wait(&status) == -1)
+		if (close(pipe_fd[0]) == -1)
 			ft_error(errno);
-		i++;
+		if (dup2(pipe_fd[1], 0) == -1)
+			ft_error(errno);
+		if (dup2(pipe_fd[1], 1) == -1)//stdout을 file2 == -1)
+			ft_error(errno);
+		if (execve(cmd_path, cmd, 0) == -1)
+			ft_error(errno);
 	}
+	if (pid > 0)
+		return ;
 }
 
-int	ft_open(char *filename, int option)
+int	main(void)
 {
-	int	fd;
+	pid_t pid;
 
-	fd = open(filename, option);
-	if (fd == -1)
-		ft_error(errno);
-	return (fd);
-}
-
-size_t	ft_strlen(char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
+	int	i;
+	
+	i = 0;
+	pid = fork();
+	if (pid == 0)
+		ft_child();
+	if (pid > 0)
+	{
+		while (i < 10)
+		{
+			ft_fo;
+			i++;
+		}
+	}
 }
