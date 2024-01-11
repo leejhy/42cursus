@@ -51,6 +51,18 @@ char	*ft_strdup(char *str, char sep)
 	return (rt_str);
 }
 
+void	split_frees(char **ptr)
+{
+	int	i;
+
+	i = 0;
+	while (ptr[i])
+	{
+		free(ptr[i]);
+		i++;
+	}
+	free(ptr)
+}
 
 char	**ft_split(char *str)
 {

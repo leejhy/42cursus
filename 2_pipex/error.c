@@ -21,8 +21,8 @@ void	ft_error(int err)
 	str = strerror(err);
 	while (str[len])
 		len++;
-	write(1, str, len);
-	exit(1);
+	write(2, str, len);
+	exit(EXIT_FAILURE);
 }
 
 void	malloc_failed(void)

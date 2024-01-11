@@ -29,6 +29,7 @@ char	*ft_get_path(char **envp)
 	size_t	i;
 
 	i = 0;
+	str_path = NULL;
     while (envp[i])
     {
         if (ft_strncmp(envp[i], "PATH", 4) == 0)
@@ -80,23 +81,19 @@ char	*ft_match_path(char *str_path, char *cmd)
 	return (str_path + len + 1);
 }
 
-int main(int argc, char **argv, char **envp)//이름 바꿔야함
+char	*ft_path_cmd(char *cmd, char **envp)
 {
     char *str_path;
     char *match_path;
-    char *cmd[3];
-
-	cmd[0] = "ls";
-	cmd[1] = "-l";
-	cmd[2] = 0;
+  
     str_path = ft_get_path(envp);//ok
 	match_path = str_path;
 	while (*match_path)
 	{
-		match_path = ft_match_path(match_path, cmd[0]);
+		match_path = ft_match_path(match_path, cmd);
 		if (*match_path && access(match_path, F_OK & X_OK) == 0)
 			break ;
 	}
-    printf("%s\n", match_path);
-	execve(match_path, cmd, envp);
+	return (match_path);
+	// execve(match_path, cmd, envp);
 }
