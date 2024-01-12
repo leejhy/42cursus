@@ -54,10 +54,7 @@ char	*ft_get_path(char **envp)
 char	*ft_path_cmd(char *find_path, char *path, char *cmd)
 {
 	if (*path == '\0')
-	{
-		printf("????????????\n");
 		return (NULL);
-	}
 	while (*path && *path != ':')
 	{
 		*find_path = *path;
