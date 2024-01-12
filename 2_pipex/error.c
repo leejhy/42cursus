@@ -17,16 +17,20 @@ void	ft_error(int err)
 	char	*str;
 	size_t	len;
 
-	len = 0;
 	str = strerror(err);
-	while (str[len])
-		len++;
+	len = ft_strlen(str);
 	write(2, str, len);
 	exit(EXIT_FAILURE);
 }
 
 void	malloc_failed(void)
 {
-	perror("malloc failed");
-	exit(1);
+	write(2, "malloc failed\n", 14);
+	exit(EXIT_FAILURE);
+}
+
+void	argument_error(void)
+{
+	write(2, "invalid number of arguments\n", 28);
+	exit(EXIT_FAILURE);
 }

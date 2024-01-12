@@ -26,24 +26,20 @@ void	ft_parent(int *pipe_fd, char **argv, char **envp);
 void	ft_child_one(char *file, int *pipe_fd, char **cmd1, char *path);
 void	ft_child_two(char *file, int *pipe_fd, char **cmd2, char *path);
 //pipex_utils.c
-int		ft_open(char *filename, int option);
 void	wait_process(int process_cnt);
 size_t	ft_strlen(char *str);
-
 //ft_split.c
 size_t	ft_word_cnt(char *str, char sep);
 char	*ft_strdup(char *str, char sep);
 void	split_frees(char **ptr);
 char	**ft_split(char *str);
 //get_path.c
-char	*ft_path_cmd(char *cmd, char **envp);
-char	*ft_match_path(char *str_path, char *cmd, size_t cmd_len);
+char	*ft_find_path(char *cmd, char **envp);
+char	*ft_path_cmd(char *find_path, char *path, char *cmd);
 char	*ft_get_path(char **envp);
 int		ft_strncmp(char *s1, char *s2, size_t n);
-//process.c
-void	wait_process(int process_cnt);
 //error.c
 void	ft_error(int err);
 void	malloc_failed(void);
-
+void	argument_error(void);
 #endif

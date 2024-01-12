@@ -16,21 +16,26 @@ void	ft_child_one(char *file, int *pipe_fd, char **cmd1, char *path)
 {
 	int	fd_file1;
 
-	if (access(file, F_OK) == 0)
-		fd_file1 = open(file, O_RDWR);
-	else
-		fd_file1 = open(file, O_CREAT | O_RDWR);
 	fd_file1 = open(file, O_RDWR);
-	if (dup2(pipe_fd[1], 1) == -1)
+	if (fd_file1 == -1 ||
+		dup2(pipe_fd[1], 1) == -1 ||
+		dup2(fd_file1, 0) == -1 ||
+		close(pipe_fd[0]) == -1 ||
+		close(fd_file1) == -1 ||
+		execve(path, cmd1, 0) == -1)
 		ft_error(errno);
-	if (dup2(fd_file1, 0) == -1)
-		ft_error(errno);
-	if (close(pipe_fd[0]) == -1)
-		ft_error(errno);
-	if (close(fd_file1) == -1)
-		ft_error(errno);
-	if (execve(path, cmd1, 0) == -1)
-		ft_error(errno);
+	// if (ft_file1 == -1)
+	// 	ft_error(errno);
+	// if (dup2(pipe_fd[1], 1) == -1)
+	// 	ft_error(errno);
+	// if (dup2(fd_file1, 0) == -1)
+	// 	ft_error(errno);
+	// if (close(pipe_fd[0]) == -1)
+	// 	ft_error(errno);
+	// if (close(fd_file1) == -1)
+	// 	ft_error(errno);
+	// if (execve(path, cmd1, 0) == -1)
+	// 	ft_error(errno);
 }
 
 void	ft_child_two(char *file, int *pipe_fd, char **cmd2, char *path)
@@ -38,19 +43,26 @@ void	ft_child_two(char *file, int *pipe_fd, char **cmd2, char *path)
 	int	fd_file2;
 
 	if (access(file, F_OK) == 0)
-		fd_file2 = open(file, O_TRUNC | O_RDWR);
+		fd_file2 = open(file, O_TRUNC | O_WRONLY);
 	else
-		fd_file2 = open(file, O_CREAT | O_RDWR);
-	if (dup2(pipe_fd[0], 0) == -1) 
+		fd_file2 = open(file, O_CREAT | O_WRONLY, 0777);
+	if (fd_file2 == -1 ||
+		dup2(pipe_fd[0], 0) == -1 ||
+		dup2(fd_file2, 1) == -1 ||
+		close(pipe_fd[1]) == -1 ||
+		close(fd_file2) == -1 ||
+		execve(path, cmd2, 0) == -1)
 		ft_error(errno);
-	if (dup2(fd_file2, 1) == -1)
-		ft_error(errno);
-	if (close(pipe_fd[1]) == -1)
-		ft_error(errno);
-	if (close(fd_file2) == -1)
-		ft_error(errno);
-	if (execve(path, cmd2, 0) == -1)
-		ft_error(errno);
+	// if (dup2(pipe_fd[0], 0) == -1) 
+	// 	ft_error(errno);
+	// if (dup2(fd_file2, 1) == -1)
+	// 	ft_error(errno);
+	// if (close(pipe_fd[1]) == -1)
+	// 	ft_error(errno);
+	// if (close(fd_file2) == -1)
+	// 	ft_error(errno);
+	// if (execve(path, cmd2, 0) == -1)
+	// 	ft_error(errno);
 }
 
 void	ft_parent(int *pipe_fd, char **argv, char **envp)
@@ -60,7 +72,7 @@ void	ft_parent(int *pipe_fd, char **argv, char **envp)
 	char	*cmd2_path;
 
 	cmd2 = ft_split(argv[3]);
-	cmd2_path = ft_path_cmd(cmd2[0], envp);
+	cmd2_path = ft_find_path(cmd2[0], envp);
 	child_two = fork();
 	if (child_two < 0)
 		ft_error(errno);
@@ -88,7 +100,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 5)
 		return (0);
 	cmd1 = ft_split(argv[2]);
-	cmd1_path = ft_path_cmd(cmd1[0], envp);
+	cmd1_path = ft_find_path(cmd1[0], envp);
 	if (pipe(pipe_fd) == -1)
 		ft_error(errno);
 	child_one = fork();
@@ -102,4 +114,5 @@ int	main(int argc, char **argv, char **envp)
 		free(cmd1_path);
 		split_frees(cmd1);
 	}
+	return (0);
 }

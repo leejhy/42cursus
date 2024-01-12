@@ -51,54 +51,56 @@ char	*ft_get_path(char **envp)
 	return (str_path);
 }
 
-char	*ft_match_path(char *str_path, char *cmd, size_t cmd_len)
+char	*ft_path_cmd(char *find_path, char *path, char *cmd)
 {
-	char	*str;
-	size_t	i;
-	size_t	len;
-
-	i = 0;
-	len = 0;
-	while (str_path[len] != ':')
-		len++;
-	str = malloc(sizeof(char) * (len + cmd_len + 2));
-	while (str_path[i] && i < len)
+	if (*path == '\0')
 	{
-		str[i] = str_path[i];
-		i++;
+		printf("????????????\n");
+		return (NULL);
 	}
-	if (str_path[i])
+	while (*path && *path != ':')
 	{
-		str[i] = '/';
-		i++;
+		*find_path = *path;
+		path++;
+		find_path++;
 	}
+	if (*path == ':')
+		path++;
+	*find_path = '/';
+	find_path++;
 	while (*cmd)
 	{
-		str[i] = *cmd;
-		i++;
+		*find_path = *cmd;
+		find_path++;
 		cmd++;
 	}
-	str[i] = '\0';
-	if (access(str, F_OK & X_OK) == 0)
-		return (str);
-	free(str);
-	return (str_path + len + 1);
+	*find_path = '\0';
+	return (path);
 }
 
-char	*ft_path_cmd(char *cmd, char **envp)
+char	*ft_find_path(char *cmd, char **envp)
 {
-	char	*str_path;
-	char	*match_path;
+	char	*path;
+	char	*find_path;
 	size_t	cmd_len;
+	size_t	path_len;
 
-	str_path = ft_get_path(envp);
-	match_path = str_path;
+	path = ft_get_path(envp);
 	cmd_len = ft_strlen(cmd);
-	while (*match_path)
+	while (*path)
 	{
-		match_path = ft_match_path(match_path, cmd, cmd_len);
-		if (*match_path && access(match_path, F_OK & X_OK) == 0)
-			break ;
+		path_len = 0;
+		while (path[path_len] && path[path_len] != ':')
+			path_len++;
+		find_path = malloc(sizeof(char) * (path_len + cmd_len + 2));
+		if (!find_path)
+			malloc_failed();
+		path = ft_path_cmd(find_path, path, cmd);//밀린 포인터의 path를 받음
+		if (access(find_path, F_OK | X_OK) == 0)
+			return (find_path);
+		else
+			free(find_path);
 	}
-	return (match_path);
+	ft_error(errno);
+	return (0);
 }

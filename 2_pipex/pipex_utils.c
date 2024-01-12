@@ -26,16 +26,6 @@ void	wait_process(int process_cnt)
 	}
 }
 
-int	ft_open(char *filename, int option)
-{
-	int	fd;
-
-	fd = open(filename, option);
-	if (fd == -1)
-		ft_error(errno);
-	return (fd);
-}
-
 size_t	ft_strlen(char *str)
 {
 	size_t	len;
