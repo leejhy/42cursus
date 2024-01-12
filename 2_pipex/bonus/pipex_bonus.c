@@ -47,13 +47,13 @@ void	ft_mid_process()
 {
 	pid = fork();
 	if (pid == 0)
-
+	{
 		if (close(pipe_fd[0]) == -1 ||
 			dup2(pipe_fd[1], 0) == -1 ||
 			dup2(pipe_fd[1], 1) == -1 ||
 			execve(cmd_path, cmd, 0) == -1)
 			ft_error(errno);
-	}
+	} 
 	if (pid > 0)
 		return ;
 }
@@ -78,17 +78,14 @@ void	ft_parent(int **pipe_fd, char **argv, char **envp)
 			ft_prc_mid(pipefd[i + 1], cmd, envp);
 		if (pid > 0)
 		{
-			if ((close(pipe_fd[i + 1][0]) == -1) || 
-				(close(pipe_fd[i + 1][0] == -1)))
+			if ((close(pipe_fd[i + 1][0]) == -1) || z
+				(close(pipe_fd[i + 1][1] == -1)))
 				ft_error(errno);
+			// split_frees(cmd);// 이거 시간 되는지 확인
 		}
 		i++;
-	}
-		if (close(pipe_fd[0]) == -1 ||
-			close(pipe_fd[1]) == -1)
-			ft_error(errno);
-		wait_process(2);
-		split_frees(cmd2);
+		// wait_process(2);
+		// split_frees(cmd2);
 	}
 }
 
@@ -110,5 +107,7 @@ int	main(int argc, char **argv, char **envp)
 	else if (first_prc > 0)
 	{
 		ft_parent(pipe_fd, argv, envp);
+		//frees
+		//ft_wait_prcs(prc_cnt);
 	}
 }

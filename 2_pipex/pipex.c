@@ -60,7 +60,6 @@ void	ft_parent(int *pipe_fd, char **argv, char **envp)
 		if (close(pipe_fd[0]) == -1 ||
 			close(pipe_fd[1]) == -1)
 			ft_error(errno);
-		wait_process(2);
 		split_frees(cmd2);
 	}
 }
@@ -85,6 +84,7 @@ int	main(int argc, char **argv, char **envp)
 	else if (child_one > 0)
 	{
 		ft_parent(pipe_fd, argv, envp);
+		wait_process(2);
 		split_frees(cmd1);
 	}
 	return (0);
