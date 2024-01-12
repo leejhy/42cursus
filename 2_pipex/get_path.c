@@ -79,22 +79,25 @@ char	*ft_find_path(char *cmd, char **envp)
 {
 	char	*path;
 	char	*find_path;
-	size_t	cmd_len;
+	// size_t	cmd_len;
 	size_t	path_len;
 
 	path = ft_get_path(envp);
-	cmd_len = ft_strlen(cmd);
+	// cmd_len = ft_strlen(cmd);
 	while (*path)
 	{
 		path_len = 0;
 		while (path[path_len] && path[path_len] != ':')
 			path_len++;
-		find_path = malloc(sizeof(char) * (path_len + cmd_len + 2));
+		find_path = malloc(sizeof(char) * (path_len + ft_strlen(cmd) + 2));
 		if (!find_path)
 			malloc_failed();
 		path = ft_path_cmd(find_path, path, cmd);//밀린 포인터의 path를 받음
 		if (access(find_path, F_OK | X_OK) == 0)
+		{
+			free(cmd);
 			return (find_path);
+		}
 		else
 			free(find_path);
 	}

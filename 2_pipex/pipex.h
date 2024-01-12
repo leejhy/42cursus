@@ -23,8 +23,8 @@
 
 //pipex.c
 void	ft_parent(int *pipe_fd, char **argv, char **envp);
-void	ft_child_one(char *file, int *pipe_fd, char **cmd1, char *path);
-void	ft_child_two(char *file, int *pipe_fd, char **cmd2, char *path);
+void	ft_child_one(char *file, int *pipe_fd, char **cmd1, char **envp);
+void	ft_child_two(char *file, int *pipe_fd, char **cmd2, char **envp);
 //pipex_utils.c
 void	wait_process(int process_cnt);
 size_t	ft_strlen(char *str);
