@@ -6,16 +6,16 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:48:24 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/12 20:38:01 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/15 22:10:14 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	f()
-{
-	system("leaks pipex");
-}
+// void	f()
+// {
+// 	system("leaks pipex");
+// }
 
 void	ft_child_one(char *file, int *pipe_fd, char **cmd1, char **envp)
 {
@@ -84,7 +84,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_parent(pipe_fd, argv, envp);
 		wait_process(2);
 		split_frees(cmd1);
-		atexit(f);
+		// atexit(f);
 	}
 	return (0);
 }

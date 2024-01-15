@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:15:07 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/11 18:33:54 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/15 22:10:38 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	ft_strncmp(char *s1, char *s2, size_t n)
 	}
 	return (s1[i] - s2[i]);
 }
-
 
 char	*ft_get_path(char **envp)
 {
@@ -79,11 +78,9 @@ char	*ft_find_path(char *cmd, char **envp)
 {
 	char	*path;
 	char	*find_path;
-	// size_t	cmd_len;
 	size_t	path_len;
 
 	path = ft_get_path(envp);
-	// cmd_len = ft_strlen(cmd);
 	while (*path)
 	{
 		path_len = 0;
