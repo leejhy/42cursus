@@ -1,14 +1,24 @@
-
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-void	f(int *ptr)
+pid_t	get_pid(void)
 {
-	*ptr = 10;
+	pid_t	pid;
+
+	pid = fork();
+	if (pid < 0)
+		exit(1);
+	return (pid);
 }
 int	main(void)
 {
-	int	a;
-	f(&a);
-	printf("%d\n", a);
+	pid_t	pid;
+
+	pid = get_pid();
+	if (pid == 0)
+		printf("hellllllo\n");
+	if (pid > 0)
+		printf("mother\n");
+	r
 }

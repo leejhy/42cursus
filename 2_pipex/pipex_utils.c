@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:28:09 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/11 20:32:11 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/12 20:37:04 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ void	wait_process(int prc_cnt)
 			ft_error(errno);
 		i++;
 	}
+}
+
+pid_t	get_fork_pid(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid < 0)
+		ft_error(errno);
+	return (pid);
 }
 
 size_t	ft_strlen(char *str)

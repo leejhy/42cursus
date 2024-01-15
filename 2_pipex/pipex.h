@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:48:39 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/11 19:02:21 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/12 20:32:16 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ void	ft_child_one(char *file, int *pipe_fd, char **cmd1, char **envp);
 void	ft_child_two(char *file, int *pipe_fd, char **cmd2, char **envp);
 //pipex_utils.c
 void	wait_process(int process_cnt);
+pid_t	fork_pid(void);
 size_t	ft_strlen(char *str);
 //ft_split.c
 size_t	ft_word_cnt(char *str, char sep);
 char	*ft_strdup(char *str, char sep);
 void	split_frees(char **ptr);
-char	**ft_split(char *str);
+char	**ft_split(char *str, char **envp);
 //get_path.c
 char	*ft_find_path(char *cmd, char **envp);
 char	*ft_path_cmd(char *find_path, char *path, char *cmd);

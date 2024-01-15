@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:48:26 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/11 18:13:44 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:23:23 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	split_frees(char **ptr)
 	free(ptr);
 }
 
-char	**ft_split(char *str)
+char	**ft_split(char *str, char **envp)
 {
 	char	**strings;
 	size_t	word_cnt;
@@ -86,5 +86,6 @@ char	**ft_split(char *str)
 		i++;
 	}
 	strings[i] = NULL;
+	strings[0] = ft_find_path(strings[0], envp);
 	return (strings);
 }
