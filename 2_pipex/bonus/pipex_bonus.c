@@ -1,113 +1,123 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:27:25 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/11 18:27:26 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:31:02 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_first_process(char *file, int *pipe_fd, char **cmd1, char **envp)
+// void	f()
+// {
+// 	system("leaks pipex");
+// }
+
+void	first_prc(char *file, int *pipe_fd, char **cmd, char **envp)
 {
 	int	fd_file1;
 
 	fd_file1 = open(file, O_RDWR);
-	if (fd_file1 == -1 ||
-		dup2(pipe_fd[1], 1) == -1 ||
-		dup2(fd_file1, 0) == -1 ||
-		close(pipe_fd[0]) == -1 ||
-		close(fd_file1) == -1 ||
-		execve(cmd1[0], cmd1, envp) == -1)
+	if (fd_file1 == -1
+		|| dup2(fd_file1, 0) == -1
+		|| dup2(pipe_fd[1], 1) == -1
+		|| close(pipe_fd[0]) == -1
+		|| close(fd_file1) == -1
+		|| execve(cmd[0], cmd, envp) == -1)
 		ft_error(errno);
 }
 
-void	ft_last_process(char *file, int *pipe_fd, char **cmd2, char **envp)
+void	last_prc(int argc, char **argv, int *pipe_fd, char **envp)
 {
-	int	fd_file2;
+	int		fd_file;
+	char	**cmd;
+	pid_t	pid;
 
-	if (access(file, F_OK) == 0)
-		fd_file2 = open(file, O_TRUNC | O_WRONLY);
+	if (access(argv[argc - 1], F_OK) == 0)
+		fd_file = open(argv[argc - 1], O_TRUNC | O_WRONLY);
 	else
-		fd_file2 = open(file, O_CREAT | O_WRONLY, 0777);
-	if (fd_file2 == -1 ||
-		dup2(pipe_fd[0], 0) == -1 ||
-		dup2(fd_file2, 1) == -1 ||
-		close(pipe_fd[1]) == -1 ||
-		close(fd_file2) == -1 ||
-		execve(cmd2[0], cmd2, envp) == -1)
+		fd_file = open(argv[argc - 1], O_CREAT | O_WRONLY, 0777);
+	if (fd_file == -1)//얘는 여기다가 하는게 맞는듯
 		ft_error(errno);
-}
-
-void	ft_mid_process()
-{
-	pid = fork();
+	cmd = ft_split(argv[argc - 2], envp);
+	pid = get_fork_pid();
 	if (pid == 0)
 	{
-		if (close(pipe_fd[0]) == -1 ||
-			dup2(pipe_fd[1], 0) == -1 ||
-			dup2(pipe_fd[1], 1) == -1 ||
-			execve(cmd_path, cmd, 0) == -1)
+		if (dup2(pipe_fd[0], 0) == -1 || dup2(fd_file, 1) == -1
+			|| close(pipe_fd[1]) == -1 || close(fd_file) == -1
+			|| execve(cmd[0], cmd, envp) == -1)
 			ft_error(errno);
-	} 
+	}
 	if (pid > 0)
-		return ;
+	{
+		if (close(pipe_fd[0]) == -1 || close(pipe_fd[1]) == -1)
+			ft_error(errno);
+		split_frees(cmd);
+	}
 }
 
-void	ft_parent(int **pipe_fd, char **argv, char **envp)
+void	mid_prc(int *in_pipe, int *out_pipe, char **cmd, char **envp)
+{
+	if (dup2(in_pipe[0], 0) == -1)
+		ft_error(errno);
+	if (dup2(out_pipe[1], 1) == -1)
+		ft_error(errno);
+	if (close(in_pipe[1]) == -1)
+		ft_error(errno);
+	if (close(out_pipe[0]) == -1)
+		ft_error(errno);
+	if (execve(cmd[0], cmd, envp) == -1)
+		ft_error(errno);
+}
+
+void	make_mid_prc(int prc_cnt, int **pipe_fd, char **argv, char **envp)
 {
 	int		i;
 	pid_t	pid;
 	char	**cmd;
 
 	i = 0;
-	while (i < prc_cnt)
+	while (i < prc_cnt - 2)// first, last process 제외
 	{
-		if (pipe(pipe_fd[i + 1]) == -1)
-			ft_error(errno)
-		cmd = ft_split(argv[i + 2]);
-		cmd[0] = ft_find_path(cmd[0], envp);
-		pid = fork();
-		if (pid < 0)
-			ft_error(errno);
+		cmd = ft_split(argv[i + 3], envp);
+		pid = get_fork_pid();
 		if (pid == 0)
-			ft_prc_mid(pipefd[i + 1], cmd, envp);
+			mid_prc(pipe_fd[i], pipe_fd[i + 1], cmd, envp);
 		if (pid > 0)
 		{
-			if ((close(pipe_fd[i + 1][0]) == -1) || z
-				(close(pipe_fd[i + 1][1] == -1)))
+			if (close(pipe_fd[i][0]) == -1)
 				ft_error(errno);
-			// split_frees(cmd);// 이거 시간 되는지 확인
+			if (close(pipe_fd[i][1]) == -1)
+				ft_error(errno);
+			split_frees(cmd);
 		}
 		i++;
-		// wait_process(2);
-		// split_frees(cmd2);
 	}
 }
 
-
 int	main(int argc, char **argv, char **envp)
-{//argc-3이 cmd개수, 자식 프로세스 개수
-	pid_t	first_prc;
+{
+	pid_t	first_pid;
 	int		prc_cnt;
 	int		**pipe_fd;
+	char	**cmd;
 
-	pipe_fd = init_pipe(argc, argv, &prc_cnt);
-	if (pipe(pipe_fd[0]) == -1)
-		ft_error(errno);
-	first_prc = fork();
-	if (first_prc < 0)
-		ft_error(errno);
-	else if (first_prc == 0)
-		ft_first_process();
-	else if (first_prc > 0)
+	pipe_fd = init_pipe(argc, &prc_cnt);
+	cmd = ft_split(argv[2], envp);
+	first_pid = get_fork_pid();
+	if (first_pid == 0)
+		first_prc(argv[1], pipe_fd[0], cmd, envp);
+	else if (first_pid > 0)
 	{
-		ft_parent(pipe_fd, argv, envp);
-		//frees
-		//ft_wait_prcs(prc_cnt);
+		make_mid_prc(prc_cnt, pipe_fd, argv, envp);
+		last_prc(argc, argv, pipe_fd[prc_cnt - 2], envp);
+		pipes_free(pipe_fd, prc_cnt - 1);
+		ft_wait_prcs(prc_cnt);
+		split_frees(cmd);
 	}
+	// atexit(f);
 }
