@@ -30,7 +30,7 @@ void	make_mid_prc(int prc_cnt, int **pipe_fd, char **argv, char **envp);
 int		**init_pipe(int argc, int *prc_cnt);
 void	pipes_free(int **pipes, int free_cnt);
 //pipex_utils.c
-void	ft_wait_prcs(int prc_cnt);
+void	wait_process(int prc_cnt);
 pid_t	get_fork_pid(void);
 size_t	ft_strlen(char *str);
 //ft_split.c

@@ -119,7 +119,7 @@ int	main(int argc, char **argv, char **envp)
 		make_mid_prc(prc_cnt, pipe_fd, argv, envp);
 		last_prc(argc, argv, pipe_fd[prc_cnt - 2], envp);
 		pipes_free(pipe_fd, prc_cnt - 1);
-		ft_wait_prcs(prc_cnt);
+		wait_process(prc_cnt);
 		split_frees(cmd);
 	}
 	// atexit(f);
