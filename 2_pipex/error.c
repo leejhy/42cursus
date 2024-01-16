@@ -6,11 +6,12 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:48:31 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/15 22:09:51 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:56:47 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "pipex_bonus.h"
 
 void	ft_error(int err)
 {
@@ -41,4 +42,3 @@ void	input_error(void)
 	write(2, "wrong argument input\n", 21);
 	exit(EXIT_FAILURE);
 }
-

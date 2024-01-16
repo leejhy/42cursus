@@ -6,11 +6,12 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:48:26 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/12 18:23:23 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:55:06 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "pipex_bonus.h"
 
 size_t	ft_word_cnt(char *str, char sep)
 {

@@ -6,16 +6,11 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:48:24 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/15 22:10:14 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:14:28 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-// void	f()
-// {
-// 	system("leaks pipex");
-// }
 
 void	ft_child_one(char *file, int *pipe_fd, char **cmd1, char **envp)
 {
@@ -38,7 +33,7 @@ void	ft_child_two(char *file, int *pipe_fd, char **cmd2, char **envp)
 	if (access(file, F_OK) == 0)
 		fd_file2 = open(file, O_TRUNC | O_WRONLY);
 	else
-		fd_file2 = open(file, O_CREAT | O_WRONLY, 0777);
+		fd_file2 = open(file, O_CREAT | O_WRONLY, 0666);
 	if (fd_file2 == -1
 		|| dup2(pipe_fd[0], 0) == -1
 		|| dup2(fd_file2, 1) == -1
@@ -84,7 +79,6 @@ int	main(int argc, char **argv, char **envp)
 		ft_parent(pipe_fd, argv, envp);
 		wait_process(2);
 		split_frees(cmd1);
-		// atexit(f);
 	}
 	return (0);
 }

@@ -6,27 +6,26 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:48:39 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/12 20:32:16 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:10:31 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <unistd.h>//write,read, fork pipe
-# include <stdlib.h>//exit
-# include <stdio.h>//perror
-# include <string.h>//strerror
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
 # include <errno.h>
 # include <sys/wait.h>
-# include <fcntl.h>//open
+# include <fcntl.h>
 
 //pipex.c
 void	ft_parent(int *pipe_fd, char **argv, char **envp);
 void	ft_child_one(char *file, int *pipe_fd, char **cmd1, char **envp);
 void	ft_child_two(char *file, int *pipe_fd, char **cmd2, char **envp);
 //pipex_utils.c
-void	wait_process(int process_cnt);
+void	wait_process(int prc_cnt);
 pid_t	get_fork_pid(void);
 size_t	ft_strlen(char *str);
 //ft_split.c

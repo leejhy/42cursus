@@ -6,11 +6,12 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:28:09 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/12 20:37:04 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:55:47 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "pipex_bonus.h"
 
 void	wait_process(int prc_cnt)
 {

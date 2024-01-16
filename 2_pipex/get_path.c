@@ -6,11 +6,12 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:15:07 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/15 22:10:38 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:56:55 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "pipex_bonus.h"
 
 int	ft_strncmp(char *s1, char *s2, size_t n)
 {
@@ -89,7 +90,7 @@ char	*ft_find_path(char *cmd, char **envp)
 		find_path = malloc(sizeof(char) * (path_len + ft_strlen(cmd) + 2));
 		if (!find_path)
 			malloc_failed();
-		path = ft_path_cmd(find_path, path, cmd);//밀린 포인터의 path를 받음
+		path = ft_path_cmd(find_path, path, cmd);
 		if (access(find_path, F_OK | X_OK) == 0)
 		{
 			free(cmd);

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:11:56 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/15 21:28:26 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:57:09 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "pipex_bonus.h"
 
 int	**init_pipe(int argc, int *prc_cnt)
 {
@@ -21,7 +22,7 @@ int	**init_pipe(int argc, int *prc_cnt)
 	if (argc <= 4)
 		argument_error();
 	*prc_cnt = argc - 3;
-	fds = malloc(sizeof(int *) * (*prc_cnt - 1));//파이프는 process 개수 - 1 개만큼 필요
+	fds = malloc(sizeof(int *) * (*prc_cnt - 1));
 	if (!fds)
 		malloc_failed();
 	while (i < (*prc_cnt - 1))

@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:27:25 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/15 21:31:02 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:07:02 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
-// void	f()
-// {
-// 	system("leaks pipex");
-// }
 
 void	first_prc(char *file, int *pipe_fd, char **cmd, char **envp)
 {
@@ -30,7 +25,6 @@ void	first_prc(char *file, int *pipe_fd, char **cmd, char **envp)
 		|| execve(cmd[0], cmd, envp) == -1)
 		ft_error(errno);
 }
-
 
 void	mid_prc(int *in_pipe, int *out_pipe, char **cmd, char **envp)
 {
@@ -53,7 +47,7 @@ void	make_mid_prc(int prc_cnt, int **pipe_fd, char **argv, char **envp)
 	char	**cmd;
 
 	i = 0;
-	while (i < prc_cnt - 2)// first, last process 제외
+	while (i < prc_cnt - 2)
 	{
 		if (pipe(pipe_fd[i + 1]) == -1)
 			ft_error(errno);
@@ -82,8 +76,8 @@ void	last_prc(int argc, char **argv, int *pipe_fd, char **envp)
 	if (access(argv[argc - 1], F_OK) == 0)
 		fd_file = open(argv[argc - 1], O_TRUNC | O_WRONLY);
 	else
-		fd_file = open(argv[argc - 1], O_CREAT | O_WRONLY, 0777);
-	if (fd_file == -1)//얘는 여기다가 하는게 맞는듯
+		fd_file = open(argv[argc - 1], O_CREAT | O_WRONLY, 0666);
+	if (fd_file == -1)
 		ft_error(errno);
 	cmd = ft_split(argv[argc - 2], envp);
 	pid = get_fork_pid();
@@ -122,5 +116,4 @@ int	main(int argc, char **argv, char **envp)
 		wait_process(prc_cnt);
 		split_frees(cmd);
 	}
-	// atexit(f);
 }

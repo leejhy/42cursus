@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:48:39 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/15 21:33:26 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:10:45 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
-# include <unistd.h>//write,read, fork pipe
-# include <stdlib.h>//exit
-# include <stdio.h>//perror
-# include <string.h>//strerror
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
 # include <errno.h>
 # include <sys/wait.h>
-# include <fcntl.h>//open
+# include <fcntl.h>
 
-//pipex.c
+//pipex_bonus.c
 void	first_prc(char *file, int *pipe_fd, char **cmd, char **envp);
 void	last_prc(int argc, char **argv, int *pipe_fd, char **envp);
 void	mid_prc(int *in_pipe, int *out_pipe, char **cmd, char **envp);
 void	make_mid_prc(int prc_cnt, int **pipe_fd, char **argv, char **envp);
-//init.c
+//init_bonus.c
 int		**init_pipe(int argc, int *prc_cnt);
 void	pipes_free(int **pipes, int free_cnt);
 //pipex_utils.c
