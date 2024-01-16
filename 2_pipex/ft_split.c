@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:48:26 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/16 17:55:06 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:15:30 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t	ft_word_cnt(char *str, char sep)
 
 	i = 0;
 	cnt = 0;
-	if (str[i] != '\0' && str[i] == sep)
+	while (str[i] != '\0' && str[i] == sep)
 		i++;
 	if (str[i] == '\0')
 		input_error();
