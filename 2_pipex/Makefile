@@ -5,13 +5,12 @@ INC = pipex.h
 SRCS = pipex.c pipex_utils.c ft_split.c get_path.c error.c
 OBJS = ${SRCS:.c=.o}
 BNS_INC = pipex_bonus.h
-BNS_SRCS = ./init.c ./pipex_bonus.c pipex_utils.c ft_split.c get_path.c error.c
+BNS_SRCS = init_bonus.c pipex_bonus.c pipex_utils.c ft_split.c get_path.c error.c
 BNS_OBJS = ${BNS_SRCS:.c=.o}
 NAME = pipex
 
-ifndef ADD_BONUS
-	OBJS := $(OBJS) $(BNS_OBJS)
-	INC = $(BNS_INC)
+ifdef ADD_BONUS
+	OBJS := $(BNS_OBJS)
 endif
 
 all : ${NAME}

@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:11:56 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/15 21:36:39 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:28:26 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	**init_pipe(int argc, int *prc_cnt)
 	int	i;
 
 	i = 0;
-	if (argc < 4)
+	if (argc <= 4)
 		argument_error();
 	*prc_cnt = argc - 3;
 	fds = malloc(sizeof(int *) * (*prc_cnt - 1));//파이프는 process 개수 - 1 개만큼 필요
@@ -29,10 +29,10 @@ int	**init_pipe(int argc, int *prc_cnt)
 		fds[i] = malloc(sizeof(int) * 2);
 		if (!fds[i])
 			malloc_failed();
-		if (pipe(fds[i]) == -1)
-			ft_error(errno);
 		i++;
 	}
+	if (pipe(fds[0]) == -1)
+		ft_error(errno);
 	return (fds);
 }
 
