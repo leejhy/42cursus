@@ -20,6 +20,7 @@ void	ft_error(int err)
 	str = strerror(err);
 	len = ft_strlen(str);
 	write(2, str, len);
+	write(1, "\n", 1);
 	exit(EXIT_FAILURE);
 }
 

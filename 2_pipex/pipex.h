@@ -27,7 +27,7 @@ void	ft_child_one(char *file, int *pipe_fd, char **cmd1, char **envp);
 void	ft_child_two(char *file, int *pipe_fd, char **cmd2, char **envp);
 //pipex_utils.c
 void	wait_process(int process_cnt);
-pid_t	fork_pid(void);
+pid_t	get_fork_pid(void);
 size_t	ft_strlen(char *str);
 //ft_split.c
 size_t	ft_word_cnt(char *str, char sep);
@@ -43,4 +43,5 @@ int		ft_strncmp(char *s1, char *s2, size_t n);
 void	ft_error(int err);
 void	malloc_failed(void);
 void	argument_error(void);
+
 #endif
