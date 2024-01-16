@@ -35,3 +35,10 @@ void	argument_error(void)
 	write(2, "invalid number of arguments\n", 28);
 	exit(EXIT_FAILURE);
 }
+
+void	input_error(void)
+{
+	write(2, "wrong input argument\n", 21);
+	exit(EXIT_FAILURE);
+}
+

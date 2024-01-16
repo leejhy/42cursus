@@ -47,5 +47,6 @@ int		ft_strncmp(char *s1, char *s2, size_t n);
 void	ft_error(int err);
 void	malloc_failed(void);
 void	argument_error(void);
+void	input_error(void);
 
 #endif
