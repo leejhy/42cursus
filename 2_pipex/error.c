@@ -38,7 +38,7 @@ void	argument_error(void)
 
 void	input_error(void)
 {
-	write(2, "wrong input argument\n", 21);
+	write(2, "wrong argument input\n", 21);
 	exit(EXIT_FAILURE);
 }
 
