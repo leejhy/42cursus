@@ -16,9 +16,7 @@
 size_t	ft_word_cnt(char *str, char sep)
 {
 	size_t	cnt;
-	size_t	i;
 
-	i = 0;
 	cnt = 0;
 	while (*str)
 	{

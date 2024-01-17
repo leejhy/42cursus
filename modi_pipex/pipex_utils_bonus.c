@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
 #include "pipex_bonus.h"
 
 int	**init_pipe(int argc, int *prc_cnt)

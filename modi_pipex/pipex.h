@@ -34,6 +34,7 @@ char	*ft_strdup(char *str, char sep);
 void	split_frees(char **ptr);
 char	**ft_split(char *str);
 //get_path.c
+char	**get_cmd(char *cmd, char **envp);
 char	*ft_find_path(char *cmd, char **envp);
 char	*ft_path_cmd(char *find_path, char *path, char *cmd);
 char	*ft_get_path(char **envp);
@@ -43,6 +44,8 @@ void	ft_error(int err);
 void	malloc_failed(void);
 void	argument_error(void);
 void	input_error(void);
-//error2.c
+void	cmd_error(void);
+//error_utils.c
 int		check_cmd(char **cmd);
+
 #endif

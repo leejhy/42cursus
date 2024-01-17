@@ -29,7 +29,6 @@ void	make_mid_prc(int prc_cnt, int **pipe_fd, char **argv, char **envp);
 //pipex_utils_bonus.c
 int		**init_pipe(int argc, int *prc_cnt);
 void	pipes_free(int **pipes, int free_cnt);
-
 void	execute_last(int fd_file, int *pipe_fd, char **cmd, char **envp);
 //pipex_utils.c
 void	wait_process(int prc_cnt);
@@ -51,7 +50,7 @@ void	ft_error(int err);
 void	malloc_failed(void);
 void	argument_error(void);
 void	input_error(void);
-void	cmd_error(char **cmd, char **envp);
+void	cmd_error(void);
 //error2.c
 int		check_cmd(char **cmd);
 #endif

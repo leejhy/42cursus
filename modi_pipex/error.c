@@ -43,8 +43,14 @@ void	input_error(void)
 	exit(EXIT_FAILURE);
 }
 
-void	cmd_error(char **cmd, char **envp)
+void	cmd_error(void)
 {
-	if (execve(cmd, cmd, envp) == -1)
-		ft_error(errno);
+	char *str;
+	size_t	len;
+
+	str = strerror(2);
+	len = ft_strlen(str);
+	write(2, str, len);
+	write(2, "\n", 1);
+	exit(EXIT_FAILURE);
 }

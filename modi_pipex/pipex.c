@@ -48,7 +48,9 @@ void	ft_parent(int *pipe_fd, char **argv, char **envp)
 	pid_t	child_two;
 	char	**cmd2;
 
-	cmd2 = ft_split(argv[3], envp);
+	cmd2 = get_cmd(argv[3], envp);
+	if (check_cmd(cmd2))
+		cmd_error();
 	child_two = get_fork_pid();
 	if (child_two == 0)
 		ft_child_two(argv[4], pipe_fd, cmd2, envp);
@@ -68,7 +70,9 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 5)
 		argument_error();
-	cmd1 = ft_split(argv[2], envp);
+	cmd1 = get_cmd(argv[2], envp);
+	if (check_cmd(cmd1))
+		cmd_error();
 	if (pipe(pipe_fd) == -1)
 		ft_error(errno);
 	child_one = get_fork_pid();
