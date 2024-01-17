@@ -42,3 +42,9 @@ void	input_error(void)
 	write(2, "wrong argument input\n", 21);
 	exit(EXIT_FAILURE);
 }
+
+void	cmd_error(char **cmd, char **envp)
+{
+	if (execve(cmd, cmd, envp) == -1)
+		ft_error(errno);
+}

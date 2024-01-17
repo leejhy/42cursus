@@ -43,5 +43,6 @@ void	ft_error(int err);
 void	malloc_failed(void);
 void	argument_error(void);
 void	input_error(void);
-
+//error2.c
+int		check_cmd(char **cmd);
 #endif

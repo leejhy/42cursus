@@ -2,10 +2,10 @@ CC = cc
 # CFLAGS = -Wall -Wextra -Werror
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 INC = pipex.h
-SRCS = pipex.c pipex_utils.c ft_split.c get_path.c error.c
+SRCS = pipex.c pipex_utils.c ft_split.c get_path.c error.c error2.c
 OBJS = ${SRCS:.c=.o}
 BNS_INC = pipex_bonus.h
-BNS_SRCS = init_bonus.c pipex_bonus.c pipex_utils.c ft_split.c get_path.c error.c
+BNS_SRCS = init_bonus.c pipex_bonus.c pipex_utils.c ft_split.c get_path.c error.c error2.c
 BNS_OBJS = ${BNS_SRCS:.c=.o}
 NAME = pipex
 

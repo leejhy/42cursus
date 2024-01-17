@@ -20,10 +20,6 @@ size_t	ft_word_cnt(char *str, char sep)
 
 	i = 0;
 	cnt = 0;
-	if (str[i] != '\0' && str[i] == sep)
-		i++;
-	if (str[i] == '\0')
-		input_error();
 	while (*str)
 	{
 		while (*str && *str == sep)
@@ -78,8 +74,6 @@ char	**ft_split(char *str)
 	size_t	i;
 
 	i = 0;
-	if (str == NULL || *str == 0)
-		input_error();
 	word_cnt = ft_word_cnt(str, ' ');
 	strings = malloc(sizeof(char *) * (word_cnt + 1));
 	if (!strings)

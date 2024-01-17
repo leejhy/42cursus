@@ -49,3 +49,11 @@ void	pipes_free(int **pipes, int free_cnt)
 	}
 	free(pipes);
 }
+
+void	execute_last(int fd_file, int *pipe_fd, char **cmd, char **envp)
+{
+	if (dup2(pipe_fd[0], 0) == -1 || dup2(fd_file, 1) == -1
+		|| close(pipe_fd[1]) == -1 || close(fd_file) == -1
+		|| execve(cmd[0], cmd, envp) == -1)
+		ft_error(errno);
+}

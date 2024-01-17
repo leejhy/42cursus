@@ -15,7 +15,8 @@
 void	first_prc(char *file, int *pipe_fd, char **cmd, char **envp)
 {
 	int	fd_file1;
-
+	if (check_cmd(cmd))
+		cmd_error(cmd, envp);
 	fd_file1 = open(file, O_RDWR);
 	if (fd_file1 == -1
 		|| dup2(fd_file1, 0) == -1
@@ -28,6 +29,8 @@ void	first_prc(char *file, int *pipe_fd, char **cmd, char **envp)
 
 void	mid_prc(int *in_pipe, int *out_pipe, char **cmd, char **envp)
 {
+	// if (check_cmd(cmd))
+	// 	cmd_error(cmd, envp);
 	if (dup2(in_pipe[0], 0) == -1)
 		ft_error(errno);
 	if (dup2(out_pipe[1], 1) == -1)
@@ -52,6 +55,8 @@ void	make_mid_prc(int prc_cnt, int **pipe_fd, char **argv, char **envp)
 		if (pipe(pipe_fd[i + 1]) == -1)
 			ft_error(errno);
 		cmd = get_cmd(argv[i + 3], envp);
+		if (check_cmd(cmd))
+			cmd_error(cmd, envp)
 		pid = get_fork_pid();
 		if (pid == 0)
 			mid_prc(pipe_fd[i], pipe_fd[i + 1], cmd, envp);
@@ -80,13 +85,16 @@ void	last_prc(int argc, char **argv, int *pipe_fd, char **envp)
 	if (fd_file == -1)
 		ft_error(errno);
 	cmd = get_cmd(argv[argc - 2], envp);
+	if (check_cmd(cmd))
+		cmd_error(cmd, envp);
 	pid = get_fork_pid();
 	if (pid == 0)
 	{
-		if (dup2(pipe_fd[0], 0) == -1 || dup2(fd_file, 1) == -1
-			|| close(pipe_fd[1]) == -1 || close(fd_file) == -1
-			|| execve(cmd[0], cmd, envp) == -1)
-			ft_error(errno);
+		execute_last(fd_file, pipe_fd, cmd, envp);
+		// if (dup2(pipe_fd[0], 0) == -1 || dup2(fd_file, 1) == -1
+		// 	|| close(pipe_fd[1]) == -1 || close(fd_file) == -1
+		// 	|| execve(cmd[0], cmd, envp) == -1)
+		// 	ft_error(errno);
 	}
 	if (pid > 0)
 	{
@@ -105,6 +113,8 @@ int	main(int argc, char **argv, char **envp)
 
 	pipe_fd = init_pipe(argc, &prc_cnt);
 	cmd = get_cmd(argv[2], envp);
+	if (check_cmd(cmd))
+		cmd_error(cmd, envp);
 	first_pid = get_fork_pid();
 	if (first_pid == 0)
 		first_prc(argv[1], pipe_fd[0], cmd, envp);

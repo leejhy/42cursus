@@ -106,7 +106,15 @@ char	*ft_find_path(char *cmd, char **envp)
 char	**get_cmd(char *cmd, char **envp)
 {
 	char	**split_str;
+	size_t	i;
 
+	i = 0;
+	if (cmd == NULL || *cmd == '\0')
+		return (NULL);
+	while (cmd[i] == ' ')
+		i++;
+	if (cmd[i] == '\0')
+		return (NULL);
 	split_str = ft_split(cmd);
 	if (access(split_str[0], F_OK & X_OK) == 0)
 		return (split_str);
