@@ -1,6 +1,6 @@
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 INC = pipex.h
 SRCS = pipex.c pipex_utils.c ft_split.c get_path.c error.c error_utils.c
 OBJS = ${SRCS:.c=.o}

@@ -19,7 +19,6 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-#include <stdio.h>
 
 //pipex_bonus.c
 void	first_prc(char *file, int *pipe_fd, char **cmd, char **envp);
