@@ -28,7 +28,15 @@ typedef struct s_env
 	char	*key;
 	char	*value;
 }	t_env;
+//here_doc.c
+char	*ft_strjoin(const char *s1, const char *s2);
+t_list	*make_list(void);
+t_list	*set_list(int *cnt);
+char	*run_heredoc(int heredoc_cnt);
 
-// void	execute_cmd(t_cmd *pa, pipe_fd);
-
+//here_doc_utils.c
+void	clear_list(t_list *head);
+char	*make_doc_name(int nb);
+pid_t	fork_pid(void);
+size_t	ft_strlen(char *str);
 #endif

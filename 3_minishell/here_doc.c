@@ -19,6 +19,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	size_t	s2_len;
 
 	s1_len = 0;
+	s2_len = 0;
 	while (s1 && s1[s1_len])
 		s1_len++;
 	while (s2 && s2[s2_len])
@@ -83,46 +84,61 @@ t_list	*set_list(int *cnt)
 	return (head);
 }
 
-char	**make_heredoc(int heredoc_cnt, int *heredoc_fd)
+char	*run_heredoc(int heredoc_cnt)
 {
-	char	*temp_name;
-	char	**doc_name;
-	int	i;
+	pid_t	pid;
+	char	*doc_name;
+	char	*input;
+	int		fd;
+	int		i;
 
 	i = 0;
-	doc_name = malloc(sizeof(char *) * (heredoc_cnt + 1));
 	while (i < heredoc_cnt)
 	{//name 만드는 부분 함수로 빼자
-		if (i < 10)
+		printf("=1111\n");
+		doc_name = make_doc_name(i);
+		pid = fork_pid();
+		if (pid == 0)
 		{
-			temp_name = malloc(sizeof(char) * 2);//숫자 1개, 널
-			temp_name[0] = i + '0';
-			temp_name[1] = '\0';
+			printf("=222\n");
+			fd = open(doc_name, O_TRUNC | O_CREAT | O_RDWR, 0666);
+			dup2(fd, 1);//input을 fd로
+			while (1)
+			{
+				printf("=222\n");
+				input = readline("> ");
+				// if (strncmp(input, "limiter", ft_strlen(limiter)) == 0)//limiter 확이인
+				if (strncmp(input, "lim", 4) == 0)//limiter 확이인
+					break ;
+				write(fd, input, ft_strlen(input));
+			}
 		}
-		else
+		else if (pid > 0)
 		{
-			temp_name = malloc(sizeof(char) * 3);
-			temp_name[0] = '1';
-			temp_name[1] = (i % 10) + '0';
-			temp_name[2] = '\0';
+			waitpid(pid, 0, 0);
+			if (i != heredoc_cnt - 1)
+			{
+				close(fd);
+				unlink(doc_name);
+				free(doc_name);
+			}
+			// else// i == heredoc_cnt -1 (마지막 )
+				//doc_name, fd 리턴시켜야함
 		}
-		doc_name[i] = ft_strjoin("/tmp/here_doc", temp_name);//i번째에 이름넣기
-		free(temp_name);
-		heredoc_fd[i] = open(doc_name[i], O_TRUNC | O_CREAT | O_RDWR, 0666);
 		i++;
 	}
-	doc_name[i] = NULL;
 	return (doc_name);
 }
 
 int	main(void)
 {
 	t_list	*head;
-	int		*heredoc_fd;
-	char	**doc_name;
+	char	*str;
 	int		cnt;
-	
+	int		i;
+
+	i = 0;
 	head = set_list(&cnt);//테스트 리스트 만들기
-	heredoc_fd = malloc(sizeof(int) * cnt);//heredoc 개수만큼 말록
-	doc_name = make_heredoc(cnt, heredoc_fd);
+	str = run_heredoc(cnt);
+	clear_list(head);
 }
