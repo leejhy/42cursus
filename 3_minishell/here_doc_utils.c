@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   here_doc_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/01 17:56:40 by junhylee          #+#    #+#             */
+/*   Updated: 2024/02/01 18:03:03 by junhylee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 size_t	ft_strlen(char *str)
@@ -26,7 +38,6 @@ char	*make_doc_name(int nb)
 {
 	char	*doc_name;
 	char	*doc_nb;
-	int		fd;
 
 	if (nb < 10)
 	{
@@ -41,7 +52,7 @@ char	*make_doc_name(int nb)
 		doc_nb[1] = (nb % 10) + '0';
 		doc_nb[2] = '\0';
 	}
-	// doc_name[i] = ft_strjoin("/tmp/here_doc", temp_name);//i번째에 이름넣기
+	// doc_name[i] = ft_strjoin("/tmp/here_doc", doc_nb);//i번째에 이름넣기
 	doc_name = ft_strjoin("./here_doc/", doc_nb);//tmp로 바꾸기
 	free(doc_nb);
 	return (doc_name);

@@ -1,17 +1,16 @@
-CC = clang
-CFLAGS = -lreadline -fsanitize=address 
-SRCS = main.c
-# OBJS = ${SRCS:.c=.o}
-NAME = minishell
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+SRCS = here_doc.c here_doc_utils.c
+OBJS = ${SRCS:.c=.o}
+NAME = a.out
 
 all : $(NAME)
 
+$(NAME) : $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -lreadline
 
-$(NAME) :
-	$(CC) $(CFLAGS) -o $(NAME) $(SRCS)
-
-# %.o : %.c
-# 	$(CC) $(CFLAGS) -c $< -o $@
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
 	rm -f $(OBJS)

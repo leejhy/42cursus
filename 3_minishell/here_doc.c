@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:05:06 by junhylee          #+#    #+#             */
-/*   Updated: 2024/01/31 20:44:01 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:52:09 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char	*run_heredoc(int heredoc_cnt)
 	char	*doc_name;
 	char	*input;
 	int		fd;
+	int		write_fd;
 	int		i;
 
 	i = 0;
@@ -97,18 +98,17 @@ char	*run_heredoc(int heredoc_cnt)
 	{//name 만드는 부분 함수로 빼자
 		doc_name = make_doc_name(i);
 		pid = fork_pid();
+		fd = open(doc_name, O_TRUNC | O_CREAT | O_RDWR, 0666);
+		write_fd = dup(fd);
 		if (pid == 0)
 		{
-			fd = open(doc_name, O_TRUNC | O_CREAT | O_RDWR, 0666);
-			dup2(fd, 1);//input을 fd로
-			//이거 dup2를 여기서 무조건 바꾸면안되네.. dup2 위치 수정
 			while (1)
 			{
 				input = readline("> ");
-				// if (strncmp(input, "limiter", ft_strlen(limiter)) == 0)//limiter 확이인
 				if (strncmp(input, "lim", 4) == 0)//limiter 확이인
 					break ;
-				write(fd, input, ft_strlen(input));
+				write(write_fd, input, ft_strlen(input));
+				write(write_fd, "\n", 1);
 			}
 			exit(0);
 		}
@@ -140,4 +140,5 @@ int	main(void)
 	head = set_list(&cnt);//테스트 리스트 만들기
 	str = run_heredoc(cnt);
 	clear_list(head);
+	system("leaks a.out");
 }
