@@ -95,23 +95,22 @@ char	*run_heredoc(int heredoc_cnt)
 	i = 0;
 	while (i < heredoc_cnt)
 	{//name 만드는 부분 함수로 빼자
-		printf("=1111\n");
 		doc_name = make_doc_name(i);
 		pid = fork_pid();
 		if (pid == 0)
 		{
-			printf("=222\n");
 			fd = open(doc_name, O_TRUNC | O_CREAT | O_RDWR, 0666);
 			dup2(fd, 1);//input을 fd로
+			//이거 dup2를 여기서 무조건 바꾸면안되네.. dup2 위치 수정
 			while (1)
 			{
-				printf("=222\n");
 				input = readline("> ");
 				// if (strncmp(input, "limiter", ft_strlen(limiter)) == 0)//limiter 확이인
 				if (strncmp(input, "lim", 4) == 0)//limiter 확이인
 					break ;
 				write(fd, input, ft_strlen(input));
 			}
+			exit(0);
 		}
 		else if (pid > 0)
 		{
