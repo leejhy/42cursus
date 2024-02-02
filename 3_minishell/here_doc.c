@@ -84,61 +84,54 @@ t_list	*set_list(int *cnt)
 	return (head);
 }
 
-char	*run_heredoc(int heredoc_cnt)
+char	**run_heredoc(int heredoc_cnt)
 {
 	pid_t	pid;
-	char	*doc_name;
+	char	**doc_name;
 	char	*input;
 	int		fd;
-	int		write_fd;
 	int		i;
 
 	i = 0;
-	while (i < heredoc_cnt)
-	{//name 만드는 부분 함수로 빼자
-		doc_name = make_doc_name(i);
+	doc_name = malloc(sizeof(char *) * (heredoc_cnt + 1));
+	while (i < heredoc_cnt)//이 while이 heredoc개수만큼 돌리는게 아니라 t_cmd의 t_list redirection != NULL 일 때 까지 돌아야함
+	{
+		doc_name[i] = make_doc_name(i);
 		pid = fork_pid();
-		fd = open(doc_name, O_TRUNC | O_CREAT | O_RDWR, 0666);
-		write_fd = dup(fd);
 		if (pid == 0)
-		{
+		{//here_doc 자식에서 시그널처리 필요
+			fd = open(doc_name[i], O_TRUNC | O_CREAT | O_RDWR, 0666);
+			printf("fd %d\n", fd);
 			while (1)
 			{
 				input = readline("> ");
-				if (strncmp(input, "lim", 4) == 0)//limiter 확이인
+				if (strncmp(input, "lim", 4) == 0)//"lim" heredoc 이름으로 바꾸기
 					break ;
-				write(write_fd, input, ft_strlen(input));
-				write(write_fd, "\n", 1);
+				write(fd, input, ft_strlen(input));
+				write(fd, "\n", 1);
+				free(input);//readline 한 값도 free?
 			}
+			//t_cmd->redirect->HEREDOC을 INREDIRECT로 바꾸기
+			close(fd);
 			exit(0);
 		}
 		else if (pid > 0)
-		{
 			waitpid(pid, 0, 0);
-			if (i != heredoc_cnt - 1)
-			{
-				close(fd);
-				unlink(doc_name);
-				free(doc_name);
-			}
-			// else// i == heredoc_cnt -1 (마지막 )
-				//doc_name, fd 리턴시켜야함
-		}
 		i++;
 	}
+	doc_name[i] = NULL;
 	return (doc_name);
 }
 
-int	main(void)
+int	main(void)//t_cmd -> redirection -> 받아와야함
 {
 	t_list	*head;
-	char	*str;
+	// char	**doc_name;
 	int		cnt;
-	int		i;
 
-	i = 0;
 	head = set_list(&cnt);//테스트 리스트 만들기
-	str = run_heredoc(cnt);
+	// doc_name = run_heredoc(cnt);
+	run_heredoc(cnt);
 	clear_list(head);
-	system("leaks a.out");
+	return (doc_name);
 }
