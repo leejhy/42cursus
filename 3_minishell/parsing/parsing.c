@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/02 19:14:29 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:06:21 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,11 +149,11 @@ t_list	*parsing(char *str, t_list *env, char *prompt)
 		return (print_error(prompt, "malloc error2"));
 	remove_quote_in_tokens(tokens);
 	cmds = get_cmds(tokens);
-	return (tokens);
 	// ft_lstclear(&tokens, token_free);
 	// print_cmds(cmds);
 	// ft_lstclear(&((t_cmd *)cmds->content)->redirect, token_free);
 	// ft_lstclear(&((t_cmd *)cmds->content)->simple_cmd, token_free);
 	// ft_lstclear(&cmds, free);
 	// return (NULL);
+	return (tokens);
 }

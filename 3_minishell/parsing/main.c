@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/02 21:47:15 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:10:50 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	test(int a)
 	rl_redisplay();
 }
 
-// void	f(void){system("leaks minishell");}
+void	f(void){system("leaks minishell");}
 
 t_list	*get_env(char **envp)
 {
@@ -59,7 +59,7 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*str;
 	char	*prompt;
 
-	// atexit(f);
+	atexit(f);
 	env = get_env(envp);
 	prompt = ft_strjoin(&argv[0][2], " : ");
 	str = NULL;
@@ -73,7 +73,8 @@ int	main(int argc, char *argv[], char *envp[])
 			break ;
 		if (ft_strlen(str) > 0)
 			add_history(str);
-		run_heredoc(parsed);
+		run_heredoc(parsed);//HEREDOC -> INREDIRECT
+		handle_redirection(parsed);
 		free(str);
 	}
 	free(prompt);
