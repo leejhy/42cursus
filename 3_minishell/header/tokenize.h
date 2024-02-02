@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/01 21:40:43 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/02 21:49:05 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
+# include <string.h>
 enum e_token_type
 {
 	ERROR = 0,
@@ -46,6 +46,7 @@ typedef struct s_cmd
 	t_list			*simple_cmd;
 	int				next_pipe;
 }	t_cmd;
+
 typedef struct s_env
 {
 	char			*key;
@@ -83,5 +84,12 @@ int		get_last_simplecmd_idx(char *str, int *idx, int re_token);
 int		get_close_quote_idx(char *str, int last_idx, char c);
 void	token_free(void	*ptr);
 t_list	*ft_tokenlistdup(t_list *node);
+
+//exe
+void	run_heredoc(t_list *parsed);
+void	heredoc_read(char *doc_name, t_list *parsed);
+char	*make_doc_name(int nb);
+int		cnt_docs(t_list *parsed);
+pid_t	fork_pid(void);
 
 #endif
