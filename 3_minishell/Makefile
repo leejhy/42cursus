@@ -1,5 +1,7 @@
 .DEFAULT_GOAL := all
-SRCS =	main.c \
+SRCS_MAIN = main.c
+
+SRCS_PARS = \
 		tokenize.c \
 		expansion.c \
 		utils.c \
@@ -8,24 +10,37 @@ SRCS =	main.c \
 		error_manager.c \
 		remove_oper.c \
 		parsing.c \
-		here_doc.c
-		
-SRCS_BONUS = $(SRCS:.c=_bonus.c)
+		find_ambigous.c
+
+SRCS_EXEC = execute.c \
+			execute_utils.c \
+			heredoc.c \
+			redirect.c
+
+SRCS_BONUS_MAIN = $(SRCS:.c=_bonus.c)
+SRCS_BONUS_PARS = $(SRCS:.c=_bonus.c)
+SRCS_BONUS_EXEC = $(SRCS:.c=_bonus.c)
+
+OBJS_MAIN = $(SRCS_MAIN:.c=.o)
+OBJS_PARS = $(addprefix ./parsing/, $(SRCS_PARS:.c=.o))
+OBJS_EXEC = $(addprefix ./executing/, $(SRCS_EXEC:.c=.o))
+OBJS = $(OBJS_PARS) $(OBJS_EXEC) $(OBJS_MAIN)
+
+OBJS_BONUS_MAIN = $(SRCS_BONUS_MAIN:.c=.o)
+OBJS_BONUS_PARS = $(addprefix ./parsing_bonus/, $(SRCS_BONUS_PARS:.c=.o))
+OBJS_BONUS_EXEC = $(addprefix ./executing_bonus/, $(SRCS_BONUS_EXEC:.c=.o))
+OBJS_BONUS = $(OBJS_BONUS_PARS) $(OBJS_BONUS_EXEC) $(OBJS_BONUS_MAIN)
+
 LIBFT_DIR = ./libft
 LIBFT_NAME = ft
 LIBFT = libft/libft.a
-OBJS = $(addprefix ./parsing/, $(SRCS:.c=.o))
-OBJS_BONUS = $(addprefix ./srcs_bonus/, $(SRCS_BONUS:.c=.o))
-DEPS = $(addprefix ./parsing/, $(SRCS:.c=.d))
-DEPS_BONUS = $(addprefix ./srcs_bonus/, $(SRCS_BONUS:.c=.d))
 HEADER_DIR = ./header
 HEADER_BONUS_DIR = ./header_bonus
 READLINE = readline
-CC = cc -Wall -Wextra -Werror -MMD -MP
+CC = cc -Wall -Wextra -Werror
 NAME = minishell
 MANDA = .manda
 BONUS = .bonus
--include $(DEPS)
 
 all :
 	@echo "minishell : make $(NAME)"
@@ -60,12 +75,12 @@ $(BONUS) : $(LIBFT) $(OBJS_BONUS)
 
 clean :
 	@echo "minishell : make clean"
-	@rm -f $(OBJS) $(DEPS) $(OBJS_BONUS) $(BONUS) $(MANDA) $(DEPS_BONUS)
+	@rm -f $(OBJS) $(OBJS_BONUS) $(BONUS) $(MANDA)
 	@make -C $(LIBFT_DIR) clean
 
 fclean :
 	@echo "minishell : make fclean"
-	@rm -f $(OBJS) $(NAME) $(DEPS) $(OBJS_BONUS) $(BONUS) $(MANDA) $(DEPS_BONUS)
+	@rm -f $(OBJS) $(NAME) $(OBJS_BONUS) $(BONUS) $(MANDA)
 	@make -C $(LIBFT_DIR) fclean
 
 re : fclean

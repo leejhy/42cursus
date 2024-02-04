@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/02 20:18:29 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/03 14:33:54 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,25 @@ int	ft_isspace(char c)
 
 void	print_node(t_list *tokens)
 {
+	t_token	*tok;
+
 	while (tokens != NULL)
 	{
-		if (((t_token *)tokens->content)->type == ERROR)
-			printf("ERROR TOKEN : [%s] [%s]\n", ((t_token *)tokens->content)->value, ((t_token *)tokens->content)->exp_value);
-		if (((t_token *)tokens->content)->type == INREDIRECTION)
-			printf("INREDIRECTION : [%s] [%s]\n", ((t_token *)tokens->content)->value, ((t_token *)tokens->content)->exp_value);
-		if (((t_token *)tokens->content)->type == OUTREDIRECTION)
-			printf("OUTREDIRECTION : [%s] [%s]\n", ((t_token *)tokens->content)->value, ((t_token *)tokens->content)->exp_value);
-		if (((t_token *)tokens->content)->type == HEREDOC)
-			printf("HEREDOC : [%s] [%s]\n", ((t_token *)tokens->content)->value, ((t_token *)tokens->content)->exp_value);
-		if (((t_token *)tokens->content)->type == APPEND)
-			printf("APPEND : [%s] [%s]\n", ((t_token *)tokens->content)->value, ((t_token *)tokens->content)->exp_value);
-		if (((t_token *)tokens->content)->type == PIPE)
-			printf("PIPE : [%s] [%s]\n", ((t_token *)tokens->content)->value, ((t_token *)tokens->content)->exp_value);
-		if (((t_token *)tokens->content)->type == SIMPLECMD)
-			printf("SIMPLECMD : [%s] [%s]\n", ((t_token *)tokens->content)->value, ((t_token *)tokens->content)->exp_value);
+		tok = tokens->content;
+		if (tok->type == ERROR)
+			printf("ERROR TOKEN : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
+		if (tok->type == INREDIRECTION)
+			printf("INREDIRECTION : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
+		if (tok->type == OUTREDIRECTION)
+			printf("OUTREDIRECTION : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
+		if (tok->type == HEREDOC)
+			printf("HEREDOC : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
+		if (tok->type == APPEND)
+			printf("APPEND : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
+		if (tok->type == PIPE)
+			printf("PIPE : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
+		if (tok->type == SIMPLECMD)
+			printf("SIMPLECMD : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
 		tokens = tokens->next;
 	}
 }
@@ -91,8 +94,7 @@ t_list	*ft_tokenlistdup(t_list *node)
 	if (res_token == NULL)
 		return (NULL);
 	res_token->type = ((t_token *)node->content)->type;
-	res_token->value = NULL;
-	res_token->exp_value = NULL;
+	res_token->is_ambiguous = ((t_token *)node->content)->is_ambiguous;
 	if (((t_token *)node->content)->value != NULL)
 	{
 		res_token->value = ft_strdup(((t_token *)node->content)->value);

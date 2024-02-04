@@ -6,23 +6,19 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/04 21:15:11 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:41:58 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-void	test(int a)
-{
-	a = 0;
-	rl_replace_line("", 0);
-	printf("\n");
-	rl_on_new_line();
-	rl_redisplay();
-}
+// void	f(void){system("leaks minishell");}
 
-void	f(void){system("leaks minishell");}
-
+/**
+ * change form by envp
+ * char **envp -> t_list *env
+ * env->content = t_env *
+*/
 t_list	*get_env(char **envp)
 {
 	t_list	*res;
@@ -52,6 +48,30 @@ t_list	*get_env(char **envp)
 	return (res);
 }
 
+/**
+ * add front {key : "?", value : "0"} to env
+*/
+t_list	*add_exitcode(t_list *env)
+{
+	t_env	*exitcode;
+	t_list	*node;
+
+	exitcode = ft_calloc(1, sizeof(t_env));
+	if (exitcode == NULL)
+		return (NULL);
+	exitcode->key = ft_strdup("?");
+	if (exitcode->key == NULL)
+		return (NULL);
+	exitcode->value = ft_strdup("0");
+	if (exitcode->value == NULL)
+		return (NULL);
+	node = ft_lstnew(exitcode);
+	if (node == NULL)
+		return (NULL);
+	ft_lstadd_back(&node, env);
+	return (node);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_list	*parsed;
@@ -59,8 +79,9 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*str;
 	char	*prompt;
 
-	atexit(f);
+	// atexit(f);
 	env = get_env(envp);
+	env = add_exitcode(env);
 	prompt = ft_strjoin(&argv[0][2], " : ");
 	str = NULL;
 	argc = 0;
@@ -73,8 +94,7 @@ int	main(int argc, char *argv[], char *envp[])
 			break ;
 		if (ft_strlen(str) > 0)
 			add_history(str);
-		handle_heredoc(parsed);//HEREDOC -> INREDIRECT
-		handle_redirection(parsed, envp);
+		start_execute(parsed);
 		free(str);
 	}
 	free(prompt);

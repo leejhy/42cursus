@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/01 21:50:47 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/02 19:47:10 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	get_last_name_idx(char *str, int end)
 {
 	end++;
+	if (str[end] == '?')
+		return (end + 1);
 	while (str[end])
 	{
 		if (!(ft_isalnum(str[end]) || str[end] == '_'))
@@ -39,30 +41,33 @@ char	*get_env_str(char *str, t_list *env, int key_start, int key_end)
 	return ("");
 }
 
-int	get_expansion_size(char *str, t_list *env)
+void	expansion_size(char *str, t_list *env, int *size)
 {
 	int		idx;
 	int		end;
-	int		size;
+	int		flag;
 
-	size = 0;
 	idx = 0;
+	flag = 0;
 	while (str[idx])
 	{
-		if (str[idx] == '$' && str[idx + 1] != '$' && \
-			(ft_isalnum(str[idx + 1]) || str[idx + 1] == '_'))
+		if (flag == 0 && (str[idx] == '\'' || str[idx] == '\"'))
+			flag = str[idx];
+		else if (flag != 0 && (str[idx] == flag))
+			flag = 0;
+		if (flag != '\'' && str[idx] == '$' && str[idx + 1] != '\0' && \
+			(ft_isalnum(str[idx + 1]) || ft_strchr("?\'\"_", str[idx + 1])))
 		{
 			end = get_last_name_idx(str, idx);
-			size += ft_strlen(get_env_str(str, env, idx, end));
+			*size += ft_strlen(get_env_str(str, env, idx, end));
 			idx = end;
 		}
 		else
 		{
-			size++;
+			(*size)++;
 			idx++;
 		}
 	}
-	return (size);
 }
 
 void	expansion_simplecmd(char *str, char *res, int size, t_list *env)
@@ -81,9 +86,8 @@ void	expansion_simplecmd(char *str, char *res, int size, t_list *env)
 			flag = str[str_idx];
 		else if (flag != 0 && (str[str_idx] == flag))
 			flag = 0;
-		if (flag != '\'' && str[str_idx] == '$' && \
-			(str[str_idx + 1] == '\'' || str[str_idx + 1] == '\"' || \
-			ft_isalnum(str[str_idx + 1]) || str[str_idx + 1] == '_'))
+		if (flag != '\'' && str[str_idx] == '$' && str[str_idx + 1] != '\0' && \
+		(ft_isalnum(str[str_idx + 1]) || ft_strchr("?\'\"_", str[str_idx + 1])))
 		{
 			end = get_last_name_idx(str, str_idx);
 			ft_strlcat(res, get_env_str(str, env, str_idx, end), size + 1);
@@ -106,11 +110,14 @@ int	expansion(t_list *tokens, t_list *env)
 		tok = ((t_token *)tokens->content);
 		if (tok->type != HEREDOC && tok->value != NULL)
 		{
-			size = get_expansion_size(tok->value, env);
+			size = 0;
+			expansion_size(tok->value, env, &size);
 			expansion_res = ft_calloc(size + 1, sizeof(char));
 			if (expansion_res == NULL)
 				return (FALSE);
 			expansion_simplecmd(tok->value, expansion_res, size, env);
+			printf("p : %d\n", size);
+			printf("r : %zd\n", ft_strlen(expansion_res));
 			tok->exp_value = expansion_res;
 		}
 		else

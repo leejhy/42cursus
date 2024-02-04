@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/02 22:06:21 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/03 14:36:08 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,40 +92,6 @@ void	print_cmds(t_list *cmds)
 	}
 }
 
-int	get_word_cnt(char *str)
-{
-	int	idx;
-	int	cnt;
-
-	idx = 1;
-	cnt = 0;
-	if (!ft_isspace(str[0]))
-		cnt++;
-	while (str && str[0] && str[idx])
-	{
-		if (ft_isspace(str[idx - 1]) && !ft_isspace(str[idx]))
-			cnt++;
-		idx++;
-	}
-	return (cnt);
-}
-
-void	check_ambigious(t_list *tokens)
-{
-	int	cnt;
-
-	while (tokens)
-	{
-		cnt = get_word_cnt(((t_token *)tokens->content)->exp_value);
-		if (cnt != 1)
-		{
-			((t_token *)tokens->content)->is_ambiguous = 1;
-		}
-		tokens = tokens->next;
-	}
-}
-
-
 t_list	*parsing(char *str, t_list *env, char *prompt)
 {
 	t_list	*tokens;
@@ -137,23 +103,24 @@ t_list	*parsing(char *str, t_list *env, char *prompt)
 	if (!is_valid_syntax(tokens))
 	{
 		ft_lstclear(&tokens, token_free);
-		return (print_error(prompt, "syntax error"));
+		return (print_error(prompt, "syntax error\n"));
 	}
 	tokens = merge_oper_simplecmd(tokens);
 	if (expansion(tokens, env) == FALSE)
 		return (print_error(prompt, "malloc error1"));
 	print_node(tokens);
-	check_ambigious(tokens);
 	tokens = re_tokenize(tokens);
 	if (tokens == NULL)
 		return (print_error(prompt, "malloc error2"));
 	remove_quote_in_tokens(tokens);
+	check_ambigious(tokens, env);
 	cmds = get_cmds(tokens);
 	// ft_lstclear(&tokens, token_free);
-	// print_cmds(cmds);
+	print_cmds(cmds);
 	// ft_lstclear(&((t_cmd *)cmds->content)->redirect, token_free);
 	// ft_lstclear(&((t_cmd *)cmds->content)->simple_cmd, token_free);
+	// printf("type :: %d\n", ((t_token *)(((t_cmd *)(cmds->content))->redirect->content))->type);
 	// ft_lstclear(&cmds, free);
 	// return (NULL);
-	return (tokens);
+	return (cmds);
 }

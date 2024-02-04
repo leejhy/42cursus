@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/02 21:49:05 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/04 21:15:01 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <string.h>
+
 enum e_token_type
 {
 	ERROR = 0,
@@ -53,6 +53,16 @@ typedef struct s_env
 	char			*value;
 }	t_env;
 
+typedef struct s_info
+{
+	t_list	*cmd;
+	t_list	*env;
+	int		exitcode;
+}	t_info;
+
+/* find_ambigous.c  */
+void	check_ambigious(t_list *tokens, t_list *env);
+
 /* remove_oper.c */
 t_list	*merge_oper_simplecmd(t_list *tokens);
 
@@ -70,6 +80,8 @@ void	remove_quote_in_tokens(t_list *tokens);
 
 /* expansion.c */
 int		expansion(t_list *tokens, t_list *env);
+char	*get_env_str(char *str, t_list *env, int key_start, int key_end);
+int		get_last_name_idx(char *str, int end);
 
 /* parsing.c */
 t_list	*parsing(char *str, t_list *env, char *prompt);
@@ -85,11 +97,21 @@ int		get_close_quote_idx(char *str, int last_idx, char c);
 void	token_free(void	*ptr);
 t_list	*ft_tokenlistdup(t_list *node);
 
-//exe
-void	run_heredoc(t_list *parsed);
-void	heredoc_read(char *doc_name, t_list *parsed);
-char	*make_doc_name(int nb);
-int		cnt_docs(t_list *parsed);
+//executing
+void	start_execute(t_list *parsed, char **envp);
+//execute_utils.c
 pid_t	fork_pid(void);
-
+//heredoc.c
+void	handle_heredoc(t_list *parsed);
+void	run_heredoc(t_list *redirect, int doc_nb);
+void	read_heredoc(char *doc_name, t_list *parsed);
+int		cnt_heredoc(t_list *parsed);
+char	*make_heredoc_name(int nb);
+//redirect.c
+void	handle_redirection(t_list *cmds, int *pipe_fd);
+void	handle_inredirection(t_token *token);
+void	handle_outredirection(t_token *token);
+void	handle_append(t_token *token);
+//
+void	ft_test(t_list *cmds);
 #endif
