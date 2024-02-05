@@ -6,13 +6,13 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/02 20:55:25 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/04 21:45:02 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
+#include "builtin.h"
 
-int	is_n_flag(char *str)
+static int	is_n_flag(char *str)
 {
 	const int	size = ft_strlen(str);
 	int			cnt_n;
@@ -57,12 +57,4 @@ int	builtin_echo(int argc, char **argv)
 	if (argc == 1 || !is_n_flag(argv[1]))
 		ft_putchar_fd('\n', 1);
 	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	int	exit_code;
-
-	exit_code = builtin_echo(argc, argv);
-	exit(exit_code);
 }

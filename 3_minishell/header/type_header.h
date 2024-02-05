@@ -1,33 +1,49 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   tokenize.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/04 21:21:13 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/03 13:09:00 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
-
-int	builtin_pwd(int argc, char **argv, t_list *env, char *prompt)
+#ifndef TYPE_HEADER_H
+# define TYPE_HEADER_H
+# include "include_header.h"
+typedef enum e_token_type
 {
-	t_list	*pwd;
-	char	*pwd_ptr;
+	ERROR = 0,
+	INREDIRECTION,
+	OUTREDIRECTION,
+	HEREDOC,
+	APPEND,
+	PIPE,
+	SIMPLECMD
+}	t_token_type;
 
-	pwd_ptr = getcwd(NULL, 0);
-	pwd = get_list_env("PWD", env);
-	if (pwd_ptr != NULL)
-	{
-		ft_putstr_fd(pwd, 1);
-	}
-	else if (pwd != NULL)
-	{
-		ft_putstr_fd(((t_env *)pwd->content)->value, 1);
-	}
-	ft_putchar_fd('\n', 1);
-	free(pwd_ptr);
-	return (0);
-}
+typedef struct s_token
+{
+	t_token_type	type;
+	char			*value;
+	char			*exp_value;
+	int				is_ambiguous;
+}	t_token;
+
+typedef struct s_cmd
+{
+	t_list			*redirect;
+	t_list			*simple_cmd;
+	int				next_pipe;
+}	t_cmd;
+
+typedef struct s_env
+{
+	char	*key;
+	char	*value;
+	int		value_null;
+}	t_env;
+#endif

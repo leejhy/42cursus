@@ -1,35 +1,22 @@
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
+/*   Updated: 2024/02/04 19:21:26 by tajeong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
-#include <sys/wait.h>
-#include <stdlib.h>
+#include <unistd.h>
 
-int	main()
+int main()
 {
-	pid_t	pid;
-	int pipe_fd[2];
-	int	in;
-	int	out;
+	char *a;
 
-	in = -1;
-	out = -1;
-	for (int i = 1; i < 3; i++)
-	{
-		printf("=================\n");
-		pipe(pipe_fd);
-		in = pipe_fd[0];
-		out = pipe_fd[1];
-		pid = fork();
-		if (pid == 0)
-		{
-			printf("%d pipe : %d %d\n", i, pipe_fd[0], pipe_fd[1]);
-			printf("infd %d outfd %d\n", in, out);
-			exit(1);
-		}
-		else if (pid > 0)
-		{
-			printf("%dth parent\n", i);
-			close(pipe_fd[0]);
-			close(pipe_fd[1]);
-		}
-	}
+	a = getcwd(NULL, 0);
+	printf("%s\n", a);
 }

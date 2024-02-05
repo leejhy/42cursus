@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/03 14:36:08 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/04 15:04:29 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,19 +108,16 @@ t_list	*parsing(char *str, t_list *env, char *prompt)
 	tokens = merge_oper_simplecmd(tokens);
 	if (expansion(tokens, env) == FALSE)
 		return (print_error(prompt, "malloc error1"));
-	print_node(tokens);
 	tokens = re_tokenize(tokens);
 	if (tokens == NULL)
 		return (print_error(prompt, "malloc error2"));
 	remove_quote_in_tokens(tokens);
 	check_ambigious(tokens, env);
 	cmds = get_cmds(tokens);
-	// ft_lstclear(&tokens, token_free);
+	ft_lstclear(&tokens, token_free);
 	print_cmds(cmds);
-	// ft_lstclear(&((t_cmd *)cmds->content)->redirect, token_free);
-	// ft_lstclear(&((t_cmd *)cmds->content)->simple_cmd, token_free);
-	// printf("type :: %d\n", ((t_token *)(((t_cmd *)(cmds->content))->redirect->content))->type);
-	// ft_lstclear(&cmds, free);
-	// return (NULL);
-	return (cmds);
+	ft_lstclear(&((t_cmd *)cmds->content)->redirect, token_free);
+	ft_lstclear(&((t_cmd *)cmds->content)->simple_cmd, token_free);
+	ft_lstclear(&cmds, free);
+	return (NULL);
 }

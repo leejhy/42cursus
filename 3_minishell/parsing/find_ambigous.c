@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/02 18:29:05 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/04 15:34:55 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	is_ambiguous(char *str, t_list *env)
 			flag = str[str_idx];
 		else if (flag != 0 && (str[str_idx] == flag))
 			flag = 0;
-		if (flag != '\'' && str[str_idx] == '$' && \
+		if (flag != '\'' && flag != '\"' && str[str_idx] == '$' && \
 		(ft_isalnum(str[str_idx + 1]) || ft_strchr("\'\"_", str[str_idx + 1])))
 		{
 			res = get_word_cnt(get_env_str(str, env, str_idx, \

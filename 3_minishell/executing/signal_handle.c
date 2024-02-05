@@ -22,7 +22,7 @@ void	ft_sigint(int signo)
 
 void	ft_sigquit(int signo)
 {//이게맞나.. a.out argv[0]으로 수정
-	printf("zsh: quit\t./a.out\n");
+	printf("bash: quit\t./a.out\n");
 	exit(1);
 }
 

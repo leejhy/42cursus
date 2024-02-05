@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/02 19:47:10 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/04 14:47:13 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	expansion_size(char *str, t_list *env, int *size)
 		else if (flag != 0 && (str[idx] == flag))
 			flag = 0;
 		if (flag != '\'' && str[idx] == '$' && str[idx + 1] != '\0' && \
-			(ft_isalnum(str[idx + 1]) || ft_strchr("?\'\"_", str[idx + 1])))
+			(ft_isalpha(str[idx + 1]) || ft_strchr("?\'\"_", str[idx + 1])))
 		{
 			end = get_last_name_idx(str, idx);
 			*size += ft_strlen(get_env_str(str, env, idx, end));
@@ -87,7 +87,7 @@ void	expansion_simplecmd(char *str, char *res, int size, t_list *env)
 		else if (flag != 0 && (str[str_idx] == flag))
 			flag = 0;
 		if (flag != '\'' && str[str_idx] == '$' && str[str_idx + 1] != '\0' && \
-		(ft_isalnum(str[str_idx + 1]) || ft_strchr("?\'\"_", str[str_idx + 1])))
+		(ft_isalpha(str[str_idx + 1]) || ft_strchr("?\'\"_", str[str_idx + 1])))
 		{
 			end = get_last_name_idx(str, str_idx);
 			ft_strlcat(res, get_env_str(str, env, str_idx, end), size + 1);
@@ -116,8 +116,6 @@ int	expansion(t_list *tokens, t_list *env)
 			if (expansion_res == NULL)
 				return (FALSE);
 			expansion_simplecmd(tok->value, expansion_res, size, env);
-			printf("p : %d\n", size);
-			printf("r : %zd\n", ft_strlen(expansion_res));
 			tok->exp_value = expansion_res;
 		}
 		else
