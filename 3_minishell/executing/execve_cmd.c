@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handle.c                                    :+:      :+:    :+:   */
+/*   execve_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 17:52:09 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/05 18:12:56 by junhylee         ###   ########.fr       */
+/*   Created: 2024/02/05 21:34:21 by junhylee          #+#    #+#             */
+/*   Updated: 2024/02/05 22:14:34 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executing.h"
 
-void	ft_sigint(int signo)
-{//^C 문자 제거 해야함
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
-
-void	ft_sigquit(int signo)
-{//이게맞나.. a.out argv[0]으로 수정
-	printf("bash: quit\t./a.out\n");
-	exit(1);
-}
-
-int	main(void)
+char	*cat_path(char *cmd, t_list *env)
 {
-	char	*str;
+	t_env	*temp_env;
+	char	*path;
+	char	*temp_path;
+	size_t	len;
 
-	signal(SIGQUIT, ft_sigquit);
-	signal(SIGINT, ft_sigint);
-	while (1)
+	path = NULL;
+	cmd = NULL;
+	while (env)
 	{
-		str = readline("hello $ ");
-		add_history(str);
-		printf("readline : %s\n", str);
+		temp_env = (t_env *)(env->content);
+		if (ft_strncmp(temp_env->key, "PATH", 5) == 0)
+		{
+			path = temp_env->value;
+			break ;
+		}
+		env = env->next;
 	}
+	while (path)
+	{
+		len = 0;
+		while (path && path[len] != ':')
+			len++;
+		temp_path = ft_substr(path, 0, len);
+		path++;
+	}
+	return (cmd);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:05:06 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/05 18:18:42 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/02 21:51:47 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executing.h"
+#include "tokenize.h"
 
-char	*make_heredoc_name(int nb)
+char	*make_doc_name(int nb)
 {
 	char	*doc_name;
 	char	*doc_nb;
@@ -36,26 +36,30 @@ char	*make_heredoc_name(int nb)
 	return (doc_name);
 }
 
-int	cnt_heredoc(t_list *cmds)
+pid_t	fork_pid(void)
 {
-//((t_token *)(((t_cmd *)(cmds->content))->redirect->content))->type
-//지금 얘는 한개의 파이프에 here_doc밖에 체크못함
+	pid_t	pid;
+
+	pid = fork();
+	if (pid < 0)
+		exit(1);//에러처리
+	return (pid);
+}
+
+int	cnt_docs(t_list *parsed)
+{//t_list parsed->content->type == HEREDOC
 	t_list *temp;
 	int	cnt;
-
+	
 	cnt = 0;
-	temp = NULL;
-	while (cmds)
+	temp = parsed;
+	while (temp != NULL)
 	{
-		temp = ((t_cmd *)(cmds->content))->redirect;
-		while (temp != NULL)
-		{
-			if (((t_token *)(temp->content))->type == HEREDOC)
-				cnt++;
-			temp = temp->next;
-		}
-		cmds = cmds->next;
+		if (((t_token *)(temp->content))->type == HEREDOC)
+			cnt++;
+		temp = temp->next;
 	}
+	printf("heredoc cnt = %d\n", cnt);
 	if (cnt > 16)
 	{
 		printf("minishell: maximum here-document count exceeded\n");
@@ -64,7 +68,7 @@ int	cnt_heredoc(t_list *cmds)
 	return (cnt);
 }
 
-void	read_heredoc(char *doc_name, t_list *redirect)
+void	heredoc_read(char *doc_name, t_list *parsed)
 {
 	char	*input;
 	char	*deli;
@@ -73,14 +77,13 @@ void	read_heredoc(char *doc_name, t_list *redirect)
 	fd = open(doc_name, O_TRUNC | O_CREAT | O_RDWR, 0666);
 	while (1)
 	{
-		deli = ((t_token *)redirect->content)->exp_value;
+		deli = ((t_token *)parsed->content)->exp_value;
 		printf("delimiter : %s\n", deli);
 		input = readline("> ");
-		if (ft_strncmp(input, deli, ft_strlen(deli) + 1) == 0)
+		if (strncmp(input, deli, ft_strlen(deli) + 1) == 0)
 			break ;
-		ft_putendl_fd(input, fd);
-		// write(fd, input, ft_strlen(input));
-		// write(fd, "\n", 1);
+		write(fd, input, ft_strlen(input));
+		write(fd, "\n", 1);
 		free(input);
 	}
 	//t_cmd->redirect->HEREDOC을 INREDIRECT로 바꾸기
@@ -88,43 +91,34 @@ void	read_heredoc(char *doc_name, t_list *redirect)
 	exit(0);//pid == 0부터 여기까지 함수로 만들기
 }
 
-void	run_heredoc(t_list *redirect, int doc_nb)
+void	run_heredoc(t_list *parsed)
 {
 	char	*doc_name;
 	pid_t	pid;
-	int		status;
-
-	doc_name = make_heredoc_name(doc_nb);
-	pid = fork_pid();
-	if (pid == 0)//here_doc 자식에서 시그널 처리 필요
-		read_heredoc(doc_name, redirect);
-	else if (pid > 0)
-	{
-		waitpid(pid, &status, 0);
-		((t_token *)redirect->content)->type = INREDIRECTION;
-		((t_token *)redirect->content)->exp_value = doc_name;
-		free(doc_name);
-	}
-}
-
-void	handle_heredoc(t_list *cmds)
-{
 	int		docs_cnt;
-	t_list	*redirect;
+	int		status;
 	int		i;
-	
+	// ((t_token *)tokens->content)->exp_value 값이 heredoc의 delimiter
 	i = 0;
-	docs_cnt = cnt_heredoc(cmds);//이거 here document개수를 갖고 있을 필요가 있나?
-	while (cmds != NULL)
+	// docs_cnt = cnt_docs(parsed);
+	docs_cnt = cnt_docs(parsed);//이거 here document개수를 갖고 있을 필요가 있나?
+	while (parsed != NULL)
 	{
-		redirect = ((t_cmd *)(cmds->content))->redirect;
-		while (redirect)
+		if (((t_token *)parsed->content)->type == HEREDOC)
 		{
-			if (redirect && ((t_token *)(redirect->content))->type == HEREDOC)
-				run_heredoc(redirect, i++);
-			redirect = redirect->next; 
+			doc_name = make_doc_name(i);
+			i++;
+			pid = fork_pid();
+			if (pid == 0)//here_doc 자식에서 시그널 처리 필요
+				heredoc_read(doc_name, parsed);
+			else if (pid > 0)
+			{
+				waitpid(pid, &status, 0);
+				((t_token *)parsed->content)->type = INREDIRECTION;
+				((t_token *)parsed->content)->exp_value = doc_name;
+				free(doc_name);
+			}
 		}
-		cmds = cmds->next;
+		parsed = parsed->next;
 	}
-	// return (pipe_cnt);
 }

@@ -6,17 +6,18 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:39:31 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/04 15:40:33 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/05 22:12:43 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
+#include "executing.h"
 
-int	cnt_simplecmd(t_list *lst)
+int	cnt_simplecmd(t_list *cmd)
 {
 	int	cnt;
 
-	while (lst)
+	cnt = 0;
+	while (cmd)
 	{
 		if (((t_token *)(cmd->content))->type == SIMPLECMD)
 			cnt++;
@@ -25,9 +26,10 @@ int	cnt_simplecmd(t_list *lst)
 	return (cnt);
 }
 
-char	**make_exe_argv(t_list *cmd)
+char	**make_exe_argv(t_list *cmd, t_list *env)
 {
 	char	**exe_argv;
+	char	*temp_cmd;
 	t_list	*temp;
 	int		cnt;
 	int		i;
@@ -38,53 +40,41 @@ char	**make_exe_argv(t_list *cmd)
 	exe_argv = malloc(sizeof(char *) * (cnt + 1));
 	//handle malloc fail
 	//
-	while (temp)
-	{
-		if (((t_token *)(temp->content))->type == SIMPLECMD)
-		{
-			exe_argv[i] = ((t_token *)(temp->content))->exp_value;
-			i++;
-		}
-		temp = temp->next;
-	}
-	exe_argv[i] = NULL;
+	
+	temp_cmd = cat_path(((t_token *)(cmd->content))->exp_value, env);
+	// if (temp != NULL)
+	// 	if (access(((t_token *)(cmd->content))->exp_value, F_OK & X_OK) == 0)
+			//이대로 ㄱ
+	// while (temp)
+	// {
+	// 	if (((t_token *)(temp->content))->type == SIMPLECMD)
+	// 	{
+	// 		exe_argv[i] = ((t_token *)(temp->content))->exp_value;
+	// 		i++;
+	// 	}
+	// 	temp = temp->next;
+	// }
+	// exe_argv[i] = NULL;
 	return (exe_argv);
 }
 
 char	**make_exe_envp(t_list *env)
 {
-	t_list	*row_cnt;
 	t_env	*one_env;
 	int		cnt;
-	int		total_len;
-	int		i;
-	int		j;
 	char	**exe_envp;
-	char	*str;
 
-	i = 0;
 	cnt = ft_lstsize(env);
 	exe_envp = malloc(sizeof(char *) * (cnt + 1));
 	while (env)
 	{
 		one_env = (t_env *)(env->content);
-		total_len = ft_strlen(one_env->key) + ft_strlen(one_env->value) + 1;
-		exe_envp[i] = malloc(sizeof(char) * (total_len + 1));
-		str = exe_envp[i];
-		while (one_env->key[j])
-		{
-			str[j] = one_env->key[j];
-			j++;
-		}
-		str[j] = '=';
-		j++;
-		while (one_env->value[ft_strlen((one_env->key + 1) - j)])
-		{
-			str[j] = one_env->value[ft_strlen((one_env->key + 1) - j)];
-			j++;
-		}
-		str[j] = '\0';
-		i++;
+		// if (one_env->key[0] != '?')
+		// {
+		// printf("%s",one_env->key);
+		// printf("=");
+		// printf("%s\n",one_env->value);
+		// }
 		env = env->next;
 	}
 	return (exe_envp);

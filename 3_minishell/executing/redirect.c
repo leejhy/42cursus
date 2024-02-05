@@ -6,22 +6,24 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:10:12 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/04 17:18:23 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:53:26 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
+#include "executing.h"
 
 void	handle_inredirection(t_token *token)
 {
 	char	*filename;
 	int		fd;
-
+	char	*err;
 	filename = token->exp_value;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("%s\n", strerror(errno));
+		err = strerror(errno);
+		write(2, strerror(errno), ft_strlen(err));
+		write(2, "\n", 1);
 		exit(errno);// 에러처리
 	}
 	dup2(fd, 0);//dup2해주고
@@ -34,7 +36,7 @@ void	handle_outredirection(t_token *token)
 	int		fd;
 	
 	filename = token->exp_value;
-	fd = open(filename, O_WRONLY | O_TRUNC | O_CREAT);
+	fd = open(filename, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fd < 0)
 	{
 		printf("%s\n", strerror(errno));
@@ -50,7 +52,7 @@ void	handle_append(t_token *token)
 	int		fd;
 
 	filename = token->exp_value;
-	fd = open(filename, O_WRONLY | O_CREAT);
+	fd = open(filename, O_WRONLY | O_CREAT, 0644);
 	if (fd < 0)
 	{
 		printf("%s\n", strerror(errno));
@@ -63,7 +65,6 @@ void	handle_append(t_token *token)
 void	handle_redirection(t_list *cmds, int *pipe_fd)
 {//자식 프로세스 내에서 작동한다고 판단
 //파이프도 받아와야함
-	// ((t_token *)(parsed->content))
 	t_list	*redirect;
 	t_cmd	*cmd;
 
@@ -73,14 +74,12 @@ void	handle_redirection(t_list *cmds, int *pipe_fd)
 		dup2(pipe_fd[1], 1);
 	while (redirect)
 	{
-		if (((t_token *)(cmds->content))->type == INREDIRECTION)
-			handle_inredirection(((t_token *)(cmds->content)));
-		else if (((t_token *)(cmds->content))->type == OUTREDIRECTION)
-			handle_outredirection(((t_token *)(cmds->content)));
-		else if (((t_token *)(cmds->content))->type == APPEND)
-			handle_append(((t_token *)(cmds->content)));
-		//else
-			//??
+		if (((t_token *)(redirect->content))->type == INREDIRECTION)
+			handle_inredirection(((t_token *)(redirect->content)));
+		else if (((t_token *)(redirect->content))->type == OUTREDIRECTION)
+			handle_outredirection(((t_token *)(redirect->content)));
+		else if (((t_token *)(redirect->content))->type == APPEND)
+			handle_append(((t_token *)(redirect->content)));
 		redirect = redirect->next;
 	}
 }

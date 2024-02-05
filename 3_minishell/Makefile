@@ -13,32 +13,36 @@ SRCS_PARS = \
 		parsing.c \
 		find_ambigous.c
 
-SRCS_EXEC = \
+SRCS_EXEC = execute.c \
+			execute_utils.c \
+			heredoc.c \
+			redirect.c \
+			execve_cmd.c
 
-SRCS_BUILTIN = \
-		builtin_cd.c \
-		builtin_echo.c \
-		builtin_env.c \
-		builtin_exit.c \
-		builtin_export.c \
-		builtin_pwd.c \
-		builtin_unset.c \
-		builtin_utils.c
+# SRCS_BUILTIN = \
+# 		builtin_cd.c \
+# 		builtin_echo.c \
+# 		builtin_env.c \
+# 		builtin_exit.c \
+# 		builtin_export.c \
+# 		builtin_pwd.c \
+# 		builtin_unset.c \
+# 		builtin_utils.c
 
 SRCS_BONUS_MAIN = $(SRCS_MAIN:.c=_bonus.c)
 SRCS_BONUS_PARS = $(SRCS_PARS:.c=_bonus.c)
 SRCS_BONUS_EXEC = $(SRCS_EXEC:.c=_bonus.c)
-SRCS_BONUS_BUILTIN = $(SRCS_BUILTIN:.c=_bonus.c)
+# SRCS_BONUS_BUILTIN = $(SRCS_BUILTIN:.c=_bonus.c)
 
 OBJS_MAIN = $(SRCS_MAIN:.c=.o)
 OBJS_PARS = $(addprefix ./parsing/, $(SRCS_PARS:.c=.o))
-OBJS_EXEC = $(addprefix ./excuting/, $(SRCS_EXEC:.c=.o))
-OBJS_BUILTIN = $(addprefix ./builtin/, $(SRCS_BUILTIN:.c=.o))
+OBJS_EXEC = $(addprefix ./executing/, $(SRCS_EXEC:.c=.o))
+# OBJS_BUILTIN = $(addprefix ./builtin/, $(SRCS_BUILTIN:.c=.o))
 OBJS = $(OBJS_MAIN) $(OBJS_PARS) $(OBJS_EXEC) $(OBJS_BUILTIN)
 
 OBJS_BONUS_MAIN = $(SRCS_BONUS_MAIN:.c=.o)
 OBJS_BONUS_PARS = $(addprefix ./parsing_bonus/, $(SRCS_BONUS_PARS:.c=.o))
-OBJS_BONUS_EXEC = $(addprefix ./excuting_bonus/, $(SRCS_BONUS_EXEC:.c=.o))
+OBJS_BONUS_EXEC = $(addprefix ./executing_bonus/, $(SRCS_BONUS_EXEC:.c=.o))
 OBJS_BONUS_BUILTIN = $(addprefix ./builtin_bonus/, $(SRCS_BONUS_BUILTIN:.c=.o))
 OBJS_BONUS = $(OBJS_BONUS_MAIN) $(OBJS_BONUS_PARS) $(OBJS_BONUS_EXEC) $(OBJS_BONUS_BUILTIN)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/04 15:04:29 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/05 18:17:14 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,11 @@ t_list	*parsing(char *str, t_list *env, char *prompt)
 	remove_quote_in_tokens(tokens);
 	check_ambigious(tokens, env);
 	cmds = get_cmds(tokens);
-	ft_lstclear(&tokens, token_free);
+	// ft_lstclear(&tokens, token_free);
 	print_cmds(cmds);
-	ft_lstclear(&((t_cmd *)cmds->content)->redirect, token_free);
-	ft_lstclear(&((t_cmd *)cmds->content)->simple_cmd, token_free);
-	ft_lstclear(&cmds, free);
-	return (NULL);
+	// ft_lstclear(&((t_cmd *)cmds->content)->redirect, token_free);
+	// ft_lstclear(&((t_cmd *)cmds->content)->simple_cmd, token_free);
+	// ft_lstclear(&cmds, free);
+	// return (NULL);
+	return (cmds);
 }

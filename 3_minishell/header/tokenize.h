@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/04 21:56:35 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:09:12 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,45 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "type_header.h"
+// enum e_token_type
+// {
+// 	ERROR = 0,
+// 	INREDIRECTION,
+// 	OUTREDIRECTION,
+// 	HEREDOC,
+// 	APPEND,
+// 	PIPE,
+// 	SIMPLECMD
+// };
 
-enum e_token_type
-{
-	ERROR = 0,
-	INREDIRECTION,
-	OUTREDIRECTION,
-	HEREDOC,
-	APPEND,
-	PIPE,
-	SIMPLECMD
-};
+// typedef struct s_token
+// {
+// 	int		type;
+// 	char	*value;
+// 	char	*exp_value;
+// 	int		is_ambiguous;
+// }	t_token;
 
-typedef struct s_token
-{
-	int		type;
-	char	*value;
-	char	*exp_value;
-	int		is_ambiguous;
-}	t_token;
+// typedef struct s_cmd
+// {
+// 	t_list			*redirect;
+// 	t_list			*simple_cmd;
+// 	int				next_pipe;
+// }	t_cmd;
 
-typedef struct s_cmd
-{
-	t_list			*redirect;
-	t_list			*simple_cmd;
-	int				next_pipe;
-}	t_cmd;
+// typedef struct s_env
+// {
+// 	char			*key;
+// 	char			*value;
+// }	t_env;
 
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-}	t_env;
+// typedef struct s_info
+// {
+// 	t_list	*cmds;
+// 	t_list	*env;
+// 	int		exitcode;
+// }	t_info;
 
 /* find_ambigous.c  */
 void	check_ambigious(t_list *tokens, t_list *env);
