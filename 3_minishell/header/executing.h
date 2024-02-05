@@ -15,8 +15,15 @@
 
 #include "tokenize.h"
 
+typedef struct s_info
+{
+	t_list	*cmds;
+	t_list	*env;
+	int		exitcode;
+}	t_info;
+
 //executing
-void	start_execute(t_list *parsed, char **envp);
+void	start_execute(t_list *cmds, t_list *env);
 //execute_utils.c
 pid_t	fork_pid(void);
 //heredoc.c

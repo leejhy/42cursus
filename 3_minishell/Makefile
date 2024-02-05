@@ -1,5 +1,6 @@
 .DEFAULT_GOAL := all
-SRCS_MAIN = main.c
+# SRCS_MAIN = main.c
+SRCS_MAIN = exe_main.c
 
 SRCS_PARS = \
 		tokenize.c \

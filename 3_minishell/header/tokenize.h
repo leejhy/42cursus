@@ -53,13 +53,6 @@ typedef struct s_env
 	char			*value;
 }	t_env;
 
-typedef struct s_info
-{
-	t_list	*cmd;
-	t_list	*env;
-	int		exitcode;
-}	t_info;
-
 /* find_ambigous.c  */
 void	check_ambigious(t_list *tokens, t_list *env);
 
