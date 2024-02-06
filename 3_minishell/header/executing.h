@@ -20,10 +20,17 @@ typedef struct s_info
 	t_list	*cmds;
 	t_list	*env;
 	int		exitcode;
-	int		prev_pipe[2];
 }	t_info;
+
+typedef struct s_pipe
+{
+	int		prev_pipe[2];
+	char	**exe_envp;
+	char	**exe_argv;
+}	t_pipe;
+
 //executing
-void	start_execute(t_list *cmds, t_list *env);
+void	start_execute(t_info *info);
 void	child_prc(t_info *info, int *pipe_fd, char **exe_argv);
 //execute_utils.c
 pid_t	fork_pid(void);
@@ -31,7 +38,7 @@ int	cnt_simplecmd(t_list *cmd);
 char	**make_exe_argv(t_list *cmd, t_list *env);
 char	**make_exe_envp(t_list *env);
 //execve_cmd.c
-char	*cat_path(char *cmd, t_list *env);
+char	*find_path(char *cmd, t_list *env);
 //heredoc.c
 void	handle_heredoc(t_list *parsed);
 void	run_heredoc(t_list *redirect, int doc_nb);

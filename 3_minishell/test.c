@@ -35,7 +35,7 @@ t_list	*get_env_list(char **envp)
 	return (res);
 }
 
-char	*cat_path(char *cmd, t_list *env)
+char	*find_path(char *cmd, t_list *env)
 {
 	t_env	*temp_env;
 	char	*path;
@@ -72,5 +72,5 @@ int main(int argc, char **argv, char **envp)
 	if (argv == NULL)
 		return (0);
 	env = get_env_list(envp);
-	temp = cat_path("ls", env);
+	temp = find_path("ls", env);
 }

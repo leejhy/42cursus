@@ -89,16 +89,16 @@ t_list	*get_env_list(char **envp)
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	t_list	*parsed;
-	t_list	*env;
+	t_info	*info;
 	char	*str;
 	char	*prompt;
 
 	// for (int i = 0; envp[i]; i++)
 	// 	printf("envp[%d] : [%s]\n", i, envp[i]);
 	// atexit(f);
+	info = init_info();
 	prompt = ft_strjoin(&argv[0][2], " : ");
-	env = get_env_list(envp);
+	info->env = get_env_list(envp);
 	// char	*argvv[] = {"export", "OLDPWD=123", NULL};
 	// builtin_export(2, argvv, env, prompt);
 	// builtin_unset(argc, argv, env, prompt);
@@ -111,12 +111,12 @@ int	main(int argc, char *argv[], char *envp[])
 	while (1)
 	{
 		str = readline(prompt);
-		parsed = parsing(str, env, prompt);
+		info->cmds = parsing(str, info->env, prompt);
 		if (!str)
 			break ;
 		if (ft_strlen(str) > 0)
 			add_history(str);
-		start_execute(parsed, env);
+		start_execute(info);
 		free(str);
 	}
 	free(prompt);

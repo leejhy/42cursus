@@ -12,15 +12,38 @@
 
 #include "executing.h"
 
-char	*cat_path(char *cmd, t_list *env)
+char	*cat_path(char **path, char *cmd, size_t path_len)
+{
+	char	*rt_str;
+	size_t	cmd_len;
+	size_t	i;
+
+	i = 0;
+	cmd_len = ft_strlen(cmd);
+	rt_str = malloc(sizeof(char) * (path_len + cmd_len + 2));//path 길이 + cmd길이 + / + '\0'
+	while (i < path_len)
+	{
+		rt_str[i] = (*path)++;
+		(*path)++;
+		i++;
+	}
+	rt_str[i] = '/';
+	i++;
+	while (i < path_len + cmd_len + 2)
+	{
+		rt_str[i] = *cmd;
+		cmd++;
+		i++;
+	}
+	rt_str[i] = '\0';//수정
+	return (rt_str);
+}
+
+char	*get_path(t_list *env)
 {
 	t_env	*temp_env;
 	char	*path;
-	char	*temp_path;
-	size_t	len;
 
-	path = NULL;
-	cmd = NULL;
 	while (env)
 	{
 		temp_env = (t_env *)(env->content);
@@ -31,13 +54,29 @@ char	*cat_path(char *cmd, t_list *env)
 		}
 		env = env->next;
 	}
-	while (path)
+	return (path);
+}
+
+char	*find_path(char *cmd, t_list *env)
+{
+	char	*path;
+	char	*path_cmd;
+	size_t	len;
+
+	path = NULL;
+	path = get_path(env);
+	if (access(cmd, F_OK & X_OK) == 0)
+		return (cmd);
+	while (*path)
 	{
 		len = 0;
-		while (path && path[len] != ':')
+		while (path[len] && path[len] != ':')
 			len++;
-		temp_path = ft_substr(path, 0, len);
-		path++;
+		path_cmd = cat_path(&path, cmd, len);
+		if (access(path_cmd, F_OK & X_OK) == 0)
+			return (path_cmd);
+		if (*path != '\0')
+			path++;
 	}
-	return (cmd);
+	return (0);
 }
