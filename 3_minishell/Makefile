@@ -17,7 +17,8 @@ SRCS_EXEC = execute.c \
 			execute_utils.c \
 			heredoc.c \
 			redirect.c \
-			execve_cmd.c
+			execve_cmd.c \
+			init_struct.c
 
 # SRCS_BUILTIN = \
 # 		builtin_cd.c \

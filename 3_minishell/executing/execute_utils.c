@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:39:31 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/05 22:12:43 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:33:54 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ char	**make_exe_argv(t_list *cmd, t_list *env)
 	exe_argv = malloc(sizeof(char *) * (cnt + 1));
 	//malloc
 	temp_cmd = find_path(((t_token *)(cmd->content))->exp_value, env);
-	if (temp_cmd == 0)
-		exit(errno);//마지막으로 세팅된 errno가 access함수
-	free(((t_token *)(cmd->content))->exp_value);
-	((t_token *)(cmd->content))->exp_value = temp_cmd;
-	temp = temp->next;
+	if (temp_cmd != 0)
+	{
+		free(((t_token *)(cmd->content))->exp_value);
+		((t_token *)(cmd->content))->exp_value = temp_cmd;
+	}
 	while (temp)
 	{
 		exe_argv[i] = ((t_token *)(temp->content))->exp_value;
@@ -55,13 +55,35 @@ char	**make_exe_argv(t_list *cmd, t_list *env)
 	return (exe_argv);
 }
 
+void	cat_keyvalue(t_env *env, char *temp_envp)
+{
+	char	*key;
+	char	*value;
+
+	key = env->key;
+	value = env->value;
+	while (*key)
+	{
+		*temp_envp = *key;//PWD
+		temp_envp++;
+		key++;
+	}//3번
+	*temp_envp = '=';
+	temp_envp++;//4번
+	while (*value)
+	{
+		*temp_envp = *value;
+		temp_envp++;
+		value++;//
+	}
+	*temp_envp = '\0';
+}
+
 char	**make_exe_envp(t_list *env)
 {
 	t_env	*one_env;
 	int		i;
 	int		cnt;
-	char	*temp_key;
-	char	*temp_value;
 	char	*temp_envp;
 	char	**exe_envp;
 
@@ -71,28 +93,13 @@ char	**make_exe_envp(t_list *env)
 	while (env)
 	{
 		one_env = (t_env *)(env->content);
-		temp_key = one_env->key;
-		temp_value = one_env->key;
-		temp_envp = malloc(sizeof(char) * (ft_strlen(temp_key) + ft_strlen(temp_value) + 2));
-		while (*temp_key)
-		{
-			*temp_envp = *temp_key;
-			temp_envp++;
-			temp_key++;
-		}
-		*temp_envp = '=';
-		temp_envp++;
-		while (*temp_value)
-		{
-			*temp_envp = *temp_value;
-			temp_envp++;
-			temp_value++;
-		}
-		*temp_envp = '\0';
-		exe_envp[i] = temp_envp - (ft_strlen(temp_key) + ft_strlen(temp_value) + 1);
+		temp_envp = malloc(sizeof(char) * (ft_strlen(one_env->key) + ft_strlen(one_env->value) + 2));
+		cat_keyvalue(one_env, temp_envp);
+		exe_envp[i] = temp_envp;
 		i++;
 		env = env->next;
 	}
+	exe_envp[i] = NULL;
 	return (exe_envp);//얘는 싹 free해야함
 }
 

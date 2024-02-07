@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 21:55:40 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/05 22:12:20 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:45:16 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ typedef struct s_pipe
 
 //executing
 void	start_execute(t_info *info);
-void	child_prc(t_info *info, int *pipe_fd, char **exe_argv);
+void	parent_prc(t_pipe *vars);
+// void	parent_prc(void);
+void	child_prc(t_info *info, t_pipe *vars, int *pipe_fd);
+
 //execute_utils.c
 pid_t	fork_pid(void);
 int	cnt_simplecmd(t_list *cmd);
@@ -50,6 +53,9 @@ void	handle_redirection(t_list *cmds, int *pipe_fd);
 void	handle_inredirection(t_token *token);
 void	handle_outredirection(t_token *token);
 void	handle_append(t_token *token);
+//init_struct.c
+t_info	*init_info(void);
+t_pipe	*init_vars(void);
 //
 void	ft_test(t_list *cmds);
 

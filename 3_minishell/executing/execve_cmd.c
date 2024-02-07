@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 21:34:21 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/05 22:14:34 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:03:16 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*cat_path(char **path, char *cmd, size_t path_len)
 	rt_str = malloc(sizeof(char) * (path_len + cmd_len + 2));//path 길이 + cmd길이 + / + '\0'
 	while (i < path_len)
 	{
-		rt_str[i] = (*path)++;
+		rt_str[i] = **path;
 		(*path)++;
 		i++;
 	}
@@ -44,6 +44,7 @@ char	*get_path(t_list *env)
 	t_env	*temp_env;
 	char	*path;
 
+	path = NULL;
 	while (env)
 	{
 		temp_env = (t_env *)(env->content);

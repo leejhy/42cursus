@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:10:12 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/05 18:53:26 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:51:14 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	handle_append(t_token *token)
 	int		fd;
 
 	filename = token->exp_value;
-	fd = open(filename, O_WRONLY | O_CREAT, 0644);
+	fd = open(filename, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (fd < 0)
 	{
 		printf("%s\n", strerror(errno));
