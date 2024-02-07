@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:05:06 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/05 18:18:42 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/07 20:58:55 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	run_heredoc(t_list *redirect, t_list *env, int doc_nb)
 		waitpid(pid, &status, 0);
 		((t_token *)redirect->content)->type = INREDIRECTION;
 		((t_token *)redirect->content)->exp_value = doc_name;
-		free(doc_name);
+		// free(doc_name);
 	}
 }
 
@@ -128,7 +128,7 @@ void	handle_heredoc(t_list *cmds, t_list *env)
 		{
 			if (redirect && ((t_token *)(redirect->content))->type == HEREDOC)
 				run_heredoc(redirect, env, i++);
-			redirect = redirect->next; 
+ 			redirect = redirect->next; 
 		}
 		cmds = cmds->next;
 	}

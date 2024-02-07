@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/05 18:13:36 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:07:06 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		str = readline(prompt);
 		info->cmds = parsing(str, info->env, prompt);
-		if (!str)
+		if (!str)//여기서 ctrl + D 시그널처리
 			break ;
 		if (ft_strlen(str) > 0)
 			add_history(str);

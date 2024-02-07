@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 21:55:40 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/06 20:45:16 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:47:04 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ typedef struct s_pipe
 	char	**exe_envp;
 	char	**exe_argv;
 }	t_pipe;
+
+//expansion.c
+void	expansion_simplecmd(char *str, char *res, int size, t_list *env);
+void	expansion_size(char *str, t_list *env, int *size);
 
 //executing
 void	start_execute(t_info *info);

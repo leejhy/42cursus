@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:10:12 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/06 21:51:14 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/07 19:11:06 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	handle_inredirection(t_token *token)
 	char	*filename;
 	int		fd;
 	char	*err;
+
 	filename = token->exp_value;
+	printf("filename %s\n", filename);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
