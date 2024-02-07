@@ -16,6 +16,7 @@ SRCS_PARS = \
 SRCS_EXEC = execute.c \
 			execute_utils.c \
 			heredoc.c \
+			heredoc_utils.c \
 			redirect.c \
 			execve_cmd.c \
 			init_struct.c

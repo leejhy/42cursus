@@ -2,6 +2,7 @@
 	"files.associations": {
 		"main.h": "c",
 		"executing.h": "c",
-		"tokenize.h": "c"
+		"tokenize.h": "c",
+		"errno.h": "c"
 	}
 }
