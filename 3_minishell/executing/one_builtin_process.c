@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   one_builtin_process.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:39:38 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/07 19:33:06 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/09 13:58:13 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,10 @@ void	run_one_builtin(t_info *info)
 	one_builtin_fd_save_load(info, SAVE_MODE);
 	one_builtin_dup_process(info);
 	if (g_last_exitcode == 0)
+	{
 		run_one_builtin_sub(info, \
 		((t_token *)((t_list *)((t_cmd *)info->cmd->content)-> \
 		simple_cmd)->content)->exp_value);
+	}
 	one_builtin_fd_save_load(info, LOAD_MODE);
 }

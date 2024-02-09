@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/04 21:47:05 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/08 16:03:01 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	free_env(void *env)
 {
 	free(((t_env *)env)->key);
 	free(((t_env *)env)->value);
+	free(((t_env *)env));
 }
 
 static void	remove_env(t_list *env_start, t_list *del_node)

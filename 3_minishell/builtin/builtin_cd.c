@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/07 16:19:26 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/08 16:25:11 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	change_pwd_oldpwd(t_list *env, char *oldpwd_value, \
 		free(argv[0]);
 		free(argv[1]);
 		free(argv);
+		free(pwd_value);
 	}
 }
 
@@ -70,7 +71,7 @@ void	no_dir_handler(char **argv, t_list *env, char *prompt)
 	t_list		*pwd_env;
 	char		*pwd;
 
-	ft_putendl_fd("cd: error retrieving current directory: \
+	ft_putendl_fd("cd: error retrieving current directory:\
 	getcwd: cannot access parent directories: No such file or directory", 2);
 	pwd_env = get_list_env("PWD", env);
 	if (pwd_env != NULL)
@@ -99,6 +100,7 @@ int	cd_error_manager(char **argv, t_list *env, char *prompt)
 	}
 	else
 	{
+		free(pwd);
 		builtin_perror_manager(prompt, argv[0], argv[1], strerror(errno));
 		return (1);
 	}
@@ -108,20 +110,24 @@ int	builtin_cd(int argc, char **argv, t_list *env, char *prompt)
 {
 	int		chdir_res;
 	char	*prev_dir;
+	char	*curr_dir;
 
 	if (argc == 1)
 		return (move_home(argv, env, prompt));
 	prev_dir = getcwd(NULL, 0);
 	chdir_res = chdir(argv[1]);
-	if (chdir_res == 0)
+	curr_dir = getcwd(NULL, 0);
+	if (curr_dir != NULL && chdir_res == 0)
 	{
 		change_pwd_oldpwd(env, prev_dir, getcwd(NULL, 0), prompt);
 	}
 	else
 	{
 		free(prev_dir);
+		free(curr_dir);
 		return (cd_error_manager(argv, env, prompt));
 	}
 	free(prev_dir);
+	free(curr_dir);
 	return (0);
 }

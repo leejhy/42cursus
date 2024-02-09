@@ -15,12 +15,13 @@ SRCS_PARS = \
 		find_ambigous.c
 
 SRCS_EXEC = \
-		execute_utils.c \
 		execute.c \
+		execute_utils.c \
+		exe_vars.c \
+		exe_vars_utils.c \
 		heredoc.c \
 		redirect.c \
 		signal_handle.c \
-		test.c \
 		error_manager.c \
 		one_builtin_process.c \
 		utils.c
@@ -58,7 +59,7 @@ LIBFT = libft/libft.a
 HEADER_DIR = ./header
 HEADER_BONUS_DIR = ./header_bonus
 READLINE = readline
-CC = cc -Wall -Wextra -Werror -fsanitize=address -g
+CC = cc -Wall -Wextra -Werror #-fsanitize=address -g
 NAME = minishell
 MANDA = .manda
 BONUS = .bonus

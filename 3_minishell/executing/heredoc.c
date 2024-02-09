@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:05:06 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/07 13:31:26 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/09 14:04:15 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int	run_heredoc(t_list *redirect, t_list **here_doc_filenames, int doc_nb)
 	int		fd;
 
 	doc_name = make_heredoc_name(doc_nb, here_doc_filenames);
+	//list로 쭉 저장해놓고, docname만 리턴
 	if (doc_name == NULL)
 		return (FALSE);
 	fd = open(doc_name, O_TRUNC | O_CREAT | O_RDWR, 0666);

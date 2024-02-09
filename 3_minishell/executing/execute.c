@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:39:38 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/08 13:57:55 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/09 21:10:22 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,58 +19,59 @@ void	parent_prc(t_info *info)
 	info->input_fd = info->pipe_fd[0];
 }
 
-void	child_prc(t_info *info)
+void	child_prc(t_info *info, t_list *curr_cmd)
 {
 	t_cmd	*cmd;
-	char	*str;
+	char	*exe_cmd;
 	char	**exe_argv;
 	char	**exe_envp;
 
-	cmd = (t_cmd *)(info->cmd->content);
+	exe_argv = 0;
+	cmd = (t_cmd *)(curr_cmd->content);
 	handle_pipe(cmd, info);
-	handle_redirection(info->cmd, info->pipe_fd);
-	if (g_last_exitcode != 0)//캐스팅 해서 exit 할건지, exit하고 캐스팅할건지
-		exit(g_last_exitcode);
+	handle_redirection(curr_cmd);
+	//redirection 에서 에러나면 알아서 redirection 함수 안에서 알아서 에러처리, exit
+	if (cmd->simple_cmd == NULL)//redirection만 들어왔을때 정상종료
+		exit(0);
 	exe_argv = make_exe_argv(cmd->simple_cmd, info->env);
 	exe_envp = make_exe_envp(info->env);
-	//자식안에서 malloc하면 알아서 free
-	if (execve(((t_token *)(cmd->simple_cmd->content))->exp_value, exe_argv, exe_envp) == -1)
-	{
-		str = strerror(errno);
-		write(2, str, ft_strlen(str));
-		write(2, "\n", 1);
-		exit(1);
-	}
+	exe_cmd = ((t_token *)(cmd->simple_cmd->content))->exp_value;
+	if (execve(exe_cmd, exe_argv, exe_envp) == -1)
+		custom_error_manager(PROMPT_ERROR, exe_cmd, "command not found", 127);
 }
 
 void	run_execute(t_info *info)
 {
 	pid_t	pid;
+	t_list	*cmd;
 	int		prc_cnt;
 
 	prc_cnt = 0;
 	info->input_fd = -1;
-	while (info->cmd)//non built-in
+	cmd = info->cmd;
+	while (cmd)//non built-in
 	{
-		if (((t_cmd *)(info->cmd->content))->next_pipe == TRUE)
+		if (((t_cmd *)(cmd->content))->next_pipe == TRUE)
 			pipe(info->pipe_fd);
 		pid = fork_pid();
 		if (pid == 0)
-			child_prc(info);
-		if (info->cmd->next != NULL)
+			child_prc(info, cmd);
+		if (cmd->next != NULL)
 			close(info->pipe_fd[1]);
-		parent_prc(info->pipe_fd);
+		parent_prc(info);
 		prc_cnt++;
-		info->cmd = info->cmd->next;
+		cmd = cmd->next;
 	}
-	wait_prc(prc_cnt);
+	wait_prc(prc_cnt, pid);
 }
 
 void	run_process(t_info *info)
 {
 	//already handled heredoc, exitcode = 0;
 	if (check_one_builtin(info))
+	{
 		run_one_builtin(info);
+	}
 	else
 	{
 		run_execute(info);//자식만들어서 execve

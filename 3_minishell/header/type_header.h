@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/07 21:16:36 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:30:23 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,5 @@ typedef struct s_info
 	int		pipe_fd[2];
 	int		input_fd;
 }	t_info;
-
-typedef struct s_vars
-{
-	char	**exe_envp;
-	char	**exe_argv;
-}	t_vars;
 
 #endif

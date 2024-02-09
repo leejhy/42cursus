@@ -6,18 +6,22 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/07 21:26:40 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:20:54 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
 void	remove_here_doc_files(t_list *here_doc_files)
-{
+{//fix the heredoc leaks
+	t_list	*temp;
+
 	while (here_doc_files != NULL)
 	{
+		temp = here_doc_files;
 		unlink((char *)here_doc_files->content);
 		here_doc_files = here_doc_files->next;
+		free(temp);
 	}
 }
 

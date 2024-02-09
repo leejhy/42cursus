@@ -6,79 +6,82 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:10:12 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/08 13:54:50 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/09 20:41:34 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executing.h"
 
-void	handle_inredirection(t_token *token)
+void	handle_pipe(t_cmd *cmd, t_info *info)
 {
-	char	*filename;
+	if (cmd->next_pipe == TRUE)//pipe인식이 redirection 보다 먼저
+	{
+		dup2(info->pipe_fd[1], 1);//다음 파이프 존재하면 파이프에다가 쓰기
+		close(info->pipe_fd[0]);
+		close(info->pipe_fd[1]);
+	}
+	if (info->input_fd != -1)
+	{
+		dup2(info->input_fd , 0);
+		close(info->input_fd);
+	}
+}
+
+void	handle_inredirection(char *filename)
+{
 	int		fd;
 
-	filename = token->exp_value;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-	{
-		g_last_exitcode = errno;
-		exit ((unsigned char)g_last_exitcode);
-	}
+		exec_error_manager(PROMPT_ERROR, filename, 1);
 	dup2(fd, 0);//dup2해주고
 	close(fd);
 }
 
-void	handle_outredirection(t_token *token)
+void	handle_outredirection(char *filename)
 {
-	char	*filename;
 	int		fd;
 
-	filename = token->exp_value;
 	fd = open(filename, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fd < 0)
-	{
-		g_last_exitcode = errno;
-		exit ((unsigned char)g_last_exitcode);
-	}
+		exec_error_manager(PROMPT_ERROR, filename, 1);
 	dup2(fd, 1);//dup2해주고
 	close(fd);
 }
 
-void	handle_append(t_token *token)
+void	handle_append(char *filename)
 {
-	char	*filename;
 	int		fd;
-
-	filename = token->exp_value;
+	
 	fd = open(filename, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (fd < 0)
-	{
-		g_last_exitcode = errno;
-		exit ((unsigned char)g_last_exitcode);
-	}
+		exec_error_manager(PROMPT_ERROR, filename, 1);
 	dup2(fd, 1);//dup2해주고
 	close(fd);
 }
 
-void	handle_redirection(t_list *cmds, int *pipe_fd)
-{//자식 프로세스 내에서 작동한다고 판단
-//파이프도 받아와야함
-	// ((t_token *)(parsed->content))
+void	handle_redirection(t_list *cmds)
+{
 	t_list	*redirect;
-	t_cmd	*cmd;
+	int		type;
+	char	*value;
+	char	*exp_value;
 
 	redirect = ((t_cmd *)(cmds->content))->redirect;
-	cmd = (t_cmd *)(cmds->content);
 	while (redirect)
-	{
-		if (((t_token *)(cmds->content))->type == INREDIRECTION)
-			handle_inredirection(((t_token *)(cmds->content)));
-		else if (((t_token *)(cmds->content))->type == OUTREDIRECTION)
-			handle_outredirection(((t_token *)(cmds->content)));
-		else if (((t_token *)(cmds->content))->type == APPEND)
-			handle_append(((t_token *)(cmds->content)));
-		//else
-			//??
+	{//while 돌리면서 전역변수 0세팅 계속
+		type = ((t_token *)(redirect->content))->type;
+		value = ((t_token *)(redirect->content))->value;
+		exp_value = ((t_token *)(redirect->content))->exp_value;
+		if (((t_token *)(redirect->content))->is_ambiguous == TRUE
+			|| (ft_strncmp("$", value, 1) == 0 && value[1] != '?' && value[1] != '\0'))
+			custom_error_manager(PROMPT_ERROR, value, "ambiguous redirect", 1);
+		if (type == INREDIRECTION)
+			handle_inredirection(exp_value);
+		else if (type == OUTREDIRECTION)
+			handle_outredirection(exp_value);
+		else if (type == APPEND)
+			handle_append(exp_value);
 		redirect = redirect->next;
 	}
 }
