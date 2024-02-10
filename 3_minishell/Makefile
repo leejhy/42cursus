@@ -20,6 +20,7 @@ SRCS_EXEC = \
 		exe_vars.c \
 		exe_vars_utils.c \
 		heredoc.c \
+		heredoc_utils.c \
 		redirect.c \
 		signal_handle.c \
 		error_manager.c \
@@ -59,7 +60,7 @@ LIBFT = libft/libft.a
 HEADER_DIR = ./header
 HEADER_BONUS_DIR = ./header_bonus
 READLINE = readline
-CC = cc -Wall -Wextra -Werror #-fsanitize=address -g
+CC = cc -Wall -Wextra -Werror #-fsanitize=address -g3
 NAME = minishell
 MANDA = .manda
 BONUS = .bonus

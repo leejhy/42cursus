@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:05:06 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/09 14:04:15 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/10 19:53:29 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,9 @@ void	max_heredoc_handle(t_list *cmds)
 	}
 }
 
-void	here_doc_signal(int signo)
+void	read_heredoc(char *doc_name, t_list *redirect, int fd, t_list *env)
 {
-	if (signo == SIGINT)
-	{
-		ft_putchar_fd('\n', 1);
-		exit(1);
-	}
-}
-
-void	read_heredoc(char *doc_name, t_list *redirect, int fd)
-{
+	char	*exp_input;
 	char	*input;
 	char	*deli;
 
@@ -90,14 +82,17 @@ void	read_heredoc(char *doc_name, t_list *redirect, int fd)
 		input = readline("> ");
 		if (input == NULL || ft_strncmp(input, deli, ft_strlen(deli) + 1) == 0)
 			break ;
-		ft_putendl_fd(input, fd);
+		exp_input = expanse_input(env, input);
+		ft_putendl_fd(exp_input, fd);//add heredoc expansion
+		free(exp_input);
 		free(input);
 	}
 	free(input);
 	exit(0);
 }
 
-int	run_heredoc(t_list *redirect, t_list **here_doc_filenames, int doc_nb)
+int	run_heredoc(t_list *redirect, t_list **here_doc_filenames,\
+				int doc_nb, t_list *env)
 {
 	char	*doc_name;
 	pid_t	pid;
@@ -109,11 +104,10 @@ int	run_heredoc(t_list *redirect, t_list **here_doc_filenames, int doc_nb)
 	if (doc_name == NULL)
 		return (FALSE);
 	fd = open(doc_name, O_TRUNC | O_CREAT | O_RDWR, 0666);
+	signal(SIGINT, SIG_IGN);
 	pid = fork_pid();
-	if (pid != 0)
-		signal(SIGINT, SIG_IGN);
 	if (pid == 0)
-		read_heredoc(doc_name, redirect, fd);
+		read_heredoc(doc_name, redirect, fd, env);
 	close(fd);
 	waitpid(pid, &status, 0);
 	g_last_exitcode = WEXITSTATUS(status);
@@ -124,7 +118,7 @@ int	run_heredoc(t_list *redirect, t_list **here_doc_filenames, int doc_nb)
 	return (TRUE);
 }
 
-t_list	*handle_heredoc(t_list *cmds)
+t_list	*handle_heredoc(t_list *cmds, t_list *env)
 {
 	t_list	*redirect;
 	t_list	*here_doc_filenames;
@@ -140,7 +134,7 @@ t_list	*handle_heredoc(t_list *cmds)
 		{
 			if (g_last_exitcode != 1 && \
 				((t_token *)(redirect->content))->type == HEREDOC)
-				run_heredoc(redirect, &here_doc_filenames, i++);
+				run_heredoc(redirect, &here_doc_filenames, i++, env);
 			redirect = redirect->next;
 		}
 		cmds = cmds->next;

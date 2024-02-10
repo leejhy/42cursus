@@ -1,5 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/09 21:49:22 by junhylee          #+#    #+#             */
+/*   Updated: 2024/02/10 15:15:20 by junhylee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "executing.h"
+
+void	here_doc_signal(int signo)
+{
+	if (signo == SIGINT)
+	{
+		ft_putchar_fd('\n', 1);
+		exit(1);
+	}
+}
 
 char	*expanse_input(t_list *env, char *input)
 {

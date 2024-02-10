@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:10:12 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/09 20:41:34 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/10 17:28:11 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,12 @@ void	handle_redirection(t_list *cmds)
 		type = ((t_token *)(redirect->content))->type;
 		value = ((t_token *)(redirect->content))->value;
 		exp_value = ((t_token *)(redirect->content))->exp_value;
-		if (((t_token *)(redirect->content))->is_ambiguous == TRUE
-			|| (ft_strncmp("$", value, 1) == 0 && value[1] != '?' && value[1] != '\0'))
-			custom_error_manager(PROMPT_ERROR, value, "ambiguous redirect", 1);
+		if (value)
+		{
+			if (((t_token *)(redirect->content))->is_ambiguous == TRUE
+				|| (ft_strncmp("$", value, 1) == 0 && value[1] != '?' && value[1] != '\0'))
+				custom_error_manager(PROMPT_ERROR, value, "ambiguous redirect", 1);
+		}
 		if (type == INREDIRECTION)
 			handle_inredirection(exp_value);
 		else if (type == OUTREDIRECTION)

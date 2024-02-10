@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/09 17:20:54 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/10 16:29:19 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	all_process(t_info *info)
 {
 	t_list	*here_doc_files;
 
-	here_doc_files = handle_heredoc(info->cmd);
+	here_doc_files = handle_heredoc(info->cmd, info->env);
 	if (g_last_exitcode == 0)
 		do_process(info);
 	remove_here_doc_files(here_doc_files);

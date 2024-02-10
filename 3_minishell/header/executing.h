@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 21:55:40 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/09 20:39:02 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:29:47 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "type_header.h"
 # include "include_header.h"
 # include "builtin.h"
+# include "tokenize.h"//add because of heredocument expansion 
 
 /*  execute.c */
 void	run_process(t_info *info);
@@ -25,6 +26,7 @@ void	child_prc(t_info *info, t_list *curr_cmd);
 /* execute_utils.c */
 pid_t	fork_pid(void);
 void	wait_prc(int prc_cnt, pid_t pid);
+void	exec_cmd_check(char *str);
 
 /* exe_vars.c */
 char	**set_exe_argv(t_list *cmd, char *path_cmd, int cnt);
@@ -41,7 +43,18 @@ int		env_cnt(t_list *env);
 int		cnt_simplecmd(t_list *cmd);
 
 /* heredoc.c */
-t_list	*handle_heredoc(t_list *cmds);
+t_list	*handle_heredoc(t_list *cmds, t_list *env);
+int		run_heredoc(t_list *redirect, t_list **here_doc_filenames,\
+					 int doc_nb, t_list *env);
+void	read_heredoc(char *doc_name, t_list *redirect, int fd, t_list *env);
+void	max_heredoc_handle(t_list *cmds);
+char	*make_heredoc_name(int nb, t_list **here_doc_filenames);
+
+/* heredoc_utils.c */
+void	here_doc_signal(int signo);
+char	*expanse_input(t_list *env, char *input);
+void	expansion_size(char *str, t_list *env, int *size);//expansion.c /add because of heredocument expansion 
+void	expansion_simplecmd(char *str, char *res, int size, t_list *env);//expansion.c /add because of heredocument expansion 
 
 /* redirect.c */
 void	handle_redirection(t_list *cmds);

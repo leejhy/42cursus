@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:26:58 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/09 20:49:11 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:06:39 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,12 @@ char	**make_exe_argv(t_list *cmd, t_list *env)
 	//얘때문에 redirection만 들어왔을때 exit코드 1로 찍힘 수정수정수정
 	while (tmp_lst && ((t_token *)(tmp_lst->content))->exp_value[0] == '\0')
 		tmp_lst = tmp_lst->next;
+	if (tmp_lst == NULL)//빈 문자열이라 밀었는데 NULL일경우에 exit 0
+		exit (0);
 	cnt = cnt_simplecmd(tmp_lst);
 	path_cmd = find_path(((t_token *)(tmp_lst->content))->exp_value, env);
-	if (path_cmd != 0)
-	{
-		free(((t_token *)(cmd->content))->exp_value);
-		((t_token *)(cmd->content))->exp_value = path_cmd;
-	}
+	// if (path_cmd != 0)
+	((t_token *)(cmd->content))->exp_value = path_cmd;
 	exe_argv = set_exe_argv(tmp_lst, path_cmd, cnt);
 	return (exe_argv);
 }
@@ -97,11 +96,7 @@ char	*find_path(char *cmd, t_list *env)
 		if (*path != '\0')
 			path++;
 	}
-	// if (access(cmd, F_OK) == -1)
-	// {
-	// 	write(2, "acc\n", 4);
-	// 	exec_error_manager(PROMPT_ERROR, cmd, 127);
-	// }
+	custom_error_manager(PROMPT_ERROR, cmd, "command not found", 127);
 	return (0);
 }
 
