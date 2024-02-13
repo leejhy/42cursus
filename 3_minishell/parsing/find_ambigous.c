@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/04 22:19:25 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/13 18:27:54 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,12 @@ void	check_ambigious(t_list *tokens, t_list *env)
 {
 	while (tokens != NULL)
 	{
-		((t_token *)tokens->content)->is_ambiguous = \
-			is_ambiguous(((t_token *)tokens->content)->value, env);
+		if (((t_token *)tokens->content)->value && \
+			((t_token *)tokens->content)->exp_value[0] == '\0')
+			((t_token *)tokens->content)->is_ambiguous = TRUE;
+		else
+			((t_token *)tokens->content)->is_ambiguous = \
+				is_ambiguous(((t_token *)tokens->content)->value, env);
 		tokens = tokens->next;
 	}
 }

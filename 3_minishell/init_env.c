@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/07 20:50:19 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/13 18:48:38 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,12 @@ t_list	*get_env_list(char **envp)
 	t_list	*res;
 	t_list	*node;
 	t_env	*env;
+	char	*tmp;
 
 	res = NULL;
-	res = add_env_manual(res, "OLDPWD", "", TRUE);
+	tmp = getenv("OLDPWD");
+	if (tmp == NULL)
+		res = add_env_manual(res, "OLDPWD", "", TRUE);
 	res = add_env_manual(res, "?", "0", FALSE);
 	while (*envp)
 	{

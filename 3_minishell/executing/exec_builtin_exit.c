@@ -1,16 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*   exec_builtin_exit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/11 16:38:25 by junhylee         ###   ########.fr       */
+/*   Created: 2024/02/11 15:30:46 by junhylee          #+#    #+#             */
+/*   Updated: 2024/02/13 15:03:16 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "executing.h"
+
+static int	check_same_num(char *argv1, char *ltoa_res)
+{
+	int	origin_idx;
+	int	change_idx;
+
+	origin_idx = 0;
+	change_idx = 0;
+	if (argv1[origin_idx] == '+')
+		origin_idx++;
+	while (1)
+	{
+		if (argv1[origin_idx] == '\0' && ltoa_res[change_idx] == '\0')
+			break ;
+		if (argv1[origin_idx] != ltoa_res[change_idx])
+			return (FALSE);
+		origin_idx++;
+		change_idx++;
+	}
+	return (TRUE);
+}
 
 static size_t	ft_get_digit_size(long n)
 {
@@ -74,33 +95,11 @@ static long	ft_atol(const char *str)
 	return ((long)(sign * res));
 }
 
-static int	check_same_num(char *argv1, char *ltoa_res)
-{
-	int	origin_idx;
-	int	change_idx;
-
-	origin_idx = 0;
-	change_idx = 0;
-	if (argv1[origin_idx] == '+')
-		origin_idx++;
-	while (1)
-	{
-		if (argv1[origin_idx] == '\0' && ltoa_res[change_idx] == '\0')
-			break ;
-		if (argv1[origin_idx] != ltoa_res[change_idx])
-			return (FALSE);
-		origin_idx++;
-		change_idx++;
-	}
-	return (TRUE);
-}
-
-int	builtin_exit(int argc, char **argv, char *prompt)
+int	exec_builtin_exit(int argc, char **argv, char *prompt)
 {
 	char	*atol_res_str;
 	long	atol_res;
 
-	ft_putendl_fd("exit", 1);
 	if (argc == 1)
 		return (0);
 	atol_res = ft_atol(argv[1]);

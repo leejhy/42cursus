@@ -6,39 +6,11 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/08 16:25:11 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/13 14:59:46 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
-
-static int	move_home(char **argv, t_list *env, char *prompt)
-{
-	t_list	*home;
-	int		chdir_res;
-
-	home = get_list_env("HOME", env);
-	if (home == NULL)
-	{
-		builtin_perror_manager(prompt, argv[0], "HOME not set", NULL);
-		return (1);
-	}
-	if (((t_env *)home->content)->value[0] == '\0')
-		return (0);
-	chdir_res = chdir(((t_env *)home->content)->value);
-	if (chdir_res == 0)
-	{
-		free(((t_env *)home->content)->value);
-		((t_env *)home->content)->value = getcwd(NULL, 0);
-		return (0);
-	}
-	else
-	{
-		builtin_perror_manager(prompt, argv[0], \
-					((t_env *)home->content)->value, strerror(errno));
-		return (1);
-	}
-}
 
 void	change_pwd_oldpwd(t_list *env, char *oldpwd_value, \
 						char *pwd_value, char *prompt)
@@ -62,7 +34,6 @@ void	change_pwd_oldpwd(t_list *env, char *oldpwd_value, \
 		free(argv[0]);
 		free(argv[1]);
 		free(argv);
-		free(pwd_value);
 	}
 }
 
@@ -85,6 +56,7 @@ void	no_dir_handler(char **argv, t_list *env, char *prompt)
 		if (!ft_strncmp("./", argv[1], 3))
 			pwd = ft_strjoin(((t_env *)pwd_env->content)->value, "/./");
 		change_pwd_oldpwd(env, NULL, pwd, prompt);
+		free(pwd);
 	}
 }
 
@@ -119,7 +91,7 @@ int	builtin_cd(int argc, char **argv, t_list *env, char *prompt)
 	curr_dir = getcwd(NULL, 0);
 	if (curr_dir != NULL && chdir_res == 0)
 	{
-		change_pwd_oldpwd(env, prev_dir, getcwd(NULL, 0), prompt);
+		change_pwd_oldpwd(env, prev_dir, curr_dir, prompt);
 	}
 	else
 	{

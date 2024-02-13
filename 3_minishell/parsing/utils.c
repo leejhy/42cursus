@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/09 15:52:02 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:01:03 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,29 +86,4 @@ t_list	*ft_tokenlistdup(t_list *node)
 	if (res == NULL)
 		return (NULL);
 	return (res);
-}
-
-void	print_node(t_list *tokens)
-{
-	t_token	*tok;
-
-	while (tokens != NULL)
-	{
-		tok = tokens->content;
-		if (tok->type == ERROR)
-			printf("ERROR TOKEN : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
-		if (tok->type == INREDIRECTION)
-			printf("INREDIRECTION : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
-		if (tok->type == OUTREDIRECTION)
-			printf("OUTREDIRECTION : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
-		if (tok->type == HEREDOC)
-			printf("HEREDOC : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
-		if (tok->type == APPEND)
-			printf("APPEND : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
-		if (tok->type == PIPE)
-			printf("PIPE : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
-		if (tok->type == SIMPLECMD)
-			printf("SIMPLECMD : [%s] [%s] [%d]\n", tok->value, tok->exp_value, tok->is_ambiguous);
-		tokens = tokens->next;
-	}
 }

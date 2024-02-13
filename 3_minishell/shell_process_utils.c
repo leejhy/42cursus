@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   shell_process_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/11 21:23:46 by junhylee         ###   ########.fr       */
+/*   Created: 2024/02/11 17:03:12 by junhylee          #+#    #+#             */
+/*   Updated: 2024/02/11 17:08:21 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "main.h"
 
-int	builtin_pwd(t_list *env)
+void	init_minishell(void)
 {
-	t_list	*pwd;
-	char	*pwd_ptr;
+	g_last_exitcode = 0;
+	rl_catch_signals = 0;
+	signal(SIGINT, signal_handle);
+	signal(SIGQUIT, SIG_IGN);
+}
 
-	pwd_ptr = getcwd(NULL, 0);
-	pwd = get_list_env("PWD", env);
-	if (pwd != NULL)
+int	is_str_empty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		ft_putstr_fd(((t_env *)pwd->content)->value, 1);
+		if (str[i] != ' ')
+			return (0);
+		i++;
 	}
-	else if (pwd_ptr != NULL)
-	{
-		ft_putstr_fd(pwd_ptr, 1);
-	}
-	ft_putchar_fd('\n', 1);
-	free(pwd_ptr);
-	return (0);
+	return (1);
+}
+
+void	ctrl_d(void)
+{
+	ft_putendl_fd("exit", 1);
+	exit(g_last_exitcode);
 }

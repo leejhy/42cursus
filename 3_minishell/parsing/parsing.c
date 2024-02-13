@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/07 16:56:48 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/13 14:34:25 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,32 @@ t_list	*get_cmds(t_list *tokens)
 	return (res);
 }
 
+t_list	*remove_empty_simplecmd(t_list *tokens)
+{
+	t_list	*temp;
+	t_list	*res;
+	t_list	*node;
+
+	temp = tokens;
+	res = NULL;
+	while (tokens)
+	{
+		if (((t_token *)tokens->content)->type == SIMPLECMD && \
+			((t_token *)tokens->content)->value != NULL && \
+			ft_strlen(((t_token *)tokens->content)->exp_value) == 0)
+		{
+		}
+		else
+		{
+			node = ft_tokenlistdup(tokens);
+			ft_lstadd_back(&res, node);
+		}
+		tokens = tokens->next;
+	}
+	ft_lstclear(&temp, token_free);
+	return (res);
+}
+
 t_list	*parsing(char *str, t_list *env)
 {
 	t_list	*tokens;
@@ -82,6 +108,7 @@ t_list	*parsing(char *str, t_list *env)
 	tokens = tokenize(str, FALSE);
 	if (!is_valid_syntax(tokens))
 	{
+		g_last_exitcode = 258;
 		ft_lstclear(&tokens, token_free);
 		return (print_error(PROMPT_ERROR, "syntax error\n"));
 	}
@@ -89,11 +116,11 @@ t_list	*parsing(char *str, t_list *env)
 	if (expansion(tokens, env) == FALSE)
 		return (print_error(PROMPT_ERROR, "malloc error1"));
 	tokens = re_tokenize(tokens);
-	if (tokens == NULL)
-		return (print_error(PROMPT_ERROR, "malloc error2"));
 	remove_quote_in_tokens(tokens);
 	check_ambigious(tokens, env);
+	tokens = remove_empty_simplecmd(tokens);
 	cmds = get_cmds(tokens);
-	ft_lstclear(&tokens, token_free);
+	if (tokens != NULL)
+		ft_lstclear(&tokens, token_free);
 	return (cmds);
 }

@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/01 18:19:52 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/13 14:33:57 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ t_list	*get_simplecmd_token(char *str, int *idx, int re_token)
 	int		start;
 	int		end;
 
-	token = ft_calloc(1, sizeof(t_token));
-	if (token == NULL)
-		return (NULL);
 	start = *idx;
 	end = get_last_simplecmd_idx(str, idx, re_token);
 	if (end == -1)
 		return (get_error_token());
+	token = ft_calloc(1, sizeof(t_token));
+	if (token == NULL)
+		return (NULL);
 	token->type = SIMPLECMD;
 	token->value = ft_substr(str, start, end - start);
 	token->exp_value = NULL;

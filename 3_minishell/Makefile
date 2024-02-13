@@ -1,7 +1,8 @@
 .DEFAULT_GOAL := all
 SRCS_MAIN = main.c \
 			init_env.c \
-			shell_process.c
+			shell_process.c \
+			shell_process_utils.c
 
 SRCS_PARS = \
 		tokenize.c \
@@ -17,18 +18,21 @@ SRCS_PARS = \
 SRCS_EXEC = \
 		execute.c \
 		execute_utils.c \
+		exec_builtin_check.c \
+		exec_builtin_exit.c \
 		exe_vars.c \
 		exe_vars_utils.c \
 		heredoc.c \
 		heredoc_utils.c \
 		redirect.c \
-		signal_handle.c \
 		error_manager.c \
 		one_builtin_process.c \
+		one_builtin_process2.c \
 		utils.c
 
 SRCS_BUILTIN = \
 		builtin_cd.c \
+		builtin_cd2.c \
 		builtin_echo.c \
 		builtin_env.c \
 		builtin_exit.c \

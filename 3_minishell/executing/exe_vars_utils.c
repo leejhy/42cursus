@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:27:02 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/10 18:03:40 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:23:39 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	slash_check(char *cmd)
 		{
 			fd = open(cmd, O_RDWR);
 			if (fd < 0 && errno == 21)
-				exec_error_manager(PROMPT_ERROR, cmd, 126);
+				custom_error_manager(PROMPT_ERROR, cmd, "is a directory", 126);
 			if (access(cmd, F_OK) == -1)
 				exec_error_manager(PROMPT_ERROR, cmd, 127);
 			if (access(cmd, X_OK) == -1)
@@ -53,7 +53,9 @@ char	*cat_path(char **path, char *cmd, size_t path_len)
 
 	i = 0;
 	cmd_len = ft_strlen(cmd);
-	rt_str = malloc(sizeof(char) * (path_len + cmd_len + 2));//path 길이 + cmd길이 + / + '\0' 
+	rt_str = malloc(sizeof(char) * (path_len + cmd_len + 2));
+	if (!rt_str)
+		malloc_failed();
 	while (i < path_len)
 	{
 		rt_str[i] = **path;
@@ -68,7 +70,7 @@ char	*cat_path(char **path, char *cmd, size_t path_len)
 		cmd++;
 		i++;
 	}
-	rt_str[i] = '\0';//수정
+	rt_str[i] = '\0';
 	return (rt_str);
 }
 

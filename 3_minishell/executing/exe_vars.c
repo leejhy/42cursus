@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_vars.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 19:26:58 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/10 18:06:39 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:20:49 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	**set_exe_argv(t_list *cmd, char *path_cmd, int cnt)
 	i = 0;
 	tmp_lst = cmd;
 	exe_argv = malloc(sizeof(char *) * (cnt + 1));
-	//if (exe_argv == NULL)
 	while (path_cmd && tmp_lst)
 	{
 		exe_argv[i] = ((t_token *)(tmp_lst->content))->exp_value;
@@ -40,16 +39,11 @@ char	**make_exe_argv(t_list *cmd, t_list *env)
 	int		cnt;
 
 	tmp_lst = cmd;
-	// if (tmp_lst == NULL)//여기까지 들어오기 전에 처리해야함
-	// 	exit (1);//얘때문에 redirection만 들어왔을때 exit코드 1로 찍힘 수정수정수정
-	//얘때문에 redirection만 들어왔을때 exit코드 1로 찍힘 수정수정수정
-	while (tmp_lst && ((t_token *)(tmp_lst->content))->exp_value[0] == '\0')
-		tmp_lst = tmp_lst->next;
-	if (tmp_lst == NULL)//빈 문자열이라 밀었는데 NULL일경우에 exit 0
-		exit (0);
 	cnt = cnt_simplecmd(tmp_lst);
+	if (((t_token *)(tmp_lst->content))->exp_value
+		&& ((t_token *)(tmp_lst->content))->exp_value[0] == '\0')
+		custom_error_manager(PROMPT_ERROR, "", "command not found", 127);
 	path_cmd = find_path(((t_token *)(tmp_lst->content))->exp_value, env);
-	// if (path_cmd != 0)
 	((t_token *)(cmd->content))->exp_value = path_cmd;
 	exe_argv = set_exe_argv(tmp_lst, path_cmd, cnt);
 	return (exe_argv);
@@ -85,7 +79,7 @@ char	*find_path(char *cmd, t_list *env)
 	slash_check(cmd);
 	if (access(cmd, X_OK) == 0)
 		return (cmd);
-	while (*path)
+	while (path && *path)
 	{
 		len = 0;
 		while (path[len] && path[len] != ':')
@@ -93,6 +87,7 @@ char	*find_path(char *cmd, t_list *env)
 		path_cmd = cat_path(&path, cmd, len);
 		if (access(path_cmd, X_OK) == 0)
 			return (path_cmd);
+		free(path_cmd);
 		if (*path != '\0')
 			path++;
 	}
@@ -125,5 +120,5 @@ char	**make_exe_envp(t_list *env)
 		i++;
 		env = env->next;
 	}
-	return (exe_envp);//얘는 싹 free해야함
+	return (exe_envp);
 }

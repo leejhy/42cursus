@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:54:00 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/07 19:59:43 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/13 14:10:59 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ char	*get_env_str(char *str, t_list *env, int key_start, int key_end)
 		if (str[key_start + 1] == '?')
 		{
 			free(((t_env *)env->content)->value);
-			((t_env *)env->content)->value = \
+			if (g_last_exitcode == 258)
+				((t_env *)env->content)->value = ft_itoa(g_last_exitcode);
+			else
+				((t_env *)env->content)->value = \
 					ft_itoa((unsigned char)g_last_exitcode);
 			return (((t_env *)env->content)->value);
 		}

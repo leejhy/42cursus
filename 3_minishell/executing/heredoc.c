@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:05:06 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/10 19:53:29 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:38:18 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	read_heredoc(char *doc_name, t_list *redirect, int fd, t_list *env)
 		if (input == NULL || ft_strncmp(input, deli, ft_strlen(deli) + 1) == 0)
 			break ;
 		exp_input = expanse_input(env, input);
-		ft_putendl_fd(exp_input, fd);//add heredoc expansion
+		ft_putendl_fd(exp_input, fd);
 		free(exp_input);
 		free(input);
 	}
@@ -91,7 +91,7 @@ void	read_heredoc(char *doc_name, t_list *redirect, int fd, t_list *env)
 	exit(0);
 }
 
-int	run_heredoc(t_list *redirect, t_list **here_doc_filenames,\
+int	run_heredoc(t_list *redirect, t_list **here_doc_filenames, \
 				int doc_nb, t_list *env)
 {
 	char	*doc_name;
@@ -100,7 +100,6 @@ int	run_heredoc(t_list *redirect, t_list **here_doc_filenames,\
 	int		fd;
 
 	doc_name = make_heredoc_name(doc_nb, here_doc_filenames);
-	//list로 쭉 저장해놓고, docname만 리턴
 	if (doc_name == NULL)
 		return (FALSE);
 	fd = open(doc_name, O_TRUNC | O_CREAT | O_RDWR, 0666);
