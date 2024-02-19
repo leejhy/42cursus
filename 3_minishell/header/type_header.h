@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_header.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/13 14:20:59 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/02/19 11:31:25 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ typedef struct s_cmd
 
 typedef struct s_env
 {
-	char	*key;
-	char	*value;
-	int		value_null;
+	char			*key;
+	char			*value;
+	int				value_null;
 }	t_env;
 
 typedef struct s_info
