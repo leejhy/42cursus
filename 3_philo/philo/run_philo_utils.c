@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:13:18 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/20 21:27:19 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/26 22:20:58 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,19 @@ void	odd_sleep(long sleep_time, struct timeval start_time)
 	}
 }
 
-void	philo_print(t_philo *philo, char const *str, long diff_time)
+void	philo_print(t_philo *philo, char const *str)
 {
-	// pthread_mutex_lock(philo->print_mutex);
-	printf("%ld %d %s\n", diff_time, philo->philo_nb, str);
-	// pthread_mutex_unlock(philo->print_mutex);
+	long	time_stamp;
+
+	time_stamp = 0;
+	pthread_mutex_lock(philo->print_mutex);
+	if (philo->lifespan == -1)
+	{
+		printf("%d philo\n", philo->philo_nb);
+		pthread_mutex_unlock(philo->print_mutex);
+		return ;
+	}
+	time_stamp = get_time(philo->start_time);
+	printf("%ld %d %s\n", time_stamp, philo->philo_nb, str);
+	pthread_mutex_unlock(philo->print_mutex);
 }

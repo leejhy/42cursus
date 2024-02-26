@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:57:29 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/25 21:32:11 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:13:23 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ void	print_info_philo(t_info *info, t_philo *philo)
 	}
 }
 
-void	frees(t_info *info, t_philo *philo)
+void	frees(t_info *info, t_philo *philos)
 {
 	free(info);
-	free(philo->fork);
-	free(philo->fork_mutex);
-	free(philo);
+	free(philos->fork);
+	free(philos->fork_mutex);
+	free(philos);
 }
 
 //철학자 수, 죽을 시간, 먹는시간, 자는시간, (각 철학자 최소 식사 횟수)
 int	main(int argc, char **argv)
 {
 	t_info		*info;
-	t_philo		*philo;
+	t_philo		*philos;
 
 	info = parsing(argc, argv);
 	if (!info)
@@ -55,12 +55,12 @@ int	main(int argc, char **argv)
 		write(2, "argument error\n", 15);
 		return (1);
 	}
-	philo = make_philo(info);
-	if (!philo)
+	philos = make_philo(info);
+	if (!philos)
 		return (0);
-	run_thread(info, philo);
+	run_thread(info, philos);
 	// print_info_philo(info, philo);
-	frees(info, philo);
+	frees(info, philos);
 	// system("leaks philo");
 	return (0);
 }

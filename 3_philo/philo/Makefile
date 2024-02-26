@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -pthread -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=thread
 INC = philo.h
 SRCS =	main.c \
 		parsing.c \
@@ -7,7 +7,8 @@ SRCS =	main.c \
 		run_thread.c \
 		run_philo.c \
 		run_philo_utils.c \
-		behavior.c
+		actions.c \
+		actions_utils.c
 OBJS = ${SRCS:.c=.o}
 NAME = philo
 

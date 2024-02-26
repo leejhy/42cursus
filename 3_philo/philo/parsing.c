@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:25:25 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/20 16:51:00 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:46:19 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ t_info	*parsing(int argc, char **argv)
 	if (set_info(info, argc, argv) == -1)
 		return (NULL);
 	if (argc == 5)
-		info->min_eat_cnt = -1;
+		info->min_eat_cnt = -1;//같을수가없지
 	return (info);
 }
