@@ -6,18 +6,18 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:57:07 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/26 22:27:53 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:43:58 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	get_time(struct timeval	start_time)
+long	get_time(struct timeval start_time)
 {
 	struct timeval	curr_time;
-	long	curr_msec;
-	long	start_msec;
-	long	diff_msec;
+	long			curr_msec;
+	long			start_msec;
+	long			diff_msec;
 
 	start_msec = (start_time.tv_sec * 1000) + (start_time.tv_usec / 1000);
 	gettimeofday(&curr_time, 0);
@@ -26,31 +26,26 @@ long	get_time(struct timeval	start_time)
 	return (diff_msec);
 }
 
-void	join_thread(t_philo *philo, int philo_cnt)
+int	check_died(t_philo *philos, int philo_cnt, int idx)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	while (i < philo_cnt)
+	pthread_mutex_lock(philos[idx].dead_mutex);
+	if (philos[idx].lifespan == -1)
 	{
-		pthread_join(philo[i].tid, 0);
-		i++;
+		pthread_mutex_lock(philos[idx].print_mutex);
+		printf("%ld %d died\n", get_time(philos[idx].start_time), idx + 1);
+		while (i < philo_cnt)
+		{
+			philos[i].lifespan = -1;
+			i++;
+		}
+		pthread_mutex_unlock(philos[idx].print_mutex);
+		pthread_mutex_unlock(philos[idx].dead_mutex);
+		return (1);
 	}
-}
-
-void	make_thread(t_philo *philos, int philo_cnt)
-{
-	int				i;
-	struct timeval	start_time;
-
-	i = 0;
-	gettimeofday(&start_time, 0);
-	while (i < philo_cnt)//5
-	{
-		philos[i].start_time = start_time;
-		pthread_create(&philos[i].tid, 0, run_philo, &(philos[i]));
-		i++;
-	}
+	return (0);
 }
 
 void	monitor_thread(t_philo *philos, int philo_cnt, int min_eat_cnt)
@@ -61,26 +56,13 @@ void	monitor_thread(t_philo *philos, int philo_cnt, int min_eat_cnt)
 	while (1)
 	{
 		i = 0;
-		while (i < philo_cnt)//죽었는지 체크
+		while (i < philo_cnt)
 		{
-			pthread_mutex_lock(philos[i].dead_mutex);
-			if (philos[i].lifespan == -1)//if died philosophers
-			{
-				pthread_mutex_lock(philos[i].print_mutex);
-				printf("%ld %d died\n", get_time(philos[i].start_time), i + 1);
-				// usleep(100);
-				// for (int j = 0; j < philo_cnt; j++)
-				// {
-				// 	printf("%d\n", j);
-				// 	philos[j].lifespan = -1;
-				// }
-				pthread_mutex_unlock(philos[i].print_mutex);
-				pthread_mutex_unlock(philos[i].dead_mutex);
+			if (check_died(philos, philo_cnt, i) == 1)
 				return ;
-			}
 			pthread_mutex_unlock(philos[i].dead_mutex);
 			pthread_mutex_lock(philos[i].min_eat_mutex);
-			if (philos[i].eat_cnt == min_eat_cnt)//이것도 뮤텍스보호 해야함
+			if (philos[i].eat_cnt == min_eat_cnt)
 			{
 				pthread_mutex_unlock(philos[i].min_eat_mutex);
 				return ;
@@ -88,13 +70,28 @@ void	monitor_thread(t_philo *philos, int philo_cnt, int min_eat_cnt)
 			pthread_mutex_unlock(philos[i].min_eat_mutex);
 			i++;
 		}
-		usleep(10);//usleep100으로 돌리니까 섞임
+		usleep(10);
 	}
 }
 
 void	run_thread(t_info *info, t_philo *philos)
 {
-	make_thread(philos, info->philo_cnt);
+	int				i;
+	struct timeval	start_time;
+
+	i = 0;
+	gettimeofday(&start_time, 0);
+	while (i < info->philo_cnt)
+	{
+		philos[i].start_time = start_time;
+		pthread_create(&philos[i].tid, 0, run_philo, &(philos[i]));
+		i++;
+	}
 	monitor_thread(philos, info->philo_cnt, info->min_eat_cnt);
-	join_thread(philos, info->philo_cnt);
+	i = 0;
+	while (i < info->philo_cnt)
+	{
+		pthread_join(philos[i].tid, 0);
+		i++;
+	}
 }

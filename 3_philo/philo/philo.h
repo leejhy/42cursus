@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:57:23 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/26 22:06:27 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:03:37 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 
 typedef struct s_info
 {
-	pthread_mutex_t	*start_mutex;
 	long			philo_cnt;
 	long			time_to_die;
 	long			time_to_eat;
@@ -51,32 +50,34 @@ typedef struct s_philo
 
 /* main.c */
 void	frees(t_info *info, t_philo *philo);
-
+void	mutex_destroys(t_philo *philos, int philo_cnt);
 
 /* parsing.c */
 t_info	*parsing(int argc, char **argv);
 int		set_info(t_info *info, int argc, char **argv);
 long	ft_atol(const char *str);
-t_philo	*make_philo(t_info *info);
+size_t	ft_strlen(char *str);
 
 /* set_vars.c */
 t_philo	*make_philo(t_info *info);
-int	set_philo(t_info *info, t_philo *philo);
-int	set_fork_mutex(t_info *info, t_philo *philo);
+int		set_philo(t_info *info, t_philo *philo);
+int		set_fork_mutex(t_info *info, t_philo *philo);
 
 /* run_thread */
 void	run_thread(t_info *info, t_philo *philos);
-void	join_thread(t_philo *philos, int philo_cnt);
-void	make_thread(t_philo *philos, int philo_cnt);
 void	monitor_thread(t_philo *philos, int philo_cnt, int min_eat_cnt);
-long	get_time(struct timeval	start_time);//얘위치수정
+int		check_died(t_philo *philos, int philo_cnt, int idx);
+long	get_time(struct timeval start_time);
 
 /* run_philo.c */
 void	*run_philo(void *tmp_philo);
 int		philo_action(t_philo *philo);
+void	odd_sleep(long sleep_time, struct timeval start_time);
 
 /* run_philo_utils.c */
-void	odd_sleep(long sleep_time, struct timeval start_time);
+void	only_one_philo(t_philo *philo);
+int		is_died(t_philo *philo);
+int		is_enough_eat(t_philo *philo);
 void	philo_print(t_philo *philo, char const *str);
 
 /* actions.c */
@@ -85,9 +86,5 @@ void	drop_fork(t_philo *philo);
 int		philo_eat(t_philo *philo);
 int		philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
-
-/* actions_utils.c */
-void	only_one_philo(t_philo *philo);
-int		is_died(t_philo *philo);
 
 #endif

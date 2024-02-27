@@ -6,14 +6,23 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:25:25 by junhylee          #+#    #+#             */
-/*   Updated: 2024/02/26 14:46:19 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:46:32 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+size_t	ft_strlen(char *str)
+{
+	size_t	len;
 
-long ft_atol(const char *str)
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
+
+long	ft_atol(const char *str)
 {
 	long long	result;
 
@@ -43,7 +52,7 @@ int	set_info(t_info *info, int argc, char **argv)
 	while (i < argc)
 	{
 		temp = ft_atol(argv[i]);
-		if (temp == -1 || temp > INT_MAX)//인자가 0일때 에러?
+		if (temp == -1 || temp > INT_MAX)
 			return (-1);
 		if (i == 1)
 			info->philo_cnt = temp;
@@ -60,21 +69,26 @@ int	set_info(t_info *info, int argc, char **argv)
 	return (0);
 }
 
-//철학자 수, 죽을 시간, 먹는시간, 자는시간, (각 철학자 최소 식사 횟수)
-//argc 최대 6
-
 t_info	*parsing(int argc, char **argv)
 {
 	t_info	*info;
+	int		i;
 
+	i = 1;
 	if (!(argc == 5 || argc == 6))
 		return (0);
 	info = malloc(sizeof(t_info));
 	if (!info)
 		return (NULL);
+	while (i < argc)
+	{
+		if (ft_strlen(argv[i]) > 11)
+			return (0);
+		i++;
+	}
 	if (set_info(info, argc, argv) == -1)
 		return (NULL);
 	if (argc == 5)
-		info->min_eat_cnt = -1;//같을수가없지
+		info->min_eat_cnt = -1;
 	return (info);
 }
