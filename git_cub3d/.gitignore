@@ -1,0 +1,8 @@
+.DS_Store
+*.o
+libmlx.dylib
+cub3D
+*.a
+*.swiftdoc
+*.swiftmodule
+*.dylib
