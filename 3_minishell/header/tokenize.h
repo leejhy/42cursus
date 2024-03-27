@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/02/05 17:00:42 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/03/15 14:10:20 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int		get_last_name_idx(char *str, int end);
 
 /* parsing.c */
 t_list	*parsing(char *str, t_list *env);
+
+
 
 /* tokenize.c */
 t_list	*tokenize(char *str, int re_token);

@@ -1,0 +1,8 @@
+ft_lstadd_front_bonus.o: ft_lstadd_front_bonus.c libft.h ft_printf.h \
+  get_next_line_bonus.h
+
+libft.h:
+
+ft_printf.h:
+
+get_next_line_bonus.h:
