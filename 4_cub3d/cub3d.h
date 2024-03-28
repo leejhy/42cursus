@@ -6,7 +6,7 @@
 /*   By: junhylee <junhylee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:21:24 by inghwang          #+#    #+#             */
-/*   Updated: 2024/03/26 16:14:20 by junhylee         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:05:20 by junhylee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,6 @@ typedef struct s_vars
 	void	*mlx;
 	void	*win;
 }	t_vars;
-
-typedef enum e_wall_type
-{
-	FLOOR = 0,
-	WALL,
-	SPAWN,
-	EMPTY
-}	t_wall_type;
 
 typedef enum e_wall_direction
 {

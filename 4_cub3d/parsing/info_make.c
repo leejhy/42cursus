@@ -95,6 +95,8 @@ static char	*tool_make_utils(char *str, int len)
 		len++;
 	if (len == 0)
 		error(0, "data error");
+	if (str[len] == '\0')
+		error(0, "data error");
 	answer = ft_substr(str, len, ft_strlen(str));
 	error(answer, 0);
 	return (answer);

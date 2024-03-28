@@ -1,5 +1,5 @@
 CC = cc
-FLAG = -Wall -Wextra -Werror#-g3 -fsanitize=address
+FLAG = -Wall -Wextra -Werror
 FRAMEWORK = -Lmlx -lmlx -framework OpenGL -framework AppKit
 LIB_DIR = 	./libft
 MLX_DIR =	./mlx

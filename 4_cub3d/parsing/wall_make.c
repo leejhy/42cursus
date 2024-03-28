@@ -71,7 +71,7 @@ static void	data_make(t_wall *wall, int fd)
 		free(buffer);
 	}
 	close(fd);
-	error(wall->str, "data error");
+	error(wall->str, "wrong data");
 	wall->data = ft_split(wall->str, '\n');
 	error(wall->data, 0);
 }
