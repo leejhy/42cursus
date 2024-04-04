@@ -9,6 +9,8 @@ class HumanB
 		Weapon		weapon;
 		std::string	name;
 	public :
+		HumanB(std::string name);
+		void	setWeapon(Weapon Weapon);
 		void	attack();
 };
 
