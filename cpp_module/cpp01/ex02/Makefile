@@ -1,19 +1,15 @@
 CXX = c++ 
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror 
-SRCS =	Zombie.cpp \
-		newZombie.cpp \
-		randomChump.cpp \
-		main.cpp
-INC = Zombie.hpp
+SRCS =	main.cpp
 OBJS = $(SRCS:.cpp=.o)
-NAME = ex00
+NAME = ex02
 
 all : $(NAME)
 
-$(NAME) : $(OBJS) $(INC)
+$(NAME) : $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-%.o : %.cpp $(INC)
+%.o : %.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 clean :

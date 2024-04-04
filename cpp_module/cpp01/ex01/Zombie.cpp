@@ -1,9 +1,9 @@
 
 #include "Zombie.hpp"
 
-Zombie::Zombie(std::string name){
+
+void	Zombie::setName(std::string name){
 	this->name = name;
-	std::cout << name << " Zombie is created" << std::endl;
 }
 
 Zombie::~Zombie(void){
