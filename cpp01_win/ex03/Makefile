@@ -1,6 +1,8 @@
 CXX = c++ 
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror 
-SRCS =	Weapon.cpp \
+SRCS =	HumanA.cpp \
+		HumanB.cpp \
+		Weapon.cpp \
 		main.cpp
 INC =	Weapon.hpp \
 		HumanA.hpp \
