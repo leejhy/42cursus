@@ -6,6 +6,7 @@
 // 	system("leaks a.out");
 // }
 
+
 int	main(int argc, char **argv)
 {
 	std::string		str;
@@ -25,14 +26,14 @@ int	main(int argc, char **argv)
 	str = argv[1];
 	ifs.open(argv[1]);//argv[1]로 들어오는거 open
 	str = str + ".replace";
-	ofs.open(str);
+	ofs.open(str.c_str());//이거 const char *로 변환해야함 c_str()사용
 	while (std::getline(ifs, line)){
 		pos = 0;
 		while (line.find(s1, pos) != std::string::npos){
 			pos = line.find(s1, pos);
-			for (unsigned int i = 0; i < s2.length(); i++)
-				line[pos + i] = s2[i];
-			pos += s1.length();
+			line.erase(pos, s1.length());
+			line.insert(pos, s2);
+			// pos += s1.length();
 		}
 		ofs << line;
 		if (!ifs.eof())
