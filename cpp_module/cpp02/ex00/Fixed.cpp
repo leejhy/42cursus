@@ -20,15 +20,15 @@ Fixed::Fixed(const Fixed &fixed){
 Fixed &Fixed::operator=(const Fixed &fixed){
 	std::cout << "Copy assignment operator called" << std::endl;
 	this->fp_number = fixed.getRawBits();
-	// std::cout << "this " << this << std::endl;
-	return (*this);
+	//this의 fp_number를 b의값으로 대체함
+	return (*this);//this의 주소를 역참조해서 reference로 리턴시킨다
 }
 
 Fixed::~Fixed(){
 	std::cout << "Destructor called" << std::endl;
 }
 
-int		Fixed::getRawBits( void ) const{
+int		Fixed::getRawBits( void ) const {
 	std::cout << "getRawBits member function called" << std::endl;
 	return (this->fp_number);
 }
