@@ -1,10 +1,12 @@
 CXX = c++ 
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror 
 SRCS =	Fixed.cpp \
+		Point.cpp \
 		main.cpp
-INC = Fixed.hpp
+INC =	Fixed.hpp \
+		Point.hpp
 OBJS = $(SRCS:.cpp=.o)
-NAME = ex02
+NAME = ex03
 
 all : $(NAME)
 
