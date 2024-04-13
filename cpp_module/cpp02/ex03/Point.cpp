@@ -6,14 +6,14 @@ Point::Point() : x(0), y(0) {}
 Point::Point(float x, float y) : x(x), y(y){}
 
 Point::Point(const Point &point){
-	this->x = point.getX();
 	*this = point;
+	// *this = point;
 }
 
 Point& Point::operator= (const Point& point){
+//이거어케함
 	return *this;
 }
-//이거어케함
 
 Point::~Point(){}
 
