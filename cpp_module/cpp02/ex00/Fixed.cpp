@@ -1,14 +1,8 @@
 
 #include "Fixed.hpp"
 
-// Fixed();
-// 	~Fixed();
-// 	Fixed(const Fixed &fixed);
-// 	Fixed &operator= (const Fixed &fixed);
-
 Fixed::Fixed() : fp_number(0){
 	std::cout << "Default constructor called" << std::endl;
-	// this->fp_number = 0;
 }
 
 Fixed::Fixed(const Fixed &fixed){

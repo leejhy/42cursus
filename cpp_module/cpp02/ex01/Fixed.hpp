@@ -15,7 +15,7 @@ class Fixed
 		Fixed(const int fp_number);
 		Fixed(const float fp_number);
 		Fixed(const Fixed& fixed);
-		Fixed& operator= (const Fixed& fixed);
+		Fixed &operator= (const Fixed& fixed);
 		~Fixed();
 
 		float	toFloat( void ) const;

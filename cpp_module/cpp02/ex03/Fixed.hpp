@@ -21,7 +21,7 @@ class Fixed
 		float	toFloat( void ) const;
 		int		toInt( void ) const;
 		int		getRawBits( void ) const;
-		void	setRawBits( int const raw ) const;
+		void	setRawBits( int const raw );
 		bool	operator> (const Fixed& fixed);
 		bool	operator< (const Fixed& fixed);
 		bool	operator>= (const Fixed& fixed);

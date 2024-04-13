@@ -2,6 +2,7 @@ CXX = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror 
 SRCS =	Fixed.cpp \
 		Point.cpp \
+		bsp.cpp \
 		main.cpp
 INC =	Fixed.hpp \
 		Point.hpp
