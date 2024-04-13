@@ -38,11 +38,10 @@ void	ClapTrap::attack(const std::string& target){
 	}
 	this->energy_point--;
 	std::cout << "ClapTrap " << this->name << " attacks " << target \
-	<< " causing " << this->attack_damage << " points of damage!\n" ;
+	<< ", causing " << this->attack_damage << " points of damage!\n" ;
 }
 
 void	ClapTrap::takeDamage(unsigned int amount){
-//피해 당한거.?
 	int	hp;
 
 	hp = this->hit_point - amount;
