@@ -3,12 +3,14 @@ CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 SRCS =	ClapTrap.cpp\
 		ScavTrap.cpp\
 		FragTrap.cpp\
+		DiamondTrap.cpp\
 		main.cpp
 INC =	ClapTrap.hpp\
 		ScavTrap.hpp\
+		DiamondTrap.hpp\
 		FragTrap.hpp
 OBJS = $(SRCS:.cpp=.o)
-NAME = ex02
+NAME = ex03
 
 all : $(NAME)
 

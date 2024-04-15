@@ -8,7 +8,7 @@ ClapTrap::ClapTrap()
 
 ClapTrap::ClapTrap(std::string& name)
 : name(name), hit_point(10), energy_point(10), attack_damage(0){
-	std::cout << this->name << " Name Constructor\n";
+	std::cout << this->name << " string Constructor\n";
 }
 
 ClapTrap::ClapTrap(const ClapTrap& claptrap){

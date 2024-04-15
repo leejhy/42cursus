@@ -13,7 +13,7 @@ ScavTrap::ScavTrap(std::string& name) : ClapTrap(name){
 	this->hit_point = 100;
 	this->energy_point = 50;
 	this->attack_damage = 20;
-	std::cout << this->name << " ScavTrap default Constructor\n";
+	std::cout << this->name << " ScavTrap string Constructor\n";
 }
 
 ScavTrap::ScavTrap(const ScavTrap& scavtrap){

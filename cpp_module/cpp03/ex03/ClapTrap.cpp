@@ -7,7 +7,8 @@ ClapTrap::ClapTrap()
 }
 
 ClapTrap::ClapTrap(std::string& name)
-: name(name), hit_point(10), energy_point(10), attack_damage(0){
+: hit_point(10), energy_point(10), attack_damage(0){
+	this->name = name + "_clap_name";
 	std::cout << this->name << " ClapTrap string Constructor\n";
 }
 
