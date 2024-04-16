@@ -9,7 +9,7 @@ FragTrap::FragTrap(){
 	std::cout << this->name << " FragTrap default Constructor\n";
 }
 
-FragTrap::FragTrap(std::string& name) : ClapTrap(name){
+FragTrap::FragTrap(std::string name){
 	this->name = name;
 	this->hit_point = 100;
 	this->energy_point = 100;
@@ -36,5 +36,9 @@ FragTrap::~FragTrap(){
 }
 
 void	FragTrap::highFivesGuys(void){
+	if (this->energy_point == 0 || this->hit_point == 0){
+		std::cout << this->name << " FragTrap can't do anything\n";
+		return ;
+	}
 	std::cout << this->name << " FragTrap a positive high fives request\n";
 }

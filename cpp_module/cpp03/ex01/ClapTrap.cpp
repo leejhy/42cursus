@@ -6,7 +6,7 @@ ClapTrap::ClapTrap()
 	std::cout << this->name << " ClapTrap Default Constructor\n";
 }
 
-ClapTrap::ClapTrap(std::string& name)
+ClapTrap::ClapTrap(std::string name)
 : name(name), hit_point(10), energy_point(10), attack_damage(0){
 	std::cout << this->name << " ClapTrap Name Constructor\n";
 }
@@ -33,7 +33,7 @@ ClapTrap::~ClapTrap(){
 //energy point or hitpoint가 0이되면 아무것도 못함
 void	ClapTrap::attack(const std::string& target){
 	if (this->energy_point == 0 || this->hit_point == 0){
-		std::cout << "ClapTrap can't do anything\n";
+		std::cout << this->name << "ClapTrap can't do anything\n";
 		return ;
 	}
 	this->energy_point--;
