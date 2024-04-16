@@ -17,9 +17,12 @@ ScavTrap::ScavTrap(std::string name){
 	std::cout << this->name << " ScavTrap string Constructor\n";
 }
 
-ScavTrap::ScavTrap(const ScavTrap& scavtrap){
+ScavTrap::ScavTrap(const ScavTrap& scavtrap) : ClapTrap(scavtrap){
+	this->name = scavtrap.name;
+	this->hit_point = scavtrap.hit_point;
+	this->energy_point = scavtrap.energy_point;
+	this->attack_damage = scavtrap.attack_damage;
 	std::cout << this->name << " ScavTrap Copy Constructor\n";
-	*this = scavtrap;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& scavtrap){

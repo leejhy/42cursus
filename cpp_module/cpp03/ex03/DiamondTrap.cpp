@@ -19,7 +19,8 @@ DiamondTrap::DiamondTrap(std::string name){
 	std::cout << this->name << " DiamondTrap name Constructor\n";
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& diamondtrap){
+DiamondTrap::DiamondTrap(const DiamondTrap& diamondtrap)
+: ClapTrap(diamondtrap), ScavTrap(diamondtrap), FragTrap(diamondtrap){
 	this->name = diamondtrap.name;
 	ClapTrap::name = this->name + "_clap_name";
 	this->hit_point = diamondtrap.hit_point;

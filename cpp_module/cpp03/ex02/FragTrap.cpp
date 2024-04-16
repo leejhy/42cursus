@@ -17,8 +17,11 @@ FragTrap::FragTrap(std::string name){
 	std::cout << this->name << " FragTrap string Constructor\n";
 }
 
-FragTrap::FragTrap(const FragTrap& fragtrap){
-	*this = fragtrap;
+FragTrap::FragTrap(const FragTrap& fragtrap) : ClapTrap(fragtrap){
+	this->name = fragtrap.name;
+	this->hit_point = fragtrap.hit_point;
+	this->energy_point = fragtrap.energy_point;
+	this->attack_damage = fragtrap.attack_damage;
 	std::cout << this->name << " FragTrap Copy Constructor\n";
 }
 
