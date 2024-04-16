@@ -1,5 +1,5 @@
 CXX = c++ 
-CXXFLAGS = -std=c++98 -Wall -Wextra -Werror -Wshadow -Wno-shadow
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 SRCS =	ClapTrap.cpp\
 		ScavTrap.cpp\
 		FragTrap.cpp\

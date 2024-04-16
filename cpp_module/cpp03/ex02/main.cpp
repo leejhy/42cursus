@@ -14,6 +14,7 @@ int	main(void)
 	std::cout << "=============================\n";
 	FragTrap fragg(frag);
 	std::cout << "=============================\n";
+	fragg = frag;
 
 	scav.attack(target);
 	std::cout << "Energy Left " << scav.getEp() << " point\n";
