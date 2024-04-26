@@ -12,7 +12,7 @@ int	main(void)
 {
 	const Animal* meta = new Animal();
 	std::cout << "============================\n";
-	const Animal* j = new Dog();
+	const Animal* j = new Dog();//Upcast
 	std::cout << "============================\n";
 	const Animal* i = new Cat();
 	std::cout << "============================\n";
