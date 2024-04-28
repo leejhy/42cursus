@@ -1,44 +1,34 @@
-
-#include "Dog.hpp"
 #include "Cat.hpp"
-#include "WrongCat.hpp"
+#include "Dog.hpp"
 #include <iostream>
 
-// void f(){
-// 	system("leaks ex00");
+// void	f(){
+// 	system("leaks ex01");
 // }
 
-int	main(void)
+int main()
 {
-	const Animal* meta = new Animal();
-	std::cout << "============================\n";
 	const Animal* j = new Dog();
-	std::cout << "============================\n";
+	std::cout << "================\n";
 	const Animal* i = new Cat();
-	std::cout << "============================\n";
-	const WrongAnimal* wrong_animal = new WrongAnimal();
-	const WrongAnimal* wrong_cat = new WrongCat();
-	std::cout << "============================\n";
+	std::cout << "================\n";
+	const Animal*	animal[4];
 
-	std::cout << meta->getType() << " " << std::endl;
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound! dog
-	j->makeSound(); // cat
-	meta->makeSound(); // animal
-	std::cout << "============================\n";
+	animal[0] = new Dog();
+	animal[1] = new Dog();
+	animal[2] = new Cat();
+	animal[3] = new Cat();
+	std::cout << "================\n";
 
-	std::cout << wrong_animal->getType() << std::endl;
-	std::cout << wrong_cat->getType() << std::endl;
-	wrong_animal->makeSound();
-	wrong_cat->makeSound();
-	std::cout << "============================\n";
-	// atexit(f);
-	delete meta;
+	animal[0]->makeSound();
+	animal[1]->makeSound();
+	animal[2]->makeSound();
+	animal[3]->makeSound();
+	for (int i = 0; i < 4; i++)
+		delete animal[i];
+	std::cout << "================\n";
+	delete j;//should not create a leak
 	delete i;
-	delete j;
-	std::cout << "============================\n";
-	delete wrong_animal;
-	delete wrong_cat;
+	// atexit(f);
 	return 0;
 }

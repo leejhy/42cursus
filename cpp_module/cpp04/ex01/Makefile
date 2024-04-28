@@ -1,18 +1,20 @@
 CXX = c++ 
-CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror# -fsanitize=address -g3
 SRCS =	Animal.cpp\
 		Dog.cpp\
 		Cat.cpp\
+		Brain.cpp\
 		WrongAnimal.cpp\
 		WrongCat.cpp\
 		main.cpp
 INC =	Animal.hpp\
 		Dog.hpp\
 		Cat.hpp\
+		Brain.hpp\
 		WrongAnimal.hpp\
 		WrongCat.hpp
 OBJS = $(SRCS:.cpp=.o)
-NAME = ex00
+NAME = ex01
 
 all : $(NAME)
 
