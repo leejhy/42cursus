@@ -9,12 +9,25 @@ Cat::Cat(){
 }
 
 Cat::Cat(const Cat& cat) : Animal(cat){
+	//brain도 복사해줘야함
+	std::string tmp;
+
 	this->type = cat.type;
+	for (int i = 0; i < 100; i++){
+		tmp = cat.brain->getIdeas(i);
+		this->brain->setIdeas(i, tmp);
+	}
 	std::cout << "Cat copy constructor\n";
 }
 
 Cat& Cat::operator=(const Cat& cat){
+	std::string tmp;
+
 	this->type = cat.type;
+	for (int i = 0; i < 100; i++){
+		tmp = cat.brain->getIdeas(i);
+		this->brain->setIdeas(i, tmp);
+	}
 	std::cout << "Cat copy assignment operator\n";
 	return *this;
 }
@@ -26,5 +39,5 @@ Cat::~Cat(){
 
 void	Cat::makeSound() const{
 	std::cout << "Cacacacacacacactttt\n";
-	this->brain->getIdeas(10);
+	std::cout << this->brain->getIdeas(10) << std::endl;
 }

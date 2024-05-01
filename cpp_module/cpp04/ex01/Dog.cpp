@@ -25,5 +25,5 @@ Dog::~Dog(){
 
 void	Dog::makeSound() const{
 	std::cout << "Doododododododdoodooogggg\n";
-	this->brain->getIdeas(15);
+	std::cout << this->brain->getIdeas(10) << std::endl;
 }

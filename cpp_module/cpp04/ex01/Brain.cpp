@@ -33,8 +33,16 @@ Brain::~Brain(){
 	std::cout << "Brain Destructor\n";
 }
 
-void	Brain::getIdeas(int idx) const{
+std::string	Brain::getIdeas(int idx) const {
+	if (idx < 0 || 99 < idx)
+		return 0;
+	return (this->ideas[idx]);
+}
+
+void	Brain::setIdeas(int idx, std::string const& value){
+	std::stringstream ss;
+
 	if (idx < 0 || 99 < idx)
 		return ;
-	std::cout << this->ideas[idx] << std::endl;
+	this->ideas[idx] = value;
 }
