@@ -3,7 +3,7 @@
 #include <iostream>
 
 // void	f(){
-// 	system("leaks ex01");
+// 	system("leaks ex02");
 // }
 
 int	main(void)

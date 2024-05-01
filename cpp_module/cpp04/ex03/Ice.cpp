@@ -4,21 +4,22 @@
 
 Ice::Ice(){
 	this->type = "ice";
-	std::cout << "Ice Constructor\n";
+	// std::cout << "Ice Constructor\n";
 }
 
 Ice::~Ice(){
-	std::cout << "Ice Destructor\n";
+	// std::cout << "Ice Destructor\n";
 }
 
 Ice::Ice(const Ice& obj){
 	this->type = obj.type;
-	std::cout << "Ice Copy\n";
+	// std::cout << "Ice Copy\n";
 }
 
 Ice& Ice::operator=(const Ice& obj){
 	this->type = obj.type;
-	std::cout << "Ice copy assignment\n";
+	// std::cout << "Ice copy assignment\n";
+	return *this;
 }
 
 Ice* Ice::clone() const{
@@ -29,5 +30,5 @@ Ice* Ice::clone() const{
 }
 
 void Ice::use(ICharacter& target){
-	std::cout << "* shoots an ice bolt at " << target.getName() << std::endl;
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }

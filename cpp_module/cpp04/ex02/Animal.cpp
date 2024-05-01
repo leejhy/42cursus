@@ -21,7 +21,7 @@ Animal::~Animal(){
 	std::cout << "Animal destructor\n";
 }
 
-// void	Animal::makeSound() const {
+// void	Animal::makeSound() const {//있든없든 상관x
 // 	std::cout << "Animal Sound\n";
 // }
 

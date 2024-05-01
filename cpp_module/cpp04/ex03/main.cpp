@@ -1,7 +1,13 @@
 
 #include "AMateria.hpp"
-#include "ICharacter.hpp"
-#include "IMateriaSource.hpp"
+#include "Character.hpp"
+#include "MateriaSource.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
+
+void	f(){
+	system("leaks ex03");
+}
 
 int main()
 {
@@ -20,5 +26,6 @@ int main()
 	delete bob;
 	delete me;
 	delete src;
+	// atexit(f);
 	return 0;
 }
