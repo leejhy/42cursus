@@ -11,7 +11,7 @@ Cure::~Cure(){
 	// std::cout << "Cure Destuctor\n";
 }
 
-Cure::Cure(const Cure& obj){
+Cure::Cure(const Cure& obj) : AMateria(obj){
 	this->type = obj.type;
 	// std::cout << "Cure copy\n";
 }

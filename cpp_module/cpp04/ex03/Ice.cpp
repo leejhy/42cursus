@@ -11,7 +11,7 @@ Ice::~Ice(){
 	// std::cout << "Ice Destructor\n";
 }
 
-Ice::Ice(const Ice& obj){
+Ice::Ice(const Ice& obj) : AMateria(obj){
 	this->type = obj.type;
 	// std::cout << "Ice Copy\n";
 }

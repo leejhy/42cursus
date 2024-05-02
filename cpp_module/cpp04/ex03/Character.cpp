@@ -5,13 +5,7 @@
 #include "Cure.hpp"
 #include <iostream>
 
-// std::string const & getName() const;
-// void equip(AMateria* m);
-// void unequip(int idx);
-// void use(int idx, ICharacter& target);
-
 Character::Character(){
-	//이상태에서 inventory 비어있고 ice, cure 넣을떄 new해서 넣기
 	// std::cout << "Character default Constructor\n";
 	for (int i = 0; i < 4; i++)
 		this->inventory[i] = NULL;
@@ -26,38 +20,63 @@ Character::Character(const std::string& name){
 
 Character::~Character(){
 	for (int i = 0; i < 4; i++){
-		if (this->inventory[i] != NULL)
+		if (this->inventory[i] != NULL){
 			delete this->inventory[i];
+			this->inventory[i] = NULL;
+		}
 	}
 	// std::cout << "Character Destructor\n";
 }
 
 Character::Character(const Character& obj){
-	//deep copy??
-	(void)obj;
+	for (int i = 0; i < 4; i++){
+		this->inventory[i] = NULL;
+		if (obj.inventory[i] != NULL)
+			this->inventory[i] = obj.inventory[i]->clone();
+	}
 }
 
 Character& Character::operator=(const Character& obj){
-	(void)obj;
+	for (int i = 0; i < 4; i++){
+		if (this->inventory[i] != NULL)
+			delete this->inventory[i];
+		this->inventory[i] = NULL;
+		if (obj.inventory[i] != NULL)
+			this->inventory[i] = obj.inventory[i]->clone();
+	}
 	return *this;
 }
 
 void	Character::equip(AMateria* m){
-	int	i = 0;
-	//m포인터로 받아온 값 character에 넣기
-	while (this->inventory[i] != NULL)
-		i++;
+	int	i;
+
+	for (i = 0; i < 4; i++){
+		if (this->inventory[i] == NULL)
+			break ;
+	}
 	if (i == 4)//꽉차있으면 아무것도 x
 		return ;
-	this->inventory[i] = m;//그냥 넣어도 되나?
+	this->inventory[i] = m;
 }
 
 void	Character::unequip(int idx){
-//고민
+	if (idx < 0 || idx >= 4)
+		return ;
+	if (this->inventory[idx] == NULL){
+		std::cout << this->name << " get nothing\n";
+		return ;
+	}
+	// std::cout << this->name << " unequip " << this->inventory[idx]->getType() << '\n';
 	this->inventory[idx] = NULL;
 }
 
 void	Character::use(int idx, ICharacter& target){
+	if (idx < 0 || idx >= 4)
+		return ;
+	if (this->inventory[idx] == NULL){
+		std::cout << this->name << " get nothing skill\n";
+		return ;
+	}
 	this->inventory[idx]->use(target);
 }
 
