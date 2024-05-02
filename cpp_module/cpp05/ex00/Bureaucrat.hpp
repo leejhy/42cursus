@@ -8,17 +8,21 @@ class Bureaucrat
 {
 	private :
 		std::string const&	name;
-		unsigned int		grade;
+		int					grade;
 	public :
 		Bureaucrat();
 		~Bureaucrat();
 		Bureaucrat(const Bureaucrat& obj);
 		Bureaucrat& operator=(const Bureaucrat& obj);
 
-		void GradeTooHighException();
-		void GradeTooLowException();
-		std::string const& getName();
-		unsigned int getGrade();
+		const std::string&	getName() const;
+		int					getGrade() const;
+		void				incGrade();
+		void				decGrade();
+		void	GradeTooHighException();
+		void	GradeTooLowException();
 };
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj);
 
 #endif
