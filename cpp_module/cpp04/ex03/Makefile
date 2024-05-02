@@ -1,5 +1,5 @@
 CXX = c++ 
-CXXFLAGS = -std=c++98 -Wall -Wextra -Werror -fsanitize=address -g3
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror# -fsanitize=address -g3
 SRCS =	AMateria.cpp\
 		Character.cpp\
 		MateriaSource.cpp\

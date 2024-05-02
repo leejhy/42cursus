@@ -7,19 +7,16 @@
 MateriaSource::MateriaSource(){
 	for (int i = 0; i < 4; i++)
 		this->learned[i] = NULL;
-	// std::cout << "MateriaSource default constructor\n";
 }
 
 MateriaSource::MateriaSource(const MateriaSource& obj){
 	for (int i = 0; i < 4; i++)
 		this->learned[i] = obj.learned[i];
-	// std::cout << "MateriaSource copy\n";
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& obj){
 	for (int i = 0; i < 4; i++)
 		this->learned[i] = obj.learned[i];
-	// std::cout << "MateriaSource copy assignment\n";
 	
 	return *this;
 }
@@ -29,7 +26,6 @@ MateriaSource::~MateriaSource(){
 		if (this->learned[i] != NULL)
 			delete learned[i];
 	}
-	// std::cout << "MateriaSource Destructor\n";
 }
 
 void	MateriaSource::learnMateria(AMateria* m){
