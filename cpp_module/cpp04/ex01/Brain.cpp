@@ -40,8 +40,6 @@ std::string	Brain::getIdeas(int idx) const {
 }
 
 void	Brain::setIdeas(int idx, std::string const& value){
-	std::stringstream ss;
-
 	if (idx < 0 || 99 < idx)
 		return ;
 	this->ideas[idx] = value;

@@ -2,9 +2,9 @@
 #include "Dog.hpp"
 #include <iostream>
 
-void	f(){
-	system("leaks ex01");
-}
+// void	f(){
+// 	system("leaks ex01");
+// }
 
 int main()
 {
@@ -29,6 +29,6 @@ int main()
 	std::cout << "================\n";
 	delete j;//should not create a leak
 	delete i;
-	atexit(f);
+	// atexit(f);
 	return 0;
 }
