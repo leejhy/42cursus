@@ -1,10 +1,12 @@
 CXX = c++ 
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror# -fsanitize=address -g3
 SRCS =	Bureaucrat.cpp\
+		Form.cpp\
 		main.cpp
-INC =	Bureaucrat.hpp
+INC =	Bureaucrat.hpp\
+		Form.hpp
 OBJS = $(SRCS:.cpp=.o)
-NAME = ex00
+NAME = ex01
 
 all : $(NAME)
 

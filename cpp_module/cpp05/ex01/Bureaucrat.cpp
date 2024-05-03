@@ -1,5 +1,6 @@
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 
 Bureaucrat::Bureaucrat() : name("DEFAULT"), grade(150){
@@ -55,9 +56,21 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj){
 }
 
 const char *Bureaucrat::GradeTooHighException::what () const throw (){
-	return "*===EXCEPTION Grade Too High===*";
+	return "*===Bureaucrat EXCEPTION Grade Too High===*";
 }
 
 const char *Bureaucrat::GradeTooLowException::what () const throw (){
-	return "*===EXCEPTION Grade Too Low===*";
+	return "*===Bureaucrat EXCEPTION Grade Too Low===*";
 }
+
+void	Bureaucrat::signForm(Form& form){
+	if (this->grade > form.getSignGrade()){
+		std::cout << this->name << " couldn't sign " << form.getName() << " because grade too low\n";
+		return ;
+	}
+	else{//this->grade <= form grade
+		form.beSigned(*this);//가능?
+		std::cout << this->name << " signed " << form.getName() << '\n';
+		return ;
+	}
+}//새로 추가

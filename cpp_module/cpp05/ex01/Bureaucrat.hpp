@@ -4,6 +4,8 @@
 
 #include <string>
 
+class Form;
+
 class Bureaucrat
 {
 	private :
@@ -12,14 +14,15 @@ class Bureaucrat
 		Bureaucrat& operator=(const Bureaucrat& obj);//금지
 	public :
 		Bureaucrat();
-		Bureaucrat(std::string const& name, int grade);
 		~Bureaucrat();
 		Bureaucrat(const Bureaucrat& obj);
 
+		Bureaucrat(std::string const& name, int grade);
 		const std::string&	getName() const;
 		int					getGrade() const;
 		void				incGrade();
 		void				decGrade();
+		void				signForm(Form& form);//새로 추가
 		class GradeTooHighException : public std::exception
 		{
 			public :
