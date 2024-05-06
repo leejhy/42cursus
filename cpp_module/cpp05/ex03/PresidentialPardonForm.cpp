@@ -3,19 +3,19 @@
 #include <iostream>
 #include <fstream>
 
-PresidentialPardonForm::PresidentialPardonForm() : AForm(){}
+PresidentialPardonForm::PresidentialPardonForm() : Form(){}
 
 PresidentialPardonForm::~PresidentialPardonForm(){}
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& obj)
-: AForm(obj){}
+: Form(obj){}
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& obj)
 {(void)obj; return *this;}
 
 PresidentialPardonForm::PresidentialPardonForm\
 (const std::string& target)
-: AForm(target+"_name", 25, 5){
+: Form(target+"_name", 25, 5){
 	this->target = target;
 }
 

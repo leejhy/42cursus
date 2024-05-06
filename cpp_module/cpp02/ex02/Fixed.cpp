@@ -112,7 +112,7 @@ Fixed&	Fixed::operator++ (void){//전위
 	return *this;
 }
 
-Fixed	Fixed::operator++ (int){//후위
+const Fixed	Fixed::operator++ (int){//후위
 	Fixed	tmp(*this);
 
 	this->fp_number += 1;

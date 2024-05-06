@@ -22,6 +22,7 @@ int	main(void)
 
 		a.signForm(form1);
 		std::cout << form1 << '\n';
+		a.signForm(form1);
 		std::cout << "===============================\n";
 
 		b.signForm(form2);

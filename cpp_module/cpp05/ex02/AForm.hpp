@@ -19,17 +19,23 @@ class AForm
 		AForm(AForm const& obj);
 
 		AForm(const std::string& name, const int s_grade, const int e_grade);
-		virtual void	beSigned(const Bureaucrat& obj) = 0;//
+		void	beSigned(const Bureaucrat& obj);
 		const std::string&	getName() const;
 		bool				getCheck() const;
 		int					getSignGrade() const;
 		int					getExecuteGrade() const;
+		virtual void execute (Bureaucrat const & executor) const = 0;
 		class GradeTooHighException : public std::exception
 		{
 			public :
 				const char *what () const throw();
 		};
 		class GradeTooLowException : public std::exception
+		{
+			public :
+				const char *what () const throw();
+		};
+		class FormIsNotSigned : public std::exception
 		{
 			public :
 				const char *what () const throw();

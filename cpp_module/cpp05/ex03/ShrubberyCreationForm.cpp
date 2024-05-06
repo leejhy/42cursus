@@ -3,19 +3,19 @@
 #include <iostream>
 #include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm(){}
+ShrubberyCreationForm::ShrubberyCreationForm() : Form(){}
 
 ShrubberyCreationForm::~ShrubberyCreationForm(){}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& obj)
-: AForm(obj){}
+: Form(obj){}
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& obj)
 {(void)obj; return *this;}
 
 ShrubberyCreationForm::ShrubberyCreationForm\
 (const std::string& target)
-: AForm(target+"_name", 145, 137){
+: Form(target+"_name", 145, 137){
 	this->target = target;
 }
 

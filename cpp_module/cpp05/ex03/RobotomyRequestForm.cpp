@@ -4,20 +4,20 @@
 #include <cstdlib>
 #include <ctime>
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm(){
+RobotomyRequestForm::RobotomyRequestForm() : Form(){
 }
 
 RobotomyRequestForm::~RobotomyRequestForm(){}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& obj)
-: AForm(obj){}
+: Form(obj){}
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& obj)
 {(void)obj; return *this;}
 
 RobotomyRequestForm::RobotomyRequestForm\
 (const std::string& target)
-: AForm(target+"_name", 72, 45){
+: Form(target+"_name", 72, 45){
 	this->target = target;
 }
 

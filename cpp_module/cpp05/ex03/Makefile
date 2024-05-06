@@ -4,15 +4,17 @@ SRCS =	Bureaucrat.cpp\
 		ShrubberyCreationForm.cpp\
 		RobotomyRequestForm.cpp\
 		PresidentialPardonForm.cpp\
-		AForm.cpp\
+		Intern.cpp\
+		Form.cpp\
 		main.cpp
 INC =	Bureaucrat.hpp\
 		ShrubberyCreationForm.hpp\
 		RobotomyRequestForm.hpp\
 		PresidentialPardonForm.hpp\
-		AForm.hpp
+		Intern.hpp\
+		Form.hpp
 OBJS = $(SRCS:.cpp=.o)
-NAME = ex02
+NAME = ex03
 
 all : $(NAME)
 
