@@ -9,12 +9,12 @@
 
 class ScalarConverter//abstract class
 {
-	private :
+    public :
         ScalarConverter();
         virtual ~ScalarConverter();
         ScalarConverter(const ScalarConverter& obj);
         ScalarConverter& operator= (const ScalarConverter& obj);
-    public :
+
         virtual void    abstract() = 0;
         static void     convert(std::string str);
 };

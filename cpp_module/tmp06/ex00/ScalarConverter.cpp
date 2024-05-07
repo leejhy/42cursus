@@ -55,9 +55,9 @@ void    ScalarConverter::convert(std::string str){
     std::cout << "double: ";
 	if (isinf(d)){
 		if (d > 0)
-			std::cout << "inf\n";
+			std::cout << "inff\n";
 		else
-			std::cout << "-inf\n";
+			std::cout << "-inff\n";
 	}
 	else{
 		std::cout << d;
