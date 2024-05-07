@@ -3,6 +3,9 @@
 # define SCALARCONVERTER_HPP
 
 #include <string>
+#include <cmath>
+#include <cstdlib>
+#include <limits>
 
 class ScalarConverter//abstract class
 {

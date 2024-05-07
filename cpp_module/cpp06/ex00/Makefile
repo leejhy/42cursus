@@ -1,10 +1,10 @@
 CXX = c++ 
-CXXFLAGS = -std=c++11 -Wall -Wextra -Werror# -fsanitize=address -g3
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror# -fsanitize=address -g3
 SRCS =	ScalarConverter.cpp\
 		main.cpp
 INC =	ScalarConverter.hpp
 OBJS = $(SRCS:.cpp=.o)
-NAME = ex00
+NAME = convert
 
 all : $(NAME)
 
