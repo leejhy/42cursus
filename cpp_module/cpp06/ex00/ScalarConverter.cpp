@@ -1,6 +1,7 @@
 
 #include "ScalarConverter.hpp"
 #include <iostream>
+#include <string>
 
 ScalarConverter::ScalarConverter(){}
 
@@ -11,21 +12,17 @@ ScalarConverter::ScalarConverter(const ScalarConverter& obj){(void)obj;}
 ScalarConverter&  ScalarConverter::operator= (const ScalarConverter& obj){(void)obj; return *this;}
 
 void    ScalarConverter::convert(std::string str){
-    char    a;
-    int     b;
-    float   c;
-    double  d;
+    char    a = static_cast<char>(std::stof(str));
+    int     b = static_cast<int>(std::stof(str));
+    float   c = static_cast<float>(std::stof(str));
+    double  d = static_cast<double>(std::stof(str));
 
-    if (!(32 <= c && c <= 126)){
-        std::cout << "Non printable character\n";
-        return ;
+    if (!(32 <= a && a <= 126)){
+        std::cout << "Non displayable\n";
     }
-    a = static_cast<char>(str);
-	b = static_cast<int>(str);
-	c = static_cast<float>(str);
-	d = static_cast<double>(str);
+    else
+        std::cout << a << std::endl;
 
-    std::cout << a << std::endl;
     std::cout << b << std::endl;
     std::cout << c << std::endl;
     std::cout << d << std::endl;
