@@ -26,10 +26,14 @@ void    ScalarConverter::convert(std::string str){
 		return ;
 	}
 
-    if (!(32 <= a && a <= 126))
-        std::cout << "char: Non displayable\n";
-	else
-    	std::cout << "char: " << '\'' << a << '\'' << std::endl;
+	if (b > 127)
+		std::cout << "char: can not type casting\n";
+	else{
+	    if (!(32 <= a && a <= 126))
+	        std::cout << "char: Non displayable\n";
+		else
+	    	std::cout << "char: " << '\'' << a << '\'' << std::endl;
+	}
 
 	if (b > INT_MAX)
 		std::cout << "int: can not type casting\n";
