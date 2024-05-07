@@ -4,15 +4,16 @@
 
 #include <string>
 
-class ScalarConverter
+class ScalarConverter//abstract class
 {
     public :
         ScalarConverter();
-        ~ScalarConverter();
+        virtual ~ScalarConverter();
         ScalarConverter(const ScalarConverter& obj);
         ScalarConverter& operator= (const ScalarConverter& obj);
 
-        static convert(const std::string& str);
+        virtual void    abstract() = 0;
+        static void     convert(std::string str);
 };
 
 #endif

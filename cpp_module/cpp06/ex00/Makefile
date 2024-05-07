@@ -1,7 +1,8 @@
 CXX = c++ 
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror# -fsanitize=address -g3
-SRCS =	main.cpp
-INC =	
+SRCS =	ScalarConverter.cpp\
+		main.cpp
+INC =	ScalarConverter.hpp
 OBJS = $(SRCS:.cpp=.o)
 NAME = ex00
 

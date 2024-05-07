@@ -1,23 +1,14 @@
 #include <iostream>
-
-using namespace std;
+#include "ScalarConverter.hpp"
 
 int main(int argc, char **argv)
 {
-	char	a;
-	int		b;
-	float	c;
-	double	d;
+	std::string str;
 	
-	(void)argc;
-	(void)argv;
-	a = 0;
-	b = 0;
-	c = 0;
-	d = 0;
-
-	cout << a << endl;
-	cout << b << endl;
-	cout << c << endl;
-	cout << d << endl;
+	if (argc != 2){
+		std::cout << "Argument error\n";
+		return (1);
+	}
+	str = argv[1];//string으로 저장
+	ScalarConverter::convert(str);
 }
