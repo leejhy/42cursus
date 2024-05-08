@@ -7,9 +7,9 @@
 #include "B.hpp"
 #include "C.hpp"
 
-void	f(){
-	system("leaks ex02");
-}
+// void	f(){
+// 	system("leaks ex02");
+// }
 
 Base * generate(void){
 	int		ran;
@@ -115,5 +115,5 @@ int	main(void)
 	delete pa;
 	delete pb;
 	delete pc;
-	atexit(f);
+	// atexit(f);
 }

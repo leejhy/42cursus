@@ -28,6 +28,8 @@ void    ScalarConverter::convert(std::string str){
 
 	if (b > 127)
 		std::cout << "char: can not type casting\n";
+	else if (b < -127)
+		std::cout << "char: can not type casting\n";
 	else{
 	    if (!(32 <= a && a <= 126))
 	        std::cout << "char: Non displayable\n";
