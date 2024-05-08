@@ -5,6 +5,6 @@ int	main(void)
 {
 	Zombie *horde;
 
-	horde = zombieHorde(-1, "jun");
+	horde = zombieHorde(5, "jun");
 	delete [] horde;
 }
