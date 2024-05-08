@@ -1,8 +1,11 @@
 CXX = c++ 
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror# -fsanitize=address -g3
-SRCS =	Serializer.cpp\
+SRCS =	Base.cpp\
 		main.cpp
-INC =	Serializer.hpp
+INC =	Base.hpp\
+		A.hpp\
+		B.hpp\
+		C.hpp
 OBJS = $(SRCS:.cpp=.o)
 NAME = ex02
 
