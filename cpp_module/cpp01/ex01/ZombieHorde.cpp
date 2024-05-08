@@ -2,6 +2,8 @@
 #include "Zombie.hpp"
 
 Zombie*	zombieHorde(int N, std::string name){
+	if (N < 0)
+		return NULL;
 	Zombie *tmp = new Zombie[N];
 	std::stringstream ss;
 
