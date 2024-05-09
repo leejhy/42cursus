@@ -35,7 +35,6 @@ int main( void ) {
 // 	std::cout << "float : "<< fa << ' ' << fb << '\n';
 // 	std::cout << "double : "<< da << ' ' << db << '\n';
 
-// 	// swap<char>(&ca, &cb);
 // 	swap (ca, cb);
 // 	swap (ia, ib);
 // 	swap (fa, fb);
@@ -56,5 +55,10 @@ int main( void ) {
 // 	std::cout << "int : " << max(ia,ib) << '\n';
 // 	std::cout << "float : " << max(fa,fb) << '\n';
 // 	std::cout << "double : " << max(da,db) << '\n';
+// 	std::cout << "\n======================\n\n";
 
+// 	std::cout << max(2323,-12) << '\n';
+// 	std::cout << min(2323,-12) << '\n';
+// 	std::cout << max(1,1) << '\n';
+// 	std::cout << min(2,2) << '\n';
 // }

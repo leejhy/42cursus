@@ -13,6 +13,8 @@ int	main(void)
 		arr1[i] =  i * 10;
 		arr2[i] =  a + (i * 10);
 	}
+	arr1[3] = 2323;
+	arr2[2] = 231.12;
 	std::cout << "int : ";
 	for (int i = 0; i < 5; i++){
 		std::cout << arr1[i] << ' ';
