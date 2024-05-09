@@ -1,7 +1,7 @@
 CXX = c++ 
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror# -fsanitize=address -g3
 SRCS =	main.cpp
-INC =	whatever.hpp
+INC =	Array.hpp
 OBJS = $(SRCS:.cpp=.o)
 NAME = ex02
 
