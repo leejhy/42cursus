@@ -107,25 +107,25 @@ float	Fixed::operator/ (const Fixed& fixed){
 	return (tmp);
 }
 
-Fixed&	Fixed::operator++ (void){//전위
+Fixed	Fixed::operator++ (void){//전위
 	this->fp_number += 1;
 	return *this;
 }
 
 const Fixed	Fixed::operator++ (int){//후위
-	Fixed	tmp(*this);
+	const Fixed	tmp(*this);
 
 	this->fp_number += 1;
 	return tmp;
 }
 
-Fixed&	Fixed::operator-- (void){
+Fixed	Fixed::operator-- (void){
 	this->fp_number -= 1;
 	return *this;
 }
 
-Fixed	Fixed::operator-- (int){
-	Fixed	tmp(*this);
+const Fixed	Fixed::operator-- (int){
+	const Fixed	tmp(*this);
 
 	this->fp_number -= 1;
 	return tmp;

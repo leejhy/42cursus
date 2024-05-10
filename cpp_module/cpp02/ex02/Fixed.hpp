@@ -32,10 +32,10 @@ class Fixed
 		float	operator- (const Fixed& fixed);
 		float	operator* (const Fixed& fixed);
 		float	operator/ (const Fixed& fixed);
-		Fixed&	operator++ (void);
-		Fixed	operator++ (int);
-		Fixed&	operator-- (void);
-		Fixed	operator-- (int);
+		Fixed	operator++ (void);
+		const Fixed	operator++ (int);
+		Fixed	operator-- (void);
+		const Fixed	operator-- (int);
 
 		static Fixed& 		min(Fixed& a, Fixed& b);
 		static const Fixed&	min(const Fixed& a, const Fixed& b);
