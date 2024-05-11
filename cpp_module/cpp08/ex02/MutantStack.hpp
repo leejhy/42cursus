@@ -22,9 +22,9 @@ class MutantStack : public std::stack<T, Container>
 		typedef typename MutantStack<T, Container>::stack::container_type::const_iterator const_iterator;
 
 		iterator	begin(){ return this->c.begin(); }
-		const_iterator	cbegin() const { return this->c.cbegin();}
+		const_iterator	begin() const { return this->c.begin();}
 		reverse_iterator rbegin() { return this->c.rbegin(); }
 		iterator	end(){ return this->c.end();}
-		const_iterator	cend() const { return this->c.cend();}
+		const_iterator	end() const { return this->c.end();}
 		reverse_iterator rend() { return this->c.rend(); }
 };
