@@ -1,10 +1,9 @@
 CXX = c++ 
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror -fsanitize=address -g3
-SRCS =	main.cpp\
-		Span.cpp
-INC =	Span.hpp
+SRCS =	main.cpp
+INC =	MutantStack.hpp
 OBJS = $(SRCS:.cpp=.o)
-NAME = ex01
+NAME = ex02
 
 all : $(NAME)
 
