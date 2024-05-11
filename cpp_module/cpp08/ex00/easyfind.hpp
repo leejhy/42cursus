@@ -16,3 +16,12 @@ typename T::iterator easyfind(T& cont, const int& a)
 		throw std::runtime_error("Not found");
 	return (iter);
 }
+
+template <typename T>
+typename T::const_iterator easyfind(const T& cont, const int& a)
+{
+	typename T::const_iterator iter = std::find(cont.cbegin(), cont.cend(), a);
+	if (iter == cont.cend())
+		throw std::runtime_error("Not found");
+	return (iter);
+}

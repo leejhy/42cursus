@@ -11,6 +11,7 @@ int	main(void)
 		list.push_back(i+1);
 		deq.push_back(i*2+2);
 	}
+	const std::deque<int> hi(deq);
 	try
 	{
 		std::cout << *easyfind(vec, 15) << '\n';
@@ -33,6 +34,15 @@ int	main(void)
 	{
 		std::cout << *easyfind(deq, 8) << '\n';
 		std::cout << *easyfind(deq, 7) << '\n';
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		std::cout << *easyfind(hi, 8) << '\n';
+		std::cout << *easyfind(hi, 7) << '\n';
 	}
 	catch(const std::exception& e)
 	{
