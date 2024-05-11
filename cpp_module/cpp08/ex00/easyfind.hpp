@@ -20,8 +20,8 @@ typename T::iterator easyfind(T& cont, const int& a)
 template <typename T>
 typename T::const_iterator easyfind(const T& cont, const int& a)
 {
-	typename T::const_iterator iter = std::find(cont.cbegin(), cont.cend(), a);
-	if (iter == cont.cend())
+	typename T::const_iterator iter = std::find(cont.begin(), cont.end(), a);
+	if (iter == cont.end())
 		throw std::runtime_error("Not found");
 	return (iter);
 }
