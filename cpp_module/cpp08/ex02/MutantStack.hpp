@@ -4,42 +4,27 @@
 #include <iostream>
 #include <algorithm>
 #include <stack>
+#include <deque>
 
-template <typename T>
-class MutantStack
+template < typename T, typename Container = std::deque<T> >
+class MutantStack : public std::stack<T, Container>
 {
-	private :
-		std::deque<T> deq;
 	public :
 		MutantStack(){}
 		~MutantStack(){}
 		MutantStack(const MutantStack& obj){*this = obj;}
-		MutantStack& operator=(const MutantStack& obj){this->deq = obj.deq; return *this;}
-		// typedef typename std::stack<T>::container_type::iterator iterator; 
-		typedef typename std::deque<T>::iterator iterator;
-		typedef typename std::deque<T>::const_iterator const_iterator;
-
-		
-};
-
-template<typename T>
-class MyIterator
-{
-	private :
-		node<T>* cur;
-	public :
-		MyIterator(MutantStack<T>* cur) : cur(cur){}
-		MyIterator& operator++(){//전 후위?
-			cur = cur->next;
+		MutantStack& operator=(const MutantStack& obj){
+			std::stack<T, Container>::operator=(obj);
 			return *this;
 		}
-		MyIterator& operator*(){
-			return cur->data;
-		}
-		bool operator==(const MyIterator& ref){
-			return (cur == ref.cur);
-		}
-		bool operator!=(const MyIterator& ref){
-			return (cur != ref.cur);
-		}
+		typedef typename MutantStack<T, Container>::stack::container_type::iterator iterator;
+		typedef typename MutantStack<T, Container>::stack::container_type::reverse_iterator reverse_iterator;
+		typedef typename MutantStack<T, Container>::stack::container_type::const_iterator const_iterator;
+
+		iterator	begin(){ return this->c.begin(); }
+		const_iterator	begin() const { return this->c.begin();}
+		reverse_iterator rbegin() { return this->c.rbegin(); }
+		iterator	end(){ return this->c.end();}
+		const_iterator	end() const { return this->c.end();}
+		reverse_iterator rend() { return this->c.rend(); }
 };

@@ -2,6 +2,8 @@
 #include "Span.hpp"
 #include <algorithm>
 #include <iostream>
+#include <climits>
+
 Span::Span(){}
 
 Span::Span(unsigned int n){
