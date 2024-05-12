@@ -73,7 +73,7 @@ void	Bureaucrat::signForm(Form& form){
 			std::cout << this->name << " couldn't sign " << form.getName() << " because already signed\n";
 			return ;
 		}
-		form.beSigned(*this);//가능?
+		form.beSigned(*this);
 		std::cout << this->name << " signed " << form.getName() << '\n';
 		return ;
 	}
