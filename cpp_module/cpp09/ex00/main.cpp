@@ -11,9 +11,11 @@ int	main(int argc, char **argv)
 	try
 	{
 		BitcoinExchange Bit(argv[1]);
+		Bit.openData();
+		Bit.run();
 	}
 	catch (std::exception& e)
 	{
-
+		std::cout << e.what() << std::endl;
 	}
 }
