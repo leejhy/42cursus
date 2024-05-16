@@ -151,6 +151,7 @@ void	BitcoinExchange::inputData(){
 			tm.tm_mday--;
 			std::time_t t;
 			t = std::mktime(&tm);
+			(void)t;
 			char tmp[20];
 			std::strftime(tmp, sizeof(tmp), "%Y-%m-%d", &tm);
 			if (1900 + tm.tm_year <= 2008){
