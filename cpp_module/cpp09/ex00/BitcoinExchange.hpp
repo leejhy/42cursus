@@ -7,7 +7,7 @@ class BitcoinExchange
 {
 	private :
 		std::string	data;
-		std::string input;
+		std::string input_file;
 		std::map<std::string, float> map;// date, value
 		BitcoinExchange();
 	public :
@@ -17,4 +17,5 @@ class BitcoinExchange
 		BitcoinExchange& operator=(const BitcoinExchange& obj);
 		void openDatabase();
 		void inputData();
+		bool isValidValue(const std::string& split);
 };
