@@ -11,8 +11,8 @@ int	main(int argc, char **argv)
 	try
 	{
 		BitcoinExchange Bit(argv[1]);
-		Bit.openData();
-		Bit.run();
+		Bit.openDatabase();
+		Bit.inputData();
 	}
 	catch (std::exception& e)
 	{

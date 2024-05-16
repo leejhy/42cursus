@@ -15,6 +15,6 @@ class BitcoinExchange
 		~BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange& obj);
 		BitcoinExchange& operator=(const BitcoinExchange& obj);
-		void openData();
-		void run();
+		void openDatabase();
+		void inputData();
 };

@@ -57,7 +57,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& obj){
 	return *this;
 }
 
-void BitcoinExchange::openData(){
+void BitcoinExchange::openDatabase(){
 	std::ifstream	ifs;
 	std::string 	line;
 	float			value;
@@ -73,13 +73,14 @@ void BitcoinExchange::openData(){
 		value = std::atof(second.c_str());
 		this->map.insert(std::make_pair(first, value));
 	}
+	ifs.close();
 	// for (auto i = map.begin(); i != map.end(); i++){
 	// 	std::cout << i->first << ' ' << i->second << '\n';
 	// }
 }
 
-void	BitcoinExchange::run(){
-	std::ifstream ifs;
+void	BitcoinExchange::inputData(){
+	std::ifstream	ifs;
 	std::string		line;
 	
 	ifs.open(this->input.c_str());
@@ -87,13 +88,17 @@ void	BitcoinExchange::run(){
 		std::istringstream	ss(line);
 		std::string			tmp;
 		int					date;
-		std::getline(ss, tmp, '-');
-		if (tmp[0] == '-')
-			throw std::runtime_error("WRONG ARGUMENT THROW");
-		if (tmp.length() > 4)
-			throw std::runtime_error("TOO LONG THROW");
-		// date = std::atoi(tmp.c_str());
-		// if (date > )
+		// '-'기준으로 파싱-> 유효성검사 -> 에러 throw,
+		// 에러 아닐때 std::string으로 날짜갖고있고 map에서 string으로 value 뽑아서 파이프 뒤 숫자랑 곱해서 출력
+
+		while (std::getline(ss, tmp, '-')){
+			if (tmp[0] == '-')
+				throw std::runtime_error("WRONG ARGUMENT THROW");
+			if (tmp.length() > 4)
+				throw std::runtime_error("TOO LONG THROW");
+			// date = std::atoi(tmp.c_str());
+			// if (date > )
+		}
 	}
 	ifs.close();
 }
