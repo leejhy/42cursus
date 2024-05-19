@@ -1,8 +1,8 @@
 CXX = c++ 
-CXXFLAGS = -std=c++11 -Wall -Wextra -Werror# -fsanitize=address -g3
-SRCS =	BitcoinExchange.cpp\
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror -fsanitize=address -g3
+SRCS =	PmergeMe.cpp\
 		main.cpp
-INC =	BitcoinExchange.hpp
+INC =	PmergeMe.hpp
 OBJS = $(SRCS:.cpp=.o)
 NAME = PmergeMe
 

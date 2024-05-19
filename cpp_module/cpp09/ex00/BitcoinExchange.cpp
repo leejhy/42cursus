@@ -30,6 +30,7 @@ void BitcoinExchange::openDatabase(){
 	std::ifstream	ifs;
 	std::string 	line;
 	float			value;
+
 	ifs.open(this->data.c_str());
 	if (!ifs.is_open())
 		throw std::runtime_error("OPEN ERROR THROW");
@@ -61,6 +62,8 @@ void	BitcoinExchange::inputData(){
 	int				days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	
 	ifs.open(this->input_file.c_str());
+	if (!ifs.is_open())
+		throw std::runtime_error("OPEN ERROR THROW");
 	while (std::getline(ifs, line)){
 		std::string			split;
 		std::istringstream	ss(line);
@@ -87,7 +90,7 @@ void	BitcoinExchange::inputData(){
 			std::cout << "Error: bad input => " << split << '\n';
 			continue;
 		}
-		if (year % 4 == 0 && year % 100 == 0 && year % 400 == 0)
+		if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
 			days[1] = 29;
 		if (month < 1 || month > 12){
 			std::cout << "Error: bad input => " << split << '\n';
