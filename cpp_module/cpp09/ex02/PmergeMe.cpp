@@ -10,16 +10,26 @@ PmergeMe::PmergeMe(const PmergeMe& obj){ *this = obj; }
 PmergeMe& PmergeMe::operator=(const PmergeMe& obj){
 	if (this == &obj)
 		return *this;
+	this->vec_parse = obj.vec_parse;
+	this->sorted_vec = obj.sorted_vec;
+	this->deq_parse = obj.deq_parse;
+	this->sorted_deq = obj.sorted_deq;
+	this->jacobsthal_nb = obj.jacobsthal_nb;
+	this->arg_size = obj.arg_size;
 	return *this;
 }
 
 void PmergeMe::parsing(int argc, char **argv){
 	this->arg_size = argc - 1;
 	char *tmp;
+	std::string str;
 	long nb;
 
 	for (uint i = 1; i <= this->arg_size; i++){
 		tmp = argv[i];
+		str = tmp;
+		if (str.length() == 0)
+			throw std::runtime_error("argument is not number");
 		while (*tmp){
 			if (!('0' <= *tmp && *tmp <= '9'))
 				throw std::runtime_error("argument is not number");
@@ -53,8 +63,8 @@ PmergeMe::PmergeMe(int argc, char **argv){
 	parsing(argc, argv);
 	makeJacobsthal();
 	std::cout << "Before:\t";
-	if (this->arg_size > 4){
-		for (uint i = 0; i < 4; ++i)
+	if (this->arg_size > 100){
+		for (uint i = 0; i < 100; ++i)
 			std::cout << this->vec_parse[i] << ' ';
 		std::cout << "[...]\n";
 	}
@@ -67,8 +77,8 @@ PmergeMe::PmergeMe(int argc, char **argv){
 	fordJohnson(this->vec_parse, 1);
 	end = clock();
 	std::cout << "After:\t";
-	if (this->arg_size > 4){
-		for (uint i = 0; i < 4; ++i)
+	if (this->arg_size > 100){
+		for (uint i = 0; i < 100; ++i)
 			std::cout << this->sorted_vec[i] << ' ';
 		std::cout << "[...]\n";
 	}
@@ -80,8 +90,8 @@ PmergeMe::PmergeMe(int argc, char **argv){
 	std::cout << "Time to process a range of " << this->arg_size << " elements with std::vector : " << (end - start) << " ms" << std::endl;
 
 	// std::cout << "Before: ";
-	// if (this->arg_size > 4){
-	// 	for (uint i = 0; i < 4; ++i)
+	// if (this->arg_size > 100){
+	// 	for (uint i = 0; i < 100; ++i)
 	// 		std::cout << this->deq_parse[i] << ' ';
 	// 	std::cout << "[...]\n";
 	// }
@@ -94,8 +104,8 @@ PmergeMe::PmergeMe(int argc, char **argv){
 	fordJohnson(this->deq_parse, 1);
 	end = clock();
 	// std::cout << "After: ";
-	// if (this->arg_size > 4){
-	// 	for (uint i = 0; i < 4; ++i)
+	// if (this->arg_size > 100){
+	// 	for (uint i = 0; i < 100; ++i)
 	// 		std::cout << this->sorted_deq[i] << ' ';
 	// 	std::cout << "[...]\n";
 	// }
