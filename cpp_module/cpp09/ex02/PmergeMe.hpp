@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <deque>
+#include <climits>
 
 typedef unsigned int uint;
 

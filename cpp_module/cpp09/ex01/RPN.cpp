@@ -11,7 +11,7 @@ RPN::RPN(const std::string str){
 		if (!('0' <= str[i] && str[i] <= '9') &&
 			str[i] != '-' && str[i] != '+' && 
 			str[i] != '*' && str[i] != '/')
-			throw std::runtime_error("error");
+			throw std::runtime_error("INVALID INPUT THROW");
 	}
 	this->input = str;
 	split();
@@ -26,6 +26,7 @@ RPN::RPN(const RPN& obj){
 RPN& RPN::operator=(const RPN& obj){
 	if (this == &obj)
 		return *this;
+	this->input = obj.input;
 	this->stack = obj.stack;
 	return *this;
 }
@@ -62,7 +63,7 @@ void RPN::split(){
 
 	while (std::getline(ss, buf, ' ')){
 		if (buf.length() > 1)//음수, 10 이상, 에러
-			throw std::runtime_error("too long argument");
+			throw std::runtime_error("wrong argument input");
 		if (buf == "*" || buf == "-" || buf == "+" || buf == "/"){
 			if (this->stack.size() >= 2)// == ? > ?
 				calculate(buf[0]);
@@ -72,7 +73,7 @@ void RPN::split(){
 		}
 		nb = std::atoi(buf.c_str());
 		if (nb < 0 || nb > 9)
-			throw std::runtime_error("out of range number");
+			throw std::range_error("out of range number");
 		//decimal, range limit complete
 		this->stack.push(nb);
 	}

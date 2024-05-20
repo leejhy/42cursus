@@ -4,12 +4,13 @@
 #include <string>
 #include <algorithm>
 #include <map>
+
 class BitcoinExchange
 {
 	private :
 		std::string	data;
 		std::string input_file;
-		std::map<std::string, float> map;// date, value
+		std::map<std::string, double> map;// date, value
 		bool isValidValue(const std::string& split);
 		BitcoinExchange();
 	public :

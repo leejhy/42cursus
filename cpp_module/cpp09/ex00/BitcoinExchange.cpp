@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iomanip>
 #include <ctime>
+
 BitcoinExchange::BitcoinExchange(){}
 
 BitcoinExchange::BitcoinExchange(const std::string& file) 
@@ -29,7 +30,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& obj){
 void BitcoinExchange::openDatabase(){
 	std::ifstream	ifs;
 	std::string 	line;
-	float			value;
+	double			value;
 
 	ifs.open(this->data.c_str());
 	if (!ifs.is_open())
@@ -47,6 +48,8 @@ void BitcoinExchange::openDatabase(){
 }
 
 bool	BitcoinExchange::isValidValue(const std::string& split){
+	if (split.length() == 0)
+		throw std::runtime_error("WRONG VALUE FORMAT THROW");
 	for (size_t i = 0; i < split.length(); i++){
 		if (!('0' <= split[i] && split[i] <= '9') &&
 			split[i] != '.')
@@ -65,6 +68,7 @@ void	BitcoinExchange::inputData(){
 	if (!ifs.is_open())
 		throw std::runtime_error("OPEN ERROR THROW");
 	while (std::getline(ifs, line)){
+		days[1] = 28;
 		std::string			split;
 		std::istringstream	ss(line);
 		int					month;
@@ -78,6 +82,10 @@ void	BitcoinExchange::inputData(){
 		if (line == "date | value")
 			continue;
 		std::getline(ss, split, ' ');
+		if (split.length() != 10){
+			std::cout << "Error: bad input => " << split << '\n';
+			continue;
+		}
 		check = strptime(split.c_str(), "%Y-%m-%d", &tm);
 		if (!check){
 			std::cout << "Error: bad input => " << split << '\n';
@@ -112,7 +120,7 @@ void	BitcoinExchange::inputData(){
 			char tmp[20];
 			std::strftime(tmp, sizeof(tmp), "%Y-%m-%d", &tm);
 			if (1900 + tm.tm_year <= 2008){
-				throw std::runtime_error("OUT OF DATE RANGE THROW");
+				throw std::range_error("OUT OF DATE RANGE THROW");
 			}
 			key = tmp;
 		}

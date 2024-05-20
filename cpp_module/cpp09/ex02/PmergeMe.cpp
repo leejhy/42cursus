@@ -106,14 +106,14 @@ PmergeMe::PmergeMe(int argc, char **argv){
 	// }
 
 	std::cout << "Time to process a range of " << this->arg_size << " elements with std::deque : " << (end - start) << " ms" << std::endl;
-	// if (isSorted(this->sorted_vec))
-	// 		std::cout << "Sorted !!\n";
-	// 	else
-	// 		std::cout << "NOT Sorted !!\n";
-	// if (isSorted(this->sorted_deq))
-	// 		std::cout << "Sorted !!\n";
-	// 	else
-	// 		std::cout << "NOT Sorted !!\n";
+	if (isSorted(this->sorted_vec))
+			std::cout << "Sorted !!\n";
+		else
+			std::cout << "NOT Sorted !!\n";
+	if (isSorted(this->sorted_deq))
+			std::cout << "Sorted !!\n";
+		else
+			std::cout << "NOT Sorted !!\n";
 }
 
 void	PmergeMe::fordJohnson(std::vector<int>& vec, uint pos){
