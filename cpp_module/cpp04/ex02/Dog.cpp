@@ -8,12 +8,22 @@ Dog::Dog(){
 }
 
 Dog::Dog(const Dog& dog) : Animal(dog){
-	this->type = dog.type;
+	*this = dog;
 	std::cout << "Dog copy constructor\n";
 }
 
 Dog& Dog::operator=(const Dog& dog){
+	std::string tmp;
+	Brain *tbrain = new Brain();
+
+	delete this->brain;
+	this->brain = NULL;
 	this->type = dog.type;
+	for (int i = 0; i < 100; i++){
+		tmp = dog.brain->getIdeas(i);
+		tbrain->setIdeas(i, tmp);
+	}
+	this->brain = tbrain;
 	std::cout << "Dog copy assignment operator\n";
 	return *this;
 }
