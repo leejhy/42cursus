@@ -151,8 +151,10 @@ const std::string handleResponse(const std::string& nickname, int responseCode, 
             break;
 		case ERR_PASSWDMISMATCH: //464
 			message = ":" + g_server_name + " 464 * :Server Password incorrect\r\n";
+			break;
 		case ERR_BADCHANNAME: //479
 			message = ":" + g_server_name + " 479 " + nickname + " " + target + " :Channel name contains illegal characters\r\n";
+			break;
 	}
 	return (message);
 }
