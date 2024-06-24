@@ -1,0 +1,8 @@
+[mysqld]
+
+[galera]
+bind-address=0.0.0.0
+
+[embedded]
+
+[mariadb]
