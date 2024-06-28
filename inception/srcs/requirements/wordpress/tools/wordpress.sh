@@ -8,7 +8,7 @@ su tmp
 
 echo "start wordpress.sh "
 if [ ! -e  wp-config-sample.php ]; then
-    su tmp -c "wp core download --path=/var/www --locale=ko_KR"
+    su tmp -c "wp core download --path=/var/www --locale=en_US"
 fi
 
 su tmp -c "wp config create --force --skip-check --dbhost=mariadb --dbcharset="utf8" --dbuser=$MARIADB_USER_ID --dbpass=$MARIADB_USER_PASSWORD --dbname=$MARIADB_DATABASE"

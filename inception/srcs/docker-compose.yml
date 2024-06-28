@@ -80,7 +80,6 @@ services:
 volumes:
   mariadb-volume:
     name: mariadb-volume
-    # 볼륨 저장공간
     driver: local
     driver_opts:
       type: none
