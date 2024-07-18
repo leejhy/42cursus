@@ -19,5 +19,6 @@ ENTRYPOINT ["/wordpress.sh"]
 
 CMD ["php-fpm82", "-F"]
 #docker run 명령어를 칠때 변경가능
-#ENTRYPOINT는 컨테이너가 최초에 꼭 실행해야만 하는 명령어가 있을 때, CMD는 컨테이너 실행 시 시작되는 명령어지만 변경할 수 있을 때 활용하시면 됩니다.
+#ENTRYPOINT는 컨테이너가 최초에 꼭 실행해야만 하는 명령어가 있을 때, 
+#CMD는 컨테이너 실행 시 시작되는 명령어지만 변경할 수 있을 때 활용하시면 됩니다.
 STOPSIGNAL SIGQUIT
